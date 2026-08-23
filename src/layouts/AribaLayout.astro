@@ -1,16 +1,19 @@
 ---
-import '../styles/global.css';
+import '../styles/ariba.css';
 
 interface Props {
   title?: string;
   description?: string;
 }
 
-const { title = 'PUP VANH', description = 'Portfolio of Puppy — photos, caps, poems, sites.' } = Astro.props;
+const {
+  title = 'FC Ariba — MVBI Izegem',
+  description = 'FC Ariba · Minivoetbal Izegem · Reeks 1 · Sinds 2022'
+} = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -18,11 +21,13 @@ const { title = 'PUP VANH', description = 'Portfolio of Puppy — photos, caps, 
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
   <title>{title}</title>
 </head>
-<body>
-  <div class="grain"></div>
+<body class="ariba-page">
   <slot />
 </body>
 </html>

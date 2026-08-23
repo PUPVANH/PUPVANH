@@ -1,0 +1,39 @@
+---
+const rijen = [
+  { pos: 1, ploeg: "T'Bloemgat", gsp: 26, w: 23, g: 1, v: 2, dv: 239, dt: 62, pt: 70 },
+  { pos: 2, ploeg: 'FC Ariba', gsp: 21, w: 18, g: 2, v: 1, dv: 143, dt: 65, pt: 56, us: true },
+  { pos: 3, ploeg: 'Vloerwerken Slambrouck', gsp: 21, w: 16, g: 4, v: 1, dv: 159, dt: 57, pt: 52 },
+  { pos: 4, ploeg: 'Panna FC', gsp: 21, w: 13, g: 3, v: 5, dv: 122, dt: 98, pt: 42 },
+  { pos: 5, ploeg: 'FC Bacobana', gsp: 21, w: 12, g: 2, v: 7, dv: 125, dt: 117, pt: 38 },
+  { pos: 6, ploeg: 'MVC Deportivo VDM', gsp: 21, w: 9, g: 1, v: 11, dv: 95, dt: 100, pt: 28 },
+  { pos: 7, ploeg: 'Orthopedie Van Parys', gsp: 21, w: 8, g: 3, v: 10, dv: 72, dt: 79, pt: 27 },
+  { pos: 8, ploeg: 'Plectrum - Maison Noire', gsp: 21, w: 8, g: 3, v: 10, dv: 93, dt: 96, pt: 27 },
+  { pos: 9, ploeg: 'VK Lagaar', gsp: 21, w: 8, g: 2, v: 11, dv: 90, dt: 98, pt: 26 },
+  { pos: 10, ploeg: "L'Abattoir", gsp: 21, w: 6, g: 1, v: 12, dv: 82, dt: 88, pt: 19 },
+  { pos: 11, ploeg: 'MVC De Statie', gsp: 21, w: 5, g: 3, v: 13, dv: 91, dt: 107, pt: 18 },
+];
+---
+
+<section class="ariba-last-season">
+  <div class="ariba-last-season-header">
+    <h3>Klassement <em>2024-25</em></h3>
+    <span>Reeks 1 · eindstand</span>
+  </div>
+  <table class="ariba-table">
+    <thead>
+      <tr>
+        <th>#</th><th>Ploeg</th><th>Gsp</th><th>W</th><th>G</th>
+        <th>V</th><th>DV</th><th>DT</th><th>Pt</th>
+      </tr>
+    </thead>
+    <tbody>
+      {rijen.map(r => (
+        <tr class={r.us ? 'us' : ''}>
+          <td>{r.pos}</td><td>{r.ploeg}</td><td>{r.gsp}</td>
+          <td>{r.w}</td><td>{r.g}</td><td>{r.v}</td>
+          <td>{r.dv}</td><td>{r.dt}</td><td>{r.pt}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</section>

@@ -1,0 +1,45 @@
+---
+// Spelerslijst — pas hier aan wanneer er iemand bij komt of stopt.
+// Kapitein: zet "captain: true"
+const spelers = [
+  { naam: 'Robbie Espeel', nummer: 2, captain: true },
+  { naam: 'Matthias Blomme', nummer: 1 },
+  { naam: 'Matthias Espeel', nummer: 3 },
+  { naam: 'Lucas Vandenbussche', nummer: 4 },
+  { naam: 'Matisse Ingels', nummer: 6 },
+  { naam: 'Thibaut Maes', nummer: 7 },
+  { naam: 'Vincent Gayse', nummer: 9 },
+  { naam: 'Emmerson Deneir', nummer: 10 },
+  { naam: 'Anton Allosserie', nummer: 11 },
+  { naam: 'Thomas Verbeke', nummer: 16 },
+  { naam: 'Alexandre De Abreu Marques', nummer: 17 },
+  { naam: 'Pepijn Vanhauwere', nummer: 19 },
+  { naam: 'Nicolas Quartier', nummer: 20 },
+];
+const captain = spelers.find(s => s.captain);
+---
+
+<section class="ariba-section">
+  <p class="ariba-section-kicker">De ploeg</p>
+  <h2 class="ariba-section-title">Selectie <em>2025-26</em></h2>
+  <p class="ariba-section-sub">{spelers.length} spelers · Kapitein {captain?.naam}</p>
+
+  <div class="ariba-team-grid">
+    <div class="ariba-kit-wrap">
+      <p class="ariba-kit-label">Thuistenue</p>
+      <div class="ariba-kit">
+        <div class="ariba-shirt"></div>
+        <div class="ariba-shorts"></div>
+      </div>
+    </div>
+
+    <div class="ariba-players">
+      {spelers.map(s => (
+        <div class={`ariba-player ariba-reveal${s.captain ? ' captain' : ''}`}>
+          <span class="ariba-player-name">{s.naam}</span>
+          <span class="ariba-player-num">{s.nummer}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

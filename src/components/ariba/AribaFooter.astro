@@ -1,0 +1,16 @@
+---
+const jaar = new Date().getFullYear();
+---
+
+<footer class="ariba-footer">
+  <div>© {jaar} FC Ariba · MVBI Izegem</div>
+  <div><a href="/">terug naar pup vanh →</a></div>
+</footer>
+
+<script is:inline>
+  // reveal-on-scroll voor .ariba-reveal elementen
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.ariba-reveal').forEach(el => obs.observe(el));
+</script>

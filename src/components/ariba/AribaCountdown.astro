@@ -1,0 +1,118 @@
+---
+import data from '../../data/ariba-wedstrijden.json';
+
+// Sorteer op datum, pak eerste toekomstige wedstrijd zonder uitslag
+const now = Date.now();
+const aankomend = data.wedstrijden
+  .filter((w: any) => w.uitslag === null && new Date(w.datum).getTime() > now)
+  .sort((a: any, b: any) => new Date(a.datum).getTime() - new Date(b.datum).getTime());
+
+const volgende = aankomend[0] ?? null;
+
+// Voor client-side: geef alle aankomende matchen door zodat de teller kan doorlopen
+// naar de volgende zodra deze voorbij is (zonder page refresh)
+const clientData = aankomend.map((w: any) => ({
+  datum: w.datum,
+  thuis: w.thuis,
+  uit: w.uit,
+  locatie: w.locatie,
+}));
+
+// Datum formatteren voor initiële server-rendered weergave (bv "MA 14 SEP · 21U50")
+function formatMatchInfo(datumStr: string, locatie: string) {
+  const d = new Date(datumStr);
+  const dagen = ['ZO', 'MA', 'DI', 'WO', 'DO', 'VR', 'ZA'];
+  const maanden = ['JAN', 'FEB', 'MRT', 'APR', 'MEI', 'JUN', 'JUL', 'AUG', 'SEP', 'OKT', 'NOV', 'DEC'];
+  const dag = dagen[d.getDay()];
+  const dm = d.getDate();
+  const mnd = maanden[d.getMonth()];
+  const uu = String(d.getHours()).padStart(2, '0');
+  const mm = String(d.getMinutes()).padStart(2, '0');
+  const tijd = `${uu}U${mm}`;
+  return `${dag} ${dm} ${mnd} <span>·</span> ${tijd} <span>·</span> ${locatie}`;
+}
+---
+
+<section class="ariba-countdown">
+  <p class="ariba-countdown-label">Aftellen tot <span>matchday</span></p>
+  <div class="ariba-countdown-numbers">
+    <div class="ariba-cbox"><div class="num" id="cd-days">--</div><div class="lbl">dagen</div></div>
+    <div class="ariba-cbox"><div class="num" id="cd-hours">--</div><div class="lbl">uur</div></div>
+    <div class="ariba-cbox"><div class="num" id="cd-mins">--</div><div class="lbl">min</div></div>
+    <div class="ariba-cbox"><div class="num" id="cd-secs">--</div><div class="lbl">sec</div></div>
+  </div>
+
+  <div class="ariba-next-match">
+    <div class="ariba-next-match-inner">
+      <p class="ariba-next-match-kicker" id="nm-kicker">
+        {volgende ? 'Volgende wedstrijd' : 'Geen aankomende wedstrijden'}
+      </p>
+      <p class="ariba-next-match-teams" id="nm-teams" set:html={volgende ? `${volgende.thuis} <em>vs</em> ${volgende.uit}` : '—'} />
+      <p
+        class="ariba-next-match-info"
+        id="nm-info"
+        set:html={volgende ? formatMatchInfo(volgende.datum, volgende.locatie) : ''}
+      />
+    </div>
+  </div>
+</section>
+
+<script is:inline define:vars={{ clientData }}>
+  (function () {
+    const matches = clientData.map(m => ({ ...m, dateObj: new Date(m.datum) }));
+
+    const dagen = ['ZO', 'MA', 'DI', 'WO', 'DO', 'VR', 'ZA'];
+    const maanden = ['JAN','FEB','MRT','APR','MEI','JUN','JUL','AUG','SEP','OKT','NOV','DEC'];
+    function fmtInfo(d, loc) {
+      const dag = dagen[d.getDay()];
+      const dm = d.getDate();
+      const mnd = maanden[d.getMonth()];
+      const uu = String(d.getHours()).padStart(2, '0');
+      const mm = String(d.getMinutes()).padStart(2, '0');
+      return `${dag} ${dm} ${mnd} <span>·</span> ${uu}U${mm} <span>·</span> ${loc}`;
+    }
+
+    function pickNext() {
+      const now = new Date();
+      for (const m of matches) if (m.dateObj > now) return m;
+      return null;
+    }
+
+    let prevSecs = -1;
+    function update() {
+      const next = pickNext();
+      const days = document.getElementById('cd-days');
+      const hours = document.getElementById('cd-hours');
+      const mins = document.getElementById('cd-mins');
+      const secs = document.getElementById('cd-secs');
+      if (!days) return;
+
+      if (!next) {
+        [days, hours, mins, secs].forEach(el => el.textContent = '00');
+        const k = document.getElementById('nm-kicker');
+        if (k) k.textContent = 'Seizoen bezig — geen match ingepland';
+        return;
+      }
+
+      const teams = document.getElementById('nm-teams');
+      const info = document.getElementById('nm-info');
+      if (teams) teams.innerHTML = `${next.thuis} <em>vs</em> ${next.uit}`;
+      if (info) info.innerHTML = fmtInfo(next.dateObj, next.locatie);
+
+      const diff = next.dateObj - new Date();
+      days.textContent  = String(Math.floor(diff / 86400000)).padStart(2, '0');
+      hours.textContent = String(Math.floor((diff / 3600000) % 24)).padStart(2, '0');
+      mins.textContent  = String(Math.floor((diff / 60000) % 60)).padStart(2, '0');
+
+      const s = Math.floor((diff / 1000) % 60);
+      secs.textContent = String(s).padStart(2, '0');
+      if (s !== prevSecs) {
+        secs.classList.add('tick');
+        setTimeout(() => secs.classList.remove('tick'), 200);
+        prevSecs = s;
+      }
+    }
+    update();
+    setInterval(update, 1000);
+  })();
+</script>

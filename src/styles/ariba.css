@@ -1,0 +1,257 @@
+/* FC Ariba — subpagina styles
+   Volledig geïsoleerd van PUP VANH styling. Enkel geladen door AribaLayout. */
+
+:root {
+  --ar-bg: #F4F0E8;
+  --ar-text: #18211E;
+  --ar-muted: #6B6B66;
+  --ar-accent: #0E6B6F;
+  --ar-gold: #C8A35F;
+  --ar-line: #D8D2C2;
+  --ar-card: #EEEADD;
+  --ar-forest: #1E3A34;
+  --ar-forest-deep: #122522;
+  --ar-p-teal: url(/ariba/patterns/pattern-teal.jpg);
+  --ar-p-goud: url(/ariba/patterns/pattern-goud.jpg);
+  --ar-p-ivory: url(/ariba/patterns/pattern-ivory.jpg);
+}
+
+.ariba-page * { box-sizing: border-box; margin: 0; padding: 0; }
+.ariba-page { font-family: 'Inter', -apple-system, sans-serif; background: var(--ar-bg); color: var(--ar-text); overflow-x: hidden; }
+.ariba-page .serif { font-family: 'DM Serif Display', Georgia, serif; font-weight: 400; }
+.ariba-page .bebas { font-family: 'Bebas Neue', sans-serif; letter-spacing: .02em; }
+
+.ariba-page::before {
+  content: ''; position: fixed; inset: 0;
+  background-image: var(--ar-p-ivory); background-size: 400px;
+  opacity: .35; z-index: -1; pointer-events: none;
+}
+
+/* NAV */
+.ariba-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 60;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 20px 32px; background: rgba(244, 240, 232, .85); backdrop-filter: blur(12px);
+  font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: .08em; }
+.ariba-nav-back { color: var(--ar-muted); text-decoration: none; transition: color .2s;
+  font-size: 13px; font-family: 'Inter', sans-serif; letter-spacing: 0; }
+.ariba-nav-back:hover { color: var(--ar-accent); }
+.ariba-nav-back::before { content: '← '; color: var(--ar-gold); }
+.ariba-nav-title { display: flex; align-items: center; gap: 12px; }
+.ariba-nav-title img { height: 32px; }
+.ariba-nav-title span { font-size: 20px; }
+.ariba-nav-r { font-family: 'Inter', sans-serif; font-size: 12px; color: var(--ar-muted); letter-spacing: 0; }
+
+/* HERO */
+.ariba-hero { padding: 140px 32px 60px; max-width: 1400px; margin: 0 auto; text-align: center;
+  position: relative; overflow: hidden; min-height: 600px;
+  display: flex; flex-direction: column; justify-content: center; align-items: center; }
+.ariba-hero-blob { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 800px; height: 800px; background-image: var(--ar-p-teal); background-size: 400px;
+  border-radius: 50%; opacity: .18; filter: blur(30px);
+  animation: ar-blob-drift 20s ease-in-out infinite; z-index: 0; pointer-events: none; }
+@keyframes ar-blob-drift {
+  0%, 100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+  33% { transform: translate(-55%, -45%) scale(1.1) rotate(120deg); }
+  66% { transform: translate(-45%, -55%) scale(.95) rotate(240deg); }
+}
+.ariba-hero-inner { position: relative; z-index: 1; animation: ar-heroIn 1.2s ease .1s both; }
+@keyframes ar-heroIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.ariba-hero-logo { height: 140px; width: auto; margin: 0 auto 30px; display: block; animation: ar-logoIn 1.5s ease .3s both; }
+@keyframes ar-logoIn { from { opacity: 0; transform: scale(.85) rotate(-5deg); } to { opacity: 1; transform: scale(1) rotate(0); } }
+.ariba-hero-title { font-family: 'DM Serif Display', serif; font-size: clamp(56px, 9vw, 120px); line-height: .95; letter-spacing: -.03em; margin-bottom: 16px; }
+.ariba-hero-title em { color: var(--ar-accent); font-style: italic; }
+.ariba-hero-meta { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: .15em; color: var(--ar-muted); text-transform: uppercase; margin-bottom: 32px; }
+.ariba-hero-meta .dot { display: inline-block; width: 6px; height: 6px; background: var(--ar-gold); border-radius: 50%; margin: 0 12px; vertical-align: middle; animation: ar-heroDot 2s ease-in-out infinite; }
+@keyframes ar-heroDot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .4; transform: scale(.7); } }
+.ariba-hero-stats { display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+.ariba-hero-stat { display: flex; flex-direction: column; gap: 4px; align-items: center; }
+.ariba-hero-stat .num { font-family: 'Bebas Neue', sans-serif; font-size: 44px; color: var(--ar-accent); line-height: 1; letter-spacing: .02em; }
+.ariba-hero-stat .lbl { font-family: 'Bebas Neue', sans-serif; font-size: 12px; letter-spacing: .2em; color: var(--ar-muted); text-transform: uppercase; }
+
+.ariba-scroll-hint { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+  font-family: 'Bebas Neue', sans-serif; font-size: 11px; letter-spacing: .2em; color: var(--ar-muted);
+  text-transform: uppercase; animation: ar-scrollBounce 2s ease-in-out infinite; }
+.ariba-scroll-hint::after { content: '↓'; display: block; margin-top: 4px; text-align: center; color: var(--ar-gold); }
+@keyframes ar-scrollBounce { 0%, 100% { transform: translateX(-50%) translateY(0); opacity: .6; } 50% { transform: translateX(-50%) translateY(4px); opacity: 1; } }
+
+/* COUNTDOWN */
+.ariba-countdown { padding: 80px 32px 60px; max-width: 1400px; margin: 0 auto; }
+.ariba-countdown-label { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: .2em; color: var(--ar-muted); text-transform: uppercase; text-align: center; margin-bottom: 24px; }
+.ariba-countdown-label span { color: var(--ar-gold); }
+.ariba-countdown-numbers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 800px; margin: 0 auto; }
+.ariba-cbox { background: var(--ar-card); border: 1px solid var(--ar-line); border-radius: 4px; padding: 24px 12px; text-align: center; position: relative; overflow: hidden; transition: transform .3s; }
+.ariba-cbox:hover { transform: translateY(-4px); }
+.ariba-cbox::before { content: ''; position: absolute; inset: 0; background-image: var(--ar-p-teal); background-size: 200px; opacity: .08; pointer-events: none; }
+.ariba-cbox .num { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 7vw, 84px); color: var(--ar-accent); line-height: 1; position: relative; transition: transform .2s, color .2s; }
+.ariba-cbox .num.tick { transform: scale(1.15); color: var(--ar-gold); }
+.ariba-cbox .lbl { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: .15em; color: var(--ar-muted); text-transform: uppercase; margin-top: 8px; position: relative; }
+.ariba-next-match { margin-top: 40px; padding: 32px; background: var(--ar-forest); color: #F4F0E8; border-radius: 4px; position: relative; overflow: hidden; text-align: center; max-width: 800px; margin-left: auto; margin-right: auto; }
+.ariba-next-match::before { content: ''; position: absolute; inset: 0; background-image: var(--ar-p-teal); background-size: 300px; opacity: .25; pointer-events: none; }
+.ariba-next-match-inner { position: relative; z-index: 1; }
+.ariba-next-match-kicker { font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: .2em; color: var(--ar-gold); text-transform: uppercase; margin-bottom: 12px; }
+.ariba-next-match-teams { font-family: 'DM Serif Display', serif; font-size: clamp(28px, 4vw, 44px); line-height: 1.1; margin-bottom: 12px; }
+.ariba-next-match-teams em { color: var(--ar-gold); font-style: italic; }
+.ariba-next-match-info { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: .1em; color: rgba(244, 240, 232, .75); text-transform: uppercase; }
+.ariba-next-match-info span { color: #F4F0E8; }
+
+/* SECTIE HEADERS */
+.ariba-section { padding: 100px 32px; max-width: 1400px; margin: 0 auto; }
+.ariba-section-kicker { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: .2em; color: var(--ar-gold); text-transform: uppercase; margin-bottom: 12px; }
+.ariba-section-title { font-family: 'DM Serif Display', serif; font-size: clamp(38px, 5vw, 64px); line-height: 1; letter-spacing: -.02em; margin-bottom: 12px; }
+.ariba-section-title em { color: var(--ar-accent); font-style: italic; }
+.ariba-section-sub { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: .15em; color: var(--ar-muted); text-transform: uppercase; margin-bottom: 40px; }
+
+/* MATCHES */
+.ariba-matches-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.ariba-matches-col h3 { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: .15em; color: var(--ar-muted); text-transform: uppercase; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid var(--ar-line); }
+.ariba-matches-col h3 span { color: var(--ar-accent); }
+.ariba-match-row { padding: 16px 20px; background: var(--ar-card); border: 1px solid var(--ar-line); border-radius: 4px; margin-bottom: 8px; transition: all .2s; }
+.ariba-match-row:hover { border-color: var(--ar-accent); transform: translateX(4px); }
+.ariba-match-row-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 6px; }
+.ariba-match-date { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: .1em; color: var(--ar-accent); text-transform: uppercase; }
+.ariba-match-loc { font-family: 'Bebas Neue', sans-serif; font-size: 11px; letter-spacing: .1em; color: var(--ar-muted); text-transform: uppercase; }
+.ariba-match-teams { font-family: 'DM Serif Display', serif; font-size: 18px; line-height: 1.3; }
+.ariba-match-teams em { color: var(--ar-accent); font-style: italic; }
+.ariba-match-score { display: inline-block; font-family: 'Bebas Neue', sans-serif; font-size: 20px; color: var(--ar-forest); background: var(--ar-gold); padding: 2px 10px; border-radius: 3px; letter-spacing: .05em; margin-left: 8px; }
+.ariba-match-empty { padding: 40px 20px; text-align: center; font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: .15em; color: var(--ar-muted); text-transform: uppercase; background: var(--ar-card); border: 1px dashed var(--ar-line); border-radius: 4px; }
+
+/* PLOEG + KIT */
+.ariba-team-grid { display: grid; grid-template-columns: auto 1fr; gap: 60px; align-items: start; }
+.ariba-kit-wrap { display: flex; flex-direction: column; align-items: center; gap: 16px; position: sticky; top: 100px; }
+.ariba-kit-label { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: .2em; color: var(--ar-muted); text-transform: uppercase; }
+.ariba-kit { display: flex; flex-direction: column; gap: 8px; align-items: center; }
+.ariba-shirt { width: 180px; height: 180px; position: relative; background: var(--ar-accent); border-radius: 4px; overflow: hidden; box-shadow: 0 4px 20px rgba(24, 33, 30, .15); }
+.ariba-shirt::before { content: ''; position: absolute; inset: 0; background-image: var(--ar-p-teal); background-size: 200px; mix-blend-mode: overlay; opacity: .8; }
+.ariba-shirt::after { content: 'shirt'; position: absolute; bottom: 8px; left: 0; right: 0; text-align: center; font-family: 'Bebas Neue', sans-serif; font-size: 11px; letter-spacing: .2em; color: rgba(244, 240, 232, .7); text-transform: uppercase; }
+.ariba-shorts { width: 120px; height: 80px; background: var(--ar-accent); border-radius: 4px; position: relative; box-shadow: 0 4px 20px rgba(24, 33, 30, .15); }
+.ariba-shorts::after { content: 'broek'; position: absolute; bottom: 6px; left: 0; right: 0; text-align: center; font-family: 'Bebas Neue', sans-serif; font-size: 10px; letter-spacing: .2em; color: rgba(244, 240, 232, .7); text-transform: uppercase; }
+
+.ariba-players { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; background: var(--ar-line); border: 1px solid var(--ar-line); border-radius: 4px; overflow: hidden; }
+.ariba-player { padding: 16px 20px; background: var(--ar-card); display: flex; justify-content: space-between; align-items: center; gap: 16px; transition: all .2s; cursor: default; }
+.ariba-player:hover { background: var(--ar-bg); padding-left: 24px; }
+.ariba-player-name { font-family: 'DM Serif Display', serif; font-size: 18px; letter-spacing: -.01em; flex: 1; }
+.ariba-player-num { font-family: 'Bebas Neue', sans-serif; font-size: 20px; color: #F4F0E8; background: var(--ar-accent); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 4px; letter-spacing: 0; flex-shrink: 0; }
+.ariba-player.captain .ariba-player-name::before { content: '★ '; color: var(--ar-gold); font-family: 'Inter', sans-serif; }
+.ariba-player.captain .ariba-player-num { background: var(--ar-gold); color: var(--ar-forest); }
+
+/* GESCHIEDENIS */
+.ariba-history { padding: 100px 32px; max-width: 1400px; margin: 0 auto; }
+.ariba-timeline { position: relative; padding-left: 40px; }
+.ariba-timeline::before { content: ''; position: absolute; left: 8px; top: 8px; bottom: 8px; width: 2px; background: var(--ar-line); }
+.ariba-season { position: relative; padding: 20px 0 20px 40px; transition: all .3s; }
+.ariba-season::before { content: ''; position: absolute; left: -40px; top: 32px; width: 18px; height: 18px; background: var(--ar-card); border: 2px solid var(--ar-accent); border-radius: 50%; transition: all .3s; }
+.ariba-season.champion::before { background: var(--ar-accent); border-color: var(--ar-accent); }
+.ariba-season.promotion::before { background: var(--ar-gold); border-color: var(--ar-gold); }
+.ariba-season:hover { transform: translateX(4px); }
+.ariba-season-header { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; flex-wrap: wrap; }
+.ariba-season-year { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--ar-accent); letter-spacing: .02em; }
+.ariba-season.promotion .ariba-season-year { color: var(--ar-gold); }
+.ariba-season-position { font-family: 'DM Serif Display', serif; font-size: 24px; letter-spacing: -.01em; }
+.ariba-season-position em { color: var(--ar-accent); font-style: italic; }
+.ariba-season.promotion .ariba-season-position em { color: var(--ar-gold); }
+.ariba-season-detail { font-family: 'Inter', sans-serif; font-size: 14px; color: var(--ar-muted); margin-top: 6px; line-height: 1.5; }
+.ariba-season-badge { display: inline-block; font-family: 'Bebas Neue', sans-serif; font-size: 11px; letter-spacing: .15em; padding: 3px 10px; background: var(--ar-accent); color: #F4F0E8; border-radius: 3px; text-transform: uppercase; margin-left: 8px; vertical-align: middle; }
+.ariba-season-badge.promo { background: var(--ar-gold); color: var(--ar-forest); }
+
+/* VORIG SEIZOEN */
+.ariba-last-season { padding: 60px 32px; max-width: 900px; margin: 0 auto; }
+.ariba-last-season-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--ar-line); }
+.ariba-last-season-header h3 { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: .15em; color: var(--ar-muted); text-transform: uppercase; }
+.ariba-last-season-header h3 em { font-style: italic; color: var(--ar-accent); }
+.ariba-last-season-header span { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: .1em; color: var(--ar-muted); text-transform: uppercase; }
+.ariba-table { width: 100%; border-collapse: collapse; font-family: 'Inter', sans-serif; font-size: 13px; }
+.ariba-table th { font-family: 'Bebas Neue', sans-serif; font-size: 11px; letter-spacing: .1em; padding: 8px 6px; text-align: center; font-weight: 400; color: var(--ar-muted); text-transform: uppercase; border-bottom: 1px solid var(--ar-line); }
+.ariba-table th:nth-child(2) { text-align: left; }
+.ariba-table td { padding: 8px 6px; text-align: center; color: var(--ar-muted); border-bottom: 1px solid rgba(216, 210, 194, .4); }
+.ariba-table td:nth-child(2) { text-align: left; }
+.ariba-table td:last-child { font-family: 'Bebas Neue', sans-serif; letter-spacing: .05em; color: var(--ar-text); }
+.ariba-table tr.us td { color: var(--ar-accent); font-weight: 600; }
+.ariba-table tr.us { background: linear-gradient(90deg, rgba(14, 110, 111, .08), transparent); }
+.ariba-table tr.us td:first-child::before { content: '★ '; color: var(--ar-gold); }
+.ariba-table tbody tr:last-child td { border-bottom: none; }
+
+/* ARTIKEL */
+.ariba-article { background: var(--ar-card); padding: 100px 32px; position: relative; }
+.ariba-article::before { content: ''; position: absolute; inset: 0; background-image: var(--ar-p-goud); background-size: 400px; opacity: .12; pointer-events: none; }
+.ariba-article-inner { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+.ariba-article-kicker { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: .2em; color: var(--ar-gold); text-transform: uppercase; margin-bottom: 12px; }
+.ariba-article-title { font-family: 'DM Serif Display', serif; font-size: clamp(32px, 4.5vw, 52px); line-height: 1.1; letter-spacing: -.02em; margin-bottom: 32px; }
+.ariba-article-title em { color: var(--ar-accent); font-style: italic; }
+.ariba-article-body { font-family: 'Inter', sans-serif; font-size: 17px; line-height: 1.8; color: var(--ar-text); }
+.ariba-article-body p { margin-bottom: 16px; }
+.ariba-article-body em { color: var(--ar-accent); font-style: italic; }
+.ariba-article-quote { font-family: 'DM Serif Display', serif; font-size: 28px; line-height: 1.3; color: var(--ar-accent); margin: 32px 0; padding: 0 20px; border-left: 3px solid var(--ar-gold); font-style: italic; }
+.ariba-article-meta { margin-top: 32px; font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: .15em; color: var(--ar-muted); text-transform: uppercase; }
+
+/* BESTUUR */
+.ariba-board { padding: 100px 32px; max-width: 1400px; margin: 0 auto; }
+.ariba-board-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.ariba-board-card { padding: 32px 24px; background: var(--ar-card); border: 1px solid var(--ar-line); border-radius: 4px; transition: all .3s; position: relative; overflow: hidden; }
+.ariba-board-card::before { content: ''; position: absolute; inset: 0; background-image: var(--ar-p-teal); background-size: 250px; opacity: 0; transition: opacity .3s; }
+.ariba-board-card:hover { border-color: var(--ar-accent); transform: translateY(-4px); }
+.ariba-board-card:hover::before { opacity: .08; }
+.ariba-board-card-role { font-family: 'Bebas Neue', sans-serif; font-size: 12px; letter-spacing: .2em; color: var(--ar-gold); text-transform: uppercase; margin-bottom: 8px; position: relative; }
+.ariba-board-card-name { font-family: 'DM Serif Display', serif; font-size: 24px; line-height: 1.2; margin-bottom: 4px; position: relative; }
+.ariba-board-card-sub { font-family: 'Bebas Neue', sans-serif; font-size: 12px; letter-spacing: .1em; color: var(--ar-muted); text-transform: uppercase; position: relative; }
+
+/* SOCIAL */
+.ariba-social { padding: 100px 32px; max-width: 1400px; margin: 0 auto; text-align: center; }
+.ariba-social-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 40px; }
+.ariba-social-card { background: var(--ar-card); border: 1px solid var(--ar-line); border-radius: 4px; padding: 60px 32px; text-decoration: none; color: var(--ar-text); transition: all .3s; position: relative; overflow: hidden; }
+.ariba-social-card::before { content: ''; position: absolute; inset: 0; background-image: var(--ar-p-teal); background-size: 300px; opacity: 0; transition: opacity .3s; }
+.ariba-social-card:hover { border-color: var(--ar-accent); transform: translateY(-4px); box-shadow: 0 8px 30px rgba(24, 33, 30, .08); }
+.ariba-social-card:hover::before { opacity: .12; }
+.ariba-social-icon { font-size: 40px; margin-bottom: 16px; position: relative; }
+.ariba-social-title { font-family: 'DM Serif Display', serif; font-size: 32px; margin-bottom: 8px; position: relative; }
+.ariba-social-handle { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: .15em; color: var(--ar-muted); text-transform: uppercase; position: relative; }
+
+/* SPONSOR BEDANK */
+.ariba-sponsor-thanks { background: var(--ar-forest); color: #F4F0E8; padding: 100px 32px 0; position: relative; overflow: hidden; }
+.ariba-sponsor-thanks::before { content: ''; position: absolute; inset: 0; background-image: var(--ar-p-teal); background-size: 400px; opacity: .15; pointer-events: none; }
+.ariba-thanks-inner { max-width: 1400px; margin: 0 auto; position: relative; z-index: 1; text-align: center; padding-bottom: 60px; }
+.ariba-thanks-kicker { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: .2em; color: var(--ar-gold); text-transform: uppercase; margin-bottom: 16px; }
+.ariba-thanks-title { font-family: 'DM Serif Display', serif; font-size: clamp(38px, 5vw, 64px); line-height: 1; letter-spacing: -.02em; margin-bottom: 20px; }
+.ariba-thanks-title em { color: var(--ar-gold); font-style: italic; }
+.ariba-thanks-text { font-family: 'Inter', sans-serif; font-size: 16px; color: rgba(244, 240, 232, .75); line-height: 1.7; max-width: 640px; margin: 0 auto; }
+
+.ariba-sponsor-marquee { overflow: hidden; padding: 50px 0; background: var(--ar-card); border-top: 1px solid var(--ar-line); border-bottom: 1px solid var(--ar-line); position: relative; }
+.ariba-sponsor-track { display: inline-flex; gap: 100px; animation: ar-sscroll 40s linear infinite; align-items: center; padding: 0 40px; white-space: nowrap; }
+.ariba-sponsor-track:hover { animation-play-state: paused; }
+.ariba-sponsor-track img { height: 65px; width: auto; object-fit: contain; opacity: .85; transition: opacity .3s; flex-shrink: 0; }
+.ariba-sponsor-track img:hover { opacity: 1; }
+.ariba-sponsor-track .dm { width: 12px; height: 12px; background: var(--ar-gold); transform: rotate(45deg); flex-shrink: 0; }
+@keyframes ar-sscroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+.ariba-footer { padding: 32px; font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: .1em; color: var(--ar-muted); text-transform: uppercase; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; background: var(--ar-bg); }
+.ariba-footer a { color: var(--ar-muted); text-decoration: none; }
+.ariba-footer a:hover { color: var(--ar-accent); }
+
+.ariba-reveal { opacity: 0; transform: translateY(20px); transition: opacity .8s ease, transform .8s ease; }
+.ariba-reveal.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 800px) {
+  .ariba-nav { padding: 14px 20px; flex-wrap: wrap; gap: 10px; }
+  .ariba-nav-r { display: none; }
+  .ariba-hero { padding: 120px 20px 40px; min-height: auto; }
+  .ariba-hero-logo { height: 100px; }
+  .ariba-hero-blob { width: 500px; height: 500px; }
+  .ariba-hero-stats { gap: 24px; }
+  .ariba-hero-stat .num { font-size: 32px; }
+  .ariba-countdown, .ariba-section, .ariba-article, .ariba-social, .ariba-history, .ariba-last-season, .ariba-board { padding: 60px 20px; }
+  .ariba-countdown-numbers { gap: 8px; }
+  .ariba-cbox { padding: 16px 8px; }
+  .ariba-matches-grid { grid-template-columns: 1fr; gap: 24px; }
+  .ariba-team-grid { grid-template-columns: 1fr; gap: 40px; }
+  .ariba-kit-wrap { position: static; }
+  .ariba-players { grid-template-columns: 1fr; }
+  .ariba-social-grid { grid-template-columns: 1fr; }
+  .ariba-table { font-size: 11px; }
+  .ariba-table th, .ariba-table td { padding: 6px 3px; }
+  .ariba-table th:nth-child(n+6):nth-child(-n+7),
+  .ariba-table td:nth-child(n+6):nth-child(-n+7) { display: none; }
+  .ariba-sponsor-thanks { padding: 60px 20px 0; }
+  .ariba-season-header { gap: 8px; }
+  .ariba-timeline { padding-left: 30px; }
+  .ariba-season::before { left: -30px; }
+  .ariba-board-grid { grid-template-columns: 1fr; }
+}

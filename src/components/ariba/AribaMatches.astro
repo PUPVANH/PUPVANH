@@ -1,0 +1,73 @@
+---
+import data from '../../data/ariba-wedstrijden.json';
+
+const dagen = ['ZO', 'MA', 'DI', 'WO', 'DO', 'VR', 'ZA'];
+const maanden = ['JAN', 'FEB', 'MRT', 'APR', 'MEI', 'JUN', 'JUL', 'AUG', 'SEP', 'OKT', 'NOV', 'DEC'];
+
+function formatDate(datumStr: string) {
+  const d = new Date(datumStr);
+  const uu = String(d.getHours()).padStart(2, '0');
+  const mm = String(d.getMinutes()).padStart(2, '0');
+  return `${dagen[d.getDay()]} ${d.getDate()} ${maanden[d.getMonth()]} · ${uu}U${mm}`;
+}
+
+const aankomend = data.wedstrijden
+  .filter((w: any) => w.uitslag === null)
+  .sort((a: any, b: any) => new Date(a.datum).getTime() - new Date(b.datum).getTime());
+
+const gespeeld = data.wedstrijden
+  .filter((w: any) => w.uitslag !== null)
+  .sort((a: any, b: any) => new Date(b.datum).getTime() - new Date(a.datum).getTime());
+---
+
+<section class="ariba-section">
+  <p class="ariba-section-kicker">Kalender</p>
+  <h2 class="ariba-section-title">Matchen <em>& uitslagen</em></h2>
+  <p class="ariba-section-sub">Seizoen {data.seizoen} · {data.reeks}</p>
+
+  <div class="ariba-matches-grid">
+    <div class="ariba-matches-col">
+      <h3>Aankomend <span>→</span></h3>
+      {aankomend.length === 0 ? (
+        <div class="ariba-match-empty">Geen aankomende wedstrijden</div>
+      ) : (
+        aankomend.map((w: any) => (
+          <div class="ariba-match-row">
+            <div class="ariba-match-row-top">
+              <span class="ariba-match-date">{formatDate(w.datum)}</span>
+              {w.locatie && <span class="ariba-match-loc">{w.locatie}</span>}
+            </div>
+            <div class="ariba-match-teams">
+              {w.thuis} <em>vs</em> {w.uit}
+            </div>
+          </div>
+        ))
+      )}
+      {aankomend.length > 0 && (
+        <div class="ariba-match-empty" style="margin-top:8px;">
+          Volgende matchen volgen zodra de kalender bekend is
+        </div>
+      )}
+    </div>
+
+    <div class="ariba-matches-col">
+      <h3>Recente uitslagen <span>←</span></h3>
+      {gespeeld.length === 0 ? (
+        <div class="ariba-match-empty">Nog geen gespeelde matchen dit seizoen</div>
+      ) : (
+        gespeeld.map((w: any) => (
+          <div class="ariba-match-row">
+            <div class="ariba-match-row-top">
+              <span class="ariba-match-date">{formatDate(w.datum)}</span>
+              {w.locatie && <span class="ariba-match-loc">{w.locatie}</span>}
+            </div>
+            <div class="ariba-match-teams">
+              {w.thuis} <em>vs</em> {w.uit}
+              <span class="ariba-match-score">{w.uitslag}</span>
+            </div>
+          </div>
+        ))
+      )}
+    </div>
+  </div>
+</section>

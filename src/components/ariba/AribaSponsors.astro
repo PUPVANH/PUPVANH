@@ -1,0 +1,37 @@
+---
+import { Fragment } from 'astro/jsx-runtime';
+
+// Sponsors — logo's in monochroom teal-stijl. Om nieuwe toe te voegen:
+// zet bestand in public/ariba/sponsors/ en voeg een regel toe.
+const sponsors = [
+  { src: '/ariba/sponsors/auditas.svg', alt: 'Auditas' },
+  { src: '/ariba/sponsors/fvd.svg', alt: 'fvd' },
+  { src: '/ariba/sponsors/dfr.svg', alt: 'DFR' },
+  { src: '/ariba/sponsors/lecluyse-dieet.png', alt: 'Lecluyse Diëet' },
+  { src: '/ariba/sponsors/naaihuisje-anja.png', alt: "'T Naaihuisje Anja" },
+];
+// De marquee heeft 2x de lijst nodig voor de naadloze scroll-loop
+const dubbel = [...sponsors, ...sponsors];
+---
+
+<div class="ariba-sponsor-thanks">
+  <div class="ariba-thanks-inner">
+    <p class="ariba-thanks-kicker">Onze partners</p>
+    <h2 class="ariba-thanks-title">Zonder hen <em>geen ploeg.</em></h2>
+    <p class="ariba-thanks-text">
+      De sponsors hieronder maken FC Ariba mogelijk — van tenues tot terreinhuur, van teamfoto's tot de derde helft.
+      Speciale shout-out naar Sjoeke van Café Ariba, waar het allemaal begon.
+    </p>
+  </div>
+</div>
+
+<div class="ariba-sponsor-marquee">
+  <div class="ariba-sponsor-track">
+    {dubbel.map(s => (
+      <Fragment>
+        <img src={s.src} alt={s.alt} />
+        <div class="dm"></div>
+      </Fragment>
+    ))}
+  </div>
+</div>
