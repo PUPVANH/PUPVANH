@@ -1,0 +1,44 @@
+---
+---
+
+<div class="about-sec">
+  <div class="about-inner">
+    <p class="kicker">// about</p>
+    <h2>Ideas were never the problem — <span class="accent">building them was.</span></h2>
+    <p>For years I collected notebooks full of half-drawn caps, unwritten sites, photo series with no home. I was never the technical type.</p>
+    <p>Then AI arrived. Claude became a co-builder — catching up with me instead of thinking for me. This site is the first thing I made that way.</p>
+    <p class="sig">// signed, <span>Puppy</span> · izegem, 2026</p>
+  </div>
+</div>
+
+<style>
+  .about-sec{background:var(--card);padding:140px 32px;position:relative;}
+  .about-sec::before{
+    content:'';position:absolute;inset:0;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+    opacity:.05;mix-blend-mode:multiply;pointer-events:none;
+  }
+  .about-inner{max-width:1000px;margin:0 auto;position:relative;z-index:1;}
+  .about-sec .kicker{
+    font-family:'JetBrains Mono',monospace;font-size:12px;
+    color:var(--muted);margin-bottom:32px;letter-spacing:.05em;text-transform:uppercase;
+  }
+  .about-sec h2{
+    font-size:clamp(38px,6vw,72px);font-weight:700;
+    letter-spacing:-.03em;line-height:1.05;margin-bottom:40px;
+  }
+  .about-sec h2 .accent{color:var(--accent);}
+  .about-sec p{
+    font-size:18px;color:var(--text);line-height:1.7;
+    margin-bottom:20px;max-width:720px;
+  }
+  .about-sec .sig{
+    font-family:'JetBrains Mono',monospace;font-size:12px;
+    color:var(--muted);margin-top:30px;
+  }
+  .about-sec .sig span{color:var(--ember);}
+
+  @media(max-width:800px){
+    .about-sec{padding:80px 20px;}
+  }
+</style>

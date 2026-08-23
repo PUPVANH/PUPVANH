@@ -1,0 +1,92 @@
+---
+---
+
+<nav>
+  <div class="nav-l" id="logoTrigger">
+    <span class="dot"></span>
+    <span>PUP VANH</span>
+  </div>
+  <div class="nav-c">
+    <a href="/index-all">index</a>
+    <a href="/about">about</a>
+    <a href="/bookmarks">bookmarks</a>
+    <a href="/blog">blog</a>
+  </div>
+  <div class="nav-r">
+    <span>2026 · vol.01</span>
+    <button class="theme-toggle" id="tb" aria-label="Toggle dark mode">◐</button>
+  </div>
+</nav>
+
+<div class="pup" id="pup">🐕</div>
+
+<style>
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:60;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:20px 32px;background:rgba(244,240,232,.85);
+    backdrop-filter:blur(12px);
+    font-family:'JetBrains Mono',monospace;font-size:13px;
+  }
+  :global(html[data-mode="dark"]) nav{background:rgba(18,37,34,.85);}
+  .nav-l{display:flex;align-items:center;gap:10px;position:relative;cursor:pointer;}
+  .nav-l .dot{width:8px;height:8px;background:var(--ember);border-radius:50%;animation:pulse 2s ease-in-out infinite;}
+  .nav-l::after{
+    content:'// hover me';position:absolute;left:calc(100% + 10px);top:50%;
+    transform:translateY(-50%);font-size:10px;color:var(--muted);
+    opacity:0;transition:opacity .3s;white-space:nowrap;pointer-events:none;
+  }
+  .nav-l:hover::after{opacity:.6;}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.85);}}
+  .nav-c{display:flex;gap:24px;font-size:12px;color:var(--muted);}
+  .nav-c a{color:var(--muted);text-decoration:none;transition:color .2s;}
+  .nav-c a:hover{color:var(--accent);}
+  .nav-r{display:flex;gap:14px;align-items:center;font-size:12px;color:var(--muted);}
+  .theme-toggle{background:transparent;border:none;color:var(--text);font-size:14px;cursor:pointer;font-family:inherit;}
+
+  .pup{position:fixed;top:22px;left:-80px;font-size:28px;z-index:200;pointer-events:none;opacity:0;}
+  .pup.run{opacity:1;animation:pupRun 5s linear;}
+  @keyframes pupRun{
+    0%{transform:translateX(0) translateY(0) rotate(0);}
+    25%{transform:translateX(30vw) translateY(-2px) rotate(-3deg);}
+    50%{transform:translateX(60vw) translateY(-5px) rotate(4deg);}
+    75%{transform:translateX(85vw) translateY(-2px) rotate(-2deg);}
+    100%{transform:translateX(110vw) translateY(0) rotate(0);}
+  }
+
+  @media(max-width:800px){
+    nav{padding:14px 20px;}
+    .nav-c{display:none;}
+  }
+</style>
+
+<script>
+  // Dark mode toggle
+  const tb = document.getElementById('tb');
+  if (tb) {
+    tb.addEventListener('click', () => {
+      const r = document.documentElement;
+      const c = r.getAttribute('data-mode');
+      const n = c === 'dark' ? 'light' : 'dark';
+      r.setAttribute('data-mode', n);
+      tb.textContent = n === 'dark' ? '◑' : '◐';
+    });
+  }
+
+  // Easter egg: sneaky pupje na 1s hover op logo
+  const logoTrigger = document.getElementById('logoTrigger');
+  const pupEl = document.getElementById('pup');
+  let hoverTimer: ReturnType<typeof setTimeout> | null = null;
+
+  if (logoTrigger && pupEl) {
+    logoTrigger.addEventListener('mouseenter', () => {
+      hoverTimer = setTimeout(() => {
+        pupEl.classList.add('run');
+        setTimeout(() => pupEl.classList.remove('run'), 5000);
+      }, 1000);
+    });
+    logoTrigger.addEventListener('mouseleave', () => {
+      if (hoverTimer) clearTimeout(hoverTimer);
+    });
+  }
+</script>

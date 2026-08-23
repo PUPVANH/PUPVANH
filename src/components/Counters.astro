@@ -1,0 +1,48 @@
+---
+---
+
+<div class="counters">
+  <div><span class="n" data-target="2">0</span><span class="l">// photos</span></div>
+  <div><span class="n" data-target="4">0</span><span class="l">// projects</span></div>
+  <div><span class="n" data-target="1">0</span><span class="l">// writings</span></div>
+  <div><span class="n" data-target="4">0</span><span class="l">// bookmarks</span></div>
+</div>
+
+<style>
+  .counters{
+    padding:50px 32px;max-width:1400px;margin:0 auto;
+    display:flex;gap:60px;
+    font-family:'JetBrains Mono',monospace;font-size:12px;
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  }
+  .counters > div{display:flex;flex-direction:column;gap:6px;cursor:default;transition:transform .3s;}
+  .counters > div:hover{transform:translateY(-4px);}
+  .counters .n{
+    font-family:'Inter',sans-serif;font-size:44px;font-weight:700;
+    color:var(--text);letter-spacing:-.03em;line-height:1;transition:color .3s;
+  }
+  .counters > div:hover .n{color:var(--ember);}
+  .counters .l{color:var(--muted);letter-spacing:.02em;}
+
+  @media(max-width:800px){
+    .counters{gap:20px;flex-wrap:wrap;padding:30px 20px;}
+    .counters .n{font-size:34px;}
+  }
+</style>
+
+<script>
+  const counters = document.querySelectorAll<HTMLSpanElement>('.n[data-target]');
+  function runCount() {
+    counters.forEach(el => {
+      const t = parseInt(el.getAttribute('data-target') || '0');
+      let c = 0;
+      const step = Math.max(1, Math.ceil(t / 25));
+      const i = setInterval(() => {
+        c += step;
+        if (c >= t) { c = t; clearInterval(i); }
+        el.textContent = (c < 10 ? '0' : '') + c;
+      }, 50);
+    });
+  }
+  setTimeout(runCount, 700);
+</script>
