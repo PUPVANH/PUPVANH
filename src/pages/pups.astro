@@ -1,0 +1,1116 @@
+---
+// pups.astro - PUPVANH subpage
+// Pups by Puppy - hondgeïnspireerde streetwear
+import { Analytics } from '@vercel/analytics/astro'
+---
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pups — by Puppy</title>
+<meta name="description" content="Hondgeïnspireerde streetwear met eigen creaties. Kleinschalig, handmade, en enkel via DM te bestellen.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style is:global>
+.pups-page {
+  --pups-bg: #F5EBD9; --pups-bg-alt: #ECDDC3;
+  --pups-ink: #2A1810; --pups-ink-soft: #5C4636;
+  --pups-accent: #E85D2F; --pups-accent-2: #F2A93D; --pups-accent-3: #7BAE7F;
+  --pups-accent-soft: #F4A78D; --pups-cream: #FFFBF3;
+  --pups-line: rgba(42,24,16,0.12); --pups-shadow: rgba(232,93,47,0.15);
+  --pups-card: #FFFBF3;
+  font-family:'Inter', sans-serif;
+  background:var(--pups-bg); color:var(--pups-ink);
+  line-height:1.55; position:relative; overflow-x:hidden;
+  min-height:100vh;
+}
+.pups-page * { margin:0; padding:0; box-sizing:border-box; }
+.pups-page::before {
+  content:''; position:fixed; inset:0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity:0.07; pointer-events:none; z-index:1; mix-blend-mode:multiply;
+}
+.pups-page section, .pups-page header, .pups-page footer, .pups-page .announce, .pups-page .pup-wall, .pups-page .rain-btn, .pups-page .drag-pup { position:relative; z-index:2; }
+
+.pups-page .drag-pup {
+  position:fixed; bottom:100px; right:30px;
+  width:80px; height:80px; cursor:grab; z-index:100;
+  transition: transform 0.3s;
+  filter: drop-shadow(0 4px 12px rgba(42,24,16,0.25));
+  animation: pupsBob 3s ease-in-out infinite;
+}
+.pups-page .drag-pup:hover { transform: scale(1.1) rotate(-8deg); }
+.pups-page .drag-pup:active { cursor:grabbing; animation:none; }
+.pups-page .drag-pup img { width:100%; height:100%; pointer-events:none; }
+.pups-page .drag-pup .drag-hint {
+  position:absolute; bottom:-24px; left:50%; transform:translateX(-50%);
+  background:var(--pups-ink); color:var(--pups-cream);
+  padding:4px 10px; border-radius:100px;
+  font-family:'JetBrains Mono', monospace;
+  font-size:9px; text-transform:uppercase; letter-spacing:0.1em;
+  white-space:nowrap; opacity:0; transition: opacity 0.2s;
+}
+.pups-page .drag-pup:hover .drag-hint { opacity:1; }
+@keyframes pupsBob { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-8px);} }
+
+.pups-page .rain-btn {
+  position:fixed; bottom:30px; right:30px;
+  background:var(--pups-ink); color:var(--pups-cream);
+  border:2px solid var(--pups-ink);
+  padding:14px 20px; border-radius:100px;
+  font-family:'JetBrains Mono', monospace;
+  font-size:11px; text-transform:uppercase; letter-spacing:0.1em;
+  cursor:pointer; z-index:100; transition: all 0.2s;
+  font-weight:600; box-shadow: 0 4px 12px rgba(42,24,16,0.2);
+}
+.pups-page .rain-btn:hover { background:var(--pups-accent); transform:translateY(-2px); }
+.pups-page .rain-btn.raining { background:var(--pups-accent-3); }
+.pups-page .rain-btn:disabled { opacity:0.6; cursor:not-allowed; }
+
+.pups-page .announce {
+  background:var(--pups-ink); color:var(--pups-cream);
+  text-align:center; padding:10px 20px;
+  font-family:'JetBrains Mono', monospace;
+  font-size:11px; text-transform:uppercase; letter-spacing:0.15em;
+}
+.pups-page .announce span { color:var(--pups-accent-2); }
+
+.pups-page .nav {
+  padding:20px 40px;
+  display:flex; justify-content:space-between; align-items:center;
+  border-bottom:1px solid var(--pups-line); background:var(--pups-bg);
+  position:sticky; top:0; z-index:50; backdrop-filter: blur(8px);
+}
+.pups-page .nav-back {
+  font-family:'JetBrains Mono', monospace;
+  font-size:12px; text-transform:uppercase; letter-spacing:0.1em;
+  color:var(--pups-ink-soft); text-decoration:none; transition: color 0.2s;
+}
+.pups-page .nav-back:hover { color:var(--pups-accent); }
+.pups-page .nav-brand {
+  display:flex; align-items:center; gap:12px;
+  position:absolute; left:50%; transform:translateX(-50%);
+  cursor:pointer;
+}
+.pups-page .nav-brand img {
+  width:44px; height:44px; border-radius:50%;
+  background:var(--pups-accent-soft); padding:2px; transition:transform 0.3s;
+}
+.pups-page .nav-brand:hover img { transform:rotate(15deg); }
+.pups-page .nav-brand-name {
+  font-family:'Bebas Neue', sans-serif;
+  font-size:28px; letter-spacing:0.12em; color:var(--pups-ink);
+}
+.pups-page .nav-links {
+  display:flex; gap:22px;
+  font-family:'JetBrains Mono', monospace;
+  font-size:12px; text-transform:uppercase; letter-spacing:0.1em;
+}
+.pups-page .nav-links a {
+  color:var(--pups-ink-soft); text-decoration:none;
+  transition: color 0.2s; cursor:pointer; position:relative;
+}
+.pups-page .nav-links a:hover { color:var(--pups-accent); }
+.pups-page .nav-links a.active { color:var(--pups-accent); }
+.pups-page .nav-links a.active::after {
+  content:''; position:absolute; bottom:-6px; left:0; right:0;
+  height:2px; background:var(--pups-accent);
+}
+
+.pups-page .view { display:none; animation: pupsFadeIn 0.5s ease; }
+.pups-page .view.active { display:block; }
+@keyframes pupsFadeIn { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:translateY(0);} }
+
+.pups-page .hero {
+  padding:80px 40px 100px;
+  display:grid; grid-template-columns: 1.1fr 1fr;
+  gap:60px; align-items:center;
+  max-width:1400px; margin:0 auto;
+}
+.pups-page .hero-kicker {
+  font-family:'JetBrains Mono', monospace;
+  font-size:12px; text-transform:uppercase; letter-spacing:0.15em;
+  color:var(--pups-accent); margin-bottom:24px;
+  display:flex; align-items:center; gap:12px; font-weight:500;
+}
+.pups-page .hero-kicker::before { content:''; width:24px; height:1px; background:var(--pups-accent); }
+.pups-page .hero-title {
+  font-family:'Bebas Neue', sans-serif;
+  font-size:clamp(80px, 13vw, 200px);
+  line-height:0.82; letter-spacing:0.02em;
+  color:var(--pups-ink); margin-bottom:24px;
+}
+.pups-page .hero-title .accent { color:var(--pups-accent); }
+.pups-page .hero-title .serif {
+  color:var(--pups-ink-soft); font-style:italic;
+  font-family:'DM Serif Display', serif;
+  font-size:0.6em; letter-spacing:-0.02em; font-weight:400;
+}
+.pups-page .hero-lead {
+  font-size:18px; line-height:1.65; color:var(--pups-ink-soft);
+  max-width:480px; margin-bottom:36px;
+}
+.pups-page .hero-lead strong { color:var(--pups-ink); font-weight:600; }
+.pups-page .hero-ctas { display:flex; gap:14px; flex-wrap:wrap; }
+.pups-page .hero-cta {
+  display:inline-flex; align-items:center; gap:10px;
+  padding:16px 28px;
+  background:var(--pups-ink); color:var(--pups-cream);
+  text-decoration:none;
+  font-family:'JetBrains Mono', monospace;
+  font-size:13px; text-transform:uppercase; letter-spacing:0.1em;
+  border-radius:100px; transition: all 0.2s; font-weight:500;
+  cursor:pointer; border:none;
+}
+.pups-page .hero-cta:hover { background:var(--pups-accent); transform: translateY(-2px); }
+.pups-page .hero-cta.secondary { background:transparent; color:var(--pups-ink); border:1.5px solid var(--pups-ink); }
+.pups-page .hero-cta.secondary:hover { background:var(--pups-ink); color:var(--pups-cream); }
+.pups-page .hero-image {
+  position:relative; aspect-ratio:4/5;
+  border-radius:16px; overflow:hidden;
+  border:2px solid var(--pups-ink);
+  box-shadow: 12px 12px 0 var(--pups-accent-2);
+}
+.pups-page .hero-image img { width:100%; height:100%; object-fit:cover; transition: transform 6s ease-in-out; }
+.pups-page .hero-image:hover img { transform: scale(1.06); }
+.pups-page .hero-sticker {
+  position:absolute; z-index:3;
+  background:var(--pups-accent); color:var(--pups-cream);
+  padding:14px 22px; border-radius:100px;
+  font-family:'JetBrains Mono', monospace;
+  font-size:11px; text-transform:uppercase; letter-spacing:0.1em;
+  font-weight:600; transform:rotate(-8deg);
+  box-shadow: 0 6px 20px var(--pups-shadow);
+}
+.pups-page .hero-sticker.top-right { top:20px; right:20px; }
+.pups-page .hero-sticker.bottom-left { bottom:20px; left:20px; background:var(--pups-accent-3); transform:rotate(8deg); }
+
+.pups-page .pup-wall {
+  background: var(--pups-bg-alt);
+  padding:32px 0; overflow:hidden;
+  border-top:2px solid var(--pups-ink); border-bottom:2px solid var(--pups-ink);
+}
+.pups-page .pup-wall-track {
+  display:flex; gap:40px; align-items:center;
+  animation: pupsScroll 60s linear infinite; width:max-content;
+}
+.pups-page .pup-wall-track img { height:110px; width:auto; transition: transform 0.3s; cursor:pointer; }
+.pups-page .pup-wall-track img:hover { transform: scale(1.2) rotate(-5deg); }
+@keyframes pupsScroll { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+.pups-page .lookbook { padding:100px 40px; background:var(--pups-bg); }
+.pups-page .lookbook-inner { max-width:1400px; margin:0 auto; }
+.pups-page .lookbook-grid {
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 280px; gap:14px;
+  margin-top:40px;
+}
+.pups-page .lookbook-item {
+  overflow:hidden; border-radius:8px; position:relative;
+  border:1.5px solid var(--pups-ink);
+}
+.pups-page .lookbook-item img { width:100%; height:100%; object-fit:cover; transition: transform 0.7s; }
+.pups-page .lookbook-item:hover img { transform: scale(1.05); }
+.pups-page .lookbook-item.tall { grid-row: span 2; }
+.pups-page .lookbook-item.wide { grid-column: span 2; }
+
+.pups-page .section { padding:100px 40px; max-width:1400px; margin:0 auto; }
+.pups-page .section-header {
+  display:flex; justify-content:space-between; align-items:flex-end;
+  margin-bottom:56px; padding-bottom:24px;
+  border-bottom:2px solid var(--pups-ink);
+}
+.pups-page .section-kicker {
+  font-family:'JetBrains Mono', monospace;
+  font-size:12px; text-transform:uppercase; letter-spacing:0.15em;
+  color:var(--pups-accent); margin-bottom:12px; font-weight:600;
+}
+.pups-page .section-title {
+  font-family:'Bebas Neue', sans-serif;
+  font-size:80px; line-height:1; letter-spacing:0.02em; color:var(--pups-ink);
+}
+.pups-page .section-title em {
+  font-family:'DM Serif Display', serif;
+  font-style:italic; color:var(--pups-accent);
+  font-size:0.82em; letter-spacing:-0.02em;
+}
+.pups-page .section-meta {
+  font-family:'JetBrains Mono', monospace;
+  font-size:12px; text-transform:uppercase; letter-spacing:0.1em;
+  color:var(--pups-ink-soft); text-align:right; line-height:1.7;
+}
+.pups-page .section-meta strong { color:var(--pups-accent); font-weight:600; }
+
+.pups-page .design-grid {
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap:24px;
+}
+.pups-page .design-card {
+  background:var(--pups-card); border:1.5px solid var(--pups-ink);
+  border-radius:12px; overflow:hidden;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s;
+  cursor:pointer; transform-style: preserve-3d; perspective: 1000px;
+}
+.pups-page .design-card:hover { box-shadow: 6px 6px 0 var(--pups-accent); }
+.pups-page .design-image {
+  aspect-ratio: 1/1; background: var(--pups-bg);
+  display:flex; align-items:center; justify-content:center;
+  border-bottom:1.5px solid var(--pups-ink); overflow:hidden;
+}
+.pups-page .design-image img {
+  width:78%; height:78%; object-fit:contain;
+  transition: transform 0.4s;
+}
+.pups-page .design-card:hover .design-image img { transform: scale(1.08) rotate(-2deg); }
+.pups-page .design-body { padding:18px 20px; text-align:center; }
+.pups-page .design-name {
+  font-family:'DM Serif Display', serif;
+  font-size:22px; line-height:1.15;
+  color:var(--pups-ink); margin-bottom:4px;
+}
+.pups-page .design-tag {
+  font-family:'JetBrains Mono', monospace;
+  font-size:10px; text-transform:uppercase; letter-spacing:0.12em;
+  color:var(--pups-ink-soft);
+}
+
+.pups-page .merch-section {
+  padding:100px 40px;
+  background: linear-gradient(180deg, var(--pups-bg) 0%, var(--pups-bg-alt) 100%);
+  border-top:2px solid var(--pups-ink);
+}
+.pups-page .merch-inner { max-width:1400px; margin:0 auto; }
+.pups-page .merch-grid {
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap:20px;
+}
+.pups-page .merch-card {
+  background:var(--pups-cream); border:1.5px solid var(--pups-ink);
+  border-radius:12px; overflow:hidden; transition: all 0.3s;
+}
+.pups-page .merch-card:hover { transform: translateY(-4px); box-shadow: 4px 4px 0 var(--pups-accent-2); }
+.pups-page .merch-image {
+  aspect-ratio: 1/1; background:#fff; overflow:hidden;
+  display:flex; align-items:center; justify-content:center;
+  border-bottom:1.5px solid var(--pups-ink); position:relative;
+}
+.pups-page .merch-image img { width:100%; height:100%; object-fit:contain; }
+
+.pups-page .tote-flip { cursor:pointer; position:relative; }
+.pups-page .tote-flip .merch-image { perspective:800px; }
+.pups-page .tote-flip .tote-front, .pups-page .tote-flip .tote-back {
+  position:absolute; inset:0;
+  backface-visibility: hidden;
+  transition: transform 0.6s;
+}
+.pups-page .tote-flip .tote-back { transform: rotateY(180deg); }
+.pups-page .tote-flip.flipped .tote-front { transform: rotateY(180deg); }
+.pups-page .tote-flip.flipped .tote-back { transform: rotateY(0deg); }
+.pups-page .tote-flip::after {
+  content:'⇄'; position:absolute; top:10px; right:10px;
+  background:var(--pups-ink); color:var(--pups-cream);
+  width:26px; height:26px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:14px; font-weight:bold;
+  z-index:2; pointer-events:none;
+}
+
+.pups-page .merch-body { padding:16px 18px; }
+.pups-page .merch-name {
+  font-family:'DM Serif Display', serif;
+  font-size:18px; line-height:1.2; color:var(--pups-ink); margin-bottom:4px;
+}
+.pups-page .merch-tag {
+  font-family:'JetBrains Mono', monospace;
+  font-size:10px; text-transform:uppercase; letter-spacing:0.1em; color:var(--pups-ink-soft);
+}
+
+.pups-page .animals { padding:120px 40px; max-width:1200px; margin:0 auto; }
+.pups-page .animals-header { text-align:center; margin-bottom:64px; }
+.pups-page .animals-kicker {
+  font-family:'JetBrains Mono', monospace;
+  font-size:12px; text-transform:uppercase; letter-spacing:0.15em;
+  color:var(--pups-accent); margin-bottom:12px; font-weight:600;
+}
+.pups-page .animals-title {
+  font-family:'Bebas Neue', sans-serif;
+  font-size:80px; line-height:1; letter-spacing:0.02em;
+}
+.pups-page .animals-title em {
+  font-family:'DM Serif Display', serif;
+  font-style:italic; color:var(--pups-accent); font-size:0.82em;
+}
+.pups-page .animals-grid {
+  display:grid; grid-template-columns: repeat(2, 1fr); gap:32px;
+}
+.pups-page .animal-card {
+  background:var(--pups-card); border:2px solid var(--pups-ink);
+  border-radius:16px; padding:32px;
+  text-align:center; transition: all 0.3s; position:relative;
+}
+.pups-page .animal-card:hover { transform: translateY(-6px); box-shadow: 0 12px 24px var(--pups-shadow); }
+.pups-page .animal-card .animal-badge {
+  position:absolute; top:-14px; right:20px;
+  background:var(--pups-accent); color:var(--pups-cream);
+  padding:5px 12px; border-radius:100px;
+  font-family:'JetBrains Mono', monospace;
+  font-size:10px; text-transform:uppercase; letter-spacing:0.1em;
+  font-weight:600; border:1.5px solid var(--pups-ink);
+}
+.pups-page .animal-photo {
+  aspect-ratio: 1/1; border-radius:12px; overflow:hidden;
+  border:1.5px solid var(--pups-ink);
+  margin-bottom:20px; position:relative;
+}
+.pups-page .animal-photo img { width:100%; height:100%; object-fit:cover; transition:transform 0.5s; }
+.pups-page .animal-card:hover .animal-photo img { transform:scale(1.05); }
+.pups-page .animal-name {
+  font-family:'Bebas Neue', sans-serif;
+  font-size:52px; color:var(--pups-ink); letter-spacing:0.03em; margin-bottom:6px;
+}
+.pups-page .animal-role {
+  font-family:'JetBrains Mono', monospace;
+  font-size:11px; text-transform:uppercase; letter-spacing:0.15em;
+  color:var(--pups-accent); margin-bottom:14px; font-weight:600;
+}
+.pups-page .animal-desc {
+  font-size:15px; line-height:1.6;
+  color:var(--pups-ink-soft); margin-bottom:16px;
+}
+.pups-page .animal-cta {
+  display:inline-flex; align-items:center; gap:6px;
+  padding:8px 16px;
+  background:var(--pups-ink); color:var(--pups-cream);
+  text-decoration:none;
+  font-family:'JetBrains Mono', monospace;
+  font-size:11px; text-transform:uppercase; letter-spacing:0.1em;
+  border-radius:100px; transition:all 0.2s; font-weight:600; cursor:pointer;
+}
+.pups-page .animal-cta:hover { background:var(--pups-accent); }
+
+.pups-page .story {
+  padding:100px 40px; max-width:1200px; margin:60px auto;
+  display:grid; grid-template-columns: 1fr 1.1fr;
+  gap:80px; align-items:center;
+  background: var(--pups-bg-alt);
+  border-radius: 24px; border: 2px solid var(--pups-ink);
+}
+.pups-page .story-image {
+  position:relative; aspect-ratio: 1/1;
+  border-radius:16px; overflow:hidden;
+  border:2px solid var(--pups-ink);
+  box-shadow: 12px 12px 0 var(--pups-accent-3);
+}
+.pups-page .story-image img { width:100%; height:100%; object-fit:cover; transition:transform 6s ease-in-out; }
+.pups-page .story-image:hover img { transform:scale(1.06); }
+.pups-page .story-content .story-kicker {
+  font-family:'JetBrains Mono', monospace;
+  font-size:12px; text-transform:uppercase; letter-spacing:0.15em;
+  color:var(--pups-accent); margin-bottom:16px; font-weight:600;
+}
+.pups-page .story-content h2 {
+  font-family:'Bebas Neue', sans-serif;
+  font-size:64px; line-height:0.95;
+  margin-bottom:28px; color:var(--pups-ink);
+}
+.pups-page .story-content h2 em {
+  font-family:'DM Serif Display', serif;
+  color:var(--pups-accent); font-style:italic; font-size:0.75em;
+}
+.pups-page .story-content p {
+  font-size:16px; line-height:1.7;
+  color:var(--pups-ink-soft); margin-bottom:16px;
+}
+.pups-page .story-content p strong { color:var(--pups-ink); font-weight:600; }
+
+.pups-page .cta-section {
+  background:var(--pups-ink); color:var(--pups-cream);
+  padding:100px 40px; text-align:center;
+  position:relative; overflow:hidden;
+}
+.pups-page .cta-section::before {
+  content:'🐾'; position:absolute;
+  top:-40px; right:-40px; font-size:400px;
+  opacity:0.04; transform:rotate(-15deg);
+}
+.pups-page .cta-kicker {
+  font-family:'JetBrains Mono', monospace;
+  font-size:12px; text-transform:uppercase; letter-spacing:0.15em;
+  color:var(--pups-accent-2); margin-bottom:16px; font-weight:600;
+  position:relative; z-index:2;
+}
+.pups-page .cta-title {
+  font-family:'Bebas Neue', sans-serif;
+  font-size:72px; line-height:1; margin-bottom:20px;
+  position:relative; z-index:2;
+}
+.pups-page .cta-title em {
+  font-family:'DM Serif Display', serif;
+  font-style:italic; color:var(--pups-accent); font-size:0.8em;
+}
+.pups-page .cta-lead {
+  font-size:17px; color: rgba(255,251,243,0.75);
+  max-width:520px; margin:0 auto 32px; line-height:1.6;
+  position:relative; z-index:2;
+}
+.pups-page .cta-btn {
+  display:inline-flex; align-items:center; gap:10px;
+  padding:18px 34px;
+  background:var(--pups-accent); color:var(--pups-cream);
+  text-decoration:none;
+  font-family:'JetBrains Mono', monospace;
+  font-size:13px; text-transform:uppercase; letter-spacing:0.1em;
+  border-radius:100px; transition: all 0.2s; font-weight:600;
+  position:relative; z-index:2; cursor:pointer; border:none;
+}
+.pups-page .cta-btn:hover { background:var(--pups-cream); color:var(--pups-ink); transform: translateY(-2px); }
+
+.pups-page .vinnie-hero {
+  padding:80px 40px 60px;
+  background: linear-gradient(135deg, #E8F0F5 0%, #C7D9E3 100%);
+  border-bottom:2px solid var(--pups-ink);
+  position:relative; overflow:hidden;
+}
+.pups-page .vinnie-hero::before {
+  content:''; position:absolute; inset:0;
+  background-image: radial-gradient(circle at 20% 30%, rgba(41,90,143,0.08) 0%, transparent 40%),
+                    radial-gradient(circle at 80% 70%, rgba(232,93,47,0.06) 0%, transparent 40%);
+}
+.pups-page .vinnie-hero-inner {
+  max-width:1400px; margin:0 auto;
+  display:grid; grid-template-columns: 1fr 1fr;
+  gap:60px; align-items:center;
+  position:relative; z-index:2;
+}
+.pups-page .vinnie-hero-photo {
+  aspect-ratio: 3/4; border-radius:16px; overflow:hidden;
+  border:2.5px solid var(--pups-ink);
+  box-shadow: 12px 12px 0 #295A8F;
+}
+.pups-page .vinnie-hero-photo img {
+  width:100%; height:100%; object-fit:cover;
+  transition:transform 6s ease-in-out;
+}
+.pups-page .vinnie-hero-photo:hover img { transform:scale(1.08); }
+.pups-page .vinnie-hero-info .v-kicker {
+  font-family:'JetBrains Mono', monospace;
+  font-size:12px; text-transform:uppercase; letter-spacing:0.15em;
+  color:#1E3A34; margin-bottom:16px; font-weight:600;
+}
+.pups-page .vinnie-hero-info h1 {
+  font-family:'Bebas Neue', sans-serif;
+  font-size:120px; line-height:0.85;
+  color:var(--pups-ink); margin-bottom:20px; letter-spacing:0.02em;
+}
+.pups-page .vinnie-hero-info h1 em {
+  font-family:'DM Serif Display', serif;
+  font-style:italic; color:#295A8F;
+  font-size:0.6em; letter-spacing:-0.02em;
+}
+.pups-page .vinnie-tagline {
+  font-size:20px; line-height:1.6;
+  color:var(--pups-ink-soft); margin-bottom:32px; max-width:480px;
+}
+.pups-page .vinnie-tagline strong { color:var(--pups-ink); }
+.pups-page .vinnie-insta {
+  display:inline-flex; align-items:center; gap:10px;
+  padding:14px 24px;
+  background: var(--pups-ink); color:var(--pups-cream);
+  text-decoration:none;
+  font-family:'JetBrains Mono', monospace;
+  font-size:12px; text-transform:uppercase; letter-spacing:0.1em;
+  border-radius:100px; transition: all 0.2s;
+  font-weight:600; cursor:pointer;
+}
+.pups-page .vinnie-insta:hover { background:#295A8F; transform:translateY(-2px); }
+
+.pups-page .vinnie-facts { padding:80px 40px; max-width:1400px; margin:0 auto; }
+.pups-page .vinnie-facts-grid {
+  display:grid; grid-template-columns: repeat(4, 1fr); gap:20px;
+}
+.pups-page .fact-card {
+  background:var(--pups-card); border:2px solid var(--pups-ink);
+  border-radius:16px; padding:28px 24px;
+  text-align:center; transition:all 0.3s;
+}
+.pups-page .fact-card:hover { transform: translateY(-4px); box-shadow: 4px 4px 0 #295A8F; }
+.pups-page .fact-icon { font-size:44px; margin-bottom:12px; display:block; }
+.pups-page .fact-value {
+  font-family:'Bebas Neue', sans-serif;
+  font-size:44px; color:#295A8F;
+  line-height:1; margin-bottom:8px;
+}
+.pups-page .fact-label {
+  font-family:'JetBrains Mono', monospace;
+  font-size:11px; text-transform:uppercase; letter-spacing:0.12em; color:var(--pups-ink-soft);
+}
+
+.pups-page .vinnie-gallery { padding:80px 40px; max-width:1400px; margin:0 auto; }
+.pups-page .vinnie-gallery-grid {
+  display:grid; grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 260px; gap:14px; margin-top:40px;
+}
+.pups-page .vinnie-photo {
+  border-radius:8px; overflow:hidden;
+  border:1.5px solid var(--pups-ink); transition:all 0.3s;
+}
+.pups-page .vinnie-photo img { width:100%; height:100%; object-fit:cover; transition:transform 0.6s; }
+.pups-page .vinnie-photo:hover img { transform:scale(1.06); }
+.pups-page .vinnie-photo.tall { grid-row: span 2; }
+.pups-page .vinnie-photo.wide { grid-column: span 2; }
+
+.pups-page .back-to-pups { text-align:center; padding:40px 40px 20px; }
+.pups-page .back-to-pups a {
+  display:inline-flex; align-items:center; gap:8px;
+  padding:12px 22px;
+  background:var(--pups-cream); border:1.5px solid var(--pups-ink);
+  color:var(--pups-ink); text-decoration:none;
+  font-family:'JetBrains Mono', monospace;
+  font-size:11px; text-transform:uppercase; letter-spacing:0.1em;
+  border-radius:100px; transition:all 0.2s; cursor:pointer;
+}
+.pups-page .back-to-pups a:hover { background:var(--pups-ink); color:var(--pups-cream); }
+
+.pups-page .footer { padding:70px 40px 40px; border-top:2px solid var(--pups-ink); text-align:center; }
+.pups-page .footer-brand { display:flex; align-items:center; justify-content:center; gap:14px; margin-bottom:20px; }
+.pups-page .footer-brand img { width:40px; height:40px; border-radius:50%; background:var(--pups-accent-soft); padding:2px; }
+.pups-page .footer-brand span { font-family:'Bebas Neue', sans-serif; font-size:26px; letter-spacing:0.1em; }
+.pups-page .footer-back {
+  font-family:'JetBrains Mono', monospace;
+  font-size:12px; text-transform:uppercase; letter-spacing:0.1em;
+  color:var(--pups-ink-soft); text-decoration:none;
+  display:inline-flex; align-items:center; gap:8px;
+  margin-bottom:28px; transition: color 0.2s;
+}
+.pups-page .footer-back:hover { color:var(--pups-accent); }
+.pups-page .footer-socials {
+  display:flex; justify-content:center; gap:20px;
+  margin-bottom:28px;
+  font-family:'JetBrains Mono', monospace;
+  font-size:12px; text-transform:uppercase; letter-spacing:0.1em; flex-wrap:wrap;
+}
+.pups-page .footer-socials a { color:var(--pups-ink-soft); text-decoration:none; transition: color 0.2s; }
+.pups-page .footer-socials a:hover { color:var(--pups-accent); }
+.pups-page .footer-copy-line1 { font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--pups-accent-2); font-weight:500; margin-bottom:6px; letter-spacing:0.08em; }
+.pups-page .footer-copy-line2 { font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--pups-ink); opacity:0.85; }
+.pups-page .footer-copy-line2 a { color:var(--pups-accent); text-decoration:none; font-weight:600; }
+
+.pups-page #pup-rain {
+  position:fixed; inset:0; pointer-events:none; z-index:9999; overflow:hidden;
+}
+.pups-page .rain-drop {
+  position:absolute; width:80px; height:80px;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+}
+
+@keyframes pupsWiggle { 0%,100%{transform:rotate(-4deg) scale(1);} 50%{transform:rotate(4deg) scale(1.05);} }
+
+@media (max-width: 900px) {
+  .pups-page .nav { padding:16px 20px; flex-wrap:wrap; gap:12px; }
+  .pups-page .nav-brand { position:static; transform:none; order:-1; width:100%; justify-content:center; margin-bottom:8px; }
+  .pups-page .nav-links { font-size:11px; gap:14px; }
+  .pups-page .hero { grid-template-columns: 1fr; gap:40px; padding:40px 24px 60px; }
+  .pups-page .hero-image { max-width:400px; margin:0 auto; order:-1; }
+  .pups-page .section, .pups-page .lookbook, .pups-page .merch-section, .pups-page .animals, .pups-page .cta-section, .pups-page .vinnie-hero, .pups-page .vinnie-facts, .pups-page .vinnie-gallery { padding:60px 24px; }
+  .pups-page .section-title, .pups-page .animals-title, .pups-page .cta-title { font-size:52px; }
+  .pups-page .section-header { flex-direction:column; align-items:flex-start; gap:16px; }
+  .pups-page .section-meta { text-align:left; }
+  .pups-page .story { grid-template-columns: 1fr; gap:40px; padding:50px 24px; margin:40px 20px; }
+  .pups-page .story-content h2 { font-size:44px; }
+  .pups-page .story-image { max-width:400px; margin:0 auto; }
+  .pups-page .animals-grid { grid-template-columns: 1fr; gap:24px; }
+  .pups-page .lookbook-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 180px; }
+  .pups-page .lookbook-item.tall { grid-row: span 1; }
+  .pups-page .lookbook-item.wide { grid-column: span 2; }
+  .pups-page .design-grid { gap:16px; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+  .pups-page .design-name { font-size:18px; }
+  .pups-page .merch-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap:14px; }
+  .pups-page .vinnie-hero-inner { grid-template-columns: 1fr; gap:40px; }
+  .pups-page .vinnie-hero-info h1 { font-size:80px; }
+  .pups-page .vinnie-facts-grid { grid-template-columns: 1fr 1fr; }
+  .pups-page .vinnie-gallery-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 180px; }
+  .pups-page .vinnie-photo.tall { grid-row: span 1; }
+  .pups-page .vinnie-photo.wide { grid-column: span 2; }
+  .pups-page .pup-wall-track img { height:80px; }
+  .pups-page .drag-pup { width:60px; height:60px; bottom:90px; right:15px; }
+  .pups-page .rain-btn { bottom:20px; right:15px; padding:12px 16px; font-size:10px; }
+  .pups-page .rain-drop { width:60px; height:60px; }
+}
+</style>
+</head>
+<body class="pups-page">
+
+<div id="pup-rain"></div>
+
+<div class="drag-pup" id="dragPup">
+  <img src="/pups/designs/sleeping.png" alt="drag me">
+  <span class="drag-hint">← drag me!</span>
+</div>
+
+<button class="rain-btn" id="rainBtn">🌧️ Rain mode</button>
+
+<div class="announce">
+  🐾 <span>@po.pups</span> · DM to order · handmade drops · sinds 2023
+</div>
+
+<nav class="nav">
+  <a href="/" class="nav-back">← pupvanh</a>
+  <div class="nav-brand" data-view="main">
+    <img src="/pups/designs/og.png" alt="Pups mascotte">
+    <span class="nav-brand-name">Pups</span>
+  </div>
+  <div class="nav-links">
+    <a data-view="main" data-scroll="collection" class="nav-collection active">Collection</a>
+    <a data-view="main" data-scroll="merch">Merch</a>
+    <a data-view="vinnie" class="nav-vinnie">Meet Vinnie</a>
+    <a data-view="main" data-scroll="animals">My animals</a>
+    <a data-view="main" data-scroll="story">Story</a>
+  </div>
+</nav>
+
+<div class="view active" id="view-main">
+
+<section class="hero">
+  <div>
+    <div class="hero-kicker">Wearable creative energy · sinds 2023</div>
+    <h1 class="hero-title">Pups<br><span class="serif">by</span> <span class="accent">Puppy</span></h1>
+    <p class="hero-lead">Hondgeïnspireerde streetwear met eigen creaties. <strong>Kleinschalig, handmade, en enkel via DM te bestellen.</strong></p>
+    <div class="hero-ctas">
+      <a href="#collection" class="hero-cta">De collectie →</a>
+      <a href="#" class="hero-cta secondary" data-view="vinnie">Meet Vinnie</a>
+    </div>
+  </div>
+  <div class="hero-image">
+    <span class="hero-sticker top-right">Drop 01</span>
+    <span class="hero-sticker bottom-left">18 designs</span>
+    <img src="/pups/photos/bono_hero_new.jpg" alt="Bono with Pups cap">
+  </div>
+</section>
+
+<div class="pup-wall">
+  <div class="pup-wall-track"><img src="/pups/designs/og.png" alt=""><img src="/pups/designs/puppy_self.png" alt=""><img src="/pups/designs/dj.png" alt=""><img src="/pups/designs/soccer.png" alt=""><img src="/pups/designs/sleeping.png" alt=""><img src="/pups/designs/skate.png" alt=""><img src="/pups/designs/cocktail.png" alt=""><img src="/pups/designs/kitty.png" alt=""><img src="/pups/designs/christmas.png" alt=""><img src="/pups/designs/photographer.png" alt=""><img src="/pups/designs/rich.png" alt=""><img src="/pups/designs/ski.png" alt=""><img src="/pups/designs/beer.png" alt=""><img src="/pups/designs/smoking.png" alt=""><img src="/pups/designs/frenchie_black.png" alt=""><img src="/pups/designs/frenchie_fawn.png" alt=""><img src="/pups/designs/grey_pup.png" alt=""><img src="/pups/designs/vinnie.png" alt=""><img src="/pups/designs/og.png" alt=""><img src="/pups/designs/puppy_self.png" alt=""><img src="/pups/designs/dj.png" alt=""><img src="/pups/designs/soccer.png" alt=""><img src="/pups/designs/sleeping.png" alt=""><img src="/pups/designs/skate.png" alt=""><img src="/pups/designs/cocktail.png" alt=""><img src="/pups/designs/kitty.png" alt=""><img src="/pups/designs/christmas.png" alt=""><img src="/pups/designs/photographer.png" alt=""><img src="/pups/designs/rich.png" alt=""><img src="/pups/designs/ski.png" alt=""><img src="/pups/designs/beer.png" alt=""><img src="/pups/designs/smoking.png" alt=""><img src="/pups/designs/frenchie_black.png" alt=""><img src="/pups/designs/frenchie_fawn.png" alt=""><img src="/pups/designs/grey_pup.png" alt=""><img src="/pups/designs/vinnie.png" alt=""></div>
+</div>
+
+<section class="lookbook">
+  <div class="lookbook-inner">
+    <div class="section-header">
+      <div>
+        <div class="section-kicker">The lookbook</div>
+        <h2 class="section-title">In het <em>wild</em></h2>
+      </div>
+      <div class="section-meta">Shoot 2024<br><strong>The Pups fam</strong></div>
+    </div>
+    <div class="lookbook-grid">
+      <div class="lookbook-item tall"><img src="/pups/photos/g_couple.jpg" alt=""></div>
+      <div class="lookbook-item wide"><img src="/pups/photos/g_group5.jpg" alt=""></div>
+      <div class="lookbook-item"><img src="/pups/photos/g_trio1.jpg" alt=""></div>
+      <div class="lookbook-item"><img src="/pups/photos/g_two_men.jpg" alt=""></div>
+      <div class="lookbook-item"><img src="/pups/photos/g_man_cap.jpg" alt=""></div>
+      <div class="lookbook-item"><img src="/pups/photos/g_girl_cap.jpg" alt=""></div>
+      <div class="lookbook-item"><img src="/pups/photos/solo_portret.jpg" alt=""></div>
+      <div class="lookbook-item"><img src="/pups/photos/g_trio2.jpg" alt=""></div>
+      <div class="lookbook-item"><img src="/pups/photos/g_tees_black.jpg" alt=""></div>
+      <div class="lookbook-item"><img src="/pups/photos/g_black_tee.jpg" alt=""></div>
+      <div class="lookbook-item"><img src="/pups/photos/g_white_tee.jpg" alt=""></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="collection">
+  <div class="section-header">
+    <div>
+      <div class="section-kicker">The collection</div>
+      <h2 class="section-title">Meet the <em>pack</em></h2>
+    </div>
+    <div class="section-meta">18 designs live · try <strong>rain mode</strong><br>tilt cards with your mouse</div>
+  </div>
+  <div class="design-grid">
+    <div class="design-card" data-tilt>
+      <div class="design-image"><img src="/pups/designs/og.png" alt="OG Pup"></div>
+      <div class="design-body"><div class="design-name">OG Pup</div><div class="design-tag">The original</div></div>
+    </div>
+    <div class="design-card" data-tilt>
+      <div class="design-image"><img src="/pups/designs/puppy_self.png" alt="Perro"></div>
+      <div class="design-body"><div class="design-name">Perro</div><div class="design-tag">Where it all starts</div></div>
+    </div>
+    <div class="design-card" data-tilt>
+      <div class="design-image"><img src="/pups/designs/dj.png" alt="DJ Pup"></div>
+      <div class="design-body"><div class="design-name">DJ Pup</div><div class="design-tag">Music makes it</div></div>
+    </div>
+    <div class="design-card" data-tilt>
+      <div class="design-image"><img src="/pups/designs/soccer.png" alt="Football Pup"></div>
+      <div class="design-body"><div class="design-name">Football Pup</div><div class="design-tag">For the field</div></div>
+    </div>
+    <div class="design-card" data-tilt>
+      <div class="design-image"><img src="/pups/designs/sleeping.png" alt="Sleepy Pup"></div>
+      <div class="design-body"><div class="design-name">Sleepy Pup</div><div class="design-tag">Naps only</div></div>
+    </div>
+    <div class="design-card" data-tilt>
+      <div class="design-image"><img src="/pups/designs/skate.png" alt="Chill Pup"></div>
+      <div class="design-body"><div class="design-name">Chill Pup</div><div class="design-tag">Green edition</div></div>
+    </div>
+    <div class="design-card" data-tilt>
+      <div class="design-image"><img src="/pups/designs/cocktail.png" alt="Vacation Pup"></div>
+      <div class="design-body"><div class="design-name">Vacation Pup</div><div class="design-tag">Summer state of mind</div></div>
+    </div>
+    <div class="design-card" data-tilt>
+      <div class="design-image"><img src="/pups/designs/kitty.png" alt="Mango"></div>
+      <div class="design-body"><div class="design-name">Mango</div><div class="design-tag">Pups × Cats crossover</div></div>
+    </div>
+    <div class="design-card" data-tilt>
+      <div class="design-image"><img src="/pups/designs/christmas.png" alt="Christmas Pup"></div>
+      <div class="design-body"><div class="design-name">Christmas Pup</div><div class="design-tag">Holiday special</div></div>
+    </div>
+    <div class="design-card" data-tilt>
+      <div class="design-image"><img src="/pups/designs/photographer.png" alt="Fujifilm Pup"></div>
+      <div class="design-body"><div class="design-name">Fujifilm Pup</div><div class="design-tag">For the lens lovers</div></div>
+    </div>
+    <div class="design-card" data-tilt>
+      <div class="design-image"><img src="/pups/designs/rich.png" alt="Rich Pup"></div>
+      <div class="design-body"><div class="design-name">Rich Pup</div><div class="design-tag">Statement piece</div></div>
+    </div>
+    <div class="design-card" data-tilt>
+      <div class="design-image"><img src="/pups/designs/ski.png" alt="Ski Pup"></div>
+      <div class="design-body"><div class="design-name">Ski Pup</div><div class="design-tag">Alpine drop</div></div>
+    </div>
+    <div class="design-card" data-tilt>
+      <div class="design-image"><img src="/pups/designs/beer.png" alt="Drinking Pup"></div>
+      <div class="design-body"><div class="design-name">Drinking Pup</div><div class="design-tag">Weekend uniform</div></div>
+    </div>
+    <div class="design-card" data-tilt>
+      <div class="design-image"><img src="/pups/designs/smoking.png" alt="High Pup"></div>
+      <div class="design-body"><div class="design-name">High Pup</div><div class="design-tag">Take it easy</div></div>
+    </div>
+    <div class="design-card" data-tilt>
+      <div class="design-image"><img src="/pups/designs/frenchie_black.png" alt="Malou"></div>
+      <div class="design-body"><div class="design-name">Malou</div><div class="design-tag">Frenchie noir</div></div>
+    </div>
+    <div class="design-card" data-tilt>
+      <div class="design-image"><img src="/pups/designs/frenchie_fawn.png" alt="Ciske"></div>
+      <div class="design-body"><div class="design-name">Ciske</div><div class="design-tag">Frenchie fawn</div></div>
+    </div>
+    <div class="design-card" data-tilt>
+      <div class="design-image"><img src="/pups/designs/grey_pup.png" alt="Bernard"></div>
+      <div class="design-body"><div class="design-name">Bernard</div><div class="design-tag">The gentle giant</div></div>
+    </div>
+    <div class="design-card" data-tilt>
+      <div class="design-image"><img src="/pups/designs/vinnie.png" alt="Vinnie"></div>
+      <div class="design-body"><div class="design-name">Vinnie</div><div class="design-tag">The aussie tribute</div></div>
+    </div></div>
+</section>
+
+<section class="merch-section" id="merch">
+  <div class="merch-inner">
+    <div class="section-header">
+      <div>
+        <div class="section-kicker">The merch</div>
+        <h2 class="section-title">Wearing <em>it</em></h2>
+      </div>
+      <div class="section-meta">Caps · totes · phone cases<br><strong>click tote to flip</strong></div>
+    </div>
+    <div class="merch-grid">
+    <div class="merch-card tote-flip" onclick="this.classList.toggle('flipped')">
+      <div class="merch-image">
+        <img class="tote-front" src="/pups/mockups/mock_tote_front.jpg" alt="Pups Tote Bag front">
+        <img class="tote-back" src="/pups/mockups/mock_tote_back.jpg" alt="Pups Tote Bag back">
+      </div>
+      <div class="merch-body"><div class="merch-name">Pups Tote Bag</div><div class="merch-tag">Click to flip · front & back</div></div>
+    </div>
+    <div class="merch-card">
+      <div class="merch-image"><img src="/pups/mockups/mock_iphone_1.jpg" alt="Vinnie iPhone Case"></div>
+      <div class="merch-body"><div class="merch-name">Vinnie iPhone Case</div><div class="merch-tag">Clear case · Vinnie print</div></div>
+    </div>
+    <div class="merch-card">
+      <div class="merch-image"><img src="/pups/mockups/mock_hat_stone.jpg" alt="Vinnie Cap"></div>
+      <div class="merch-body"><div class="merch-name">Vinnie Cap</div><div class="merch-tag">Classic dad hat · stone</div></div>
+    </div>
+    <div class="merch-card">
+      <div class="merch-image"><img src="/pups/mockups/mock_hat_black.jpg" alt="OG Pup Cap"></div>
+      <div class="merch-body"><div class="merch-name">OG Pup Cap</div><div class="merch-tag">Classic dad hat · black</div></div>
+    </div>
+    <div class="merch-card">
+      <div class="merch-image"><img src="/pups/mockups/mock_corduroy_olive.jpg" alt="OG Pup Corduroy"></div>
+      <div class="merch-body"><div class="merch-name">OG Pup Corduroy</div><div class="merch-tag">Corduroy cap · olive</div></div>
+    </div>
+    <div class="merch-card">
+      <div class="merch-image"><img src="/pups/mockups/mock_corduroy_black.jpg" alt="OG Pup Corduroy"></div>
+      <div class="merch-body"><div class="merch-name">OG Pup Corduroy</div><div class="merch-tag">Corduroy cap · black</div></div>
+    </div></div>
+  </div>
+</section>
+
+<section class="animals" id="animals">
+  <div class="animals-header">
+    <div class="animals-kicker">The real deal</div>
+    <h2 class="animals-title">My <em>animals</em></h2>
+  </div>
+  <div class="animals-grid">
+    <div class="animal-card">
+      <div class="animal-badge">The muse</div>
+      <div class="animal-photo"><img src="/pups/photos/bono_hero_new.jpg" alt="Bono"></div>
+      <div class="animal-name">Bono</div>
+      <div class="animal-role">Golden retriever · mascotte inspiration</div>
+      <div class="animal-desc">De hond van mijn beste vrienden, waar ik peter van ben. Samen met mijn nickname de basis van de Pups-mascotte.</div>
+    </div>
+    <div class="animal-card">
+      <div class="animal-badge">The model</div>
+      <div class="animal-photo"><img src="/pups/photos/v_hero.jpg" alt="Vinnie"></div>
+      <div class="animal-name">Vinnie</div>
+      <div class="animal-role">Aussie shepherd · brand model</div>
+      <div class="animal-desc">De Australian Shepherd met blauwe ogen en energie voor drie. Modelt alle nieuwe drops.</div>
+      <a data-view="vinnie" class="animal-cta">Naar Vinnie →</a>
+    </div>
+  </div>
+</section>
+
+<section class="story" id="story">
+  <div class="story-image">
+    <img src="/pups/photos/story_man.jpg" alt="Puppy">
+  </div>
+  <div class="story-content">
+    <div class="story-kicker">The story</div>
+    <h2>Pups &<br><em>Puppy</em></h2>
+    <p>Hi, ik ben <strong>Pepijn — of Puppy</strong>, zoals vrienden mij noemen. Ik startte Pups om creatieve energie, emoties en gedachten kwijt te kunnen op iets dat ik zelf graag draag.</p>
+    <p>De <strong>Pups-mascotte</strong> is een mix van mijn nickname en <strong>Bono</strong>, de golden retriever van mijn beste vrienden. Reflectie van mijn liefde voor honden, muziek en fun.</p>
+    <p>Elke drop is beperkt — vaak maar 1 of 2 stuks per ontwerp. Alles handmatig gemaakt of bedrukt, en enkel via <strong>DM te bestellen</strong>.</p>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="cta-kicker">Want one?</div>
+  <h2 class="cta-title">Slide into <em>the DMs</em></h2>
+  <p class="cta-lead">Kies een design uit de collectie, stuur mij een berichtje op Instagram — we regelen de rest.</p>
+  <button class="cta-btn" id="ctaDMBtn">DM @po.pups →</button>
+</section>
+
+</div>
+
+<div class="view" id="view-vinnie">
+
+<section class="vinnie-hero">
+  <div class="vinnie-hero-inner">
+    <div class="vinnie-hero-photo">
+      <img src="/pups/photos/v_hero.jpg" alt="Vinnie the Aussie">
+    </div>
+    <div class="vinnie-hero-info">
+      <div class="v-kicker">Meet the model · aussie shepherd</div>
+      <h1>Vinnie<br><em>the aussie.</em></h1>
+      <p class="vinnie-tagline">Australian Shepherd · <strong>blauwe ogen</strong> · energie voor drie · officieel model van alle Pups-drops.</p>
+      <a href="https://www.instagram.com/vinnie_theaussie/" target="_blank" class="vinnie-insta">📷 @vinnie_theaussie</a>
+    </div>
+  </div>
+</section>
+
+<section class="vinnie-facts">
+  <div class="animals-header" style="margin-bottom:40px;">
+    <div class="animals-kicker">Fun facts</div>
+    <h2 class="animals-title">Vinnie in <em>cijfers</em></h2>
+  </div>
+  <div class="vinnie-facts-grid">
+    <div class="fact-card"><span class="fact-icon">👁️</span><div class="fact-value">💙💙</div><div class="fact-label">Blauwe ogen</div></div>
+    <div class="fact-card"><span class="fact-icon">⚡</span><div class="fact-value">10/10</div><div class="fact-label">Energie levels</div></div>
+    <div class="fact-card"><span class="fact-icon">📸</span><div class="fact-value">18</div><div class="fact-label">Designs gemodelleerd</div></div>
+    <div class="fact-card"><span class="fact-icon">🎾</span><div class="fact-value">∞</div><div class="fact-label">Ballen apporteren</div></div>
+  </div>
+</section>
+
+<section class="vinnie-gallery">
+  <div class="section-header">
+    <div>
+      <div class="section-kicker">The gallery</div>
+      <h2 class="section-title">Vinnie <em>op zijn best</em></h2>
+    </div>
+    <div class="section-meta">Fotoshoot 2024<br><strong>Squad favorite</strong></div>
+  </div>
+  <div class="vinnie-gallery-grid">
+    <div class="vinnie-photo tall"><img src="/pups/photos/v_hero.jpg" alt=""></div>
+    <div class="vinnie-photo"><img src="/pups/photos/v_kneel.jpg" alt=""></div>
+    <div class="vinnie-photo"><img src="/pups/photos/v_extra.jpg" alt=""></div>
+    <div class="vinnie-photo"><img src="/pups/photos/v_stairs.jpg" alt=""></div>
+    <div class="vinnie-photo"><img src="/pups/photos/v_cap.jpg" alt=""></div>
+    <div class="vinnie-photo wide"><img src="/pups/photos/v_tees.jpg" alt=""></div>
+    <div class="vinnie-photo"><img src="/pups/mockups/mock_tote_front.jpg" alt=""></div>
+    <div class="vinnie-photo"><img src="/pups/mockups/mock_tote_back.jpg" alt=""></div>
+  </div>
+</section>
+
+<div class="back-to-pups">
+  <a data-view="main">← Terug naar Pups</a>
+</div>
+
+</div>
+
+<footer class="footer">
+  <div class="footer-brand">
+    <img src="/pups/designs/og.png" alt="Pups">
+    <span>Pups</span>
+  </div>
+  <a href="/" class="footer-back">← Terug naar pupvanh</a>
+  <div class="footer-socials">
+    <a href="https://www.instagram.com/po.pups/" target="_blank">Instagram Pups</a>
+    <a href="https://www.instagram.com/vinnie_theaussie/" target="_blank">Instagram Vinnie</a>
+    <a href="https://www.facebook.com/profile.php?id=100095219786747" target="_blank">Facebook</a>
+    <a href="https://www.tiktok.com/@pixelslaves_" target="_blank">TikTok</a>
+  </div>
+  <div class="footer-copy-line1">BUILT AUG 2026 · UPDATED AUG 2026</div>
+  <div class="footer-copy-line2">Pups · Part of PUPVANH Projects · <a href="https://pupvanh.vercel.app">pupvanh.vercel.app →</a></div>
+</footer>
+
+<Analytics />
+
+<script is:inline define:vars={ rainPups: ["/pups/designs/og.png","/pups/designs/puppy_self.png","/pups/designs/dj.png","/pups/designs/soccer.png","/pups/designs/sleeping.png","/pups/designs/skate.png","/pups/designs/cocktail.png","/pups/designs/kitty.png","/pups/designs/christmas.png","/pups/designs/photographer.png","/pups/designs/rich.png","/pups/designs/ski.png","/pups/designs/beer.png","/pups/designs/smoking.png","/pups/designs/frenchie_black.png","/pups/designs/frenchie_fawn.png","/pups/designs/grey_pup.png","/pups/designs/vinnie.png"] }>
+document.addEventListener('DOMContentLoaded', () => {
+  // View switching
+  function showView(name) {
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    const target = document.getElementById('view-' + name);
+    if (target) target.classList.add('active');
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    if (name === 'vinnie') {
+      const el = document.querySelector('.nav-vinnie'); if (el) el.classList.add('active');
+    } else {
+      const el = document.querySelector('.nav-collection'); if (el) el.classList.add('active');
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  function scrollToId(id) {
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior:'smooth', block:'start' });
+    }, 100);
+  }
+
+  document.querySelectorAll('[data-view]').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      showView(el.dataset.view);
+      if (el.dataset.scroll) scrollToId(el.dataset.scroll);
+    });
+  });
+
+  // Rain mode
+  let raining = false;
+  function startRain() {
+    if (raining) return;
+    raining = true;
+    const btn = document.getElementById('rainBtn');
+    btn.classList.add('raining');
+    btn.disabled = true;
+    btn.textContent = '🌧️ Raining...';
+    const rainLayer = document.getElementById('pup-rain');
+    const spawnStart = Date.now();
+    const spawnDuration = 5000;
+    const drops = [];
+    const spawnInterval = setInterval(() => {
+      if (Date.now() - spawnStart >= spawnDuration) {
+        clearInterval(spawnInterval);
+        return;
+      }
+      for (let i = 0; i < 3; i++) {
+        const pupSrc = rainPups[Math.floor(Math.random() * rainPups.length)];
+        const el = document.createElement('img');
+        el.src = pupSrc;
+        el.className = 'rain-drop';
+        el.style.left = (Math.random() * 100) + 'vw';
+        el.style.top = '-100px';
+        const size = 50 + Math.random() * 60;
+        el.style.width = size + 'px';
+        el.style.height = size + 'px';
+        rainLayer.appendChild(el);
+        drops.push({
+          el, x: parseFloat(el.style.left), y: -100,
+          vy: 2 + Math.random() * 4, vx: (Math.random() - 0.5) * 2,
+          rot: 0, vr: (Math.random() - 0.5) * 6
+        });
+      }
+    }, 60);
+    function frame() {
+      drops.forEach((d) => {
+        if (!d.el.parentNode) return;
+        d.y += d.vy;
+        d.vy += 0.08;
+        d.rot += d.vr;
+        d.el.style.top = d.y + 'px';
+        d.el.style.transform = `translateX(${d.vx * d.y * 0.02}px) rotate(${d.rot}deg)`;
+        if (d.y > window.innerHeight + 100) d.el.remove();
+      });
+      for (let i = drops.length - 1; i >= 0; i--) {
+        if (!drops[i].el.parentNode) drops.splice(i, 1);
+      }
+      if (drops.length > 0 || Date.now() - spawnStart < spawnDuration) {
+        requestAnimationFrame(frame);
+      } else {
+        raining = false;
+        btn.classList.remove('raining');
+        btn.disabled = false;
+        btn.textContent = '🌧️ Rain mode';
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+  document.getElementById('rainBtn').addEventListener('click', startRain);
+  document.getElementById('ctaDMBtn').addEventListener('click', () => {
+    startRain();
+    setTimeout(() => window.open('https://instagram.com/po.pups', '_blank'), 300);
+  });
+  document.querySelectorAll('.pup-wall-track img').forEach(img => {
+    img.addEventListener('click', () => startRain());
+  });
+
+  // Tote flip
+  document.querySelectorAll('.tote-flip').forEach(card => {
+    card.addEventListener('click', () => card.classList.toggle('flipped'));
+  });
+
+  // Draggable pup
+  const dragPup = document.getElementById('dragPup');
+  let isDragging = false, offsetX = 0, offsetY = 0;
+  function startDrag(e) {
+    isDragging = true;
+    const rect = dragPup.getBoundingClientRect();
+    const p = e.touches ? e.touches[0] : e;
+    offsetX = p.clientX - rect.left;
+    offsetY = p.clientY - rect.top;
+    dragPup.style.animation = 'none';
+    dragPup.style.transition = 'none';
+  }
+  function drag(e) {
+    if (!isDragging) return;
+    const p = e.touches ? e.touches[0] : e;
+    dragPup.style.left = (p.clientX - offsetX) + 'px';
+    dragPup.style.top = (p.clientY - offsetY) + 'px';
+    dragPup.style.right = 'auto';
+    dragPup.style.bottom = 'auto';
+    e.preventDefault();
+  }
+  function endDrag() { isDragging = false; }
+  dragPup.addEventListener('mousedown', startDrag);
+  dragPup.addEventListener('touchstart', startDrag);
+  document.addEventListener('mousemove', drag);
+  document.addEventListener('touchmove', drag, { passive:false });
+  document.addEventListener('mouseup', endDrag);
+  document.addEventListener('touchend', endDrag);
+
+  // 3D tilt
+  document.querySelectorAll('[data-tilt]').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const cx = rect.width / 2;
+      const cy = rect.height / 2;
+      const rotateX = (y - cy) / cy * -8;
+      const rotateY = (x - cx) / cx * 8;
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+    });
+    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+  });
+});
+</script>
+</body>
+</html>
