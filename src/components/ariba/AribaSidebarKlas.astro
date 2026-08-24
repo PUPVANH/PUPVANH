@@ -1,0 +1,53 @@
+---
+import data from '../../data/ariba-klassementen.json';
+
+// Vind huidig seizoen
+const huidig = data.seizoenen.find((s: any) => s.actief) || data.seizoenen[0];
+
+// Vind Ariba positie
+const arIdx = huidig.rijen.findIndex((r: any) => r.us);
+
+// Bepaal welke rijen te tonen:
+// - Als Ariba #1: toon Ariba + 4 volgende (5 rijen totaal)
+// - Anders: 2 boven, Ariba, 2 onder (max 5)
+let start = 0;
+let end = 5;
+if (arIdx > 2) {
+  start = arIdx - 2;
+  end = start + 5;
+}
+if (end > huidig.rijen.length) {
+  end = huidig.rijen.length;
+  start = Math.max(0, end - 5);
+}
+const zichtbaar = huidig.rijen.slice(start, end);
+
+function shortName(n: string) {
+  if (n.length <= 18) return n;
+  return n.slice(0, 16) + '…';
+}
+---
+
+<aside class="ariba-sidebar ariba-sidebar-left">
+  <div class="ariba-side-card">
+    <div class="ariba-side-header">
+      <span class="ariba-side-kicker">Klassement</span>
+      {huidig.actief && <span class="ariba-side-live">LIVE</span>}
+    </div>
+    <div class="ariba-side-sub">{huidig.seizoen} · {huidig.reeks}</div>
+    <table class="ariba-side-table">
+      <tbody>
+        {zichtbaar.map((r: any, i: number) => (
+          <tr class={r.us ? 'us' : ''}>
+            <td>{start + i + 1}</td>
+            <td>{shortName(r.ploeg)}</td>
+            <td>{r.pt}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    <button class="ariba-side-more" data-modal="modalKlas">
+      Volledig klassement →
+    </button>
+  </div>
+</aside>

@@ -8,23 +8,87 @@ import AribaSquad from '../components/ariba/AribaSquad.astro';
 import AribaBoard from '../components/ariba/AribaBoard.astro';
 import AribaHistory from '../components/ariba/AribaHistory.astro';
 import AribaArticle from '../components/ariba/AribaArticle.astro';
-import AribaLastSeason from '../components/ariba/AribaLastSeason.astro';
 import AribaSocial from '../components/ariba/AribaSocial.astro';
 import AribaSponsors from '../components/ariba/AribaSponsors.astro';
+import AribaSponsorsSticky from '../components/ariba/AribaSponsorsSticky.astro';
+import AribaSidebarKlas from '../components/ariba/AribaSidebarKlas.astro';
+import AribaSidebarTopsc from '../components/ariba/AribaSidebarTopsc.astro';
+import AribaKlassement from '../components/ariba/AribaKlassement.astro';
+import AribaTopscorers from '../components/ariba/AribaTopscorers.astro';
 import AribaFooter from '../components/ariba/AribaFooter.astro';
 ---
 
 <AribaLayout>
   <AribaNav />
-  <AribaHero />
-  <AribaCountdown />
-  <AribaMatches />
-  <AribaSquad />
-  <AribaBoard />
-  <AribaHistory />
-  <AribaArticle />
-  <AribaLastSeason />
-  <AribaSocial />
-  <AribaSponsors />
+
+  <div class="ariba-scroll-content">
+    <AribaHero />
+
+    <div class="ariba-layout-grid">
+      <AribaSidebarKlas />
+
+      <main class="ariba-main-col">
+        <AribaCountdown />
+        <AribaMatches />
+        <AribaSquad />
+        <AribaBoard />
+        <AribaHistory />
+        <AribaArticle />
+        <AribaSocial />
+      </main>
+
+      <AribaSidebarTopsc />
+    </div>
+
+    <AribaSponsors />
+    <AribaSponsorsSticky />
+  </div>
+
   <AribaFooter />
+
+  {/* Modals: klassement en topschutters volledig */}
+  <div class="ariba-modal" id="modalKlas">
+    <div class="ariba-modal-backdrop" data-close></div>
+    <div class="ariba-modal-panel">
+      <button class="ariba-modal-close" data-close aria-label="Sluiten">×</button>
+      <div class="ariba-modal-body">
+        <AribaKlassement />
+      </div>
+    </div>
+  </div>
+
+  <div class="ariba-modal" id="modalTopsc">
+    <div class="ariba-modal-backdrop" data-close></div>
+    <div class="ariba-modal-panel">
+      <button class="ariba-modal-close" data-close aria-label="Sluiten">×</button>
+      <div class="ariba-modal-body">
+        <AribaTopscorers />
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    (function(){
+      document.querySelectorAll('[data-modal]').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var m = document.getElementById(btn.getAttribute('data-modal'));
+          if (m) { m.classList.add('open'); document.body.style.overflow = 'hidden'; }
+        });
+      });
+      document.querySelectorAll('[data-close]').forEach(function(el){
+        el.addEventListener('click', function(){
+          var m = el.closest('.ariba-modal');
+          if (m) { m.classList.remove('open'); document.body.style.overflow = ''; }
+        });
+      });
+      document.addEventListener('keydown', function(e){
+        if (e.key === 'Escape') {
+          document.querySelectorAll('.ariba-modal.open').forEach(function(m){
+            m.classList.remove('open');
+          });
+          document.body.style.overflow = '';
+        }
+      });
+    })();
+  </script>
 </AribaLayout>

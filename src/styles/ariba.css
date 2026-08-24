@@ -385,6 +385,38 @@
 /* Oude in-flow marquee wordt niet meer gebruikt maar behouden voor backwards compat */
 .ariba-sponsor-marquee { display: none; }
 
+/* ---------- FOOTER met BUILT/UPDATED + terug-link ---------- */
+.ariba-footer-block {
+  background: var(--ar-forest); color: rgba(244,240,232,.8);
+  padding: 40px 32px 28px; text-align: center; position: relative; overflow: hidden;
+}
+.ariba-footer-block::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: var(--ar-p-teal); background-size: 400px;
+  opacity: .1; pointer-events: none;
+}
+.ariba-footer-meta { position: relative; z-index: 1; margin-bottom: 20px; }
+.ariba-footer-line {
+  font-family: 'JetBrains Mono', 'Bebas Neue', monospace; font-size: 11px;
+  letter-spacing: .15em; color: rgba(244,240,232,.55);
+  text-transform: uppercase; line-height: 1.9;
+}
+.ariba-footer-name {
+  font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: .25em;
+  color: var(--ar-gold); margin: 4px 0;
+}
+.ariba-footer-link { margin-top: 6px; }
+.ariba-footer-link a {
+  font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .1em;
+  color: rgba(244,240,232,.75); text-decoration: none; transition: color .2s;
+}
+.ariba-footer-link a:hover { color: var(--ar-gold); }
+.ariba-footer-copy {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .12em;
+  color: rgba(244,240,232,.35); text-transform: uppercase;
+  padding-top: 16px; border-top: 1px solid rgba(244,240,232,.1);
+  position: relative; z-index: 1;
+}
 
 /* ---------- MOBILE tweaks ---------- */
 @media (max-width: 800px) {
@@ -711,67 +743,4 @@
   }
   .ariba-main-col > section:first-child { padding-top: 60px; }
   .ariba-modal-body { padding: 40px 20px 24px; }
-}
-
-/* ============================================================
-   FOOTER v2 — dunne balk, 2 regels (PUPVANH standaard)
-   ============================================================ */
-.ariba-footer-block {
-  background: var(--ar-forest);
-  color: rgba(244,240,232,.85);
-  padding: 16px 24px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  font-family: 'Bebas Neue', sans-serif;
-}
-.ariba-footer-block::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: var(--ar-p-teal);
-  background-size: 400px;
-  opacity: .08;
-  pointer-events: none;
-}
-.ariba-footer-line-1 {
-  position: relative;
-  font-size: 10px;
-  letter-spacing: .18em;
-  color: rgba(244,240,232,.5);
-  text-transform: uppercase;
-  margin-bottom: 4px;
-}
-.ariba-footer-line-2 {
-  position: relative;
-  font-size: 13px;
-  letter-spacing: .14em;
-  color: rgba(244,240,232,.9);
-  text-transform: uppercase;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-.ariba-footer-name {
-  color: var(--ar-gold);
-  font-weight: 400;
-  letter-spacing: .2em;
-}
-.ariba-footer-dot {
-  color: rgba(244,240,232,.4);
-}
-.ariba-footer-link-back {
-  color: rgba(244,240,232,.9);
-  text-decoration: none;
-  transition: color .2s;
-}
-.ariba-footer-link-back:hover {
-  color: var(--ar-gold);
-}
-
-@media (max-width: 800px) {
-  .ariba-footer-block { padding: 14px 16px; }
-  .ariba-footer-line-2 { font-size: 12px; gap: 6px; }
 }

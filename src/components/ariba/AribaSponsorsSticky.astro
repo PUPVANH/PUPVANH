@@ -1,0 +1,22 @@
+---
+import { Fragment } from 'astro/jsx-runtime';
+const sponsors = [
+  { src: '/ariba/sponsors/auditas.svg', alt: 'Auditas' },
+  { src: '/ariba/sponsors/fvd.svg', alt: 'fvd' },
+  { src: '/ariba/sponsors/dfr.svg', alt: 'DFR' },
+  { src: '/ariba/sponsors/lecluyse-dieet.png', alt: 'Lecluyse Diëet' },
+  { src: '/ariba/sponsors/naaihuisje-anja.png', alt: "'T Naaihuisje Anja" },
+];
+const dubbel = [...sponsors, ...sponsors];
+---
+
+<div class="ariba-sponsor-marquee-sticky">
+  <div class="ariba-sponsor-track">
+    {dubbel.map(s => (
+      <Fragment>
+        <img src={s.src} alt={s.alt} />
+        <div class="dm"></div>
+      </Fragment>
+    ))}
+  </div>
+</div>

@@ -1,20 +1,20 @@
 {
   "_uitleg": "Bewerk dit bestand om wedstrijden toe te voegen of uitslagen in te vullen. Datum in ISO-formaat (YYYY-MM-DDTHH:MM:SS). Uitslag: null zolang de match nog niet gespeeld is, anders bv. '3-2'. Locatie is optioneel. Na commit deployt Vercel automatisch.",
-  "seizoen": "2025-26",
+  "seizoen": "2026-27",
   "reeks": "Reeks 1",
   "wedstrijden": [
     {
-      "datum": "2025-09-14T21:50:00",
-      "thuis": "FC Ariba",
-      "uit": "Kasjotters",
-      "locatie": "TSOK Kachtem",
+      "datum": "2026-09-14T21:50:00",
+      "thuis": "Fc Ariba",
+      "uit": "De Kasjoters",
+      "locatie": "",
       "uitslag": null
     },
     {
-      "datum": "2025-09-21T20:00:00",
-      "thuis": "FC Ariba",
-      "uit": "Den Ondank",
-      "locatie": "De Krekel Izegem",
+      "datum": "2026-09-21T20:00:00",
+      "thuis": "Fc Ariba",
+      "uit": "FC De Ondank",
+      "locatie": "",
       "uitslag": null
     }
   ]

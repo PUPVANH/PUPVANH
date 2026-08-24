@@ -1,0 +1,79 @@
+---
+import data from '../../data/ariba-klassementen.json';
+
+// Sorteer klassementen: actief eerst, dan aflopend per seizoen
+const seizoenen = [...data.seizoenen];
+---
+
+<section class="ariba-klassement-sec" id="ariba-klassement">
+  <p class="ariba-section-kicker">Klassement</p>
+  <h2 class="ariba-section-title">Waar we <em>staan</em></h2>
+  <p class="ariba-section-sub">Huidig seizoen · en de historie</p>
+
+  <div class="ariba-klas-tabs" role="tablist">
+    {seizoenen.map((s, i) => (
+      <button
+        class={`ariba-klas-tab${i === 0 ? ' active' : ''}${s.actief ? ' actief' : ''}`}
+        data-tab={s.seizoen}
+        role="tab"
+      >
+        {s.seizoen}
+        {s.actief && <span class="ariba-klas-live">LIVE</span>}
+      </button>
+    ))}
+  </div>
+
+  {seizoenen.map((s, i) => (
+    <div class={`ariba-klas-panel${i === 0 ? ' active' : ''}`} data-panel={s.seizoen}>
+      <div class="ariba-klas-header">
+        <h3>{s.reeks}</h3>
+        <span>Seizoen {s.seizoen}{s.actief ? ' · lopend' : ''}</span>
+      </div>
+      {s.opmerking && (
+        <p class="ariba-klas-note">ℹ️ {s.opmerking}</p>
+      )}
+      <div class="ariba-klas-table-wrap">
+        <table class="ariba-table">
+          <thead>
+            <tr>
+              <th>#</th><th>Ploeg</th><th>Gsp</th><th>W</th><th>G</th>
+              <th>V</th><th>DV</th><th>DT</th><th>Pt</th>
+            </tr>
+          </thead>
+          <tbody>
+            {s.rijen.map((r: any, idx: number) => (
+              <tr class={r.us ? 'us' : ''}>
+                <td>{r.pos ?? idx + 1}</td>
+                <td>{r.ploeg}</td>
+                <td>{r.gsp}</td>
+                <td>{r.w}</td>
+                <td>{r.g}</td>
+                <td>{r.v}</td>
+                <td>{r.dv}</td>
+                <td>{r.dt}</td>
+                <td>{r.pt}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  ))}
+</section>
+
+<script is:inline>
+  (function(){
+    const tabs = document.querySelectorAll('.ariba-klas-tab');
+    const panels = document.querySelectorAll('.ariba-klas-panel');
+    tabs.forEach(t => {
+      t.addEventListener('click', () => {
+        const key = t.getAttribute('data-tab');
+        tabs.forEach(x => x.classList.remove('active'));
+        panels.forEach(p => p.classList.remove('active'));
+        t.classList.add('active');
+        const panel = document.querySelector(`.ariba-klas-panel[data-panel="${key}"]`);
+        if (panel) panel.classList.add('active');
+      });
+    });
+  })();
+</script>

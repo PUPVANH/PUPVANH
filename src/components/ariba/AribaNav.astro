@@ -1,10 +1,48 @@
 ---
+const menu = [
+  { href: '#ariba-kalender', label: 'Kalender' },
+  { href: '#ariba-klassement', label: 'Klassement' },
+  { href: '#ariba-selectie', label: 'Selectie' },
+  { href: '#ariba-topschutters', label: 'Topschutters' },
+  { href: '#ariba-bestuur', label: 'Bestuur' },
+  { href: '#ariba-geschiedenis', label: 'Geschiedenis' },
+  { href: '#ariba-verhaal', label: 'Ons verhaal' },
+  { href: '#ariba-sponsors', label: 'Sponsors' },
+];
 ---
 <nav class="ariba-nav">
-  <a href="/" class="ariba-nav-back">terug naar pup vanh</a>
+  <button class="ariba-hamburger" id="aribaHamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
   <div class="ariba-nav-title">
-    <img src="/ariba/fc-ariba-logo.svg" alt="FC Ariba" />
-    <span class="bebas">FC ARIBA</span>
+    <img src="/ariba/fc-ariba-logo.svg" alt="Fc Ariba" />
+    <span class="bebas">Fc Ariba</span>
   </div>
-  <div class="ariba-nav-r">2025-26 · reeks 1</div>
+  <div class="ariba-nav-r">2026-27 · reeks 1</div>
+
+  <div class="ariba-menu" id="aribaMenu" aria-hidden="true">
+    <ul>
+      {menu.map(m => (<li><a href={m.href} class="ariba-menu-link">{m.label}</a></li>))}
+    </ul>
+  </div>
+  <div class="ariba-menu-overlay" id="aribaMenuOverlay"></div>
 </nav>
+
+<script is:inline>
+  (function(){
+    const hb = document.getElementById('aribaHamburger');
+    const menu = document.getElementById('aribaMenu');
+    const overlay = document.getElementById('aribaMenuOverlay');
+    if (!hb || !menu || !overlay) return;
+    function close(){ menu.classList.remove('open'); overlay.classList.remove('open'); hb.classList.remove('open'); menu.setAttribute('aria-hidden','true'); }
+    function toggle(){
+      const isOpen = menu.classList.toggle('open');
+      overlay.classList.toggle('open', isOpen);
+      hb.classList.toggle('open', isOpen);
+      menu.setAttribute('aria-hidden', String(!isOpen));
+    }
+    hb.addEventListener('click', toggle);
+    overlay.addEventListener('click', close);
+    document.querySelectorAll('.ariba-menu-link').forEach(a => a.addEventListener('click', close));
+  })();
+</script>

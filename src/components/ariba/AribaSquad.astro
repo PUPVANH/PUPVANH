@@ -1,6 +1,4 @@
 ---
-// Spelerslijst — pas hier aan wanneer er iemand bij komt of stopt.
-// Kapitein: zet "captain: true"
 const spelers = [
   { naam: 'Robbie Espeel', nummer: 2, captain: true },
   { naam: 'Matthias Blomme', nummer: 1 },
@@ -19,9 +17,9 @@ const spelers = [
 const captain = spelers.find(s => s.captain);
 ---
 
-<section class="ariba-section">
+<section class="ariba-section" id="ariba-selectie">
   <p class="ariba-section-kicker">De ploeg</p>
-  <h2 class="ariba-section-title">Selectie <em>2025-26</em></h2>
+  <h2 class="ariba-section-title">Selectie <em>2026-27</em></h2>
   <p class="ariba-section-sub">{spelers.length} spelers · Kapitein {captain?.naam}</p>
 
   <div class="ariba-team-grid">

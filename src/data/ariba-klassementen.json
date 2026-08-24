@@ -1,0 +1,764 @@
+{
+  "_uitleg": "Klassementen per seizoen. Zet 'actief: true' op het lopende seizoen. Nieuwe wedstrijd gespeeld? Pas gsp/w/g/v/dv/dt/pt aan. Bij afloop van seizoen: zet actief op false, kopieer alle ploegen op 0 punten in een nieuw blok voor het volgende seizoen.",
+  "seizoenen": [
+    {
+      "seizoen": "2026-27",
+      "reeks": "Reeks 1",
+      "actief": true,
+      "rijen": [
+        {
+          "ploeg": "Fc Ariba",
+          "gsp": 0,
+          "w": 0,
+          "g": 0,
+          "v": 0,
+          "dv": 0,
+          "dt": 0,
+          "pt": 0,
+          "us": true
+        },
+        {
+          "ploeg": "T'Bloemgat",
+          "gsp": 0,
+          "w": 0,
+          "g": 0,
+          "v": 0,
+          "dv": 0,
+          "dt": 0,
+          "pt": 0
+        },
+        {
+          "ploeg": "MVC Deportivo VDM",
+          "gsp": 0,
+          "w": 0,
+          "g": 0,
+          "v": 0,
+          "dv": 0,
+          "dt": 0,
+          "pt": 0
+        },
+        {
+          "ploeg": "Panna FC",
+          "gsp": 0,
+          "w": 0,
+          "g": 0,
+          "v": 0,
+          "dv": 0,
+          "dt": 0,
+          "pt": 0
+        },
+        {
+          "ploeg": "FC Bacobana",
+          "gsp": 0,
+          "w": 0,
+          "g": 0,
+          "v": 0,
+          "dv": 0,
+          "dt": 0,
+          "pt": 0
+        },
+        {
+          "ploeg": "Orthopedie Van Parys",
+          "gsp": 0,
+          "w": 0,
+          "g": 0,
+          "v": 0,
+          "dv": 0,
+          "dt": 0,
+          "pt": 0
+        },
+        {
+          "ploeg": "MVC De Statie",
+          "gsp": 0,
+          "w": 0,
+          "g": 0,
+          "v": 0,
+          "dv": 0,
+          "dt": 0,
+          "pt": 0
+        },
+        {
+          "ploeg": "VK Lagaar",
+          "gsp": 0,
+          "w": 0,
+          "g": 0,
+          "v": 0,
+          "dv": 0,
+          "dt": 0,
+          "pt": 0
+        },
+        {
+          "ploeg": "L'Abattoir",
+          "gsp": 0,
+          "w": 0,
+          "g": 0,
+          "v": 0,
+          "dv": 0,
+          "dt": 0,
+          "pt": 0
+        },
+        {
+          "ploeg": "Plectrum - Maison Noire",
+          "gsp": 0,
+          "w": 0,
+          "g": 0,
+          "v": 0,
+          "dv": 0,
+          "dt": 0,
+          "pt": 0
+        },
+        {
+          "ploeg": "MKS 2",
+          "gsp": 0,
+          "w": 0,
+          "g": 0,
+          "v": 0,
+          "dv": 0,
+          "dt": 0,
+          "pt": 0
+        },
+        {
+          "ploeg": "MVC JV Renovaties",
+          "gsp": 0,
+          "w": 0,
+          "g": 0,
+          "v": 0,
+          "dv": 0,
+          "dt": 0,
+          "pt": 0
+        },
+        {
+          "ploeg": "Checked by Vanhulle",
+          "gsp": 0,
+          "w": 0,
+          "g": 0,
+          "v": 0,
+          "dv": 0,
+          "dt": 0,
+          "pt": 0
+        },
+        {
+          "ploeg": "Sanifro ofzo",
+          "gsp": 0,
+          "w": 0,
+          "g": 0,
+          "v": 0,
+          "dv": 0,
+          "dt": 0,
+          "pt": 0
+        },
+        {
+          "ploeg": "EPDM Solutions",
+          "gsp": 0,
+          "w": 0,
+          "g": 0,
+          "v": 0,
+          "dv": 0,
+          "dt": 0,
+          "pt": 0
+        },
+        {
+          "ploeg": "FC Electrum",
+          "gsp": 0,
+          "w": 0,
+          "g": 0,
+          "v": 0,
+          "dv": 0,
+          "dt": 0,
+          "pt": 0
+        },
+        {
+          "ploeg": "BTW-Boys",
+          "gsp": 0,
+          "w": 0,
+          "g": 0,
+          "v": 0,
+          "dv": 0,
+          "dt": 0,
+          "pt": 0
+        },
+        {
+          "ploeg": "FC Elk 'T Zinne",
+          "gsp": 0,
+          "w": 0,
+          "g": 0,
+          "v": 0,
+          "dv": 0,
+          "dt": 0,
+          "pt": 0
+        },
+        {
+          "ploeg": "Q-Team",
+          "gsp": 0,
+          "w": 0,
+          "g": 0,
+          "v": 0,
+          "dv": 0,
+          "dt": 0,
+          "pt": 0
+        },
+        {
+          "ploeg": "Korazon",
+          "gsp": 0,
+          "w": 0,
+          "g": 0,
+          "v": 0,
+          "dv": 0,
+          "dt": 0,
+          "pt": 0
+        },
+        {
+          "ploeg": "Playa",
+          "gsp": 0,
+          "w": 0,
+          "g": 0,
+          "v": 0,
+          "dv": 0,
+          "dt": 0,
+          "pt": 0
+        },
+        {
+          "ploeg": "T'Schroefke",
+          "gsp": 0,
+          "w": 0,
+          "g": 0,
+          "v": 0,
+          "dv": 0,
+          "dt": 0,
+          "pt": 0
+        },
+        {
+          "ploeg": "FC De Ondank",
+          "gsp": 0,
+          "w": 0,
+          "g": 0,
+          "v": 0,
+          "dv": 0,
+          "dt": 0,
+          "pt": 0
+        },
+        {
+          "ploeg": "De Kasjoters",
+          "gsp": 0,
+          "w": 0,
+          "g": 0,
+          "v": 0,
+          "dv": 0,
+          "dt": 0,
+          "pt": 0
+        },
+        {
+          "ploeg": "Korupt Kidz United / Schroefke",
+          "gsp": 0,
+          "w": 0,
+          "g": 0,
+          "v": 0,
+          "dv": 0,
+          "dt": 0,
+          "pt": 0
+        }
+      ]
+    },
+    {
+      "seizoen": "2025-26",
+      "reeks": "Reeks 1",
+      "rijen": [
+        {
+          "pos": 1,
+          "ploeg": "Vloerwerken Slambrouck",
+          "gsp": 20,
+          "w": 16,
+          "g": 2,
+          "v": 2,
+          "dv": 163,
+          "dt": 71,
+          "pt": 50
+        },
+        {
+          "pos": 2,
+          "ploeg": "Fc Ariba",
+          "gsp": 20,
+          "w": 16,
+          "g": 1,
+          "v": 3,
+          "dv": 159,
+          "dt": 78,
+          "pt": 49,
+          "us": true
+        },
+        {
+          "pos": 3,
+          "ploeg": "T'Bloemgat",
+          "gsp": 20,
+          "w": 15,
+          "g": 2,
+          "v": 3,
+          "dv": 156,
+          "dt": 59,
+          "pt": 47
+        },
+        {
+          "pos": 4,
+          "ploeg": "MVC Deportivo VDM",
+          "gsp": 20,
+          "w": 14,
+          "g": 0,
+          "v": 6,
+          "dv": 143,
+          "dt": 93,
+          "pt": 42
+        },
+        {
+          "pos": 5,
+          "ploeg": "Panna FC",
+          "gsp": 20,
+          "w": 10,
+          "g": 1,
+          "v": 9,
+          "dv": 105,
+          "dt": 107,
+          "pt": 31
+        },
+        {
+          "pos": 6,
+          "ploeg": "FC Bacobana",
+          "gsp": 20,
+          "w": 8,
+          "g": 2,
+          "v": 10,
+          "dv": 104,
+          "dt": 134,
+          "pt": 26
+        },
+        {
+          "pos": 7,
+          "ploeg": "Orthopedie Van Parys",
+          "gsp": 20,
+          "w": 6,
+          "g": 5,
+          "v": 9,
+          "dv": 90,
+          "dt": 122,
+          "pt": 23
+        },
+        {
+          "pos": 8,
+          "ploeg": "MVC De Statie",
+          "gsp": 20,
+          "w": 6,
+          "g": 1,
+          "v": 13,
+          "dv": 89,
+          "dt": 146,
+          "pt": 19
+        },
+        {
+          "pos": 9,
+          "ploeg": "VK Lagaar",
+          "gsp": 20,
+          "w": 4,
+          "g": 4,
+          "v": 12,
+          "dv": 83,
+          "dt": 130,
+          "pt": 16
+        },
+        {
+          "pos": 10,
+          "ploeg": "L'Abattoir",
+          "gsp": 20,
+          "w": 3,
+          "g": 2,
+          "v": 15,
+          "dv": 59,
+          "dt": 120,
+          "pt": 11
+        },
+        {
+          "pos": 11,
+          "ploeg": "Plectrum - Maison Noire",
+          "gsp": 20,
+          "w": 1,
+          "g": 2,
+          "v": 17,
+          "dv": 62,
+          "dt": 153,
+          "pt": 5
+        }
+      ]
+    },
+    {
+      "seizoen": "2024-25",
+      "reeks": "Reeks 1",
+      "rijen": [
+        {
+          "pos": 1,
+          "ploeg": "Fc Ariba",
+          "gsp": 21,
+          "w": 18,
+          "g": 2,
+          "v": 1,
+          "dv": 143,
+          "dt": 65,
+          "pt": 56,
+          "us": true
+        },
+        {
+          "pos": 2,
+          "ploeg": "Vloerwerken Slambrouck",
+          "gsp": 21,
+          "w": 16,
+          "g": 4,
+          "v": 1,
+          "dv": 159,
+          "dt": 57,
+          "pt": 52
+        },
+        {
+          "pos": 3,
+          "ploeg": "Panna FC",
+          "gsp": 21,
+          "w": 13,
+          "g": 3,
+          "v": 5,
+          "dv": 122,
+          "dt": 98,
+          "pt": 42
+        },
+        {
+          "pos": 4,
+          "ploeg": "FC Bacobana",
+          "gsp": 21,
+          "w": 12,
+          "g": 2,
+          "v": 7,
+          "dv": 125,
+          "dt": 117,
+          "pt": 38
+        },
+        {
+          "pos": 5,
+          "ploeg": "MVC Deportivo VDM",
+          "gsp": 21,
+          "w": 9,
+          "g": 1,
+          "v": 11,
+          "dv": 95,
+          "dt": 100,
+          "pt": 28
+        },
+        {
+          "pos": 6,
+          "ploeg": "Orthopedie Van Parys",
+          "gsp": 21,
+          "w": 9,
+          "g": 0,
+          "v": 12,
+          "dv": 79,
+          "dt": 108,
+          "pt": 27
+        },
+        {
+          "pos": 7,
+          "ploeg": "Plectrum - Maison Noire",
+          "gsp": 21,
+          "w": 8,
+          "g": 3,
+          "v": 10,
+          "dv": 85,
+          "dt": 117,
+          "pt": 27
+        },
+        {
+          "pos": 8,
+          "ploeg": "VK Lagaar",
+          "gsp": 21,
+          "w": 8,
+          "g": 2,
+          "v": 11,
+          "dv": 90,
+          "dt": 98,
+          "pt": 26
+        },
+        {
+          "pos": 9,
+          "ploeg": "L'Abattoir",
+          "gsp": 21,
+          "w": 5,
+          "g": 4,
+          "v": 12,
+          "dv": 82,
+          "dt": 88,
+          "pt": 19
+        },
+        {
+          "pos": 10,
+          "ploeg": "MVC De Statie",
+          "gsp": 21,
+          "w": 5,
+          "g": 3,
+          "v": 13,
+          "dv": 91,
+          "dt": 107,
+          "pt": 18
+        }
+      ]
+    },
+    {
+      "seizoen": "2023-24",
+      "reeks": "Reeks 1",
+      "rijen": [
+        {
+          "pos": 1,
+          "ploeg": "Fc Ariba",
+          "gsp": 26,
+          "w": 21,
+          "g": 2,
+          "v": 3,
+          "dv": 180,
+          "dt": 90,
+          "pt": 65,
+          "us": true
+        },
+        {
+          "pos": 2,
+          "ploeg": "Vloerwerken Slambrouck",
+          "gsp": 26,
+          "w": 21,
+          "g": 1,
+          "v": 4,
+          "dv": 196,
+          "dt": 72,
+          "pt": 64
+        },
+        {
+          "pos": 3,
+          "ploeg": "FC Julien",
+          "gsp": 26,
+          "w": 19,
+          "g": 1,
+          "v": 6,
+          "dv": 157,
+          "dt": 101,
+          "pt": 58
+        },
+        {
+          "pos": 4,
+          "ploeg": "Panna FC",
+          "gsp": 26,
+          "w": 17,
+          "g": 1,
+          "v": 8,
+          "dv": 135,
+          "dt": 123,
+          "pt": 52
+        },
+        {
+          "pos": 5,
+          "ploeg": "FC Bacobana",
+          "gsp": 26,
+          "w": 15,
+          "g": 3,
+          "v": 8,
+          "dv": 152,
+          "dt": 138,
+          "pt": 48
+        },
+        {
+          "pos": 6,
+          "ploeg": "MVC Deportivo VDM",
+          "gsp": 26,
+          "w": 14,
+          "g": 1,
+          "v": 11,
+          "dv": 154,
+          "dt": 131,
+          "pt": 43
+        },
+        {
+          "pos": 7,
+          "ploeg": "VK Lagaar",
+          "gsp": 26,
+          "w": 13,
+          "g": 3,
+          "v": 10,
+          "dv": 144,
+          "dt": 133,
+          "pt": 42
+        },
+        {
+          "pos": 8,
+          "ploeg": "Orthopedie Van Parys",
+          "gsp": 26,
+          "w": 13,
+          "g": 1,
+          "v": 12,
+          "dv": 124,
+          "dt": 135,
+          "pt": 40
+        },
+        {
+          "pos": 9,
+          "ploeg": "MVC De Statie",
+          "gsp": 26,
+          "w": 9,
+          "g": 2,
+          "v": 15,
+          "dv": 115,
+          "dt": 160,
+          "pt": 29
+        },
+        {
+          "pos": 10,
+          "ploeg": "Dosko Ariba",
+          "gsp": 26,
+          "w": 7,
+          "g": 4,
+          "v": 15,
+          "dv": 75,
+          "dt": 116,
+          "pt": 25
+        },
+        {
+          "pos": 11,
+          "ploeg": "T' Doolkruydt",
+          "gsp": 26,
+          "w": 7,
+          "g": 2,
+          "v": 17,
+          "dv": 119,
+          "dt": 130,
+          "pt": 23
+        },
+        {
+          "pos": 12,
+          "ploeg": "Baggio-Sportief",
+          "gsp": 26,
+          "w": 6,
+          "g": 1,
+          "v": 19,
+          "dv": 79,
+          "dt": 153,
+          "pt": 19
+        },
+        {
+          "pos": 13,
+          "ploeg": "Sanifro ofzo",
+          "gsp": 26,
+          "w": 3,
+          "g": 2,
+          "v": 21,
+          "dv": 88,
+          "dt": 176,
+          "pt": 11
+        }
+      ]
+    },
+    {
+      "seizoen": "2022-23",
+      "reeks": "Reeks 3",
+      "rijen": [
+        {
+          "pos": 1,
+          "ploeg": "Fc Ariba",
+          "gsp": 21,
+          "w": 19,
+          "g": 2,
+          "v": 0,
+          "dv": 210,
+          "dt": 55,
+          "pt": 59,
+          "us": true
+        },
+        {
+          "pos": 2,
+          "ploeg": "Panna FC",
+          "gsp": 21,
+          "w": 14,
+          "g": 3,
+          "v": 4,
+          "dv": 174,
+          "dt": 79,
+          "pt": 45
+        },
+        {
+          "pos": 3,
+          "ploeg": "BTW-Boys",
+          "gsp": 21,
+          "w": 13,
+          "g": 1,
+          "v": 7,
+          "dv": 119,
+          "dt": 86,
+          "pt": 40
+        },
+        {
+          "pos": 4,
+          "ploeg": "ST Q Team",
+          "gsp": 21,
+          "w": 11,
+          "g": 0,
+          "v": 10,
+          "dv": 112,
+          "dt": 104,
+          "pt": 33
+        },
+        {
+          "pos": 5,
+          "ploeg": "JPV Renovaties",
+          "gsp": 21,
+          "w": 9,
+          "g": 3,
+          "v": 9,
+          "dv": 68,
+          "dt": 83,
+          "pt": 30
+        },
+        {
+          "pos": 6,
+          "ploeg": "Korazon",
+          "gsp": 21,
+          "w": 4,
+          "g": 2,
+          "v": 15,
+          "dv": 76,
+          "dt": 120,
+          "pt": 14
+        },
+        {
+          "pos": 7,
+          "ploeg": "FC Bacobana",
+          "gsp": 7,
+          "w": 4,
+          "g": 1,
+          "v": 2,
+          "dv": 49,
+          "dt": 37,
+          "pt": 13
+        },
+        {
+          "pos": 8,
+          "ploeg": "Autohandel Loosveld",
+          "gsp": 21,
+          "w": 3,
+          "g": 1,
+          "v": 17,
+          "dv": 64,
+          "dt": 190,
+          "pt": 10
+        },
+        {
+          "pos": 9,
+          "ploeg": "Nwooithus",
+          "gsp": 14,
+          "w": 1,
+          "g": 0,
+          "v": 13,
+          "dv": 18,
+          "dt": 136,
+          "pt": 3
+        }
+      ]
+    }
+  ]
+}

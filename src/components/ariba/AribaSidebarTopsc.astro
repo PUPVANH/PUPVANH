@@ -1,0 +1,43 @@
+---
+import data from '../../data/ariba-topschutters.json';
+
+const huidig = data.seizoenen.find((s: any) => s.actief) || data.seizoenen[0];
+const top3 = (huidig.spelers || []).slice(0, 3);
+
+function initials(n: string) {
+  if (!n || n === 'TBD') return '?';
+  const parts = n.trim().split(/\s+/);
+  return (parts[0][0] + (parts[parts.length - 1][0] || '')).toUpperCase();
+}
+---
+
+<aside class="ariba-sidebar ariba-sidebar-right">
+  <div class="ariba-side-card">
+    <div class="ariba-side-header">
+      <span class="ariba-side-kicker">Topschutters</span>
+      {huidig.actief && <span class="ariba-side-live">LIVE</span>}
+    </div>
+    <div class="ariba-side-sub">{huidig.seizoen}</div>
+    <div class="ariba-side-topsc-list">
+      {top3.length === 0 ? (
+        <div class="ariba-side-topsc-empty">Nog geen data</div>
+      ) : (
+        top3.map((sp: any, i: number) => (
+          <div class={`ariba-side-topsc-row ${i === 0 ? 'gold' : 'silver'}`}>
+            <div class="ariba-side-topsc-rank">{i + 1}</div>
+            <div class="ariba-side-topsc-avatar">
+              {sp.foto ? <img src={sp.foto} alt={sp.naam} /> : <span>{initials(sp.naam)}</span>}
+            </div>
+            <div class="ariba-side-topsc-info">
+              <div class="ariba-side-topsc-name">{sp.naam}</div>
+              <div class="ariba-side-topsc-goals">{sp.goals} goals</div>
+            </div>
+          </div>
+        ))
+      )}
+    </div>
+    <button class="ariba-side-more" data-modal="modalTopsc">
+      Alle topschutters →
+    </button>
+  </div>
+</aside>

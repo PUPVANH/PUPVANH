@@ -1,0 +1,30 @@
+{
+  "_uitleg": "Topschutters per seizoen. Volgorde in 'spelers' array = ranking (eerste = topschutter). Voor huidige seizoen: minstens 3 spelers voorzien voor de goud/teal/teal top-3 podium. Historische seizoenen: vul volledige lijst in wanneer beschikbaar. Zet 'foto' pad naar /ariba/spelers/[naam].jpg wanneer foto beschikbaar (anders wordt initialen getoond).",
+  "seizoenen": [
+    {
+      "seizoen": "2026-27",
+      "actief": true,
+      "spelers": [
+        { "naam": "TBD", "goals": 0, "foto": null },
+        { "naam": "TBD", "goals": 0, "foto": null },
+        { "naam": "TBD", "goals": 0, "foto": null }
+      ]
+    },
+    {
+      "seizoen": "2025-26",
+      "spelers": []
+    },
+    {
+      "seizoen": "2024-25",
+      "spelers": []
+    },
+    {
+      "seizoen": "2023-24",
+      "spelers": []
+    },
+    {
+      "seizoen": "2022-23",
+      "spelers": []
+    }
+  ]
+}
