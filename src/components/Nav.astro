@@ -1,23 +1,21 @@
 ---
 ---
-
 <nav>
   <div class="nav-l" id="logoTrigger">
     <span class="dot"></span>
-    <span>PUP VANH</span>
+    <span>PUPVANH</span>
   </div>
   <div class="nav-c">
     <a href="/siviez">siviez</a>
     <a href="/ariba">ariba</a>
+    <a href="/flags">flags</a>
   </div>
   <div class="nav-r">
     <span>2026 · vol.01</span>
     <button class="theme-toggle" id="tb" aria-label="Toggle dark mode">◐</button>
   </div>
 </nav>
-
 <div class="pup" id="pup">🐕</div>
-
 <style>
   nav{
     position:fixed;top:0;left:0;right:0;z-index:60;
@@ -41,7 +39,6 @@
   .nav-c a:hover{color:var(--accent);}
   .nav-r{display:flex;gap:14px;align-items:center;font-size:12px;color:var(--muted);}
   .theme-toggle{background:transparent;border:none;color:var(--text);font-size:14px;cursor:pointer;font-family:inherit;}
-
   .pup{position:fixed;top:22px;left:-80px;font-size:28px;z-index:200;pointer-events:none;opacity:0;}
   .pup.run{opacity:1;animation:pupRun 5s linear;}
   @keyframes pupRun{
@@ -51,13 +48,11 @@
     75%{transform:translateX(85vw) translateY(-2px) rotate(-2deg);}
     100%{transform:translateX(110vw) translateY(0) rotate(0);}
   }
-
   @media(max-width:800px){
     nav{padding:14px 20px;}
     .nav-c{display:none;}
   }
 </style>
-
 <script>
   // Dark mode toggle
   const tb = document.getElementById('tb');
@@ -70,12 +65,10 @@
       tb.textContent = n === 'dark' ? '◑' : '◐';
     });
   }
-
   // Easter egg: sneaky pupje na 1s hover op logo
   const logoTrigger = document.getElementById('logoTrigger');
   const pupEl = document.getElementById('pup');
   let hoverTimer: ReturnType<typeof setTimeout> | null = null;
-
   if (logoTrigger && pupEl) {
     logoTrigger.addEventListener('mouseenter', () => {
       hoverTimer = setTimeout(() => {

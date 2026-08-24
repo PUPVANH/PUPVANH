@@ -255,3 +255,523 @@
   .ariba-season::before { left: -30px; }
   .ariba-board-grid { grid-template-columns: 1fr; }
 }
+
+/* ============================================================
+   UPDATES v2 — hamburger, klassement tabs, sticky sponsors, Fc goud
+   ============================================================ */
+
+/* Smooth scroll voor anchor navigation binnen Ariba */
+.ariba-page { scroll-behavior: smooth; }
+
+/* Fc in goud in de hero-titel */
+.ariba-hero-title .ariba-fc-gold { color: var(--ar-gold); }
+
+/* ---------- NAV met hamburger ---------- */
+.ariba-nav { padding-left: 20px; padding-right: 20px; gap: 12px; }
+.ariba-hamburger {
+  width: 44px; height: 44px; background: transparent; border: none; cursor: pointer;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  gap: 5px; padding: 0; z-index: 62;
+}
+.ariba-hamburger span {
+  display: block; width: 22px; height: 2px; background: var(--ar-forest);
+  transition: transform .3s, opacity .3s;
+}
+.ariba-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.ariba-hamburger.open span:nth-child(2) { opacity: 0; }
+.ariba-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Dropdown menu */
+.ariba-menu {
+  position: fixed; top: 70px; left: 20px; z-index: 65;
+  background: var(--ar-bg); border: 1px solid var(--ar-line);
+  border-radius: 6px; box-shadow: 0 12px 40px rgba(24,33,30,.15);
+  padding: 12px 0; min-width: 220px;
+  opacity: 0; transform: translateY(-8px); pointer-events: none;
+  transition: opacity .25s, transform .25s;
+}
+.ariba-menu.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.ariba-menu ul { list-style: none; margin: 0; padding: 0; }
+.ariba-menu li { margin: 0; }
+.ariba-menu-link {
+  display: block; padding: 12px 22px;
+  font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: .15em;
+  color: var(--ar-forest); text-decoration: none; text-transform: uppercase;
+  border-left: 3px solid transparent; transition: all .2s;
+}
+.ariba-menu-link:hover { background: var(--ar-card); border-left-color: var(--ar-gold); color: var(--ar-accent); }
+.ariba-menu-overlay {
+  position: fixed; inset: 0; background: rgba(18,33,30,.35); z-index: 61;
+  opacity: 0; pointer-events: none; transition: opacity .25s;
+}
+.ariba-menu-overlay.open { opacity: 1; pointer-events: auto; }
+
+/* Nav-titel gecentreerd i.p.v. links */
+.ariba-nav-title { flex: 1; justify-content: center; }
+
+/* ---------- KLASSEMENT tabs ---------- */
+.ariba-klassement-sec { padding: 80px 32px 40px; max-width: 1400px; margin: 0 auto; }
+.ariba-klas-tabs {
+  display: flex; gap: 4px; flex-wrap: wrap; margin: 24px 0 20px;
+  border-bottom: 2px solid var(--ar-line); padding-bottom: 0;
+}
+.ariba-klas-tab {
+  background: transparent; border: none; padding: 12px 18px;
+  font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: .12em;
+  color: var(--ar-muted); text-transform: uppercase; cursor: pointer;
+  border-bottom: 3px solid transparent; margin-bottom: -2px;
+  transition: all .2s; display: flex; align-items: center; gap: 8px;
+}
+.ariba-klas-tab:hover { color: var(--ar-accent); }
+.ariba-klas-tab.active {
+  color: var(--ar-accent); border-bottom-color: var(--ar-accent);
+}
+.ariba-klas-tab.actief .ariba-klas-live {
+  display: inline-block; font-size: 9px; letter-spacing: .15em;
+  padding: 2px 6px; background: var(--ar-gold); color: var(--ar-forest);
+  border-radius: 2px; animation: ar-blink 2s ease-in-out infinite;
+}
+@keyframes ar-blink { 0%,100% { opacity: 1; } 50% { opacity: .5; } }
+
+.ariba-klas-panel { display: none; animation: ar-fadeIn .3s ease; }
+.ariba-klas-panel.active { display: block; }
+@keyframes ar-fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.ariba-klas-header {
+  display: flex; justify-content: space-between; align-items: baseline;
+  margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--ar-line);
+}
+.ariba-klas-header h3 {
+  font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: .15em;
+  color: var(--ar-forest); text-transform: uppercase; font-weight: 400;
+}
+.ariba-klas-header span {
+  font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: .1em;
+  color: var(--ar-muted); text-transform: uppercase;
+}
+.ariba-klas-note {
+  font-family: 'Inter', sans-serif; font-size: 13px; color: var(--ar-muted);
+  background: rgba(200,163,95,.1); padding: 10px 14px; border-radius: 4px;
+  border-left: 3px solid var(--ar-gold); margin-bottom: 16px; line-height: 1.5;
+}
+.ariba-klas-table-wrap { overflow-x: auto; }
+
+/* ---------- SPONSOR marquee — sticky bottom + monochroom teal ---------- */
+.ariba-scroll-content { position: relative; }
+
+.ariba-sponsor-marquee-sticky {
+  position: sticky; bottom: 0; z-index: 40;
+  overflow: hidden; padding: 20px 0;
+  background: rgba(244,240,232,.92);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--ar-line); border-bottom: 1px solid var(--ar-line);
+}
+.ariba-sponsor-marquee-sticky .ariba-sponsor-track {
+  display: inline-flex; gap: 60px; animation: ar-sscroll 40s linear infinite;
+  align-items: center; padding: 0 30px; white-space: nowrap;
+}
+.ariba-sponsor-marquee-sticky:hover .ariba-sponsor-track { animation-play-state: paused; }
+.ariba-sponsor-marquee-sticky .ariba-sponsor-track img {
+  height: 42px; width: auto; object-fit: contain; flex-shrink: 0;
+  /* Monochroom Alpine Teal filter — geldt voor alle logos (SVG + PNG) */
+  filter: brightness(0) saturate(100%) invert(32%) sepia(37%) saturate(1102%) hue-rotate(140deg) brightness(92%) contrast(88%);
+  opacity: .8; transition: opacity .3s;
+}
+.ariba-sponsor-marquee-sticky .ariba-sponsor-track img:hover { opacity: 1; }
+.ariba-sponsor-marquee-sticky .ariba-sponsor-track .dm {
+  width: 8px; height: 8px; background: var(--ar-gold); transform: rotate(45deg); flex-shrink: 0;
+}
+
+/* Oude in-flow marquee wordt niet meer gebruikt maar behouden voor backwards compat */
+.ariba-sponsor-marquee { display: none; }
+
+
+/* ---------- MOBILE tweaks ---------- */
+@media (max-width: 800px) {
+  .ariba-hamburger { margin-right: 0; }
+  .ariba-nav-r { display: none; }
+  .ariba-menu { left: 12px; right: 12px; min-width: unset; top: 68px; }
+  .ariba-nav-title span { font-size: 16px; }
+  .ariba-nav-title img { height: 26px; }
+
+  .ariba-klassement-sec { padding: 60px 20px 20px; }
+  .ariba-klas-tabs { gap: 0; overflow-x: auto; flex-wrap: nowrap; }
+  .ariba-klas-tab { padding: 10px 12px; font-size: 13px; white-space: nowrap; }
+
+  .ariba-sponsor-marquee-sticky { padding: 12px 0; }
+  .ariba-sponsor-marquee-sticky .ariba-sponsor-track img { height: 32px; }
+  .ariba-sponsor-marquee-sticky .ariba-sponsor-track { gap: 40px; padding: 0 20px; }
+
+  .ariba-footer-block { padding: 32px 20px 20px; }
+}
+
+/* ============================================================
+   UPDATES v3 — hero scroll fix, topschutters podium
+   ============================================================ */
+
+/* Hero: meer bottom padding voor de scroll-hint met 5 stats */
+.ariba-hero { padding-bottom: 100px; }
+.ariba-scroll-hint { bottom: 32px; }
+@media (max-width: 800px) {
+  .ariba-hero { padding-bottom: 80px; }
+  .ariba-scroll-hint { bottom: 24px; }
+}
+
+/* ---------- TOPSCHUTTERS ---------- */
+.ariba-topsc-sec { padding: 80px 32px 60px; max-width: 1400px; margin: 0 auto; }
+
+.ariba-topsc-tabs {
+  display: flex; gap: 4px; flex-wrap: wrap; margin: 24px 0 32px;
+  border-bottom: 2px solid var(--ar-line);
+}
+.ariba-topsc-tab {
+  background: transparent; border: none; padding: 12px 18px;
+  font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: .12em;
+  color: var(--ar-muted); text-transform: uppercase; cursor: pointer;
+  border-bottom: 3px solid transparent; margin-bottom: -2px;
+  transition: all .2s; display: flex; align-items: center; gap: 8px;
+}
+.ariba-topsc-tab:hover { color: var(--ar-accent); }
+.ariba-topsc-tab.active { color: var(--ar-accent); border-bottom-color: var(--ar-accent); }
+.ariba-topsc-tab.actief .ariba-topsc-live {
+  display: inline-block; font-size: 9px; letter-spacing: .15em;
+  padding: 2px 6px; background: var(--ar-gold); color: var(--ar-forest);
+  border-radius: 2px; animation: ar-blink 2s ease-in-out infinite;
+}
+
+.ariba-topsc-panel { display: none; animation: ar-fadeIn .3s ease; }
+.ariba-topsc-panel.active { display: block; }
+
+.ariba-topsc-empty {
+  padding: 60px 20px; text-align: center;
+  font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: .15em;
+  color: var(--ar-muted); text-transform: uppercase;
+  background: var(--ar-card); border: 1px dashed var(--ar-line); border-radius: 4px;
+}
+
+/* Podium: 3 vierkanten, 1e in het midden groter */
+.ariba-podium {
+  display: grid; grid-template-columns: 1fr 1.2fr 1fr;
+  gap: 16px; align-items: end; justify-items: center;
+  max-width: 900px; margin: 0 auto;
+}
+.ariba-podium-spot {
+  width: 100%; padding: 24px 16px 20px; text-align: center;
+  background: var(--ar-card); border: 1px solid var(--ar-line); border-radius: 6px;
+  position: relative; transition: transform .3s;
+}
+.ariba-podium-spot:hover { transform: translateY(-4px); }
+.ariba-podium-spot.gold {
+  background: linear-gradient(180deg, rgba(200,163,95,.15), var(--ar-card));
+  border-color: var(--ar-gold); border-width: 2px;
+  padding-top: 40px;
+}
+.ariba-podium-spot.silver {
+  border-color: var(--ar-accent);
+}
+.ariba-podium-spot.gold .ariba-podium-crown {
+  position: absolute; top: -18px; left: 50%; transform: translateX(-50%);
+  width: 44px; height: 44px; background: var(--ar-gold); color: var(--ar-forest);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 22px; box-shadow: 0 4px 12px rgba(200,163,95,.4);
+  font-family: 'Inter', sans-serif;
+}
+.ariba-podium-rank {
+  font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: .2em;
+  color: var(--ar-muted); text-transform: uppercase; margin-bottom: 8px;
+}
+.ariba-podium-spot.gold .ariba-podium-rank { color: var(--ar-gold); font-weight: 600; }
+.ariba-podium-spot.silver .ariba-podium-rank { color: var(--ar-accent); }
+
+.ariba-podium-photo {
+  width: 96px; height: 96px; margin: 0 auto 12px;
+  background: var(--ar-accent); border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; position: relative;
+}
+.ariba-podium-spot.gold .ariba-podium-photo {
+  background: var(--ar-gold); width: 120px; height: 120px;
+}
+.ariba-podium-photo::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: var(--ar-p-teal); background-size: 200px;
+  mix-blend-mode: overlay; opacity: .5;
+}
+.ariba-podium-spot.gold .ariba-podium-photo::before {
+  background-image: var(--ar-p-goud);
+}
+.ariba-podium-photo img {
+  width: 100%; height: 100%; object-fit: cover; position: relative; z-index: 1;
+}
+.ariba-podium-initials {
+  font-family: 'DM Serif Display', serif; font-size: 32px;
+  color: #F4F0E8; position: relative; z-index: 1;
+}
+.ariba-podium-spot.gold .ariba-podium-initials {
+  color: var(--ar-forest); font-size: 40px;
+}
+.ariba-podium-name {
+  font-family: 'DM Serif Display', serif; font-size: 18px;
+  line-height: 1.2; margin-bottom: 6px; color: var(--ar-text);
+}
+.ariba-podium-spot.gold .ariba-podium-name { font-size: 22px; }
+.ariba-podium-goals {
+  font-family: 'Bebas Neue', sans-serif; font-size: 24px;
+  color: var(--ar-accent); letter-spacing: .05em;
+}
+.ariba-podium-spot.gold .ariba-podium-goals { font-size: 30px; color: var(--ar-gold); }
+.ariba-podium-goals span {
+  font-size: 11px; color: var(--ar-muted); letter-spacing: .15em;
+  text-transform: uppercase; margin-left: 4px;
+}
+
+/* Uitklap volledig overzicht */
+.ariba-topsc-more { margin-top: 40px; text-align: center; }
+.ariba-topsc-toggle {
+  background: transparent; border: 1px solid var(--ar-line);
+  padding: 12px 24px; border-radius: 4px; cursor: pointer;
+  font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: .15em;
+  color: var(--ar-forest); text-transform: uppercase;
+  transition: all .2s;
+}
+.ariba-topsc-toggle:hover { border-color: var(--ar-accent); color: var(--ar-accent); }
+.ariba-topsc-toggle span { color: var(--ar-gold); margin-left: 6px; transition: transform .2s; }
+.ariba-topsc-toggle.open span { transform: rotate(180deg); display: inline-block; }
+.ariba-topsc-full {
+  max-height: 0; overflow: hidden; transition: max-height .4s ease;
+  margin-top: 20px; text-align: left;
+}
+.ariba-topsc-full.open { max-height: 2000px; }
+
+@media (max-width: 800px) {
+  .ariba-topsc-sec { padding: 60px 20px 40px; }
+  .ariba-topsc-tabs { gap: 0; overflow-x: auto; flex-wrap: nowrap; }
+  .ariba-topsc-tab { padding: 10px 12px; font-size: 13px; white-space: nowrap; }
+
+  .ariba-podium { grid-template-columns: 1fr; gap: 12px; }
+  .ariba-podium-spot { padding: 20px 12px; }
+  .ariba-podium-spot.gold { padding-top: 36px; order: -1; }
+  .ariba-podium-photo { width: 80px; height: 80px; }
+  .ariba-podium-spot.gold .ariba-podium-photo { width: 100px; height: 100px; }
+}
+
+/* ============================================================
+   UPDATES v4 — sidebar layout + modals (klassement + topschutters)
+   ============================================================ */
+
+.ariba-layout-grid {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr) 240px;
+  gap: 32px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 24px 0;
+  align-items: start;
+}
+.ariba-sidebar {
+  position: sticky;
+  top: 88px;
+  max-height: calc(100vh - 130px);
+  overflow-y: auto;
+}
+.ariba-side-card {
+  background: var(--ar-card);
+  border: 1px solid var(--ar-line);
+  border-radius: 6px;
+  padding: 20px 18px;
+  position: relative;
+  overflow: hidden;
+}
+.ariba-side-card::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: var(--ar-p-teal); background-size: 200px;
+  opacity: .06; pointer-events: none;
+}
+.ariba-side-header {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 8px; margin-bottom: 4px; position: relative;
+}
+.ariba-side-kicker {
+  font-family: 'Bebas Neue', sans-serif; font-size: 13px;
+  letter-spacing: .2em; color: var(--ar-accent); text-transform: uppercase;
+}
+.ariba-side-live {
+  font-size: 9px; letter-spacing: .15em; padding: 2px 6px;
+  background: var(--ar-gold); color: var(--ar-forest); border-radius: 2px;
+  font-family: 'Bebas Neue', sans-serif;
+  animation: ar-blink 2s ease-in-out infinite;
+}
+.ariba-side-sub {
+  font-family: 'Bebas Neue', sans-serif; font-size: 11px;
+  letter-spacing: .12em; color: var(--ar-muted); text-transform: uppercase;
+  padding-bottom: 12px; border-bottom: 1px solid var(--ar-line);
+  margin-bottom: 12px; position: relative;
+}
+.ariba-side-table {
+  width: 100%; border-collapse: collapse;
+  font-family: 'Inter', sans-serif; font-size: 12px;
+  position: relative; margin-bottom: 12px;
+}
+.ariba-side-table td {
+  padding: 7px 4px; color: var(--ar-muted);
+  border-bottom: 1px solid rgba(216, 210, 194, .3);
+}
+.ariba-side-table td:first-child { width: 20px; color: var(--ar-forest); font-weight: 500; }
+.ariba-side-table td:last-child {
+  text-align: right; font-family: 'Bebas Neue', sans-serif; font-size: 14px;
+  color: var(--ar-text); width: 30px;
+}
+.ariba-side-table tr.us td {
+  color: var(--ar-accent); font-weight: 600;
+  background: rgba(14, 110, 111, .06);
+}
+.ariba-side-table tr.us td:first-child::before { content: '★ '; color: var(--ar-gold); }
+.ariba-side-table tr:last-child td { border-bottom: none; }
+
+.ariba-side-topsc-list { position: relative; margin-bottom: 12px; }
+.ariba-side-topsc-empty {
+  padding: 24px 8px; text-align: center;
+  font-family: 'Bebas Neue', sans-serif; font-size: 12px;
+  letter-spacing: .12em; color: var(--ar-muted); text-transform: uppercase;
+}
+.ariba-side-topsc-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 6px; border-bottom: 1px solid rgba(216, 210, 194, .3);
+}
+.ariba-side-topsc-row:last-child { border-bottom: none; }
+.ariba-side-topsc-rank {
+  font-family: 'Bebas Neue', sans-serif; font-size: 16px;
+  color: var(--ar-accent); width: 18px; text-align: center;
+}
+.ariba-side-topsc-row.gold .ariba-side-topsc-rank { color: var(--ar-gold); font-weight: 600; }
+.ariba-side-topsc-avatar {
+  width: 36px; height: 36px; border-radius: 4px;
+  background: var(--ar-accent); color: #F4F0E8;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'DM Serif Display', serif; font-size: 14px;
+  flex-shrink: 0; overflow: hidden; position: relative;
+}
+.ariba-side-topsc-row.gold .ariba-side-topsc-avatar {
+  background: var(--ar-gold); color: var(--ar-forest);
+}
+.ariba-side-topsc-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.ariba-side-topsc-info { flex: 1; min-width: 0; }
+.ariba-side-topsc-name {
+  font-family: 'DM Serif Display', serif; font-size: 13px;
+  line-height: 1.2; color: var(--ar-text);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.ariba-side-topsc-goals {
+  font-family: 'Bebas Neue', sans-serif; font-size: 11px;
+  letter-spacing: .1em; color: var(--ar-muted); text-transform: uppercase;
+}
+
+.ariba-side-more {
+  display: block; width: 100%; background: transparent;
+  border: 1px solid var(--ar-line); padding: 8px 12px; border-radius: 4px;
+  font-family: 'Bebas Neue', sans-serif; font-size: 11px;
+  letter-spacing: .15em; color: var(--ar-forest); text-transform: uppercase;
+  cursor: pointer; transition: all .2s; position: relative;
+}
+.ariba-side-more:hover {
+  border-color: var(--ar-accent); color: var(--ar-accent);
+  background: rgba(14, 110, 111, .04);
+}
+
+.ariba-main-col > section:first-child { padding-top: 0; }
+
+.ariba-modal {
+  position: fixed; inset: 0; z-index: 100;
+  display: none; align-items: center; justify-content: center; padding: 20px;
+}
+.ariba-modal.open { display: flex; }
+.ariba-modal-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(18, 33, 30, .6); backdrop-filter: blur(4px);
+}
+.ariba-modal-panel {
+  position: relative; background: var(--ar-bg); border-radius: 8px;
+  max-width: 1100px; width: 100%; max-height: 90vh; overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,.3);
+}
+.ariba-modal-close {
+  position: absolute; top: 12px; right: 16px;
+  background: transparent; border: none; font-size: 32px;
+  color: var(--ar-muted); cursor: pointer; line-height: 1; z-index: 2;
+}
+.ariba-modal-close:hover { color: var(--ar-accent); }
+.ariba-modal-body { padding: 40px 32px 32px; }
+
+@media (max-width: 1000px) {
+  .ariba-layout-grid {
+    grid-template-columns: 1fr; padding: 0; gap: 0;
+  }
+  .ariba-sidebar {
+    position: static; max-height: none; padding: 24px 20px 0;
+  }
+  .ariba-main-col > section:first-child { padding-top: 60px; }
+  .ariba-modal-body { padding: 40px 20px 24px; }
+}
+
+/* ============================================================
+   FOOTER v2 — dunne balk, 2 regels (PUPVANH standaard)
+   ============================================================ */
+.ariba-footer-block {
+  background: var(--ar-forest);
+  color: rgba(244,240,232,.85);
+  padding: 16px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Bebas Neue', sans-serif;
+}
+.ariba-footer-block::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--ar-p-teal);
+  background-size: 400px;
+  opacity: .08;
+  pointer-events: none;
+}
+.ariba-footer-line-1 {
+  position: relative;
+  font-size: 10px;
+  letter-spacing: .18em;
+  color: rgba(244,240,232,.5);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.ariba-footer-line-2 {
+  position: relative;
+  font-size: 13px;
+  letter-spacing: .14em;
+  color: rgba(244,240,232,.9);
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.ariba-footer-name {
+  color: var(--ar-gold);
+  font-weight: 400;
+  letter-spacing: .2em;
+}
+.ariba-footer-dot {
+  color: rgba(244,240,232,.4);
+}
+.ariba-footer-link-back {
+  color: rgba(244,240,232,.9);
+  text-decoration: none;
+  transition: color .2s;
+}
+.ariba-footer-link-back:hover {
+  color: var(--ar-gold);
+}
+
+@media (max-width: 800px) {
+  .ariba-footer-block { padding: 14px 16px; }
+  .ariba-footer-line-2 { font-size: 12px; gap: 6px; }
+}

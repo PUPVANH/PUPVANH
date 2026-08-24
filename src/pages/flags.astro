@@ -1,0 +1,1311 @@
+---
+// FLAGS.EXE — subpagina van PUPVANH
+// Windows 95 vibe · 197 landen · NL/EN · vlaggen uit /public/flag-images/
+---
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FLAGS.EXE — PUPVANH</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style is:global>
+/* ========= Windows 95 tokens ========= */
+:root {
+  --desktop: #008080;
+  --face: #c0c0c0;
+  --face-light: #dfdfdf;
+  --face-dark: #808080;
+  --white: #ffffff;
+  --black: #000000;
+  --titlebar: #000080;
+  --titlebar-2: #1084d0;
+  --highlight: #000080;
+  --text: #000000;
+  --disabled: #808080;
+  --input-bg: #ffffff;
+  --link: #0000ee;
+  --lcd-bg: #000000;
+  --lcd-fg: #0f0;
+  --gold: #c8a35f;
+  --ember: #e85d2f;
+  --success-bg: #008000;
+  --error-bg: #800000;
+
+  --ui-font: "Tahoma", "MS Sans Serif", "Geneva", "Verdana", sans-serif;
+  --pixel-font: "Pixelify Sans", "VT323", "Courier New", monospace;
+  --lcd-font: "VT323", "Courier New", monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+
+body {
+  background: var(--desktop);
+  color: var(--text);
+  font-family: var(--ui-font);
+  font-size: 11px;
+  min-height: 100vh;
+  padding: 20px 16px;
+  overflow-x: hidden;
+  background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.06) 1px, transparent 0);
+  background-size: 20px 20px;
+}
+
+.win {
+  background: var(--face);
+  border-top: 2px solid var(--white);
+  border-left: 2px solid var(--white);
+  border-right: 2px solid var(--black);
+  border-bottom: 2px solid var(--black);
+  box-shadow: inset -1px -1px 0 var(--face-dark), inset 1px 1px 0 var(--face-light);
+  padding: 2px;
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.titlebar {
+  background: linear-gradient(90deg, var(--titlebar) 0%, var(--titlebar-2) 100%);
+  color: var(--white);
+  padding: 3px 4px 3px 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 700;
+  font-size: 11px;
+  height: 22px;
+}
+.titlebar-text { display: flex; align-items: center; gap: 6px; overflow: hidden; white-space: nowrap; }
+.titlebar-icon { width: 16px; height: 16px; display: inline-flex; align-items: center; justify-content: center; font-size: 13px; }
+.titlebar-controls { display: flex; gap: 2px; }
+.titlebar-btn {
+  background: var(--face);
+  border-top: 1px solid var(--white); border-left: 1px solid var(--white);
+  border-right: 1px solid var(--black); border-bottom: 1px solid var(--black);
+  box-shadow: inset -1px -1px 0 var(--face-dark);
+  width: 18px; height: 16px; padding: 0;
+  font-family: var(--ui-font); font-size: 10px; font-weight: 700;
+  color: var(--black); cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center; line-height: 1;
+}
+.titlebar-btn:active {
+  border-top: 1px solid var(--black); border-left: 1px solid var(--black);
+  border-right: 1px solid var(--white); border-bottom: 1px solid var(--white);
+  box-shadow: inset 1px 1px 0 var(--face-dark);
+}
+
+.menubar {
+  display: flex; align-items: center; padding: 2px 4px; gap: 2px;
+  border-bottom: 1px solid var(--face-dark); background: var(--face);
+}
+.menu-item { padding: 3px 8px; font-size: 11px; cursor: default; user-select: none; }
+.menu-item:hover:not(.no-hover) { background: var(--highlight); color: var(--white); }
+.menu-item u { text-decoration: underline; }
+.menubar-spacer { flex: 1; }
+.lang-switch { padding: 0 4px; font-size: 11px; }
+.lang-btn {
+  background: transparent; border: none; padding: 2px 4px;
+  cursor: pointer; font-family: inherit; font-size: 11px; color: var(--text);
+}
+.lang-btn.active { background: var(--highlight); color: var(--white); font-weight: 700; }
+.lang-switch .sep { color: var(--face-dark); margin: 0 2px; }
+
+.window-body { padding: 12px; }
+
+.statusbar {
+  display: flex; border-top: 1px solid var(--white); padding: 2px; gap: 2px;
+}
+.statusbar-cell {
+  flex: 1;
+  border-top: 1px solid var(--face-dark); border-left: 1px solid var(--face-dark);
+  border-right: 1px solid var(--white); border-bottom: 1px solid var(--white);
+  padding: 2px 6px; font-size: 11px; background: var(--face);
+}
+.statusbar-cell.narrow { flex: 0 0 auto; min-width: 90px; }
+
+.screen { display: none; }
+.screen.active { display: block; }
+
+/* Setup */
+.brand-block {
+  text-align: center; padding: 20px 12px 12px; background: var(--face);
+  border-top: 1px solid var(--face-dark); border-left: 1px solid var(--face-dark);
+  border-right: 1px solid var(--white); border-bottom: 1px solid var(--white);
+  box-shadow: inset 1px 1px 0 var(--black); margin-bottom: 12px;
+  background-image: linear-gradient(135deg, #f0f0f0 0%, #c0c0c0 100%);
+}
+.brand {
+  font-family: var(--pixel-font); font-size: 72px; font-weight: 700;
+  letter-spacing: -3px; line-height: 0.9; color: var(--titlebar);
+  text-shadow: 3px 3px 0 var(--gold), 6px 6px 0 var(--face-dark); margin: 0;
+}
+.tagline {
+  font-family: var(--lcd-font); font-size: 18px; color: var(--text);
+  letter-spacing: 1px; margin-top: 6px;
+}
+
+.dialog-group {
+  background: var(--face);
+  border-top: 1px solid var(--white); border-left: 1px solid var(--white);
+  border-right: 1px solid var(--face-dark); border-bottom: 1px solid var(--face-dark);
+  padding: 12px; margin-bottom: 12px;
+}
+.dialog-title {
+  font-weight: 700; font-size: 11px; margin-bottom: 10px;
+  padding-bottom: 6px; border-bottom: 1px solid var(--face-dark);
+  box-shadow: 0 1px 0 var(--white); display: flex; align-items: center; gap: 6px;
+}
+.dialog-title::before {
+  content: ''; display: inline-block; width: 8px; height: 8px; background: var(--titlebar);
+}
+
+fieldset {
+  border: 1px solid var(--face-dark);
+  box-shadow: 1px 1px 0 var(--white), inset -1px -1px 0 var(--white), inset 1px 1px 0 var(--face-dark);
+  padding: 10px 12px; margin-bottom: 10px;
+}
+fieldset legend { padding: 0 4px; font-weight: 700; font-size: 11px; }
+
+.radio-row { display: flex; gap: 20px; flex-wrap: wrap; }
+.radio-row label { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 11px; }
+.radio-row input[type=radio] { width: 13px; height: 13px; margin: 0; cursor: pointer; }
+
+.chip-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  background: var(--face);
+  border-top: 1px solid var(--white); border-left: 1px solid var(--white);
+  border-right: 1px solid var(--black); border-bottom: 1px solid var(--black);
+  box-shadow: inset -1px -1px 0 var(--face-dark), inset 1px 1px 0 var(--face-light);
+  padding: 4px 12px; font-family: inherit; font-size: 11px;
+  cursor: pointer; color: var(--text); min-width: 68px;
+}
+.chip:active, .chip.active {
+  border-top: 1px solid var(--black); border-left: 1px solid var(--black);
+  border-right: 1px solid var(--white); border-bottom: 1px solid var(--white);
+  box-shadow: inset 1px 1px 0 var(--face-dark); background: var(--face);
+}
+.chip.active {
+  background-image: repeating-linear-gradient(45deg, var(--face) 0, var(--face) 2px, var(--face-light) 2px, var(--face-light) 4px);
+  font-weight: 700;
+}
+
+.command-preview {
+  background: var(--lcd-bg); color: var(--lcd-fg); padding: 6px 8px;
+  font-family: var(--lcd-font); font-size: 15px;
+  border-top: 1px solid var(--black); border-left: 1px solid var(--black);
+  border-right: 1px solid var(--white); border-bottom: 1px solid var(--white);
+  box-shadow: inset 1px 1px 0 var(--face-dark); letter-spacing: 1px; margin-top: 8px;
+}
+.command-preview .cursor { animation: blink 1s step-end infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+.button-row { display: flex; gap: 8px; justify-content: flex-end; margin-top: 12px; }
+.win-btn {
+  background: var(--face);
+  border-top: 1px solid var(--white); border-left: 1px solid var(--white);
+  border-right: 1px solid var(--black); border-bottom: 1px solid var(--black);
+  box-shadow: inset -1px -1px 0 var(--face-dark), inset 1px 1px 0 var(--face-light);
+  padding: 6px 20px; font-family: inherit; font-size: 11px;
+  cursor: pointer; color: var(--text); min-width: 80px; min-height: 26px;
+}
+.win-btn:hover { background: var(--face-light); }
+.win-btn:active, .win-btn.pressed {
+  border-top: 1px solid var(--black); border-left: 1px solid var(--black);
+  border-right: 1px solid var(--white); border-bottom: 1px solid var(--white);
+  box-shadow: inset 1px 1px 0 var(--face-dark);
+  padding: 7px 19px 5px 21px;
+}
+.win-btn.primary { font-weight: 700; outline: 1px dotted var(--black); outline-offset: -4px; }
+.win-btn.large { padding: 10px 32px; font-size: 13px; min-width: 140px; }
+.win-btn.large:active { padding: 11px 31px 9px 33px; }
+
+.help-list { font-size: 11px; line-height: 1.7; }
+.help-list p { margin: 2px 0; }
+.help-list kbd {
+  background: var(--face);
+  border-top: 1px solid var(--white); border-left: 1px solid var(--white);
+  border-right: 1px solid var(--black); border-bottom: 1px solid var(--black);
+  padding: 0 4px; font-family: var(--ui-font); font-size: 10px;
+  display: inline-block; min-width: 16px; text-align: center;
+}
+.help-list b { color: var(--titlebar); }
+
+/* Quiz */
+.stats-panel { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 10px; }
+.stat-cell {
+  background: var(--face);
+  border-top: 1px solid var(--face-dark); border-left: 1px solid var(--face-dark);
+  border-right: 1px solid var(--white); border-bottom: 1px solid var(--white);
+  padding: 6px 8px; display: flex; flex-direction: column; gap: 4px;
+}
+.stat-cell label { font-size: 10px; color: var(--text); }
+.stat-lcd {
+  background: var(--lcd-bg); color: var(--lcd-fg); padding: 4px 8px;
+  font-family: var(--lcd-font); font-size: 22px; text-align: right; letter-spacing: 1px;
+  border-top: 1px solid var(--black); border-left: 1px solid var(--black);
+  border-right: 1px solid var(--face-light); border-bottom: 1px solid var(--face-light);
+}
+.stat-lcd.pulse { animation: lcdPulse 0.4s ease; }
+@keyframes lcdPulse {
+  0%, 100% { color: var(--lcd-fg); }
+  50% { color: #ff0; text-shadow: 0 0 6px #ff0; }
+}
+.stat-lcd .x { font-size: 15px; color: #060; }
+
+.progress-container {
+  height: 20px; background: var(--face);
+  border-top: 1px solid var(--face-dark); border-left: 1px solid var(--face-dark);
+  border-right: 1px solid var(--white); border-bottom: 1px solid var(--white);
+  padding: 2px; margin-bottom: 12px; position: relative;
+}
+.progress-fill {
+  height: 100%; width: 0%; transition: width 0.4s ease;
+  background-image: repeating-linear-gradient(90deg, var(--titlebar) 0px, var(--titlebar) 12px, transparent 12px, transparent 14px);
+}
+
+.sub-window {
+  background: var(--face);
+  border-top: 1px solid var(--white); border-left: 1px solid var(--white);
+  border-right: 1px solid var(--black); border-bottom: 1px solid var(--black);
+  box-shadow: inset -1px -1px 0 var(--face-dark), inset 1px 1px 0 var(--face-light);
+  max-width: 440px; margin: 0 auto 14px;
+}
+.sub-titlebar {
+  background: linear-gradient(90deg, var(--titlebar), var(--titlebar-2));
+  color: var(--white); padding: 2px 3px 2px 5px;
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 10px; font-weight: 700;
+}
+.sub-content {
+  background: #c0c0c0;
+  background-image:
+    linear-gradient(45deg, #808080 25%, transparent 25%),
+    linear-gradient(-45deg, #808080 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #808080 75%),
+    linear-gradient(-45deg, transparent 75%, #808080 75%);
+  background-size: 12px 12px;
+  background-position: 0 0, 0 6px, 6px -6px, -6px 0;
+  padding: 12px; min-height: 200px;
+  display: flex; align-items: center; justify-content: center;
+  border-top: 1px solid var(--face-dark); border-left: 1px solid var(--face-dark);
+  border-right: 1px solid var(--white); border-bottom: 1px solid var(--white);
+  margin: 2px;
+}
+#flag-img {
+  max-width: 100%; max-height: 240px; display: block;
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.4);
+  animation: flagIn 0.35s ease;
+  image-rendering: -webkit-optimize-contrast;
+}
+@keyframes flagIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+.flag-loading {
+  color: var(--text); font-family: var(--lcd-font); font-size: 20px;
+  background: var(--face); padding: 20px 32px; border: 1px solid var(--face-dark);
+}
+.flag-error {
+  background: var(--face); padding: 16px 24px;
+  border-top: 1px solid var(--white); border-left: 1px solid var(--white);
+  border-right: 1px solid var(--face-dark); border-bottom: 1px solid var(--face-dark);
+  font-family: var(--ui-font); font-size: 11px;
+  color: var(--text); text-align: center; max-width: 300px;
+}
+.flag-error .code {
+  display: block; font-family: var(--pixel-font);
+  font-size: 42px; color: var(--error-bg); margin: 8px 0;
+  letter-spacing: 4px;
+}
+.flag-error .hint {
+  font-size: 10px; color: var(--face-dark); margin-top: 8px;
+}
+.sub-statusbar {
+  padding: 3px 6px; font-size: 10px; color: var(--text);
+  border-top: 1px solid var(--face-dark); background: var(--face);
+  font-family: var(--lcd-font); letter-spacing: 1px;
+}
+
+.input-panel {
+  background: var(--face); padding: 10px;
+  border-top: 1px solid var(--white); border-left: 1px solid var(--white);
+  border-right: 1px solid var(--face-dark); border-bottom: 1px solid var(--face-dark);
+  margin-bottom: 10px; max-width: 520px; margin-left: auto; margin-right: auto;
+}
+.input-panel label { display: block; font-size: 11px; margin-bottom: 5px; font-weight: 700; }
+.input-wrap { position: relative; }
+.win-input {
+  width: 100%; background: var(--input-bg);
+  border-top: 1px solid var(--face-dark); border-left: 1px solid var(--face-dark);
+  border-right: 1px solid var(--white); border-bottom: 1px solid var(--white);
+  box-shadow: inset 1px 1px 0 var(--black), inset -1px -1px 0 var(--face-light);
+  padding: 6px 8px; font-family: var(--ui-font); font-size: 14px;
+  color: var(--text); outline: none;
+}
+.win-input:focus { background: #ffffe0; }
+.win-input:disabled { background: var(--face); color: var(--disabled); }
+
+.autocomplete {
+  position: absolute; bottom: 100%; left: 0; right: 0; background: var(--white);
+  border-top: 1px solid var(--white); border-left: 1px solid var(--white);
+  border-right: 1px solid var(--black); border-bottom: 1px solid var(--black);
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.3), inset -1px -1px 0 var(--face-dark);
+  margin-bottom: 2px; max-height: 200px; overflow-y: auto;
+  display: none; z-index: 20;
+}
+.autocomplete.open { display: block; }
+.autocomplete-item {
+  padding: 4px 10px; cursor: pointer; font-size: 12px; color: var(--text);
+  display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 1px dotted #e0e0e0;
+}
+.autocomplete-item:last-child { border-bottom: none; }
+.autocomplete-item .hint { color: var(--face-dark); font-size: 10px; }
+.autocomplete-item.highlighted, .autocomplete-item:hover { background: var(--highlight); color: var(--white); }
+.autocomplete-item.highlighted .hint, .autocomplete-item:hover .hint { color: #b0b0ff; }
+
+.feedback {
+  min-height: 24px; margin-top: 8px; padding: 4px 8px;
+  text-align: center; font-size: 12px; font-weight: 700; letter-spacing: 1px;
+  display: none; border: 1px solid transparent;
+}
+.feedback.success { display: block; background: var(--success-bg); color: var(--white); border-color: #004000; animation: fbIn 0.2s ease; }
+.feedback.error { display: block; background: var(--error-bg); color: var(--white); border-color: #400000; animation: fbIn 0.2s ease; }
+@keyframes fbIn { from { transform: scale(0.96); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+.action-row { text-align: center; margin-bottom: 4px; }
+
+/* End */
+.result-window {
+  background: var(--face);
+  border-top: 1px solid var(--white); border-left: 1px solid var(--white);
+  border-right: 1px solid var(--black); border-bottom: 1px solid var(--black);
+  padding: 20px; text-align: center; margin-bottom: 12px;
+  background-image: linear-gradient(180deg, #f5f5f5 0%, #c0c0c0 100%);
+}
+.big-score {
+  font-family: var(--pixel-font); font-size: 72px; font-weight: 700;
+  color: var(--titlebar); line-height: 1; text-shadow: 3px 3px 0 var(--gold);
+  font-variant-numeric: tabular-nums;
+}
+.big-score .of { color: var(--face-dark); font-weight: 400; margin: 0 4px; }
+.pct { font-family: var(--lcd-font); font-size: 26px; color: var(--text); margin-top: 4px; }
+.verdict {
+  font-family: var(--pixel-font); margin-top: 10px; font-size: 22px;
+  color: var(--ember); letter-spacing: 2px; text-transform: uppercase;
+}
+.sub-stats {
+  margin-top: 14px; font-size: 11px;
+  display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; color: var(--text);
+}
+.sub-stats strong { color: var(--titlebar); margin-left: 4px; }
+
+.mistakes-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: 6px; padding: 8px; background: var(--white);
+  border-top: 1px solid var(--face-dark); border-left: 1px solid var(--face-dark);
+  border-right: 1px solid var(--white); border-bottom: 1px solid var(--white);
+  box-shadow: inset 1px 1px 0 var(--black);
+  max-height: 320px; overflow-y: auto;
+}
+.mistake-card {
+  border: 1px solid var(--face-dark); padding: 4px; text-align: center;
+  background: var(--face); font-size: 10px;
+}
+.mistake-card img {
+  width: 100%; aspect-ratio: 3/2; object-fit: cover;
+  margin-bottom: 3px; display: block; background: #eee;
+}
+.mistake-card .mini-error {
+  width: 100%; aspect-ratio: 3/2; background: #f8d7da; color: #721c24;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--pixel-font); font-weight: 700; font-size: 14px;
+  margin-bottom: 3px; letter-spacing: 1px;
+}
+.mistake-card .country { color: var(--text); line-height: 1.2; }
+
+.no-mistakes {
+  background: var(--white); padding: 20px; text-align: center;
+  font-family: var(--lcd-font); font-size: 20px; color: var(--success-bg);
+  border-top: 1px solid var(--face-dark); border-left: 1px solid var(--face-dark);
+  border-right: 1px solid var(--white); border-bottom: 1px solid var(--white);
+  box-shadow: inset 1px 1px 0 var(--black);
+}
+
+.center-btns { display: flex; gap: 8px; justify-content: center; margin-top: 12px; flex-wrap: wrap; }
+
+.pupvanh-footer {
+  max-width: 780px;
+  margin: 20px auto 8px;
+  padding: 12px;
+  font-family: var(--lcd-font);
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+  text-align: center;
+  line-height: 1.6;
+}
+.pv-footer-inner {
+  display: inline-block;
+  padding: 10px 16px;
+  border: 1px dashed rgba(255,255,255,0.35);
+  background: rgba(0,0,0,0.15);
+}
+.pupvanh-footer .pv-line { display: block; }
+.pupvanh-footer .pv-line.dim { color: rgba(255,255,255,0.55); font-size: 11px; }
+.pupvanh-footer .pv-line.bright { color: var(--gold); font-weight: 700; font-size: 14px; margin: 2px 0; }
+.pupvanh-footer a { color: rgba(255,255,255,0.85); text-decoration: none; }
+.pupvanh-footer a:hover { color: var(--gold); }
+
+/* Setup warning banner if flags folder missing */
+.setup-warning {
+  background: #fff3cd; border: 1px solid #d4b400;
+  padding: 10px 12px; margin-bottom: 12px; font-size: 12px; color: #856404;
+}
+.setup-warning strong { color: #4a3700; }
+.setup-warning code {
+  background: rgba(0,0,0,0.08); padding: 1px 5px; font-family: monospace; font-size: 11px;
+}
+
+@media (max-width: 640px) {
+  body { padding: 10px 6px; font-size: 12px; }
+  .brand { font-size: 52px; text-shadow: 2px 2px 0 var(--gold), 4px 4px 0 var(--face-dark); }
+  .tagline { font-size: 15px; }
+  .window-body { padding: 8px; }
+  .stats-panel { gap: 4px; }
+  .stat-cell { padding: 4px 6px; }
+  .stat-cell label { font-size: 9px; }
+  .stat-lcd { font-size: 17px; padding: 3px 6px; }
+  .brand-block { padding: 12px 8px 10px; }
+  .win-btn.large { padding: 8px 20px; font-size: 12px; min-width: 100px; }
+  .big-score { font-size: 52px; text-shadow: 2px 2px 0 var(--gold); }
+  .win-input { font-size: 15px; }
+  .radio-row { gap: 12px; }
+  .chip { min-width: 60px; padding: 4px 8px; }
+  fieldset { padding: 8px 10px; }
+  .command-preview { font-size: 13px; }
+}
+</style>
+</head>
+<body>
+
+<div class="win">
+
+  <div class="titlebar">
+    <div class="titlebar-text">
+      <span class="titlebar-icon">🌍</span>
+      <span id="win-title">FLAGS.EXE - [Guess The Flag]</span>
+    </div>
+    <div class="titlebar-controls">
+      <button class="titlebar-btn" title="Minimize">_</button>
+      <button class="titlebar-btn" title="Maximize">□</button>
+      <button class="titlebar-btn" title="Close" onclick="window.location.href='/'">×</button>
+    </div>
+  </div>
+
+  <div class="menubar">
+    <span class="menu-item"><u>F</u>ile</span>
+    <span class="menu-item"><u>O</u>ptions</span>
+    <span class="menu-item"><u>H</u>elp</span>
+    <span class="menubar-spacer"></span>
+    <span class="menu-item no-hover lang-switch">
+      <button class="lang-btn active" data-lang="nl">NL</button><span class="sep">|</span><button class="lang-btn" data-lang="en">EN</button>
+    </span>
+  </div>
+
+  <div class="window-body">
+
+    <section id="setup" class="screen active">
+
+      <div class="brand-block">
+        <h1 class="brand">FLAGS.</h1>
+        <div class="tagline" data-i18n="tagline">// raad de vlag &nbsp;·&nbsp; typ het land</div>
+      </div>
+
+      <div id="folder-check" class="setup-warning" style="display:none">
+        <strong>⚠ Vlaggen niet gevonden</strong><br>
+        Verwachte structuur naast dit bestand: <code>./flags/Europe/SVG/Belgium.svg</code> (zie <code>LEESMIJ.txt</code>). Zonder deze map werkt de quiz nog wel, maar zie je een foutcode in plaats van elke vlag.
+      </div>
+
+      <div class="dialog-group">
+        <div class="dialog-title" data-i18n="dlg_setup">Quiz Setup</div>
+
+        <fieldset>
+          <legend data-i18n="lbl_count">Aantal vlaggen</legend>
+          <div class="radio-row">
+            <label><input type="radio" name="count" value="25" checked> 25 <span data-i18n="flags_word">vlaggen</span></label>
+            <label><input type="radio" name="count" value="50"> 50 <span data-i18n="flags_word">vlaggen</span></label>
+            <label><input type="radio" name="count" value="100"> 100 <span data-i18n="flags_word">vlaggen</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend data-i18n="lbl_region">Regio</legend>
+          <div class="chip-row" id="region-chips">
+            <button type="button" class="chip active" data-region="all" data-i18n="reg_all">Alle</button>
+            <button type="button" class="chip" data-region="europe" data-i18n="reg_europe">Europa</button>
+            <button type="button" class="chip" data-region="americas" data-i18n="reg_americas">Amerika</button>
+            <button type="button" class="chip" data-region="asia" data-i18n="reg_asia">Azië</button>
+            <button type="button" class="chip" data-region="africa" data-i18n="reg_africa">Afrika</button>
+            <button type="button" class="chip" data-region="oceania" data-i18n="reg_oceania">Oceanië</button>
+          </div>
+        </fieldset>
+
+        <div class="command-preview">
+          C:\FLAGS&gt; quiz.exe /count:<span id="count-display">25</span> /region:<span id="region-display">all</span><span class="cursor">_</span>
+        </div>
+
+        <div class="button-row">
+          <button class="win-btn primary large" id="start-btn" data-i18n="start">Start Quiz</button>
+        </div>
+      </div>
+
+      <div class="dialog-group">
+        <div class="dialog-title" data-i18n="dlg_howto">Help — How to play</div>
+        <div class="help-list">
+          <p><b>1.</b> <span data-i18n="howto_1">Typ de landnaam in het invoerveld</span></p>
+          <p><b>2.</b> <span data-i18n="howto_2">Suggesties verschijnen boven het veld tijdens het typen</span></p>
+          <p><b>3.</b> <span data-i18n="howto_3">Gebruik</span> <kbd>↑</kbd> <kbd>↓</kbd> <span data-i18n="howto_3b">om te navigeren,</span> <kbd>Enter</kbd> <span data-i18n="howto_3c">om te bevestigen</span></p>
+          <p><b>4.</b> <kbd>Tab</kbd> <span data-i18n="howto_4">= automatisch aanvullen · </span><kbd>Esc</kbd> <span data-i18n="howto_4b">= lijst sluiten</span></p>
+          <p><b>5.</b> <span data-i18n="howto_5">Klik "Skip" als je 't niet weet — telt als fout, maar toont het antwoord</span></p>
+        </div>
+      </div>
+
+    </section>
+
+    <section id="quiz" class="screen">
+
+      <div class="stats-panel">
+        <div class="stat-cell">
+          <label data-i18n="lbl_score">Score:</label>
+          <div class="stat-lcd"><span id="score">0</span>/<span id="total">25</span></div>
+        </div>
+        <div class="stat-cell">
+          <label data-i18n="lbl_streak">Streak:</label>
+          <div class="stat-lcd" id="streak-lcd"><span id="streak-value">0</span><span class="x">x</span></div>
+        </div>
+        <div class="stat-cell">
+          <label data-i18n="lbl_remaining">Resterend:</label>
+          <div class="stat-lcd" id="remaining">25</div>
+        </div>
+      </div>
+
+      <div class="progress-container">
+        <div class="progress-fill" id="progress"></div>
+      </div>
+
+      <div class="sub-window flag-window">
+        <div class="sub-titlebar">
+          <span id="sub-title">Flag_Preview.svg</span>
+          <div class="titlebar-controls">
+            <button class="titlebar-btn">×</button>
+          </div>
+        </div>
+        <div class="sub-content flag-content" id="flag-content">
+          <div class="flag-loading">LOADING...</div>
+        </div>
+        <div class="sub-statusbar" id="flag-info">Ready</div>
+      </div>
+
+      <div class="input-panel">
+        <label for="answer-input" data-i18n="lbl_input">Landnaam:</label>
+        <div class="input-wrap">
+          <div class="autocomplete" id="autocomplete"></div>
+          <input type="text" id="answer-input" class="win-input" autocomplete="off" spellcheck="false" autocapitalize="off">
+        </div>
+        <div class="feedback" id="feedback"></div>
+      </div>
+
+      <div class="action-row">
+        <button class="win-btn" id="skip-btn" data-i18n="skip">Skip →</button>
+      </div>
+
+    </section>
+
+    <section id="end" class="screen">
+
+      <div class="result-window">
+        <div class="big-score">
+          <span id="final-score">0</span><span class="of">/</span><span id="final-total">25</span>
+        </div>
+        <div class="pct"><span id="final-pct">0</span>%</div>
+        <div class="verdict" id="verdict"></div>
+        <div class="sub-stats">
+          <div><span data-i18n="end_streak">Beste streak:</span><strong id="final-streak">0</strong></div>
+          <div><span data-i18n="end_region">Regio:</span><strong id="final-region">alle</strong></div>
+        </div>
+      </div>
+
+      <div class="dialog-group">
+        <div class="dialog-title" data-i18n="mistakes_title">Fouten om te onthouden</div>
+        <div id="mistakes-container"></div>
+      </div>
+
+      <div class="center-btns">
+        <button class="win-btn primary large" id="restart-btn" data-i18n="play_again">Speel opnieuw</button>
+        <a href="/" class="win-btn large" style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center;" data-i18n="back_home">← PUPVANH</a>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="statusbar">
+    <div class="statusbar-cell" id="status-text">Ready</div>
+    <div class="statusbar-cell narrow" id="status-region">All regions</div>
+    <div class="statusbar-cell narrow">FLAGS v1.0</div>
+  </div>
+
+</div>
+
+<footer class="pupvanh-footer">
+  <div class="pv-footer-inner">
+    <div class="pv-line dim">BUILT AUG 2026 · UPDATED AUG 2026</div>
+    <div class="pv-line bright">FLAGS</div>
+    <div class="pv-line" id="pv-partof">Deel van PUPVANH Projects</div>
+    <div class="pv-line"><a href="https://pupvanh.vercel.app">→ pupvanh.vercel.app</a></div>
+  </div>
+</footer>
+
+<script is:inline>
+// ============ CONFIG ============
+// Vlaggen staan in public/flag-images/{Continent}/SVG/{Landnaam}.svg
+// Astro serveert public/ direct onder /flag-images/
+const FLAGS_PATH = '/flag-images/';
+const FLAGS_FORMAT = 'SVG';    // Map-naam: 'JPG', 'PNG', of 'SVG'
+const FLAGS_EXT = '.svg';      // Bestand-extensie: '.jpg', '.png', of '.svg'
+
+// Zuid-Amerika opsplitsen van Noord-Amerika voor de folder-structuur
+const SOUTH_AMERICA_CODES = new Set([
+  'br','ar','cl','co','pe','ve','uy','ec','bo','py','gy','sr'
+]);
+
+// Landen die filter=Europa hebben maar in de Asia continent-folder zitten
+const CONTINENT_OVERRIDES = {
+  'cy': 'Asia',   // Cyprus zit geografisch in Azië
+  'tr': 'Asia',   // Turkije zit geografisch in Azië
+};
+
+// Bestandsnaam-overrides voor landen waarvan de bundel-naam afwijkt van de Engelse naam
+const FILENAME_OVERRIDES = {
+  'cz': 'Czechia',              // ipv "Czech_Republic"
+  'ru': 'Russian_Federation',   // ipv "Russia"
+  'tr': 'Turkiye',              // ipv "Turkey"
+  'ci': 'Cote_dIvoire',         // ipv "Ivory_Coast"
+  'cv': 'Cabo_Verde',           // ipv "Cape_Verde"
+};
+
+// ============ COUNTRIES (197 landen — alle erkende + waarnemer + de facto) ============
+const COUNTRIES = [
+  // ---- EUROPA (47) ----
+  { code: 'be', region: 'europe', nl: 'België', en: 'Belgium' },
+  { code: 'nl', region: 'europe', nl: 'Nederland', en: 'Netherlands' },
+  { code: 'lu', region: 'europe', nl: 'Luxemburg', en: 'Luxembourg' },
+  { code: 'fr', region: 'europe', nl: 'Frankrijk', en: 'France' },
+  { code: 'de', region: 'europe', nl: 'Duitsland', en: 'Germany' },
+  { code: 'es', region: 'europe', nl: 'Spanje', en: 'Spain' },
+  { code: 'pt', region: 'europe', nl: 'Portugal', en: 'Portugal' },
+  { code: 'it', region: 'europe', nl: 'Italië', en: 'Italy' },
+  { code: 'gb', region: 'europe', nl: 'Verenigd Koninkrijk', en: 'United Kingdom' },
+  { code: 'ie', region: 'europe', nl: 'Ierland', en: 'Ireland' },
+  { code: 'ch', region: 'europe', nl: 'Zwitserland', en: 'Switzerland' },
+  { code: 'at', region: 'europe', nl: 'Oostenrijk', en: 'Austria' },
+  { code: 'dk', region: 'europe', nl: 'Denemarken', en: 'Denmark' },
+  { code: 'se', region: 'europe', nl: 'Zweden', en: 'Sweden' },
+  { code: 'no', region: 'europe', nl: 'Noorwegen', en: 'Norway' },
+  { code: 'fi', region: 'europe', nl: 'Finland', en: 'Finland' },
+  { code: 'is', region: 'europe', nl: 'IJsland', en: 'Iceland' },
+  { code: 'pl', region: 'europe', nl: 'Polen', en: 'Poland' },
+  { code: 'cz', region: 'europe', nl: 'Tsjechië', en: 'Czech Republic' },
+  { code: 'sk', region: 'europe', nl: 'Slowakije', en: 'Slovakia' },
+  { code: 'hu', region: 'europe', nl: 'Hongarije', en: 'Hungary' },
+  { code: 'ro', region: 'europe', nl: 'Roemenië', en: 'Romania' },
+  { code: 'bg', region: 'europe', nl: 'Bulgarije', en: 'Bulgaria' },
+  { code: 'gr', region: 'europe', nl: 'Griekenland', en: 'Greece' },
+  { code: 'hr', region: 'europe', nl: 'Kroatië', en: 'Croatia' },
+  { code: 'rs', region: 'europe', nl: 'Servië', en: 'Serbia' },
+  { code: 'si', region: 'europe', nl: 'Slovenië', en: 'Slovenia' },
+  { code: 'ba', region: 'europe', nl: 'Bosnië en Herzegovina', en: 'Bosnia and Herzegovina' },
+  { code: 'me', region: 'europe', nl: 'Montenegro', en: 'Montenegro' },
+  { code: 'mk', region: 'europe', nl: 'Noord-Macedonië', en: 'North Macedonia' },
+  { code: 'al', region: 'europe', nl: 'Albanië', en: 'Albania' },
+  { code: 'xk', region: 'europe', nl: 'Kosovo', en: 'Kosovo' },
+  { code: 'ua', region: 'europe', nl: 'Oekraïne', en: 'Ukraine' },
+  { code: 'by', region: 'europe', nl: 'Wit-Rusland', en: 'Belarus' },
+  { code: 'ru', region: 'europe', nl: 'Rusland', en: 'Russia' },
+  { code: 'ee', region: 'europe', nl: 'Estland', en: 'Estonia' },
+  { code: 'lv', region: 'europe', nl: 'Letland', en: 'Latvia' },
+  { code: 'lt', region: 'europe', nl: 'Litouwen', en: 'Lithuania' },
+  { code: 'md', region: 'europe', nl: 'Moldavië', en: 'Moldova' },
+  { code: 'tr', region: 'europe', nl: 'Turkije', en: 'Turkey' },
+  { code: 'cy', region: 'europe', nl: 'Cyprus', en: 'Cyprus' },
+  { code: 'mt', region: 'europe', nl: 'Malta', en: 'Malta' },
+  { code: 'ad', region: 'europe', nl: 'Andorra', en: 'Andorra' },
+  { code: 'li', region: 'europe', nl: 'Liechtenstein', en: 'Liechtenstein' },
+  { code: 'mc', region: 'europe', nl: 'Monaco', en: 'Monaco' },
+  { code: 'sm', region: 'europe', nl: 'San Marino', en: 'San Marino' },
+  { code: 'va', region: 'europe', nl: 'Vaticaanstad', en: 'Vatican City' },
+
+  // ---- AMERIKA (35) ----
+  { code: 'us', region: 'americas', nl: 'Verenigde Staten', en: 'United States' },
+  { code: 'ca', region: 'americas', nl: 'Canada', en: 'Canada' },
+  { code: 'mx', region: 'americas', nl: 'Mexico', en: 'Mexico' },
+  { code: 'br', region: 'americas', nl: 'Brazilië', en: 'Brazil' },
+  { code: 'ar', region: 'americas', nl: 'Argentinië', en: 'Argentina' },
+  { code: 'cl', region: 'americas', nl: 'Chili', en: 'Chile' },
+  { code: 'co', region: 'americas', nl: 'Colombia', en: 'Colombia' },
+  { code: 'pe', region: 'americas', nl: 'Peru', en: 'Peru' },
+  { code: 've', region: 'americas', nl: 'Venezuela', en: 'Venezuela' },
+  { code: 'uy', region: 'americas', nl: 'Uruguay', en: 'Uruguay' },
+  { code: 'ec', region: 'americas', nl: 'Ecuador', en: 'Ecuador' },
+  { code: 'bo', region: 'americas', nl: 'Bolivia', en: 'Bolivia' },
+  { code: 'py', region: 'americas', nl: 'Paraguay', en: 'Paraguay' },
+  { code: 'gy', region: 'americas', nl: 'Guyana', en: 'Guyana' },
+  { code: 'sr', region: 'americas', nl: 'Suriname', en: 'Suriname' },
+  { code: 'cu', region: 'americas', nl: 'Cuba', en: 'Cuba' },
+  { code: 'jm', region: 'americas', nl: 'Jamaica', en: 'Jamaica' },
+  { code: 'ht', region: 'americas', nl: 'Haïti', en: 'Haiti' },
+  { code: 'do', region: 'americas', nl: 'Dominicaanse Republiek', en: 'Dominican Republic' },
+  { code: 'cr', region: 'americas', nl: 'Costa Rica', en: 'Costa Rica' },
+  { code: 'pa', region: 'americas', nl: 'Panama', en: 'Panama' },
+  { code: 'gt', region: 'americas', nl: 'Guatemala', en: 'Guatemala' },
+  { code: 'hn', region: 'americas', nl: 'Honduras', en: 'Honduras' },
+  { code: 'ni', region: 'americas', nl: 'Nicaragua', en: 'Nicaragua' },
+  { code: 'sv', region: 'americas', nl: 'El Salvador', en: 'El Salvador' },
+  { code: 'bz', region: 'americas', nl: 'Belize', en: 'Belize' },
+  { code: 'bs', region: 'americas', nl: 'Bahama\'s', en: 'Bahamas' },
+  { code: 'bb', region: 'americas', nl: 'Barbados', en: 'Barbados' },
+  { code: 'ag', region: 'americas', nl: 'Antigua en Barbuda', en: 'Antigua and Barbuda' },
+  { code: 'dm', region: 'americas', nl: 'Dominica', en: 'Dominica' },
+  { code: 'gd', region: 'americas', nl: 'Grenada', en: 'Grenada' },
+  { code: 'kn', region: 'americas', nl: 'Saint Kitts en Nevis', en: 'Saint Kitts and Nevis' },
+  { code: 'lc', region: 'americas', nl: 'Saint Lucia', en: 'Saint Lucia' },
+  { code: 'vc', region: 'americas', nl: 'Saint Vincent en de Grenadines', en: 'Saint Vincent and the Grenadines' },
+  { code: 'tt', region: 'americas', nl: 'Trinidad en Tobago', en: 'Trinidad and Tobago' },
+
+  // ---- AZIË (47) ----
+  { code: 'jp', region: 'asia', nl: 'Japan', en: 'Japan' },
+  { code: 'cn', region: 'asia', nl: 'China', en: 'China' },
+  { code: 'tw', region: 'asia', nl: 'Taiwan', en: 'Taiwan' },
+  { code: 'kr', region: 'asia', nl: 'Zuid-Korea', en: 'South Korea' },
+  { code: 'kp', region: 'asia', nl: 'Noord-Korea', en: 'North Korea' },
+  { code: 'in', region: 'asia', nl: 'India', en: 'India' },
+  { code: 'pk', region: 'asia', nl: 'Pakistan', en: 'Pakistan' },
+  { code: 'bd', region: 'asia', nl: 'Bangladesh', en: 'Bangladesh' },
+  { code: 'bt', region: 'asia', nl: 'Bhutan', en: 'Bhutan' },
+  { code: 'th', region: 'asia', nl: 'Thailand', en: 'Thailand' },
+  { code: 'vn', region: 'asia', nl: 'Vietnam', en: 'Vietnam' },
+  { code: 'id', region: 'asia', nl: 'Indonesië', en: 'Indonesia' },
+  { code: 'ph', region: 'asia', nl: 'Filipijnen', en: 'Philippines' },
+  { code: 'my', region: 'asia', nl: 'Maleisië', en: 'Malaysia' },
+  { code: 'sg', region: 'asia', nl: 'Singapore', en: 'Singapore' },
+  { code: 'bn', region: 'asia', nl: 'Brunei', en: 'Brunei' },
+  { code: 'tl', region: 'asia', nl: 'Oost-Timor', en: 'Timor-Leste' },
+  { code: 'np', region: 'asia', nl: 'Nepal', en: 'Nepal' },
+  { code: 'lk', region: 'asia', nl: 'Sri Lanka', en: 'Sri Lanka' },
+  { code: 'mv', region: 'asia', nl: 'Malediven', en: 'Maldives' },
+  { code: 'mm', region: 'asia', nl: 'Myanmar', en: 'Myanmar' },
+  { code: 'kh', region: 'asia', nl: 'Cambodja', en: 'Cambodia' },
+  { code: 'la', region: 'asia', nl: 'Laos', en: 'Laos' },
+  { code: 'ir', region: 'asia', nl: 'Iran', en: 'Iran' },
+  { code: 'iq', region: 'asia', nl: 'Irak', en: 'Iraq' },
+  { code: 'il', region: 'asia', nl: 'Israël', en: 'Israel' },
+  { code: 'ps', region: 'asia', nl: 'Palestina', en: 'Palestine' },
+  { code: 'sa', region: 'asia', nl: 'Saoedi-Arabië', en: 'Saudi Arabia' },
+  { code: 'ae', region: 'asia', nl: 'Verenigde Arabische Emiraten', en: 'United Arab Emirates' },
+  { code: 'qa', region: 'asia', nl: 'Qatar', en: 'Qatar' },
+  { code: 'kw', region: 'asia', nl: 'Koeweit', en: 'Kuwait' },
+  { code: 'bh', region: 'asia', nl: 'Bahrein', en: 'Bahrain' },
+  { code: 'om', region: 'asia', nl: 'Oman', en: 'Oman' },
+  { code: 'ye', region: 'asia', nl: 'Jemen', en: 'Yemen' },
+  { code: 'lb', region: 'asia', nl: 'Libanon', en: 'Lebanon' },
+  { code: 'jo', region: 'asia', nl: 'Jordanië', en: 'Jordan' },
+  { code: 'sy', region: 'asia', nl: 'Syrië', en: 'Syria' },
+  { code: 'af', region: 'asia', nl: 'Afghanistan', en: 'Afghanistan' },
+  { code: 'mn', region: 'asia', nl: 'Mongolië', en: 'Mongolia' },
+  { code: 'kz', region: 'asia', nl: 'Kazachstan', en: 'Kazakhstan' },
+  { code: 'uz', region: 'asia', nl: 'Oezbekistan', en: 'Uzbekistan' },
+  { code: 'tm', region: 'asia', nl: 'Turkmenistan', en: 'Turkmenistan' },
+  { code: 'tj', region: 'asia', nl: 'Tadzjikistan', en: 'Tajikistan' },
+  { code: 'kg', region: 'asia', nl: 'Kirgizië', en: 'Kyrgyzstan' },
+  { code: 'ge', region: 'asia', nl: 'Georgië', en: 'Georgia' },
+  { code: 'am', region: 'asia', nl: 'Armenië', en: 'Armenia' },
+  { code: 'az', region: 'asia', nl: 'Azerbeidzjan', en: 'Azerbaijan' },
+
+  // ---- AFRIKA (54) ----
+  { code: 'eg', region: 'africa', nl: 'Egypte', en: 'Egypt' },
+  { code: 'ma', region: 'africa', nl: 'Marokko', en: 'Morocco' },
+  { code: 'dz', region: 'africa', nl: 'Algerije', en: 'Algeria' },
+  { code: 'tn', region: 'africa', nl: 'Tunesië', en: 'Tunisia' },
+  { code: 'ly', region: 'africa', nl: 'Libië', en: 'Libya' },
+  { code: 'sd', region: 'africa', nl: 'Soedan', en: 'Sudan' },
+  { code: 'ss', region: 'africa', nl: 'Zuid-Soedan', en: 'South Sudan' },
+  { code: 'et', region: 'africa', nl: 'Ethiopië', en: 'Ethiopia' },
+  { code: 'er', region: 'africa', nl: 'Eritrea', en: 'Eritrea' },
+  { code: 'dj', region: 'africa', nl: 'Djibouti', en: 'Djibouti' },
+  { code: 'so', region: 'africa', nl: 'Somalië', en: 'Somalia' },
+  { code: 'ke', region: 'africa', nl: 'Kenia', en: 'Kenya' },
+  { code: 'ug', region: 'africa', nl: 'Oeganda', en: 'Uganda' },
+  { code: 'tz', region: 'africa', nl: 'Tanzania', en: 'Tanzania' },
+  { code: 'rw', region: 'africa', nl: 'Rwanda', en: 'Rwanda' },
+  { code: 'bi', region: 'africa', nl: 'Burundi', en: 'Burundi' },
+  { code: 'ng', region: 'africa', nl: 'Nigeria', en: 'Nigeria' },
+  { code: 'gh', region: 'africa', nl: 'Ghana', en: 'Ghana' },
+  { code: 'sn', region: 'africa', nl: 'Senegal', en: 'Senegal' },
+  { code: 'ci', region: 'africa', nl: 'Ivoorkust', en: 'Ivory Coast' },
+  { code: 'ml', region: 'africa', nl: 'Mali', en: 'Mali' },
+  { code: 'bf', region: 'africa', nl: 'Burkina Faso', en: 'Burkina Faso' },
+  { code: 'ne', region: 'africa', nl: 'Niger', en: 'Niger' },
+  { code: 'td', region: 'africa', nl: 'Tsjaad', en: 'Chad' },
+  { code: 'mr', region: 'africa', nl: 'Mauritanië', en: 'Mauritania' },
+  { code: 'cv', region: 'africa', nl: 'Kaapverdië', en: 'Cape Verde' },
+  { code: 'gm', region: 'africa', nl: 'Gambia', en: 'Gambia' },
+  { code: 'gn', region: 'africa', nl: 'Guinee', en: 'Guinea' },
+  { code: 'gw', region: 'africa', nl: 'Guinee-Bissau', en: 'Guinea-Bissau' },
+  { code: 'sl', region: 'africa', nl: 'Sierra Leone', en: 'Sierra Leone' },
+  { code: 'lr', region: 'africa', nl: 'Liberia', en: 'Liberia' },
+  { code: 'tg', region: 'africa', nl: 'Togo', en: 'Togo' },
+  { code: 'bj', region: 'africa', nl: 'Benin', en: 'Benin' },
+  { code: 'cm', region: 'africa', nl: 'Kameroen', en: 'Cameroon' },
+  { code: 'cf', region: 'africa', nl: 'Centraal-Afrikaanse Republiek', en: 'Central African Republic' },
+  { code: 'gq', region: 'africa', nl: 'Equatoriaal-Guinea', en: 'Equatorial Guinea' },
+  { code: 'ga', region: 'africa', nl: 'Gabon', en: 'Gabon' },
+  { code: 'cg', region: 'africa', nl: 'Republiek Congo', en: 'Republic of the Congo' },
+  { code: 'cd', region: 'africa', nl: 'Democratische Republiek Congo', en: 'Democratic Republic of the Congo' },
+  { code: 'ao', region: 'africa', nl: 'Angola', en: 'Angola' },
+  { code: 'zm', region: 'africa', nl: 'Zambia', en: 'Zambia' },
+  { code: 'mw', region: 'africa', nl: 'Malawi', en: 'Malawi' },
+  { code: 'mz', region: 'africa', nl: 'Mozambique', en: 'Mozambique' },
+  { code: 'zw', region: 'africa', nl: 'Zimbabwe', en: 'Zimbabwe' },
+  { code: 'bw', region: 'africa', nl: 'Botswana', en: 'Botswana' },
+  { code: 'na', region: 'africa', nl: 'Namibië', en: 'Namibia' },
+  { code: 'za', region: 'africa', nl: 'Zuid-Afrika', en: 'South Africa' },
+  { code: 'ls', region: 'africa', nl: 'Lesotho', en: 'Lesotho' },
+  { code: 'sz', region: 'africa', nl: 'Eswatini', en: 'Eswatini' },
+  { code: 'mg', region: 'africa', nl: 'Madagaskar', en: 'Madagascar' },
+  { code: 'mu', region: 'africa', nl: 'Mauritius', en: 'Mauritius' },
+  { code: 'sc', region: 'africa', nl: 'Seychellen', en: 'Seychelles' },
+  { code: 'km', region: 'africa', nl: 'Comoren', en: 'Comoros' },
+  { code: 'st', region: 'africa', nl: 'Sao Tomé en Principe', en: 'Sao Tome and Principe' },
+
+  // ---- OCEANIË (14) ----
+  { code: 'au', region: 'oceania', nl: 'Australië', en: 'Australia' },
+  { code: 'nz', region: 'oceania', nl: 'Nieuw-Zeeland', en: 'New Zealand' },
+  { code: 'pg', region: 'oceania', nl: 'Papoea-Nieuw-Guinea', en: 'Papua New Guinea' },
+  { code: 'fj', region: 'oceania', nl: 'Fiji', en: 'Fiji' },
+  { code: 'sb', region: 'oceania', nl: 'Salomonseilanden', en: 'Solomon Islands' },
+  { code: 'vu', region: 'oceania', nl: 'Vanuatu', en: 'Vanuatu' },
+  { code: 'ws', region: 'oceania', nl: 'Samoa', en: 'Samoa' },
+  { code: 'to', region: 'oceania', nl: 'Tonga', en: 'Tonga' },
+  { code: 'ki', region: 'oceania', nl: 'Kiribati', en: 'Kiribati' },
+  { code: 'tv', region: 'oceania', nl: 'Tuvalu', en: 'Tuvalu' },
+  { code: 'nr', region: 'oceania', nl: 'Nauru', en: 'Nauru' },
+  { code: 'fm', region: 'oceania', nl: 'Micronesia', en: 'Micronesia' },
+  { code: 'mh', region: 'oceania', nl: 'Marshalleilanden', en: 'Marshall Islands' },
+  { code: 'pw', region: 'oceania', nl: 'Palau', en: 'Palau' },
+];
+
+// ============ I18N ============
+const i18n = {
+  nl: {
+    tagline: '// raad de vlag &nbsp;·&nbsp; typ het land',
+    dlg_setup: 'Quiz-instellingen',
+    dlg_howto: 'Help — Hoe spelen',
+    lbl_count: 'Aantal vlaggen',
+    lbl_region: 'Regio',
+    flags_word: 'vlaggen',
+    reg_all: 'Alle', reg_europe: 'Europa', reg_americas: 'Amerika',
+    reg_asia: 'Azië', reg_africa: 'Afrika', reg_oceania: 'Oceanië',
+    start: 'Start Quiz',
+    howto_1: 'Typ de landnaam in het invoerveld',
+    howto_2: 'Suggesties verschijnen boven het veld tijdens het typen',
+    howto_3: 'Gebruik', howto_3b: 'om te navigeren,', howto_3c: 'om te bevestigen',
+    howto_4: '= automatisch aanvullen · ', howto_4b: '= lijst sluiten',
+    howto_5: 'Klik "Skip" als je \'t niet weet — telt als fout, maar toont het antwoord',
+    lbl_score: 'Score:', lbl_streak: 'Streak:', lbl_remaining: 'Resterend:', lbl_input: 'Landnaam:',
+    skip: 'Skip →',
+    end_streak: 'Beste streak:', end_region: 'Regio:',
+    mistakes_title: 'Fouten om te onthouden',
+    play_again: 'Speel opnieuw', back_home: '← PUPVANH',
+    correct: '✓ CORRECT',
+    wrong: '✗ FOUT · ANTWOORD:',
+    skipped: '↷ OVERGESLAGEN · ANTWOORD:',
+    placeholder: 'Typ een landnaam...',
+    v_perfect: 'PERFECT SCORE', v_great: 'GOED GEDAAN', v_ok: 'NIET SLECHT', v_bad: 'BLIJF OEFENEN',
+    no_mistakes: '✓ Geen fouten. Perfect.',
+    status_ready: 'Ready', status_playing: 'Quiz in progress...', status_done: 'Quiz complete',
+    win_title: 'FLAGS.EXE - [Guess The Flag]',
+    win_title_result: 'FLAGS.EXE - [Result]',
+    flag_missing: 'Vlagbestand ontbreekt', flag_hint: 'verwacht:',
+    footer_partof: 'Deel van PUPVANH Projects',
+  },
+  en: {
+    tagline: '// guess the flag &nbsp;·&nbsp; type the country',
+    dlg_setup: 'Quiz Setup', dlg_howto: 'Help — How to play',
+    lbl_count: 'Number of flags', lbl_region: 'Region', flags_word: 'flags',
+    reg_all: 'All', reg_europe: 'Europe', reg_americas: 'Americas',
+    reg_asia: 'Asia', reg_africa: 'Africa', reg_oceania: 'Oceania',
+    start: 'Start Quiz',
+    howto_1: 'Type the country name in the input field',
+    howto_2: 'Suggestions appear above the field as you type',
+    howto_3: 'Use', howto_3b: 'to navigate,', howto_3c: 'to confirm',
+    howto_4: '= autocomplete · ', howto_4b: '= close list',
+    howto_5: 'Click "Skip" if you don\'t know — counts as wrong but shows the answer',
+    lbl_score: 'Score:', lbl_streak: 'Streak:', lbl_remaining: 'Remaining:', lbl_input: 'Country name:',
+    skip: 'Skip →',
+    end_streak: 'Best streak:', end_region: 'Region:',
+    mistakes_title: 'Mistakes to remember',
+    play_again: 'Play again', back_home: '← PUPVANH',
+    correct: '✓ CORRECT', wrong: '✗ WRONG · ANSWER:', skipped: '↷ SKIPPED · ANSWER:',
+    placeholder: 'Type a country name...',
+    v_perfect: 'PERFECT SCORE', v_great: 'WELL DONE', v_ok: 'NOT BAD', v_bad: 'KEEP PRACTICING',
+    no_mistakes: '✓ No mistakes. Flawless.',
+    status_ready: 'Ready', status_playing: 'Quiz in progress...', status_done: 'Quiz complete',
+    win_title: 'FLAGS.EXE - [Guess The Flag]',
+    win_title_result: 'FLAGS.EXE - [Result]',
+    flag_missing: 'Flag file missing', flag_hint: 'expected:',
+    footer_partof: 'Part of PUPVANH Projects',
+  }
+};
+
+// ============ STATE ============
+let state = {
+  lang: 'nl', count: 25, region: 'all',
+  pool: [], currentIdx: 0, score: 0, streak: 0, bestStreak: 0,
+  mistakes: [], suggestions: [], highlighted: -1, answered: false,
+};
+
+// ============ HELPERS ============
+function normalize(s) {
+  return (s || '').toString().toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[-'.]/g, ' ').replace(/\s+/g, ' ').trim();
+}
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function pool() {
+  if (state.region === 'all') return COUNTRIES;
+  return COUNTRIES.filter(c => c.region === state.region);
+}
+function getContinent(c) {
+  if (CONTINENT_OVERRIDES[c.code]) return CONTINENT_OVERRIDES[c.code];
+  // 5 filter-regio's mappen naar 6 continent-folders (americas → North/South)
+  if (c.region === 'americas') {
+    return SOUTH_AMERICA_CODES.has(c.code) ? 'South_America' : 'North_America';
+  }
+  return c.region.charAt(0).toUpperCase() + c.region.slice(1);
+}
+function getFilename(c) {
+  if (FILENAME_OVERRIDES[c.code]) return FILENAME_OVERRIDES[c.code];
+  // Engelse naam → spaties én streepjes naar underscores, apostrof weg
+  return c.en.replace(/[ \-]/g, '_').replace(/'/g, '');
+}
+function flagUrl(c) {
+  // Als er een string binnenkomt (oude aanroepen), zoek het land op via de code
+  if (typeof c === 'string') {
+    c = COUNTRIES.find(x => x.code === c);
+    if (!c) return '';
+  }
+  return `${FLAGS_PATH}${getContinent(c)}/${FLAGS_FORMAT}/${getFilename(c)}${FLAGS_EXT}`;
+}
+
+// ============ LANG ============
+function initLang() {
+  const saved = localStorage.getItem('flags-lang');
+  if (saved && (saved === 'nl' || saved === 'en')) state.lang = saved;
+  else if (navigator.language && !navigator.language.toLowerCase().startsWith('nl')) state.lang = 'en';
+  applyLang();
+}
+function applyLang() {
+  document.documentElement.lang = state.lang;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (i18n[state.lang][key] !== undefined) el.innerHTML = i18n[state.lang][key];
+  });
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.lang === state.lang);
+  });
+  const input = document.getElementById('answer-input');
+  if (input) input.placeholder = i18n[state.lang].placeholder;
+  const pvPartof = document.getElementById('pv-partof');
+  if (pvPartof) pvPartof.textContent = i18n[state.lang].footer_partof;
+  updateRegionDisplay();
+  localStorage.setItem('flags-lang', state.lang);
+  setStatus(getScreen() === 'quiz' ? i18n[state.lang].status_playing
+          : getScreen() === 'end' ? i18n[state.lang].status_done
+          : i18n[state.lang].status_ready);
+  document.getElementById('status-region').textContent = i18n[state.lang]['reg_' + state.region] || state.region;
+}
+function updateRegionDisplay() {
+  const key = 'reg_' + state.region;
+  document.getElementById('region-display').textContent = (i18n[state.lang][key] || state.region).toLowerCase();
+  document.getElementById('status-region').textContent = i18n[state.lang][key] || state.region;
+}
+function setStatus(txt) { document.getElementById('status-text').textContent = txt; }
+function setWinTitle(k) { document.getElementById('win-title').textContent = i18n[state.lang][k]; }
+
+// ============ SCREENS ============
+function getScreen() { const s = document.querySelector('.screen.active'); return s ? s.id : 'setup'; }
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if (id === 'quiz') { setStatus(i18n[state.lang].status_playing); setWinTitle('win_title'); }
+  else if (id === 'end') { setStatus(i18n[state.lang].status_done); setWinTitle('win_title_result'); }
+  else { setStatus(i18n[state.lang].status_ready); setWinTitle('win_title'); }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ============ FOLDER CHECK ============
+function checkFlagsFolder() {
+  const testCountry = COUNTRIES.find(c => c.code === 'be');
+  const img = new Image();
+  img.onload = () => { document.getElementById('folder-check').style.display = 'none'; };
+  img.onerror = () => { document.getElementById('folder-check').style.display = 'block'; };
+  img.src = flagUrl(testCountry);
+}
+
+// ============ QUIZ ============
+function startQuiz() {
+  const available = pool();
+  const actualCount = Math.min(state.count, available.length);
+  state.pool = shuffle(available).slice(0, actualCount);
+  state.currentIdx = 0;
+  state.score = 0;
+  state.streak = 0;
+  state.bestStreak = 0;
+  state.mistakes = [];
+  document.getElementById('total').textContent = actualCount;
+  showScreen('quiz');
+  loadCurrent();
+}
+
+function setFlagImage(country) {
+  const container = document.getElementById('flag-content');
+  container.innerHTML = '<div class="flag-loading">LOADING...</div>';
+  const info = document.getElementById('flag-info');
+  info.textContent = 'loading...';
+  const filename = getFilename(country);
+  document.getElementById('sub-title').textContent = `${filename}${FLAGS_EXT}`;
+
+  const url = flagUrl(country);
+  const img = new Image();
+  img.onload = () => {
+    container.innerHTML = '';
+    img.alt = country[state.lang];
+    img.id = 'flag-img';
+    container.appendChild(img);
+    info.textContent = `${url} · loaded`;
+  };
+  img.onerror = () => {
+    container.innerHTML = `
+      <div class="flag-error">
+        ⚠ ${i18n[state.lang].flag_missing}
+        <span class="code">${country.code.toUpperCase()}</span>
+        <div class="hint">${i18n[state.lang].flag_hint}<br><code>${url}</code></div>
+      </div>`;
+    info.textContent = 'file not found';
+  };
+  img.src = url;
+}
+
+function loadCurrent() {
+  const c = state.pool[state.currentIdx];
+  setFlagImage(c);
+  updateStats();
+  const input = document.getElementById('answer-input');
+  input.value = ''; input.disabled = false; input.focus();
+  clearFeedback(); hideAutocomplete();
+  state.answered = false;
+}
+
+function updateStats() {
+  document.getElementById('score').textContent = state.score;
+  document.getElementById('streak-value').textContent = state.streak;
+  document.getElementById('remaining').textContent = state.pool.length - state.currentIdx;
+  const pct = (state.currentIdx / state.pool.length) * 100;
+  document.getElementById('progress').style.width = pct + '%';
+}
+
+function submitAnswer(answer, isSkip = false) {
+  if (state.answered) return;
+  state.answered = true;
+  const c = state.pool[state.currentIdx];
+  const correctName = c[state.lang];
+  const isCorrect = !isSkip && normalize(answer) === normalize(correctName);
+  const input = document.getElementById('answer-input');
+  input.disabled = true;
+  hideAutocomplete();
+
+  if (isCorrect) {
+    state.score++; state.streak++;
+    state.bestStreak = Math.max(state.bestStreak, state.streak);
+    showFeedback(i18n[state.lang].correct, 'success');
+    const lcd = document.getElementById('streak-lcd');
+    lcd.classList.remove('pulse'); void lcd.offsetWidth; lcd.classList.add('pulse');
+  } else {
+    state.streak = 0;
+    state.mistakes.push({ ...c, answered: answer });
+    const label = isSkip ? i18n[state.lang].skipped : i18n[state.lang].wrong;
+    showFeedback(`${label} ${correctName.toUpperCase()}`, 'error');
+    input.value = correctName;
+  }
+
+  updateStats();
+  setTimeout(() => {
+    state.currentIdx++;
+    if (state.currentIdx >= state.pool.length) endQuiz();
+    else loadCurrent();
+  }, isCorrect ? 650 : 1600);
+}
+
+function skip() { if (!state.answered) submitAnswer('', true); }
+function showFeedback(text, type) { const f = document.getElementById('feedback'); f.textContent = text; f.className = 'feedback ' + type; }
+function clearFeedback() { const f = document.getElementById('feedback'); f.textContent = ''; f.className = 'feedback'; }
+
+// ============ AUTOCOMPLETE ============
+function updateSuggestions() {
+  const input = document.getElementById('answer-input');
+  const val = normalize(input.value);
+  if (!val) { hideAutocomplete(); return; }
+  const matches = COUNTRIES
+    .map(c => ({ c, name: c[state.lang], norm: normalize(c[state.lang]) }))
+    .filter(x => x.norm.includes(val))
+    .sort((a, b) => {
+      const av = a.norm.startsWith(val) ? 0 : 1;
+      const bv = b.norm.startsWith(val) ? 0 : 1;
+      return av - bv || a.name.localeCompare(b.name);
+    })
+    .slice(0, 7);
+  state.suggestions = matches;
+  state.highlighted = matches.length > 0 ? 0 : -1;
+  renderSuggestions();
+}
+function renderSuggestions() {
+  const ac = document.getElementById('autocomplete');
+  if (!state.suggestions.length) { ac.classList.remove('open'); return; }
+  ac.innerHTML = state.suggestions.map((s, i) => {
+    const isHi = i === state.highlighted;
+    const hint = isHi ? '<span class="hint">↵ Enter</span>' : '';
+    return `<div class="autocomplete-item${isHi ? ' highlighted' : ''}" data-idx="${i}"><span>${s.name}</span>${hint}</div>`;
+  }).join('');
+  ac.classList.add('open');
+  ac.querySelectorAll('.autocomplete-item').forEach(el => {
+    el.addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      const idx = parseInt(el.dataset.idx);
+      const sug = state.suggestions[idx];
+      if (sug) submitAnswer(sug.name);
+    });
+  });
+}
+function hideAutocomplete() { document.getElementById('autocomplete').classList.remove('open'); state.suggestions = []; state.highlighted = -1; }
+
+// ============ END ============
+function endQuiz() {
+  const pct = Math.round((state.score / state.pool.length) * 100);
+  document.getElementById('final-score').textContent = state.score;
+  document.getElementById('final-total').textContent = state.pool.length;
+  document.getElementById('final-pct').textContent = pct;
+  document.getElementById('final-streak').textContent = state.bestStreak;
+  const regKey = 'reg_' + state.region;
+  document.getElementById('final-region').textContent = i18n[state.lang][regKey] || state.region;
+
+  const verdictEl = document.getElementById('verdict');
+  let vKey = 'v_bad';
+  if (pct === 100) vKey = 'v_perfect';
+  else if (pct >= 80) vKey = 'v_great';
+  else if (pct >= 50) vKey = 'v_ok';
+  verdictEl.textContent = i18n[state.lang][vKey];
+
+  const container = document.getElementById('mistakes-container');
+  if (state.mistakes.length === 0) {
+    container.innerHTML = `<div class="no-mistakes">${i18n[state.lang].no_mistakes}</div>`;
+  } else {
+    container.innerHTML = '<div class="mistakes-grid">' + state.mistakes.map(m => `
+      <div class="mistake-card">
+        <img src="${flagUrl(m)}" alt="${m[state.lang]}"
+             onerror="this.outerHTML='<div class=&quot;mini-error&quot;>'+this.alt.substring(0,3).toUpperCase()+'</div>'">
+        <div class="country">${m[state.lang]}</div>
+      </div>
+    `).join('') + '</div>';
+  }
+  showScreen('end');
+}
+
+// ============ EVENTS ============
+document.addEventListener('DOMContentLoaded', () => {
+  initLang();
+  checkFlagsFolder();
+
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.addEventListener('click', () => {
+      state.lang = b.dataset.lang; applyLang();
+      if (state.suggestions.length) updateSuggestions();
+    });
+  });
+
+  document.querySelectorAll('input[name=count]').forEach(r => {
+    r.addEventListener('change', () => {
+      state.count = parseInt(r.value);
+      document.getElementById('count-display').textContent = state.count;
+    });
+  });
+
+  document.querySelectorAll('#region-chips .chip').forEach(b => {
+    b.addEventListener('click', () => {
+      document.querySelectorAll('#region-chips .chip').forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+      state.region = b.dataset.region;
+      updateRegionDisplay();
+    });
+  });
+
+  document.getElementById('start-btn').addEventListener('click', startQuiz);
+  document.getElementById('restart-btn').addEventListener('click', () => showScreen('setup'));
+  document.getElementById('skip-btn').addEventListener('click', skip);
+
+  const input = document.getElementById('answer-input');
+  input.addEventListener('input', updateSuggestions);
+  input.addEventListener('keydown', (e) => {
+    if (state.answered) { e.preventDefault(); return; }
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (state.suggestions.length) {
+        state.highlighted = (state.highlighted + 1) % state.suggestions.length;
+        renderSuggestions();
+      }
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (state.suggestions.length) {
+        state.highlighted = (state.highlighted - 1 + state.suggestions.length) % state.suggestions.length;
+        renderSuggestions();
+      }
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (state.highlighted >= 0 && state.suggestions[state.highlighted]) {
+        submitAnswer(state.suggestions[state.highlighted].name);
+      } else if (input.value.trim()) {
+        submitAnswer(input.value.trim());
+      }
+    } else if (e.key === 'Tab') {
+      if (state.suggestions.length) {
+        e.preventDefault();
+        input.value = state.suggestions[0].name;
+        state.highlighted = 0;
+        updateSuggestions();
+      }
+    } else if (e.key === 'Escape') { hideAutocomplete(); }
+  });
+
+  input.addEventListener('blur', () => { setTimeout(() => hideAutocomplete(), 150); });
+});
+</script>
+
+</body>
+</html>

@@ -1,14 +1,22 @@
 ---
-const jaar = new Date().getFullYear();
+// Footer volgens PUPVANH subpagina-standaard:
+// Regel 1 (dunner, muted): BUILT en UPDATED
+// Regel 2 (prominenter): NAAM · Part of PUPVANH Projects · link →
+// BUILT = eerste live-gang (vast). UPDATED = laatste code/visuele aanpassing.
 ---
 
-<footer class="ariba-footer">
-  <div>© {jaar} FC Ariba · MVBI Izegem</div>
-  <div><a href="/">terug naar pup vanh →</a></div>
+<footer class="ariba-footer-block">
+  <div class="ariba-footer-line-1">BUILT AUG 2026 · UPDATED AUG 2026</div>
+  <div class="ariba-footer-line-2">
+    <span class="ariba-footer-name">FC ARIBA</span>
+    <span class="ariba-footer-dot">·</span>
+    <span>Part of PUPVANH Projects</span>
+    <span class="ariba-footer-dot">·</span>
+    <a href="/" class="ariba-footer-link-back">pupvanh.vercel.app →</a>
+  </div>
 </footer>
 
 <script is:inline>
-  // reveal-on-scroll voor .ariba-reveal elementen
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.1 });
