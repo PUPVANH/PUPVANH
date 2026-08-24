@@ -1091,7 +1091,7 @@ function setFlagImage(country) {
   const info = document.getElementById('flag-info');
   info.textContent = 'loading...';
   const filename = getFilename(country);
-  document.getElementById('sub-title').textContent = `${filename}${FLAGS_EXT}`;
+  document.getElementById('sub-title').textContent = 'Flag_Preview.svg';
 
   const url = flagUrl(country);
   const img = new Image();
@@ -1100,7 +1100,7 @@ function setFlagImage(country) {
     img.alt = country[state.lang];
     img.id = 'flag-img';
     container.appendChild(img);
-    info.textContent = `${url} · loaded`;
+    info.textContent = 'flag loaded · guess it';
   };
   img.onerror = () => {
     container.innerHTML = `
