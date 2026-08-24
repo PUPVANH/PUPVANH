@@ -37,13 +37,14 @@ const posts = postsData.posts;
     <div class="hs-list" id="hsList"></div>
 
     <div class="hs-footer">
-      <div class="footer-block">
-        <div class="footer-meta">BUILT AUG 2026 · UPDATED AUG 2026</div>
-        <div class="footer-name">HEADSPACE</div>
-        <div class="footer-part" data-i18n="footer_part">Deel van PUPVANH Projects</div>
-        <a href="https://pupvanh.vercel.app" class="footer-link">→ pupvanh.vercel.app</a>
+      <div class="footer-line-1">BUILT AUG 2026 · UPDATED AUG 2026</div>
+      <div class="footer-line-2">
+        <span>HEADSPACE</span>
+        <span class="dot">·</span>
+        <span data-i18n="footer_part">Deel van PUPVANH Projects</span>
+        <span class="dot">·</span>
+        <a href="https://pupvanh.vercel.app">pupvanh.vercel.app →</a>
       </div>
-      <a href="#" class="rss">rss →</a>
     </div>
 
   </div>
@@ -87,10 +88,11 @@ html[data-mode="dark"] .headspace-page { background: #1E2A3A; color: #E8E4D8; }
 .headspace-page .hs-post .row,
 .headspace-page .hs-post .date { color: #6a7580; }
 .headspace-page .hs-post .pill { background: rgba(59,78,107,0.12); color: #3B4E6B; }
-.headspace-page .hs-footer { border-color: rgba(30,58,52,0.1); color: #6a7580; }
-.headspace-page .hs-footer a { color: #3B4E6B; }
-.headspace-page .footer-name { color: #1E3A34; }
-.headspace-page .footer-part { color: #3a4a5a; }
+.headspace-page .hs-footer { border-color: rgba(30,58,52,0.1); }
+.headspace-page .footer-line-1 { color: #6a7580; }
+.headspace-page .footer-line-2 { color: #1E3A34; }
+.headspace-page .footer-line-2 a { color: #3B4E6B; }
+.headspace-page .footer-line-2 .dot { color: #6a7580; }
 
 /* ============ THEME: dark (midnight) ============ */
 html[data-mode="dark"] .headspace-page .hs-topbar { border-color: rgba(232,228,216,0.1); }
@@ -112,10 +114,11 @@ html[data-mode="dark"] .headspace-page .hs-post .snip { color: #B8B4A8; }
 html[data-mode="dark"] .headspace-page .hs-post .row,
 html[data-mode="dark"] .headspace-page .hs-post .date { color: #8a9aad; }
 html[data-mode="dark"] .headspace-page .hs-post .pill { background: rgba(138,163,196,0.18); color: #8AA3C4; }
-html[data-mode="dark"] .headspace-page .hs-footer { border-color: rgba(232,228,216,0.1); color: #8a9aad; }
-html[data-mode="dark"] .headspace-page .hs-footer a { color: #8AA3C4; }
-html[data-mode="dark"] .headspace-page .footer-name { color: #E8E4D8; }
-html[data-mode="dark"] .headspace-page .footer-part { color: #B8B4A8; }
+html[data-mode="dark"] .headspace-page .hs-footer { border-color: rgba(232,228,216,0.1); }
+html[data-mode="dark"] .headspace-page .footer-line-1 { color: #8a9aad; }
+html[data-mode="dark"] .headspace-page .footer-line-2 { color: #E8E4D8; }
+html[data-mode="dark"] .headspace-page .footer-line-2 a { color: #8AA3C4; }
+html[data-mode="dark"] .headspace-page .footer-line-2 .dot { color: #8a9aad; }
 
 /* ============ LAYOUT ============ */
 .headspace-page .hs-wrap { max-width: 780px; margin: 0 auto; padding: 0 28px; }
@@ -194,32 +197,35 @@ html[data-mode="dark"] .headspace-page .footer-part { color: #B8B4A8; }
   text-align: right; padding-top: 8px; white-space: nowrap; line-height: 1.4;
 }
 
-/* ============ FOOTER ============ */
+/* ============ FOOTER (uniforme standaard: full-width centered 2 lines) ============ */
 .headspace-page .hs-footer {
-  padding: 32px 0 40px; border-top: 1px solid;
-  display: flex; justify-content: space-between; align-items: flex-start;
-  gap: 24px; flex-wrap: wrap;
+  padding: 40px 0 48px; border-top: 1px solid;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
 }
-.headspace-page .footer-block {
-  font-family: 'JetBrains Mono', monospace; font-size: 10px;
-  letter-spacing: 0.12em; text-transform: uppercase;
-  line-height: 1.9;
+.headspace-page .footer-line-1 {
+  font-size: 10px;
+  font-weight: 400;
+  opacity: 0.75;
+  margin-bottom: 10px;
 }
-.headspace-page .footer-meta { opacity: 0.75; }
-.headspace-page .footer-name { font-weight: 600; letter-spacing: 0.15em; }
-.headspace-page .footer-part { opacity: 0.9; }
-.headspace-page .footer-link {
-  text-decoration: none; display: inline-block; margin-top: 4px;
+.headspace-page .footer-line-2 {
+  font-size: 11px;
+  font-weight: 500;
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.headspace-page .footer-line-2 a {
+  text-decoration: none;
   transition: opacity 0.2s;
 }
-.headspace-page .footer-link:hover { opacity: 0.7; }
-.headspace-page .hs-footer .rss {
-  font-family: 'JetBrains Mono', monospace; font-size: 10px;
-  letter-spacing: 0.12em; text-transform: uppercase;
-  text-decoration: none; padding-top: 4px;
-  transition: opacity 0.2s;
-}
-.headspace-page .hs-footer .rss:hover { opacity: 0.7; }
+.headspace-page .footer-line-2 a:hover { opacity: 0.7; }
+.headspace-page .footer-line-2 .dot { opacity: 0.6; }
 
 /* ============ MOBILE ============ */
 @media (max-width: 640px) {
@@ -232,6 +238,8 @@ html[data-mode="dark"] .headspace-page .footer-part { color: #B8B4A8; }
   .headspace-page .hs-post h2 { font-size: 22px; }
   .headspace-page .hs-post .date { grid-column: 2; padding-top: 4px; text-align: left; }
   .headspace-page .hs-num { padding-top: 6px; }
+  .headspace-page .hs-footer { padding: 32px 0 40px; }
+  .headspace-page .footer-line-2 { font-size: 10px; }
 }
 </style>
 
