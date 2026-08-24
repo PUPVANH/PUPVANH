@@ -8,13 +8,13 @@ import AribaSquad from '../components/ariba/AribaSquad.astro';
 import AribaBoard from '../components/ariba/AribaBoard.astro';
 import AribaHistory from '../components/ariba/AribaHistory.astro';
 import AribaArticle from '../components/ariba/AribaArticle.astro';
-import AribaSocial from '../components/ariba/AribaSocial.astro';
 import AribaSponsors from '../components/ariba/AribaSponsors.astro';
 import AribaSponsorsSticky from '../components/ariba/AribaSponsorsSticky.astro';
 import AribaSidebarKlas from '../components/ariba/AribaSidebarKlas.astro';
 import AribaSidebarTopsc from '../components/ariba/AribaSidebarTopsc.astro';
 import AribaKlassement from '../components/ariba/AribaKlassement.astro';
 import AribaTopscorers from '../components/ariba/AribaTopscorers.astro';
+import AribaSpelerModals from '../components/ariba/AribaSpelerModals.astro';
 import AribaFooter from '../components/ariba/AribaFooter.astro';
 ---
 
@@ -25,7 +25,10 @@ import AribaFooter from '../components/ariba/AribaFooter.astro';
     <AribaHero />
 
     <div class="ariba-layout-grid">
-      <AribaSidebarKlas />
+      <aside class="ariba-sidebar ariba-sidebar-left">
+        <AribaSidebarKlas />
+        <AribaSidebarTopsc />
+      </aside>
 
       <main class="ariba-main-col">
         <AribaCountdown />
@@ -34,10 +37,7 @@ import AribaFooter from '../components/ariba/AribaFooter.astro';
         <AribaBoard />
         <AribaHistory />
         <AribaArticle />
-        <AribaSocial />
       </main>
-
-      <AribaSidebarTopsc />
     </div>
 
     <AribaSponsors />
@@ -46,7 +46,7 @@ import AribaFooter from '../components/ariba/AribaFooter.astro';
 
   <AribaFooter />
 
-  {/* Modals: klassement en topschutters volledig */}
+  {/* Modals: klassement, topschutters, en per speler */}
   <div class="ariba-modal" id="modalKlas">
     <div class="ariba-modal-backdrop" data-close></div>
     <div class="ariba-modal-panel">
@@ -67,6 +67,8 @@ import AribaFooter from '../components/ariba/AribaFooter.astro';
     </div>
   </div>
 
+  <AribaSpelerModals />
+
   <script is:inline>
     (function(){
       document.querySelectorAll('[data-modal]').forEach(function(btn){
@@ -83,9 +85,7 @@ import AribaFooter from '../components/ariba/AribaFooter.astro';
       });
       document.addEventListener('keydown', function(e){
         if (e.key === 'Escape') {
-          document.querySelectorAll('.ariba-modal.open').forEach(function(m){
-            m.classList.remove('open');
-          });
+          document.querySelectorAll('.ariba-modal.open').forEach(function(m){ m.classList.remove('open'); });
           document.body.style.overflow = '';
         }
       });

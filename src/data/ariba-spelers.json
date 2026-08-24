@@ -1,0 +1,109 @@
+{
+  "_uitleg": "Centrale spelersdata. Per speler alle stats per seizoen. Deze data voedt zowel de selectie-sectie, de topschutters, als de speler-detail-modals. Kaarten (geel/rood) mag Pepijn bijhouden tijdens het seizoen. Roepnaam is de bijnaam die soms in korte lijstjes wordt gebruikt (bv 'Gayse' i.p.v. 'Vincent Gayse'). Foto komt in public/ariba/spelers/{slug}.jpg.",
+  "spelers": [
+    {
+      "naam": "Robbie Espeel", "roepnaam": "Robbie", "nummer": 2, "captain": true, "foto": null,
+      "seizoenen": {
+        "2024-25": { "games": null, "goals": 4, "geel": 0, "rood": 0 },
+        "2025-26": { "games": 17, "goals": 9, "geel": 0, "rood": 0 },
+        "2026-27": { "games": 0, "goals": 0, "geel": 0, "rood": 0 }
+      }
+    },
+    {
+      "naam": "Matthias Blomme", "roepnaam": "Blomme", "nummer": 1, "foto": null,
+      "seizoenen": {
+        "2024-25": { "games": null, "goals": 2, "geel": 0, "rood": 0 },
+        "2025-26": { "games": 2, "goals": 1, "geel": 0, "rood": 0 },
+        "2026-27": { "games": 0, "goals": 0, "geel": 0, "rood": 0 }
+      }
+    },
+    {
+      "naam": "Matthias Espeel", "roepnaam": "Mattie", "nummer": 3, "foto": null,
+      "seizoenen": {
+        "2024-25": { "games": null, "goals": 6, "geel": 0, "rood": 0 },
+        "2025-26": { "games": 19, "goals": 11, "geel": 0, "rood": 0 },
+        "2026-27": { "games": 0, "goals": 0, "geel": 0, "rood": 0 }
+      }
+    },
+    {
+      "naam": "Lucas Vandenbussche", "roepnaam": "Lucas", "nummer": 4, "foto": null,
+      "seizoenen": {
+        "2024-25": { "games": null, "goals": 5, "geel": 0, "rood": 0 },
+        "2025-26": { "games": 10, "goals": 9, "geel": 0, "rood": 0 },
+        "2026-27": { "games": 0, "goals": 0, "geel": 0, "rood": 0 }
+      }
+    },
+    {
+      "naam": "Matisse Ingels", "roepnaam": "Matisse", "nummer": 6, "foto": null,
+      "seizoenen": {
+        "2024-25": { "games": null, "goals": 18, "geel": 0, "rood": 0 },
+        "2025-26": { "games": 4, "goals": 6, "geel": 0, "rood": 0 },
+        "2026-27": { "games": 0, "goals": 0, "geel": 0, "rood": 0 }
+      }
+    },
+    {
+      "naam": "Thibaut Maes", "roepnaam": "Maes", "nummer": 7, "foto": null,
+      "seizoenen": {
+        "2024-25": { "games": null, "goals": 21, "geel": 0, "rood": 0 },
+        "2025-26": { "games": 3, "goals": 8, "geel": 0, "rood": 0 },
+        "2026-27": { "games": 0, "goals": 0, "geel": 0, "rood": 0 }
+      }
+    },
+    {
+      "naam": "Vincent Gayse", "roepnaam": "Gayse", "nummer": 9, "foto": null,
+      "seizoenen": {
+        "2024-25": { "games": null, "goals": 14, "geel": 0, "rood": 0 },
+        "2025-26": { "games": 19, "goals": 40, "geel": 0, "rood": 0 },
+        "2026-27": { "games": 0, "goals": 0, "geel": 0, "rood": 0 }
+      }
+    },
+    {
+      "naam": "Emmerson Deneir", "roepnaam": "Emmerson", "nummer": 10, "foto": null,
+      "seizoenen": {
+        "2024-25": { "games": null, "goals": 15, "geel": 0, "rood": 0 },
+        "2025-26": { "games": 2, "goals": 1, "geel": 0, "rood": 0 },
+        "2026-27": { "games": 0, "goals": 0, "geel": 0, "rood": 0 }
+      }
+    },
+    {
+      "naam": "Anton Allosserie", "roepnaam": "Anton", "nummer": 11, "foto": null,
+      "seizoenen": {
+        "2024-25": { "games": null, "goals": 28, "geel": 0, "rood": 0 },
+        "2025-26": { "games": 14, "goals": 30, "geel": 0, "rood": 0 },
+        "2026-27": { "games": 0, "goals": 0, "geel": 0, "rood": 0 }
+      }
+    },
+    {
+      "naam": "Thomas Verbeke", "roepnaam": "Tommie", "nummer": 16, "foto": null,
+      "seizoenen": {
+        "2024-25": { "games": null, "goals": 7, "geel": 0, "rood": 0 },
+        "2025-26": { "games": 17, "goals": 17, "geel": 0, "rood": 0 },
+        "2026-27": { "games": 0, "goals": 0, "geel": 0, "rood": 0 }
+      }
+    },
+    {
+      "naam": "Alexandre De Abreu Marques", "roepnaam": "Alex", "nummer": 17, "foto": null,
+      "seizoenen": {
+        "2024-25": { "games": null, "goals": 4, "geel": 0, "rood": 0 },
+        "2025-26": { "games": 2, "goals": 0, "geel": 0, "rood": 0 },
+        "2026-27": { "games": 0, "goals": 0, "geel": 0, "rood": 0 }
+      }
+    },
+    {
+      "naam": "Pepijn Vanhauwere", "roepnaam": "Puppy", "nummer": 19, "foto": null,
+      "seizoenen": {
+        "2024-25": { "games": null, "goals": 0, "geel": 0, "rood": 0 },
+        "2025-26": { "games": 19, "goals": 0, "geel": 0, "rood": 0 },
+        "2026-27": { "games": 0, "goals": 0, "geel": 0, "rood": 0 }
+      }
+    },
+    {
+      "naam": "Nicolas Quartier", "roepnaam": "Nico", "nummer": 20, "foto": null,
+      "seizoenen": {
+        "2024-25": { "games": null, "goals": 7, "geel": 0, "rood": 0 },
+        "2025-26": { "games": 17, "goals": 18, "geel": 0, "rood": 0 },
+        "2026-27": { "games": 0, "goals": 0, "geel": 0, "rood": 0 }
+      }
+    }
+  ]
+}

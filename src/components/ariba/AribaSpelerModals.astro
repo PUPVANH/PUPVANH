@@ -1,0 +1,84 @@
+---
+import data from '../../data/ariba-spelers.json';
+
+function slug(n: string) {
+  return n.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+}
+
+const seizoenenOrder = ['2026-27', '2025-26', '2024-25', '2023-24', '2022-23'];
+---
+
+{data.spelers.map((sp: any) => {
+  const sl = slug(sp.naam);
+  const rows: any[] = [];
+  seizoenenOrder.forEach(sk => {
+    const st = sp.seizoenen?.[sk];
+    if (!st) return;
+    const games = st.games ?? '—';
+    const goals = st.goals ?? 0;
+    const geel = st.geel ?? 0;
+    const rood = st.rood ?? 0;
+    if (games === '—' && goals === 0 && geel === 0 && rood === 0) return;
+    rows.push({ seizoen: sk, games, goals, geel, rood });
+  });
+
+  return (
+    <div class="ariba-modal ariba-speler-modal" id={`modalSpeler-${sl}`}>
+      <div class="ariba-modal-backdrop" data-close></div>
+      <div class="ariba-modal-panel ariba-speler-panel">
+        <button class="ariba-modal-close" data-close aria-label="Sluiten">×</button>
+        <div class="ariba-modal-body">
+          <div class="ariba-speler-header">
+            <div class={`ariba-speler-num${sp.captain ? ' cap' : ''}`}>{sp.nummer}</div>
+            <div class="ariba-speler-info">
+              <h2 class="ariba-speler-naam">{sp.naam}</h2>
+              <div class="ariba-speler-sub">
+                "{sp.roepnaam}"
+                {sp.captain && <span class="ariba-speler-cap-badge">★ Kapitein</span>}
+              </div>
+            </div>
+          </div>
+          <div class="ariba-speler-stats">
+            <h3>Statistieken per seizoen</h3>
+            <table class="ariba-table">
+              <thead>
+                <tr>
+                  <th>Seizoen</th><th>Games</th><th>Goals</th><th>Geel</th><th>Rood</th>
+                </tr>
+              </thead>
+              <tbody>
+                {rows.length === 0 ? (
+                  <tr><td colspan="5" style="text-align:center;padding:20px;color:var(--ar-muted);">Nog geen statistieken beschikbaar</td></tr>
+                ) : rows.map(r => (
+                  <tr>
+                    <td>{r.seizoen}</td>
+                    <td>{r.games}</td>
+                    <td>{r.goals}</td>
+                    <td>{r.geel}</td>
+                    <td>{r.rood}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+})}
+
+<script is:inline>
+  (function(){
+    document.querySelectorAll('.ariba-player[data-speler]').forEach(function(p){
+      function open(){
+        const s = p.getAttribute('data-speler');
+        const m = document.getElementById('modalSpeler-' + s);
+        if (m) { m.classList.add('open'); document.body.style.overflow = 'hidden'; }
+      }
+      p.addEventListener('click', open);
+      p.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
+      });
+    });
+  })();
+</script>

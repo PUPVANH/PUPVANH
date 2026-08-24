@@ -1,15 +1,19 @@
 ---
-const jaar = new Date().getFullYear();
+// Footer volgens PUPVANH subpagina-standaard:
+// Regel 1 (dunner, muted): BUILT en UPDATED
+// Regel 2 (prominenter): NAAM · Part of PUPVANH Projects · link →
+// BUILT = eerste live-gang (vast). UPDATED = laatste code/visuele aanpassing.
 ---
 
 <footer class="ariba-footer-block">
-  <div class="ariba-footer-meta">
-    <div class="ariba-footer-line">BUILT AUG 2026 · UPDATED AUG 2026</div>
-    <div class="ariba-footer-name">FC ARIBA</div>
-    <div class="ariba-footer-line">Part of PUPVANH Projects</div>
-    <div class="ariba-footer-link"><a href="/">→ pupvanh.vercel.app</a></div>
+  <div class="ariba-footer-line-1">BUILT AUG 2026 · UPDATED AUG 2026</div>
+  <div class="ariba-footer-line-2">
+    <span class="ariba-footer-name">FC ARIBA</span>
+    <span class="ariba-footer-dot">·</span>
+    <span>Part of PUPVANH Projects</span>
+    <span class="ariba-footer-dot">·</span>
+    <a href="/" class="ariba-footer-link-back">pupvanh.vercel.app →</a>
   </div>
-  <div class="ariba-footer-copy">© {jaar} Fc Ariba · MVBI Izegem</div>
 </footer>
 
 <script is:inline>

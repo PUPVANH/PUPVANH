@@ -385,38 +385,6 @@
 /* Oude in-flow marquee wordt niet meer gebruikt maar behouden voor backwards compat */
 .ariba-sponsor-marquee { display: none; }
 
-/* ---------- FOOTER met BUILT/UPDATED + terug-link ---------- */
-.ariba-footer-block {
-  background: var(--ar-forest); color: rgba(244,240,232,.8);
-  padding: 40px 32px 28px; text-align: center; position: relative; overflow: hidden;
-}
-.ariba-footer-block::before {
-  content: ''; position: absolute; inset: 0;
-  background-image: var(--ar-p-teal); background-size: 400px;
-  opacity: .1; pointer-events: none;
-}
-.ariba-footer-meta { position: relative; z-index: 1; margin-bottom: 20px; }
-.ariba-footer-line {
-  font-family: 'JetBrains Mono', 'Bebas Neue', monospace; font-size: 11px;
-  letter-spacing: .15em; color: rgba(244,240,232,.55);
-  text-transform: uppercase; line-height: 1.9;
-}
-.ariba-footer-name {
-  font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: .25em;
-  color: var(--ar-gold); margin: 4px 0;
-}
-.ariba-footer-link { margin-top: 6px; }
-.ariba-footer-link a {
-  font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .1em;
-  color: rgba(244,240,232,.75); text-decoration: none; transition: color .2s;
-}
-.ariba-footer-link a:hover { color: var(--ar-gold); }
-.ariba-footer-copy {
-  font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .12em;
-  color: rgba(244,240,232,.35); text-transform: uppercase;
-  padding-top: 16px; border-top: 1px solid rgba(244,240,232,.1);
-  position: relative; z-index: 1;
-}
 
 /* ---------- MOBILE tweaks ---------- */
 @media (max-width: 800px) {
@@ -743,4 +711,267 @@
   }
   .ariba-main-col > section:first-child { padding-top: 60px; }
   .ariba-modal-body { padding: 40px 20px 24px; }
+}
+
+/* ============================================================
+   FOOTER v2 — dunne balk, 2 regels (PUPVANH standaard)
+   ============================================================ */
+.ariba-footer-block {
+  background: var(--ar-forest);
+  color: rgba(244,240,232,.85);
+  padding: 16px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Bebas Neue', sans-serif;
+}
+.ariba-footer-block::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--ar-p-teal);
+  background-size: 400px;
+  opacity: .08;
+  pointer-events: none;
+}
+.ariba-footer-line-1 {
+  position: relative;
+  font-size: 10px;
+  letter-spacing: .18em;
+  color: rgba(244,240,232,.5);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.ariba-footer-line-2 {
+  position: relative;
+  font-size: 13px;
+  letter-spacing: .14em;
+  color: rgba(244,240,232,.9);
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.ariba-footer-name {
+  color: var(--ar-gold);
+  font-weight: 400;
+  letter-spacing: .2em;
+}
+.ariba-footer-dot {
+  color: rgba(244,240,232,.4);
+}
+.ariba-footer-link-back {
+  color: rgba(244,240,232,.9);
+  text-decoration: none;
+  transition: color .2s;
+}
+.ariba-footer-link-back:hover {
+  color: var(--ar-gold);
+}
+
+@media (max-width: 800px) {
+  .ariba-footer-block { padding: 14px 16px; }
+  .ariba-footer-line-2 { font-size: 12px; gap: 6px; }
+}
+
+/* ============================================================
+   FINAL v10 — nav center, 2-col layout, shirts, speler modals
+   ============================================================ */
+
+/* Nav gecentreerd */
+.ariba-nav {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 12px;
+}
+.ariba-nav-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+.ariba-nav-title { flex: 0 0 auto; }
+.ariba-nav-right {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: var(--ar-muted);
+}
+.ariba-hamburger { justify-self: start; }
+.ariba-nav-season { font-size: 12px; color: var(--ar-muted); }
+.ariba-nav-social {
+  color: var(--ar-forest);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  transition: all .2s;
+}
+.ariba-nav-social:hover {
+  color: var(--ar-gold);
+  background: rgba(200,163,95,.1);
+}
+.ariba-nav-social svg { width: 18px; height: 18px; }
+
+/* 2-kolom grid layout */
+.ariba-layout-grid {
+  grid-template-columns: 260px minmax(0, 1fr) !important;
+  gap: 32px;
+}
+.ariba-sidebar-left {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Kit (shirts + broek) verticaal, transparant */
+.ariba-kit-wrap {
+  position: sticky;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.ariba-kit-shirts {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 20px !important;
+}
+.ariba-kit-shirt-img {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  perspective: 1000px;
+}
+.ariba-kit-shirt-flipper {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform .6s;
+  width: 200px !important;
+  height: 220px !important;
+}
+.ariba-kit-shirt-flipper.flipped { transform: rotateY(180deg); }
+.ariba-kit-shirt-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ariba-kit-shirt-face img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.ariba-kit-shirt-face.back { transform: rotateY(180deg); }
+.ariba-kit-broek-flipper {
+  width: 170px !important;
+  height: 180px !important;
+}
+.ariba-kit-shirt-lbl {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11px;
+  letter-spacing: .15em;
+  color: var(--ar-muted);
+  text-transform: uppercase;
+}
+
+/* Klikbare spelers */
+.ariba-player { cursor: pointer; }
+.ariba-player:hover { background: rgba(14,110,111,.06); }
+.ariba-player:hover .ariba-player-name { color: var(--ar-accent); }
+
+/* Speler-detail modal */
+.ariba-speler-modal .ariba-speler-panel { max-width: 640px; }
+.ariba-speler-header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--ar-line);
+  margin-bottom: 24px;
+}
+.ariba-speler-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 56px;
+  background: var(--ar-accent);
+  color: #F4F0E8;
+  width: 90px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+.ariba-speler-num.cap {
+  background: var(--ar-gold);
+  color: var(--ar-forest);
+}
+.ariba-speler-info { flex: 1; }
+.ariba-speler-naam {
+  font-family: 'DM Serif Display', serif;
+  font-size: 32px;
+  line-height: 1;
+  color: var(--ar-text);
+  margin: 0;
+}
+.ariba-speler-sub {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 14px;
+  letter-spacing: .15em;
+  color: var(--ar-muted);
+  text-transform: uppercase;
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.ariba-speler-cap-badge {
+  background: var(--ar-gold);
+  color: var(--ar-forest);
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 11px;
+  letter-spacing: .15em;
+}
+.ariba-speler-stats h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 15px;
+  letter-spacing: .15em;
+  color: var(--ar-muted);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 1000px) {
+  .ariba-layout-grid { grid-template-columns: 1fr !important; }
+  .ariba-kit-wrap { position: static; }
+}
+@media (max-width: 800px) {
+  .ariba-nav { grid-template-columns: auto 1fr auto; gap: 8px; }
+  .ariba-nav-center { gap: 8px; }
+  .ariba-nav-title span { font-size: 14px; }
+  .ariba-nav-title img { height: 22px; }
+  .ariba-nav-season { display: none; }
+  .ariba-nav-right { gap: 6px; }
+  .ariba-nav-social { width: 28px; height: 28px; }
+  .ariba-nav-social svg { width: 16px; height: 16px; }
+  .ariba-kit-shirt-flipper { width: 170px !important; height: 190px !important; }
+  .ariba-kit-broek-flipper { width: 140px !important; height: 150px !important; }
+  .ariba-speler-num { width: 70px; height: 70px; font-size: 42px; }
+  .ariba-speler-naam { font-size: 24px; }
 }
