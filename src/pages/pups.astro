@@ -852,7 +852,7 @@ import { Analytics } from '@vercel/analytics/astro'
   <div class="animals-grid">
     <div class="animal-card">
       <div class="animal-badge">The muse</div>
-      <div class="animal-photo"><img src="/pups/photos/bono_hero_new.jpg" alt="Bono"></div>
+      <div class="animal-photo"><img src="/pups/photos/bono.jpg" alt="Bono"></div>
       <div class="animal-name">Bono</div>
       <div class="animal-role">Golden retriever · mascotte inspiration</div>
       <div class="animal-desc">De hond van mijn beste vrienden, waar ik peter van ben. Samen met mijn nickname de basis van de Pups-mascotte.</div>
@@ -958,13 +958,13 @@ import { Analytics } from '@vercel/analytics/astro'
     <a href="https://www.tiktok.com/@pixelslaves_" target="_blank">TikTok</a>
   </div>
   <div class="footer-copy-line1">BUILT AUG 2026 · UPDATED AUG 2026</div>
-  <div class="footer-copy-line2">Pups · Part of PUPVANH Projects · <a href="https://pupvanh.vercel.app">pupvanh.vercel.app →</a></div>
+  <div class="footer-copy-line2">Pups · Deel van PUPVANH Projects · <a href="https://pupvanh.vercel.app">pupvanh.vercel.app →</a></div>
 </footer>
 
 <Analytics />
 
-<script is:inline define:vars={ rainPups: ["/pups/designs/og.png","/pups/designs/puppy_self.png","/pups/designs/dj.png","/pups/designs/soccer.png","/pups/designs/sleeping.png","/pups/designs/skate.png","/pups/designs/cocktail.png","/pups/designs/kitty.png","/pups/designs/christmas.png","/pups/designs/photographer.png","/pups/designs/rich.png","/pups/designs/ski.png","/pups/designs/beer.png","/pups/designs/smoking.png","/pups/designs/frenchie_black.png","/pups/designs/frenchie_fawn.png","/pups/designs/grey_pup.png","/pups/designs/vinnie.png"] }>
-document.addEventListener('DOMContentLoaded', () => {
+<script is:inline>
+const rainPups = ["/pups/designs/og.png","/pups/designs/puppy_self.png","/pups/designs/dj.png","/pups/designs/soccer.png","/pups/designs/sleeping.png","/pups/designs/skate.png","/pups/designs/cocktail.png","/pups/designs/kitty.png","/pups/designs/christmas.png","/pups/designs/photographer.png","/pups/designs/rich.png","/pups/designs/ski.png","/pups/designs/beer.png","/pups/designs/smoking.png","/pups/designs/frenchie_black.png","/pups/designs/frenchie_fawn.png","/pups/designs/grey_pup.png","/pups/designs/vinnie.png"];document.addEventListener('DOMContentLoaded', () => {
   // View switching
   function showView(name) {
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
