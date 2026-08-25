@@ -1,0 +1,353 @@
+---
+import Analytics from "@vercel/analytics/astro"
+
+// Alle foto's — data-driven, makkelijk toe te voegen via GitHub
+const photos = [
+  { file:'bled-01-kayak.jpg',            size:'wide', place:'si', title:'Kayak past the island',        loc:'Lake Bled, Slovenia',      date:'07.2024' },
+  { file:'italy-01-dolomites.jpg',       size:'tall', place:'it', title:'Alpenglow, Alta Badia',        loc:'Alta Badia, Dolomites',    date:'07.2024' },
+  { file:'ch-01-chapel.jpg',             size:'tall', place:'ch', title:'Chapel in the drizzle',        loc:'Siviez, Valais',           date:'06.2024' },
+  { file:'italy-02-genoa.jpg',           size:'tall', place:'it', title:'Two, at the Pasticceria',      loc:'Genoa, Italy',             date:'05.2024' },
+  { file:'ch-05-turquoise.jpg',          size:'tall', place:'ch', title:'Turquoise, held by snow',      loc:'Lac de Cleuson, Valais',   date:'06.2024' },
+  { file:'italy-06-riomaggiore.jpg',     size:'tall', place:'it', title:'Painted houses at the port',   loc:'Riomaggiore, Cinque Terre',date:'08.2024' },
+  { file:'bled-04-ivy.jpg',              size:'tall', place:'si', title:'Ivy on every window',          loc:'Lake Bled, Slovenia',      date:'07.2024' },
+  { file:'italy-03-turin.jpg',           size:'tall', place:'it', title:'Via Roma, golden hour',        loc:'Turin, Italy',             date:'08.2024' },
+  { file:'ch-04-valley.jpg',             size:'tall', place:'ch', title:'A stream cuts through',       loc:'Val de Nendaz, Valais',    date:'06.2024' },
+  { file:'italy-07-manarola.jpg',        size:'tall', place:'it', title:'Laundry over the alley',       loc:'Manarola, Cinque Terre',   date:'08.2024' },
+  { file:'be-01-cappy-canal.jpg',        size:'tall', place:'be', title:'Canal light',                  loc:'Cappy',                    date:'06.2025' },
+  { file:'italy-04-venice-canal.jpg',    size:'tall', place:'it', title:'Grand Canal, from the bridge', loc:'Venice, Italy',            date:'08.2024' },
+  { file:'ch-08-cows.jpg',               size:'tall', place:'ch', title:'Cows, watching back',          loc:'Lac de Cleuson, Valais',   date:'06.2024' },
+  { file:'be-04-cappy-reflection.jpg',   size:'tall', place:'be', title:'Sky in the water',             loc:'Cappy',                    date:'06.2025' },
+  { file:'italy-08-bologna.jpg',         size:'tall', place:'it', title:'Under the porticos',           loc:'Bologna, Italy',           date:'05.2024' },
+  { file:'ch-06-cleuson-above.jpg',      size:'tall', place:'ch', title:'From the ridge',              loc:'Lac de Cleuson, Valais',   date:'06.2024' },
+  { file:'be-05-cappy-boats.jpg',        size:'tall', place:'be', title:'Two boats, one shed',          loc:'Cappy',                    date:'06.2025' },
+  { file:'italy-05-venice-artist.jpg',   size:'tall', place:'it', title:'The artist reads on',          loc:'Venice, Italy',            date:'08.2024' },
+  { file:'ch-02-forest.jpg',             size:'tall', place:'ch', title:'Larches and last snow',        loc:'Siviez, Valais',           date:'06.2024' },
+  { file:'bled-02-island.jpg',           size:'tall', place:'si', title:'The island alone',             loc:'Lake Bled, Slovenia',      date:'07.2024' },
+  { file:'be-02-cappy-river.jpg',        size:'tall', place:'be', title:'River bend',                   loc:'Cappy',                    date:'06.2025' },
+  { file:'ch-03-resort.jpg',             size:'tall', place:'ch', title:'The valley wakes',             loc:'Siviez, Valais',           date:'06.2024' },
+  { file:'be-06-cappy-neighbor.jpg',     size:'tall', place:'be', title:'The neighbour photographs back',loc:'Cappy',                   date:'06.2025' },
+  { file:'ch-07-cleuson-dam.jpg',        size:'tall', place:'ch', title:'The dam wall',                loc:'Lac de Cleuson, Valais',   date:'06.2024' },
+  { file:'be-03-cappy-lilies.jpg',       size:'tall', place:'be', title:'Lilies on still water',        loc:'Cappy',                    date:'06.2025' },
+  { file:'bled-03-loungers.jpg',         size:'tall', place:'si', title:'Loungers, late afternoon',     loc:'Lake Bled, Slovenia',      date:'07.2024' },
+  { file:'be-07-cappy-kite.jpg',         size:'tall', place:'be', title:'A kite at dusk',              loc:'Cappy',                    date:'06.2025' },
+];
+
+const filters = [
+  { key:'all', label:'All',         count: photos.length },
+  { key:'be',  label:'Belgium',     count: photos.filter(p=>p.place==='be').length },
+  { key:'ch',  label:'Switzerland', count: photos.filter(p=>p.place==='ch').length },
+  { key:'it',  label:'Italy',       count: photos.filter(p=>p.place==='it').length },
+  { key:'si',  label:'Slovenia',    count: photos.filter(p=>p.place==='si').length },
+];
+---
+<!DOCTYPE html>
+<html lang="nl" data-mode="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>pups.jpg — Photographs by Pepijn Vanhauwere</title>
+<meta name="description" content="Losse foto's van reizen en de weg naar huis. Gemaakt met een Fujifilm X100F. Deel van PUPVANH Projects." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --bg:#F5F2EA;--text:#1a1a1a;--muted:#8a877e;--border:#d4d0c4;
+  --card-bg:#EBE5D4;--ember:#E85D2F;--swatch:#e8e3d4;
+}
+html[data-mode="dark"] {
+  --bg:#0E0E0E;--text:#e8e6e0;--muted:#666;--border:#252525;
+  --card-bg:#161615;--swatch:#1c1c1c;
+}
+.pupsjpg-page * { box-sizing:border-box }
+.pupsjpg-page { font-family:'Inter',-apple-system,sans-serif; background:var(--bg); color:var(--text); transition:background .35s ease,color .35s ease; min-height:100vh; -webkit-font-smoothing:antialiased; margin:0; padding:0; }
+.pupsjpg-page .grain { position:fixed; inset:0; pointer-events:none; opacity:0.03; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)'/%3E%3C/svg%3E"); z-index:1; }
+.pupsjpg-page .wrap { max-width:1400px; margin:0 auto; padding:0 40px; position:relative; z-index:2; }
+
+.pupsjpg-page .nav { display:flex; justify-content:space-between; align-items:center; padding:28px 0; border-bottom:0.5px solid var(--border); transition:border-color .35s; gap:20px; flex-wrap:wrap; }
+.pupsjpg-page .logo { font-size:22px; letter-spacing:2px; text-transform:lowercase; text-decoration:none; color:inherit; }
+.pupsjpg-page .logo .dot { color:var(--ember); font-weight:600; }
+.pupsjpg-page .nav-r { display:flex; gap:20px; align-items:center; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; flex-wrap:wrap; }
+.pupsjpg-page .nav-r a { color:var(--muted); text-decoration:none; transition:color .2s; }
+.pupsjpg-page .nav-r a:hover { color:var(--ember); }
+.pupsjpg-page .nav-r .em { color:var(--ember); }
+.pupsjpg-page .viewsw { display:flex; padding:3px; border-radius:6px; background:var(--swatch); transition:background .35s; }
+.pupsjpg-page .viewsw button { font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:1px; padding:5px 12px; border:none; background:transparent; border-radius:4px; cursor:pointer; color:inherit; text-transform:uppercase; }
+.pupsjpg-page .viewsw button.on { background:var(--bg); color:var(--text); box-shadow:0 1px 2px rgba(0,0,0,0.06); }
+.pupsjpg-page .toggle { width:36px; height:20px; border-radius:20px; position:relative; cursor:pointer; border:none; padding:0; background:var(--border); transition:background .35s; }
+.pupsjpg-page .toggle::after { content:''; position:absolute; top:2px; width:16px; height:16px; border-radius:50%; background:var(--ember); transition:left .35s; }
+html[data-mode="light"] .pupsjpg-page .toggle::after { left:2px; }
+html[data-mode="dark"] .pupsjpg-page .toggle::after { left:18px; }
+
+.pupsjpg-page .intro { padding:60px 0 40px; max-width:720px; }
+.pupsjpg-page .intro h1 { font-family:'Playfair Display',serif; font-style:italic; font-size:52px; letter-spacing:-1.5px; line-height:1.05; margin:0 0 24px; font-weight:400; }
+.pupsjpg-page .intro h1 .em { font-style:normal; color:var(--ember); }
+.pupsjpg-page .intro p { font-size:16px; line-height:1.7; color:var(--muted); max-width:560px; margin:0 0 8px; }
+.pupsjpg-page .intro-meta { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-top:24px; }
+.pupsjpg-page .intro-meta .em { color:var(--ember); }
+
+.pupsjpg-page .filters { display:flex; gap:10px; padding:24px 0; flex-wrap:wrap; align-items:center; border-top:0.5px solid var(--border); border-bottom:0.5px solid var(--border); transition:border-color .35s; }
+.pupsjpg-page .fl { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted); margin-right:12px; }
+.pupsjpg-page .chip { font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:1px; text-transform:uppercase; padding:7px 14px; border-radius:20px; cursor:pointer; border:0.5px solid var(--border); background:transparent; color:var(--muted); transition:all .2s; display:flex; align-items:center; gap:6px; }
+.pupsjpg-page .chip:hover { color:var(--text); }
+.pupsjpg-page .chip.on { background:var(--ember); color:white; border-color:var(--ember); }
+.pupsjpg-page .chip .cnt { font-size:9px; opacity:0.7; }
+
+.pupsjpg-page .view { display:none; }
+.pupsjpg-page .view.on { display:block; }
+.pupsjpg-page .grid { padding:40px 0; display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; }
+.pupsjpg-page .photo { cursor:pointer; position:relative; overflow:hidden; border-radius:3px; transition:transform .25s ease, opacity .35s; background:var(--card-bg); }
+.pupsjpg-page .photo:hover { transform:translateY(-3px); }
+.pupsjpg-page .photo.hidden { display:none; }
+.pupsjpg-page .photo.wide { grid-column:span 2; aspect-ratio:3/2; }
+.pupsjpg-page .photo.tall { aspect-ratio:3/4; }
+.pupsjpg-page .photo.sq { aspect-ratio:1; }
+.pupsjpg-page .img { position:absolute; inset:0; background-size:cover; background-position:center; transition:transform .8s ease; }
+.pupsjpg-page .photo:hover .img { transform:scale(1.04); }
+.pupsjpg-page .overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(6,6,6,0.85) 0%,rgba(6,6,6,0.35) 40%,rgba(0,0,0,0) 65%); opacity:0; transition:opacity .35s ease; display:flex; flex-direction:column; justify-content:flex-end; padding:22px; }
+.pupsjpg-page .photo:hover .overlay { opacity:1; }
+.pupsjpg-page .o-t { font-family:'Playfair Display',serif; font-style:italic; font-size:20px; color:#f8f6f0; margin-bottom:8px; letter-spacing:-0.3px; line-height:1.2; }
+.pupsjpg-page .o-m { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:1.8px; text-transform:uppercase; color:rgba(255,255,255,0.82); }
+.pupsjpg-page .o-exif { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,0.55); margin-top:6px; }
+.pupsjpg-page .idx { position:absolute; top:12px; right:14px; font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:1px; color:white; background:rgba(0,0,0,0.5); padding:3px 8px; border-radius:2px; opacity:0; transition:opacity .35s; z-index:2; }
+.pupsjpg-page .photo:hover .idx { opacity:1; }
+
+.pupsjpg-page .mapwrap { padding:40px 0; }
+.pupsjpg-page .mapinner { background:var(--card-bg); border-radius:8px; padding:32px; transition:background .35s; }
+.pupsjpg-page .mapinner svg { width:100%; height:auto; display:block; }
+.pupsjpg-page .land { fill:var(--border); transition:fill .35s; }
+html[data-mode="dark"] .pupsjpg-page .land { fill:#2a2825; }
+.pupsjpg-page .pin { fill:var(--ember); cursor:pointer; transition:r .2s; }
+.pupsjpg-page .pin:hover { r:12; }
+.pupsjpg-page .pin-ring { fill:none; stroke:var(--ember); stroke-width:1; opacity:0.35; }
+.pupsjpg-page .pin-pulse { fill:none; stroke:var(--ember); stroke-width:1.5; opacity:0.7; animation:pulse 2.5s ease-out infinite; }
+@keyframes pulse { 0%{r:8;opacity:0.7} 100%{r:26;opacity:0} }
+.pupsjpg-page .map-lbl { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:1px; text-transform:uppercase; fill:var(--muted); transition:fill .35s; }
+.pupsjpg-page .map-legend { display:flex; gap:24px; margin-top:20px; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); }
+.pupsjpg-page .map-legend .d { width:8px; height:8px; border-radius:50%; background:var(--ember); display:inline-block; margin-right:8px; vertical-align:middle; }
+
+.pupsjpg-page .lb { position:fixed; inset:0; background:rgba(8,8,8,0.97); display:none; align-items:center; justify-content:center; z-index:100; padding:40px; }
+.pupsjpg-page .lb.on { display:flex; }
+.pupsjpg-page .lb-close { position:absolute; top:24px; right:32px; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:2px; color:#e8e6e0; background:transparent; border:0.5px solid #444; padding:8px 14px; border-radius:4px; cursor:pointer; text-transform:uppercase; }
+.pupsjpg-page .lb-close:hover { border-color:var(--ember); color:var(--ember); }
+.pupsjpg-page .lb-arrow { position:absolute; top:50%; transform:translateY(-50%); background:transparent; border:0.5px solid #444; color:#e8e6e0; width:48px; height:48px; border-radius:50%; cursor:pointer; font-size:22px; display:flex; align-items:center; justify-content:center; }
+.pupsjpg-page .lb-arrow:hover { border-color:var(--ember); color:var(--ember); }
+.pupsjpg-page .lb-prev { left:32px; } .pupsjpg-page .lb-next { right:32px; }
+.pupsjpg-page .lb-inner { max-width:80%; max-height:88vh; text-align:center; display:flex; flex-direction:column; align-items:center; }
+.pupsjpg-page .lb-img { max-width:100%; max-height:76vh; object-fit:contain; border-radius:2px; margin-bottom:20px; }
+.pupsjpg-page .lb-t { font-family:'Playfair Display',serif; font-style:italic; font-size:26px; color:#e8e6e0; margin-bottom:8px; }
+.pupsjpg-page .lb-m { font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:2px; color:#888; text-transform:uppercase; }
+.pupsjpg-page .lb-hint { position:absolute; bottom:24px; left:0; right:0; text-align:center; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:2px; color:#555; text-transform:uppercase; }
+.pupsjpg-page .lb-hint .em { color:var(--ember); }
+
+.pupsjpg-page .foot { padding:32px 0; margin-top:40px; border-top:0.5px solid var(--border); display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); transition:border-color .35s; }
+.pupsjpg-page .foot .em { color:var(--ember); }
+.pupsjpg-page .foot a { color:inherit; text-decoration:none; }
+.pupsjpg-page .foot a:hover { color:var(--ember); }
+
+@media (max-width:900px) {
+  .pupsjpg-page .wrap { padding:0 24px; }
+  .pupsjpg-page .grid { grid-template-columns:1fr 1fr; gap:14px; }
+  .pupsjpg-page .photo.wide { grid-column:span 2; }
+  .pupsjpg-page .intro h1 { font-size:38px; }
+  .pupsjpg-page .nav-r { gap:12px; }
+  .pupsjpg-page .nav-r .desktop-only { display:none; }
+  .pupsjpg-page .lb-inner { max-width:95%; }
+  .pupsjpg-page .lb-prev { left:12px; } .pupsjpg-page .lb-next { right:12px; }
+}
+@media (max-width:600px) {
+  .pupsjpg-page .grid { grid-template-columns:1fr; }
+  .pupsjpg-page .photo.wide { grid-column:span 1; aspect-ratio:3/2; }
+  .pupsjpg-page .intro h1 { font-size:32px; }
+}
+</style>
+</head>
+<body class="pupsjpg-page">
+<div class="grain"></div>
+<div class="wrap">
+
+  <div class="nav">
+    <a href="/pupsjpg" class="logo">pups<span class="dot">.</span>jpg</a>
+    <div class="nav-r">
+      <div class="viewsw">
+        <button class="on" data-view="grid">▦ Grid</button>
+        <button data-view="map">◫ Map</button>
+      </div>
+      <a href="https://www.instagram.com/pepijnvanhauwere/" target="_blank" rel="noopener" class="desktop-only">Instagram ↗</a>
+      <a href="https://www.tiktok.com/@pups.jpg" target="_blank" rel="noopener" class="desktop-only">TikTok ↗</a>
+      <a href="/" class="em">← pupvanh</a>
+      <button class="toggle" data-toggle aria-label="Toggle dark mode"></button>
+    </div>
+  </div>
+
+  <section class="intro">
+    <h1>Photographs, <span class="em">ongoing</span></h1>
+    <p>Losse foto's van reizen, verstilde straten en de weg naar huis. Gemaakt met een Fujifilm X100F die altijd in de jaszak past. Geen strak concept — gewoon momenten die traag genoeg werden om vast te leggen.</p>
+    <div class="intro-meta">Fujifilm X100F <span class="em">·</span> 23mm f/2 <span class="em">·</span> Classic Chrome <span class="em">·</span> 2024 — 2025</div>
+  </section>
+
+  <div class="filters">
+    <span class="fl">— Place —</span>
+    {filters.map((f, i) => (
+      <button class={"chip" + (i === 0 ? " on" : "")} data-filter={f.key}>{f.label} <span class="cnt">{String(f.count).padStart(2,'0')}</span></button>
+    ))}
+  </div>
+
+  <div class="view on" id="view-grid">
+    <div class="grid" id="grid-inner">
+      {photos.map((p, i) => (
+        <div class={"photo " + p.size} data-place={p.place} data-idx={i}>
+          <div class="img" style={`background-image:url(/pupsjpg/${p.file})`}></div>
+          <div class="idx">{String(i+1).padStart(3,'0')} / {String(photos.length).padStart(3,'0')}</div>
+          <div class="overlay">
+            <div class="o-t">{p.title}</div>
+            <div class="o-m">{p.loc} · {p.date}</div>
+            <div class="o-exif">X100F · 23mm · Classic Chrome</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="view" id="view-map">
+    <div class="mapwrap">
+      <div class="mapinner">
+        <svg viewBox="0 0 800 480" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+          <path class="land" d="M 80 90 Q 160 70 240 100 L 340 115 Q 420 105 500 125 L 600 145 Q 660 180 650 240 L 610 300 Q 550 350 470 360 L 360 370 Q 260 370 180 335 Q 100 300 90 230 Q 70 160 80 90 Z"/>
+          <path class="land" d="M 640 130 Q 700 145 730 180 L 745 235 Q 735 285 700 305 L 660 285 Q 645 235 640 180 Q 638 150 640 130 Z" opacity="0.65"/>
+          <path class="land" d="M 170 40 Q 230 30 280 60 L 260 90 Q 210 95 175 78 Q 150 60 170 40 Z" opacity="0.7"/>
+          <g data-map-filter="be" style="cursor:pointer">
+            <circle class="pin-pulse" cx="310" cy="180" r="8"/>
+            <circle class="pin-ring" cx="310" cy="180" r="18"/>
+            <circle class="pin" cx="310" cy="180" r="9"/>
+            <text class="map-lbl" x="325" y="178">Belgium · Cappy</text>
+            <text class="map-lbl" x="325" y="192" opacity="0.6">{photos.filter(p=>p.place==='be').length} photographs</text>
+          </g>
+          <g data-map-filter="ch" style="cursor:pointer">
+            <circle class="pin-pulse" cx="365" cy="240" r="8"/>
+            <circle class="pin-ring" cx="365" cy="240" r="18"/>
+            <circle class="pin" cx="365" cy="240" r="10"/>
+            <text class="map-lbl" x="380" y="238">Siviez, Valais</text>
+            <text class="map-lbl" x="380" y="252" opacity="0.6">{photos.filter(p=>p.place==='ch').length} photographs</text>
+          </g>
+          <g data-map-filter="it" style="cursor:pointer">
+            <circle class="pin-pulse" cx="440" cy="270" r="8"/>
+            <circle class="pin-ring" cx="440" cy="270" r="20"/>
+            <circle class="pin" cx="440" cy="270" r="11"/>
+            <text class="map-lbl" x="455" y="268">Italy</text>
+            <text class="map-lbl" x="455" y="282" opacity="0.6">{photos.filter(p=>p.place==='it').length} · Dolomites, Turin, Genoa, Venice, Cinque Terre, Bologna</text>
+          </g>
+          <g data-map-filter="si" style="cursor:pointer">
+            <circle class="pin-pulse" cx="510" cy="255" r="8"/>
+            <circle class="pin-ring" cx="510" cy="255" r="18"/>
+            <circle class="pin" cx="510" cy="255" r="9"/>
+            <text class="map-lbl" x="525" y="253">Lake Bled</text>
+            <text class="map-lbl" x="525" y="267" opacity="0.6">{photos.filter(p=>p.place==='si').length} photographs</text>
+          </g>
+        </svg>
+      </div>
+      <div class="map-legend">
+        <span><span class="d"></span>Click a pin to filter the grid</span>
+        <span>{photos.length} photographs · 4 places · 2024 — 2025</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>Fujifilm X100F <span class="em">·</span> Classic Chrome</span>
+    <span>Hover a photo <span class="em">·</span> shows title, place, date</span>
+    <span>Part of <a href="/"><span class="em">PUPVANH</span></a> Projects</span>
+    <span>BUILT AUG 2026 <span class="em">·</span> UPDATED AUG 2026</span>
+  </div>
+
+</div>
+
+<div class="lb" id="lb">
+  <button class="lb-close" data-lb-close>Close · Esc</button>
+  <button class="lb-arrow lb-prev" data-lb-prev>‹</button>
+  <button class="lb-arrow lb-next" data-lb-next>›</button>
+  <div class="lb-inner">
+    <img class="lb-img" id="lb-img" alt="" />
+    <div class="lb-t" id="lb-t"></div>
+    <div class="lb-m" id="lb-m"></div>
+  </div>
+  <div class="lb-hint">← Prev <span class="em">·</span> → Next <span class="em">·</span> Esc to close</div>
+</div>
+
+<script is:inline define:vars={{ photos }}>
+  // Dark/light met localStorage
+  const saved = localStorage.getItem('pupsjpg-mode');
+  if (saved) document.documentElement.dataset.mode = saved;
+  document.querySelector('[data-toggle]').addEventListener('click', () => {
+    const html = document.documentElement;
+    html.dataset.mode = html.dataset.mode === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('pupsjpg-mode', html.dataset.mode);
+  });
+
+  // Grid / Map view switcher
+  document.querySelectorAll('.viewsw button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.viewsw button').forEach(b => b.classList.remove('on'));
+      btn.classList.add('on');
+      document.querySelectorAll('.view').forEach(v => v.classList.remove('on'));
+      document.getElementById('view-' + btn.dataset.view).classList.add('on');
+    });
+  });
+
+  // Filter chips
+  function applyFilter(f) {
+    document.querySelectorAll('.chip').forEach(c => c.classList.remove('on'));
+    document.querySelector(`.chip[data-filter="${f}"]`)?.classList.add('on');
+    document.querySelectorAll('.photo').forEach(p => {
+      if (f === 'all' || p.dataset.place === f) p.classList.remove('hidden');
+      else p.classList.add('hidden');
+    });
+  }
+  document.querySelectorAll('.chip').forEach(chip => {
+    chip.addEventListener('click', () => applyFilter(chip.dataset.filter));
+  });
+
+  // Map-pin klikken filtert grid en scrollt naar boven
+  document.querySelectorAll('[data-map-filter]').forEach(g => {
+    g.addEventListener('click', () => {
+      applyFilter(g.dataset.mapFilter);
+      document.querySelector('.viewsw button[data-view="grid"]').click();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+
+  // Lightbox
+  let cur = 0;
+  function openLb(i) {
+    cur = i; renderLb();
+    document.getElementById('lb').classList.add('on');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLb() {
+    document.getElementById('lb').classList.remove('on');
+    document.body.style.overflow = '';
+  }
+  function prevLb() { cur = (cur - 1 + photos.length) % photos.length; renderLb(); }
+  function nextLb() { cur = (cur + 1) % photos.length; renderLb(); }
+  function renderLb() {
+    const p = photos[cur];
+    document.getElementById('lb-img').src = '/pupsjpg/' + p.file;
+    document.getElementById('lb-t').textContent = p.title;
+    document.getElementById('lb-m').textContent = p.loc + ' · ' + p.date + '  ·  ' + (cur+1) + ' / ' + photos.length;
+  }
+  document.querySelectorAll('.photo').forEach(el => {
+    el.addEventListener('click', () => openLb(parseInt(el.dataset.idx)));
+  });
+  document.querySelector('[data-lb-close]').addEventListener('click', closeLb);
+  document.querySelector('[data-lb-prev]').addEventListener('click', prevLb);
+  document.querySelector('[data-lb-next]').addEventListener('click', nextLb);
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('lb').classList.contains('on')) return;
+    if (e.key === 'Escape') closeLb();
+    if (e.key === 'ArrowLeft') prevLb();
+    if (e.key === 'ArrowRight') nextLb();
+  });
+</script>
+<Analytics />
+</body>
+</html>
