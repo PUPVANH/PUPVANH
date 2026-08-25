@@ -1078,21 +1078,24 @@ html[data-theme="classroom"] .classroom-plinth { display: block; }
   pointer-events: none;
 }
 html[data-theme="classroom"] .classroom-decor { display: block; }
-.classroom-decor.left { top: 10px; left: 16px; }
+.classroom-decor.left {
+  top: 0;
+  left: 0;
+  width: 470px;
+  height: 100vh;
+  pointer-events: none;
+}
 
 .wall-map {
+  position: absolute;
   display: block;
   filter: drop-shadow(3px 6px 14px rgba(0,0,0,0.4));
 }
-.wall-map.aus {
-  width: 200px;
-  transform: rotate(-1.5deg) translateX(60px);
-  margin-bottom: -20px;
-}
-.wall-map.usa {
-  width: 240px;
-  transform: rotate(1.2deg);
-}
+.wall-map.aus     { top: 5px;   left: 15px;  width: 195px; transform: rotate(-2deg); }
+.wall-map.belgium { top: 20px;  left: 235px; width: 170px; transform: rotate(3deg); }
+.wall-map.usa     { top: 235px; left: 5px;   width: 225px; transform: rotate(-1deg); z-index: 2; }
+.wall-map.kiribati{ top: 250px; left: 250px; width: 185px; transform: rotate(2deg); }
+.wall-map.nz      { top: 460px; left: 90px;  width: 170px; transform: rotate(-3deg); z-index: 3; }
 
 /* Kleine klok bovenaan */
 .classroom-clock {
@@ -1155,10 +1158,25 @@ html[data-theme="classroom"] .chalk-tray { display: flex; align-items: center; g
 }
 html[data-theme="classroom"] .win { position: relative; }
 
+@media (max-width: 1400px) {
+  .classroom-decor.left { width: 380px; }
+  .wall-map.aus     { top: 5px;   left: 15px;  width: 170px; }
+  .wall-map.belgium { top: 15px;  left: 210px; width: 145px; }
+  .wall-map.usa     { top: 200px; left: 5px;   width: 200px; }
+  .wall-map.kiribati{ top: 220px; left: 220px; width: 155px; }
+  .wall-map.nz      { top: 400px; left: 70px;  width: 145px; }
+}
 @media (max-width: 1200px) {
-  .classroom-decor.left { top: 10px; left: 4px; }
-  .wall-map.aus { width: 160px; transform: rotate(-1.5deg) translateX(40px); }
-  .wall-map.usa { width: 200px; }
+  .classroom-decor.left { width: 300px; }
+  .wall-map.belgium, .wall-map.kiribati { display: none; }
+  .wall-map.aus     { top: 5px;   left: 10px; width: 175px; }
+  .wall-map.usa     { top: 195px; left: 5px;  width: 210px; }
+  .wall-map.nz      { top: 400px; left: 60px; width: 145px; }
+}
+@media (max-width: 1000px) {
+  .wall-map.nz { display: none; }
+  .wall-map.aus { top: 10px; left: 5px; width: 155px; }
+  .wall-map.usa { top: 175px; left: 0; width: 185px; }
 }
 @media (max-width: 900px) {
   .classroom-decor, .classroom-clock, .classroom-plinth { display: none !important; }
@@ -1282,7 +1300,10 @@ html[data-theme="classroom"] .classroom-books { display: block; }
 
 <div class="classroom-decor left">
   <img class="wall-map aus" src="/images/map-australia.png" alt="Australia">
+  <img class="wall-map belgium" src="/images/map-belgium.png" alt="Belgium">
   <img class="wall-map usa" src="/images/map-usa.png" alt="Trump Map">
+  <img class="wall-map kiribati" src="/images/map-kiribati.png" alt="Kiribati">
+  <img class="wall-map nz" src="/images/map-newzealand.png" alt="New Zealand">
 </div>
 
 <div class="classroom-clock"><span class="center"></span></div>
