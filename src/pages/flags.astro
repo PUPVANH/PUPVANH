@@ -1204,7 +1204,7 @@ html[data-theme="classroom"] .win { position: relative; }
 
 
 /* ============ WANDDECOR (klaslokaal thema) ============ */
-.classroom-bunting, .classroom-calendar, .classroom-nametag,
+.classroom-bunting, .classroom-calendar,
 .classroom-plant, .classroom-globe, .classroom-books {
   display: none;
   position: fixed;
@@ -1213,7 +1213,6 @@ html[data-theme="classroom"] .win { position: relative; }
 }
 html[data-theme="classroom"] .classroom-bunting,
 html[data-theme="classroom"] .classroom-calendar,
-html[data-theme="classroom"] .classroom-nametag,
 html[data-theme="classroom"] .classroom-plant,
 html[data-theme="classroom"] .classroom-globe,
 html[data-theme="classroom"] .classroom-books { display: block; }
@@ -1235,17 +1234,6 @@ html[data-theme="classroom"] .classroom-books { display: block; }
   filter: drop-shadow(2px 3px 8px rgba(0,0,0,0.35));
 }
 .classroom-calendar svg { width: 100%; height: auto; display: block; }
-
-/* Naamplaatje - bij de leerkracht (over zijn borst) */
-.classroom-nametag {
-  bottom: 32vh;
-  right: 90px;
-  width: 100px;
-  z-index: 35;
-  transform: rotate(-3deg);
-  filter: drop-shadow(1px 2px 4px rgba(0,0,0,0.35));
-}
-.classroom-nametag svg { width: 100%; height: auto; display: block; }
 
 /* Plant links onderaan bij plint */
 .classroom-plant {
@@ -1281,7 +1269,6 @@ html[data-theme="classroom"] .classroom-books { display: block; }
 /* Responsive: op smaller schermen, decor verstoppen dat conflicteert */
 @media (max-width: 1100px) {
   .classroom-calendar { top: 40px; right: 10px; width: 90px; }
-  .classroom-nametag { display: none !important; }
 }
 @media (max-width: 900px) {
   .classroom-calendar, .classroom-globe, .classroom-books { display: none !important; }
@@ -1389,11 +1376,6 @@ html[data-theme="classroom"] .classroom-books { display: block; }
   <text x="120" y="138" font-family="Kalam" font-size="10" fill="#c34d3a">30</text>
   <!-- Rij 6: 31 -->
   <text x="12" y="153" font-family="Kalam" font-size="10" fill="#4a3220">31</text>
-</svg></div>
-<div class="classroom-nametag"><svg viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
-  <rect x="2" y="2" width="116" height="36" rx="3" fill="#6d4c2e" stroke="#3a2c1e" stroke-width="1.2"/>
-  <rect x="8" y="8" width="104" height="24" fill="#f5efe0" stroke="#3a2c1e" stroke-width="0.5"/>
-  <text x="60" y="24" font-family="Caveat, cursive" font-size="15" fill="#4a3220" text-anchor="middle" font-weight="700" font-style="italic">Meester Puppy</text>
 </svg></div>
 <div class="classroom-plant"><svg viewBox="0 0 90 110" xmlns="http://www.w3.org/2000/svg">
   <path d="M28,75 L22,105 L68,105 L62,75 Z" fill="#b8683a" stroke="#5a2f18" stroke-width="1.2"/>
