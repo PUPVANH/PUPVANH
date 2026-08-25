@@ -1,5 +1,6 @@
 ---
 import '../styles/ariba.css';
+import Analytics from '@vercel/analytics/astro';
 
 interface Props {
   title?: string;
@@ -29,5 +30,6 @@ const {
 </head>
 <body class="ariba-page">
   <slot />
+  <Analytics />
 </body>
 </html>
