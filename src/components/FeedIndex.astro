@@ -1,10 +1,11 @@
 ---
 const items = [
-  { n: '01', img: 'a', title: 'Golden hour, <em>Ostend pier</em>', kind: 'photo', date: '3 days ago' },
-  { n: '02', img: 'text', symbol: '"', italic: true, title: 'The quiet ones stitch loudest — thread pulled through the same eye, night after night.', kind: 'poem', date: 'last week' },
-  { n: '03', img: 'b', title: 'po.pups — <em>drop 01</em>', kind: 'project', date: 'last week' },
-  { n: '04', img: 'text', symbol: '⚽', title: 'FC Ariba, <em>the website</em>', kind: 'project', date: '2 weeks ago' },
-  { n: '05', img: 'c', title: 'Rainy Monday, <em>Ghent</em>', kind: 'photo', date: '3 weeks ago' },
+  { n: '01', img: 'photos', href: '/pupsjpg', title: 'pups.jpg — <em>photographs on the road</em>', kind: 'photos', date: '30 frames' },
+  { n: '02', img: 'pups',   href: '/pups',    title: 'po.pups — <em>dog-inspired streetwear</em>', kind: 'project', date: 'via DM only' },
+  { n: '03', img: 'siviez', href: '/siviez',  title: 'Rosablanche C34 — <em>Siviez, Swiss Alps</em>', kind: 'project', date: 'live on Airbnb' },
+  { n: '04', img: 'ariba',  href: '/ariba',   title: 'FC Ariba — <em>MVBI Izegem, reeks 1</em>', kind: 'project', date: 'since 2022' },
+  { n: '05', img: 'text', symbol: '✎', href: '/headspace', title: 'Headspace — <em>notes, rants, learning in public</em>', kind: 'writing', date: 'ongoing' },
+  { n: '06', img: 'flags',  href: '/flags',   title: 'flags.exe — <em>197 country flag quiz</em>', kind: 'project', date: 'windows 95 vibes' },
 ];
 ---
 
@@ -15,14 +16,14 @@ const items = [
   </div>
 
   {items.map(item => (
-    <div class="index-row reveal">
+    <a href={item.href} class="index-row reveal">
       <div class="rn">{item.n}</div>
       <div class={`rimg ${item.img}`}>{item.symbol || ''}</div>
-      <div class={`rt ${item.italic ? 'italic' : ''}`} set:html={item.title} />
+      <div class="rt" set:html={item.title} />
       <div class="rk">{item.kind}</div>
       <div class="rd">{item.date}</div>
       <div class="ra">→</div>
-    </div>
+    </a>
   ))}
 </div>
 
@@ -41,10 +42,11 @@ const items = [
   }
 
   .index-row{
-    display:grid;grid-template-columns:60px 80px 1fr 160px 100px 60px;
+    display:grid;grid-template-columns:60px 80px 1fr 160px 130px 60px;
     gap:20px;align-items:center;padding:16px 0;
     border-bottom:1px solid var(--line);cursor:pointer;
     transition:background .25s,padding .25s;position:relative;
+    text-decoration:none;color:var(--text);
   }
   .index-row:hover{background:var(--card);padding-left:12px;padding-right:12px;}
   .index-row::before{
@@ -57,13 +59,15 @@ const items = [
   .rn{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);transition:color .2s;}
   .index-row:hover .rn{color:var(--ember);}
   .rimg{width:60px;height:60px;border-radius:2px;transition:all .4s;}
-  .rimg.a{background:linear-gradient(160deg,#3d5a5e,#0E6B6F);}
-  .rimg.b{background:linear-gradient(140deg,#c9a56a,#8b6d3a);}
-  .rimg.c{background:linear-gradient(200deg,#2a3833,#18211E);}
+  .rimg.photos{background:linear-gradient(160deg,#3d5a5e,#0E6B6F);}
+  .rimg.pups{background:linear-gradient(140deg,#E85D2F,#F2A93D);}
+  .rimg.siviez{background:linear-gradient(200deg,#0E6B6F,#1E3A34);}
+  .rimg.ariba{background:linear-gradient(140deg,#C8A35F,#8b6d3a);}
+  .rimg.flags{background:linear-gradient(160deg,#008080,#1E3A34);}
   .rimg.text{
     background:var(--card);border:1px solid var(--line);
     display:flex;align-items:center;justify-content:center;
-    font-family:'JetBrains Mono',monospace;font-size:20px;color:var(--muted);
+    font-family:'JetBrains Mono',monospace;font-size:22px;color:var(--muted);
   }
   .index-row:hover .rimg:not(.text){
     transform:scale(2.2) translateX(25%);z-index:5;position:relative;
@@ -71,7 +75,6 @@ const items = [
   }
   .rt{font-size:19px;font-weight:500;letter-spacing:-.01em;line-height:1.3;}
   .rt :global(em){color:var(--accent);font-style:italic;font-weight:400;}
-  .rt.italic{font-style:italic;color:var(--muted);font-size:16px;}
   .rk{
     font-family:'JetBrains Mono',monospace;font-size:11px;
     letter-spacing:.1em;text-transform:uppercase;color:var(--gold);
