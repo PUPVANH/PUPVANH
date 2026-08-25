@@ -1,9 +1,9 @@
 ---
 const items = [
-  { n: '01', img: 'photos', href: '/pupsjpg', title: 'pups.jpg — <em>photographs on the road</em>', kind: 'photos', date: '30 frames' },
+  { n: '01', img: 'photos', href: '/pupsjpg', bg: '/pupsjpg/italy-04-venice-canal.jpg', title: 'pups.jpg — <em>photographs on the road</em>', kind: 'photos', date: '30 frames' },
   { n: '02', img: 'pups',   href: '/pups',    title: 'po.pups — <em>dog-inspired streetwear</em>', kind: 'project', date: 'via DM only' },
-  { n: '03', img: 'siviez', href: '/siviez',  title: 'Rosablanche C34 — <em>Siviez, Swiss Alps</em>', kind: 'project', date: 'live on Airbnb' },
-  { n: '04', img: 'ariba',  href: '/ariba',   title: 'FC Ariba — <em>MVBI Izegem, reeks 1</em>', kind: 'project', date: 'since 2022' },
+  { n: '03', img: 'siviez', href: '/siviez',  bg: '/pupsjpg/ch-03-resort.jpg', title: 'Rosablanche C34 — <em>Siviez, Swiss Alps</em>', kind: 'project', date: 'live on Airbnb' },
+  { n: '04', img: 'ariba',  href: '/ariba',   bg: '/ariba/fc-ariba-logo.svg', bgFit: 'contain', title: 'FC Ariba — <em>MVBI Izegem, reeks 1</em>', kind: 'project', date: 'since 2022' },
   { n: '05', img: 'text', symbol: '✎', href: '/headspace', title: 'Headspace — <em>notes, rants, learning in public</em>', kind: 'writing', date: 'ongoing' },
   { n: '06', img: 'flags',  href: '/flags',   title: 'flags.exe — <em>197 country flag quiz</em>', kind: 'project', date: 'windows 95 vibes' },
 ];
@@ -18,7 +18,10 @@ const items = [
   {items.map(item => (
     <a href={item.href} class="index-row reveal">
       <div class="rn">{item.n}</div>
-      <div class={`rimg ${item.img}`}>{item.symbol || ''}</div>
+      <div
+        class={`rimg ${item.img}`}
+        style={item.bg ? `background-image:url('${item.bg}');background-size:${item.bgFit || 'cover'};background-position:center;background-repeat:no-repeat;` : ''}
+      >{item.symbol || ''}</div>
       <div class="rt" set:html={item.title} />
       <div class="rk">{item.kind}</div>
       <div class="rd">{item.date}</div>

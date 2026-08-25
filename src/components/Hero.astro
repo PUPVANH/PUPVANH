@@ -11,8 +11,8 @@
     </div>
   </div>
   <div class="hero-r">
-    <div class="hp hp1" data-tag="// ostend pier"></div>
-    <div class="hp hp2" data-tag="// po.pups"></div>
+    <a href="/pupsjpg" class="hp hp1" data-tag="// dolomites, italy"></a>
+    <a href="/siviez" class="hp hp2" data-tag="// siviez, valais"></a>
   </div>
 </div>
 
@@ -52,15 +52,16 @@
   }
 
   .hero-r{position:relative;height:400px;}
-  .hp{position:absolute;border-radius:2px;overflow:hidden;box-shadow:0 8px 30px rgba(24,33,30,.15);}
+  .hp{position:absolute;border-radius:2px;overflow:hidden;box-shadow:0 8px 30px rgba(24,33,30,.15);display:block;background-size:cover;background-position:center;transition:transform .4s ease,box-shadow .4s ease;}
+  .hp:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 14px 40px rgba(24,33,30,.25);}
   .hp1{
     width:65%;height:75%;top:0;right:0;
-    background:linear-gradient(160deg,#3d5a5e,#0E6B6F);
+    background-image:linear-gradient(to bottom,rgba(24,33,30,0) 40%,rgba(24,33,30,.55) 100%),url('/pupsjpg/italy-01-dolomites.jpg');
     animation:float1 8s ease-in-out infinite;
   }
   .hp2{
     width:50%;height:60%;bottom:0;left:0;
-    background:linear-gradient(140deg,#c9a56a,#8b6d3a);
+    background-image:linear-gradient(to bottom,rgba(24,33,30,0) 40%,rgba(24,33,30,.55) 100%),url('/pupsjpg/ch-03-resort.jpg');
     animation:float2 9s ease-in-out infinite;
   }
   @keyframes float1{0%,100%{transform:translate(0,0);}50%{transform:translate(-8px,6px);}}
