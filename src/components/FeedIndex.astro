@@ -1,12 +1,12 @@
 ---
 const items = [
-  { n: '01', img: 'photos', href: '/jpg', bg: '/jpg/italy-04-venice-canal.jpg', title: 'pups.jpg — <em>photographs on the road</em>', kind: 'photos', date: '30 frames' },
-  { n: '02', img: 'pups',   href: '/pups',    title: 'po.pups — <em>dog-inspired streetwear</em>', kind: 'project', date: 'via DM only' },
-  { n: '03', img: 'siviez', href: '/siviez',  bg: '/jpg/ch-03-resort.jpg', title: 'Rosablanche C34 — <em>Siviez, Swiss Alps</em>', kind: 'project', date: 'live on Airbnb' },
+  { n: '01', img: 'photos', href: '/jpg', bg: '/pupsjpg/italy-04-venice-canal.jpg', title: 'PUPVANH.jpg — <em>photographs on the road</em>', kind: 'photos', date: '30 frames' },
+  { n: '02', img: 'pups',   href: '/pups',    title: 'pups by puppy — <em>dog-inspired streetwear</em>', kind: 'project', date: 'via DM only' },
+  { n: '03', img: 'siviez', href: '/siviez',  bg: '/pupsjpg/ch-03-resort.jpg', title: 'Rosablanche C34 — <em>Siviez, Swiss Alps</em>', kind: 'project', date: 'live on Airbnb' },
   { n: '04', img: 'ariba',  href: '/ariba',   bg: '/ariba/fc-ariba-logo.svg', bgFit: 'contain', title: 'FC Ariba — <em>MVBI Izegem, reeks 1</em>', kind: 'project', date: 'since 2022' },
   { n: '05', img: 'bookmarks', symbol: '★', href: '/bookmarks', title: 'Bookmarks — <em>worth your click</em>', kind: 'bookmarks', date: '4 links' },
   { n: '06', img: 'text', symbol: '✎', href: '/notes', title: 'Notes — <em>rants, building, learning</em>', kind: 'writing', date: 'ongoing' },
-  { n: '07', img: 'flags',  href: '/flags',   title: 'flags.exe — <em>197 country flag quiz</em>', kind: 'project', date: 'windows 95 vibes' },
+  { n: '07', img: 'flags',  href: '/flags',   bg: '/favicons/flags.png', bgFit: 'contain', title: 'flags.exe — <em>197 country flag quiz</em>', kind: 'project', date: 'windows 95 vibes' },
 ];
 ---
 
@@ -74,11 +74,11 @@ const items = [
     font-size:26px;color:#F4F0E8;
   }
   .rimg.text{
-    background:var(--card);border:1px solid var(--line);
+    background:#0E6B6F;
     display:flex;align-items:center;justify-content:center;
-    font-family:'JetBrains Mono',monospace;font-size:22px;color:var(--muted);
+    font-size:26px;color:#F4F0E8;
   }
-  .index-row:hover .rimg:not(.text){
+  .index-row:hover .rimg{
     transform:scale(2.2) translateX(25%);z-index:5;position:relative;
     box-shadow:0 8px 30px rgba(24,33,30,.2);
   }
@@ -97,7 +97,7 @@ const items = [
     .index-row{grid-template-columns:30px 50px 1fr 40px;gap:10px;}
     .rk,.rd{display:none;}
     .rt{font-size:15px;}
-    .index-row:hover .rimg:not(.text){transform:none;}
+    .index-row:hover .rimg{transform:none;}
   }
 </style>
 
