@@ -60,15 +60,23 @@
   }
 </style>
 <script>
-  // Dark mode toggle
+  // Dark mode toggle met localStorage persistence
   const tb = document.getElementById('tb');
   if (tb) {
+    // Load saved mode
+    const savedMode = localStorage.getItem('pupvanh-mode');
+    if (savedMode) {
+      document.documentElement.setAttribute('data-mode', savedMode);
+      tb.textContent = savedMode === 'dark' ? '◑' : '◐';
+    }
+    // Save on toggle
     tb.addEventListener('click', () => {
       const r = document.documentElement;
       const c = r.getAttribute('data-mode');
       const n = c === 'dark' ? 'light' : 'dark';
       r.setAttribute('data-mode', n);
       tb.textContent = n === 'dark' ? '◑' : '◐';
+      localStorage.setItem('pupvanh-mode', n);
     });
   }
   // Easter egg: sneaky pupje na 1s hover op logo
