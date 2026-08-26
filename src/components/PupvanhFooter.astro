@@ -1,0 +1,209 @@
+---
+// PupvanhFooter.astro — uniforme footer voor ELKE PUPVANH-pagina
+// -----------------------------------------------------------------------------
+// Twee regels:
+//   Regel 1: © 2026 PUPVANH Projects · alle rechten voorbehouden  [+ socials]
+//   Regel 2: BUILT MMM YYYY · UPDATED MMM YYYY · [PaginaNaam] · pupvanh.vercel.app →
+// Scheidingstekens: ember bolletje (#E85D2F).
+// Voorbeeld gebruik:
+//   <PupvanhFooter
+//     paginaNaam="Bookmarks"
+//     built="AUG 2026"
+//     updated="AUG 2026"
+//     theme="default"
+//     socials={[
+//       { label: 'IG', href: 'https://instagram.com/pepijnvanhauwere' },
+//       { label: 'TT', href: 'https://tiktok.com/@pups.jpg' },
+//     ]}
+//   />
+// -----------------------------------------------------------------------------
+
+interface Social {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  paginaNaam: string;              // bv. 'Bookmarks', 'FC Ariba', 'Notes'
+  built: string;                   // bv. 'AUG 2026'
+  updated: string;                 // bv. 'AUG 2026'
+  theme?: 'default' | 'ariba' | 'siviez' | 'notes';
+  socials?: Social[];              // optioneel — verschijnt rechts op regel 1
+  link?: string;                   // default pupvanh.vercel.app; later pupvanh.pixelslaves.com
+  linkLabel?: string;              // default 'pupvanh.vercel.app →'
+}
+
+const {
+  paginaNaam,
+  built,
+  updated,
+  theme = 'default',
+  socials = [],
+  link = 'https://pupvanh.vercel.app',
+  linkLabel = 'pupvanh.vercel.app →',
+} = Astro.props;
+---
+
+<footer class={`pv-footer pv-theme-${theme}`}>
+  <div class="pv-inner">
+
+    <!-- Regel 1: copyright + socials -->
+    <div class="pv-row pv-row-1">
+      <span class="pv-copy">© 2026 PUPVANH Projects</span>
+      <span class="pv-dot">●</span>
+      <span class="pv-copy">alle rechten voorbehouden</span>
+
+      {socials.length > 0 && (
+        <>
+          <span class="pv-dot">●</span>
+          <span class="pv-socials">
+            {socials.map((s, i) => (
+              <>
+                {i > 0 && <span class="pv-dot pv-dot-mini">·</span>}
+                <a href={s.href} target="_blank" rel="noopener noreferrer">{s.label}</a>
+              </>
+            ))}
+          </span>
+        </>
+      )}
+    </div>
+
+    <!-- Regel 2: build/update info -->
+    <div class="pv-row pv-row-2">
+      <span>BUILT {built}</span>
+      <span class="pv-dot">●</span>
+      <span>UPDATED {updated}</span>
+      <span class="pv-dot">●</span>
+      <span class="pv-page">{paginaNaam}</span>
+      <span class="pv-dot">●</span>
+      <a href={link} class="pv-link">{linkLabel}</a>
+    </div>
+
+  </div>
+</footer>
+
+<style>
+  .pv-footer {
+    width: 100%;
+    padding: 20px 24px;
+    text-align: center;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    letter-spacing: 0.05em;
+    box-sizing: border-box;
+  }
+  .pv-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+  }
+  .pv-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  .pv-row-1 {
+    font-size: 11px;
+    opacity: 0.9;
+  }
+  .pv-row-2 {
+    font-size: 11px;
+    text-transform: uppercase;
+  }
+
+  /* Ember bolletje — hét PUPVANH-scheidingsteken */
+  .pv-dot {
+    color: #E85D2F;
+    font-size: 8px;
+    line-height: 1;
+    display: inline-block;
+    transform: translateY(-1px);
+  }
+  .pv-dot-mini {
+    color: currentColor;
+    opacity: 0.4;
+    font-size: 12px;
+  }
+
+  .pv-page {
+    font-weight: 500;
+  }
+
+  .pv-link,
+  .pv-socials a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid #E85D2F;
+    padding-bottom: 1px;
+    transition: color 0.2s;
+  }
+  .pv-link:hover,
+  .pv-socials a:hover {
+    color: #E85D2F;
+  }
+
+  .pv-socials {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* ═══════════════════════════════════════════════════
+     THEMA'S
+     ═══════════════════════════════════════════════════ */
+
+  /* Default — donkere forest achtergrond met ivory tekst */
+  .pv-theme-default {
+    background: #1E3A34;
+    color: #F4F0E8;
+  }
+
+  /* Siviez — ivory met bovenrand + forest tekst */
+  .pv-theme-siviez {
+    background: #F4F0E8;
+    color: #1E3A34;
+    border-top: 1px solid rgba(30, 58, 52, 0.15);
+  }
+  .pv-theme-siviez .pv-page {
+    color: #0E6B6F;
+  }
+
+  /* Ariba — donkere forest, Bebas Neue overriden */
+  .pv-theme-ariba {
+    background: #1E3A34;
+    color: #F4F0E8;
+    font-family: 'Bebas Neue', 'Arial Narrow', sans-serif;
+    letter-spacing: 0.12em;
+  }
+  .pv-theme-ariba .pv-row-1,
+  .pv-theme-ariba .pv-row-2 {
+    font-size: 13px;
+  }
+  .pv-theme-ariba .pv-page {
+    color: #C8A35F;
+  }
+
+  /* Notes — ink-blue achtergrond met graph-paper vibe */
+  .pv-theme-notes {
+    background: #3B4E6B;
+    color: #DDE3E8;
+  }
+
+  /* Responsive — op mobiel elke regel eigen wrap toestaan */
+  @media (max-width: 640px) {
+    .pv-footer {
+      padding: 16px 18px;
+    }
+    .pv-row {
+      gap: 7px;
+    }
+    .pv-row-1,
+    .pv-row-2 {
+      font-size: 10px;
+    }
+  }
+</style>
