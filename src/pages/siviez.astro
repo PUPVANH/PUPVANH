@@ -226,13 +226,6 @@ import Layout from '../layouts/Layout.astro';
     </section>
 
     <footer class="sv-footer">
-      <a href="/" class="sv-footer-brand">Back to PUPVANH</a>
-      <div class="sv-footer-meta">
-        Rosablanche C34<span class="sv-cross"></span>Siviez<span class="sv-cross"></span>Valais<span class="sv-cross"></span>Switzerland
-      </div>
-      <div class="sv-footer-meta sv-footer-meta-b">
-        © 2026 · <span data-i18n="footer.credit">A PUPVANH side project · Hosted by Luc</span>
-      </div>
       <div class="sv-footer-standard sv-footer-line-1">
         © 2026 PUPVANH Projects <span class="ember-dot">•</span> alle rechten voorbehouden
       </div>
@@ -756,40 +749,15 @@ import Layout from '../layouts/Layout.astro';
     background: var(--sv-forest); color: rgba(244, 240, 232, 0.7);
     padding: 60px 8vw 40px; text-align: center;
   }
-  .sv-footer-brand {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 14px; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--sv-ivory); text-decoration: none;
-    display: inline-flex; align-items: center; gap: 12px;
-    margin-bottom: 20px; transition: color 0.3s;
-  }
-  .sv-footer-brand:hover { color: var(--sv-gold); }
-  .sv-footer-brand::before { content: '←'; }
-  .sv-footer-meta {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px; letter-spacing: 0.1em; opacity: 0.5;
-    margin-top: 20px;
-  }
-  .sv-footer-meta-b { margin-top: 12px; }
   .sv-footer-standard {
     font-family: 'JetBrains Mono', monospace;
     font-size: 10px; letter-spacing: 0.08em; opacity: 0.6;
     margin-top: 24px; text-transform: uppercase;
   }
-  .sv-footer-line-1 { margin-top: 40px; padding-top: 24px; border-top: 1px solid rgba(244, 240, 232, 0.15); }
+  .sv-footer-line-1 { margin-top: 0; }
   .sv-footer-line-2 { margin-top: 4px; opacity: 0.75; }
   .sv-footer-standard a { color: var(--sv-ivory); text-decoration: none; border-bottom: 1px solid #E85D2F; }
   .sv-footer-standard .ember-dot { color: #E85D2F; font-size: 8px; }
-  .sv-cross {
-    display: inline-block; width: 16px; height: 16px;
-    background: var(--sv-gold);
-    position: relative; margin: 0 8px; vertical-align: middle;
-  }
-  .sv-cross::before, .sv-cross::after {
-    content: ''; position: absolute; background: var(--sv-forest);
-  }
-  .sv-cross::before { left: 45%; top: 20%; width: 10%; height: 60%; }
-  .sv-cross::after { top: 45%; left: 20%; height: 10%; width: 60%; }
 
   /* ===== REVEAL ===== */
   .sv-reveal {
@@ -894,7 +862,6 @@ import Layout from '../layouts/Layout.astro';
         "reviews.cleanliness": "Cleanliness", "reviews.value": "Value",
         "final.title": "Ready for the <em>mountains</em>?",
         "final.desc": "Availability, prices, and instant booking all through Airbnb. Any questions before booking — send Luc a message, he'll get back to you within a day.",
-        "footer.credit": "A PUPVANH side project · Hosted by Luc"
       },
       nl: {
         "hero.kicker": "Siviez · Wallis · Zwitserse Alpen · 1730m",
@@ -959,7 +926,6 @@ import Layout from '../layouts/Layout.astro';
         "reviews.cleanliness": "Netheid", "reviews.value": "Prijs-kwaliteit",
         "final.title": "Klaar voor de <em>bergen</em>?",
         "final.desc": "Beschikbaarheid, prijzen en directe boeking allemaal via Airbnb. Vragen voor je boekt — stuur Luc een berichtje, hij antwoordt binnen de dag.",
-        "footer.credit": "Een PUPVANH side-project · Gehost door Luc"
       },
       fr: {
         "hero.kicker": "Siviez · Valais · Alpes Suisses · 1730m",
@@ -1024,7 +990,6 @@ import Layout from '../layouts/Layout.astro';
         "reviews.cleanliness": "Propreté", "reviews.value": "Rapport qualité-prix",
         "final.title": "Prêt pour la <em>montagne</em> ?",
         "final.desc": "Disponibilités, prix et réservation instantanée sur Airbnb. Une question avant de réserver — envoyez un message à Luc, il répond dans la journée.",
-        "footer.credit": "Un side-project de PUPVANH · Hébergé par Luc"
       }
     };
 
