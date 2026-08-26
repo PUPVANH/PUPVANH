@@ -37,6 +37,27 @@ const posts = postsData.posts;
 
     <div class="n-list" id="nList"></div>
 
+    <!-- Modal voor uitgebreide posts (opent alleen als post een body_en heeft) -->
+    <div class="n-modal" id="nModal" aria-hidden="true">
+      <div class="n-modal-overlay" data-close></div>
+      <article class="n-modal-card" role="dialog" aria-modal="true" aria-labelledby="nModalTitle">
+        <header class="n-modal-head">
+          <div class="n-modal-meta">
+            <span class="n-modal-num" id="nModalNum">#000</span>
+            <span class="ember-dot">•</span>
+            <span id="nModalDate">date</span>
+            <span class="ember-dot">•</span>
+            <span id="nModalRead">0 min</span>
+          </div>
+          <button class="n-modal-close" data-close aria-label="Close">×</button>
+        </header>
+        <h2 class="n-modal-title" id="nModalTitle">Title</h2>
+        <p class="n-modal-snip" id="nModalSnip">Snip</p>
+        <div class="n-modal-tags" id="nModalTags"></div>
+        <div class="n-modal-body" id="nModalBody"></div>
+      </article>
+    </div>
+
     <div class="n-footer">
       <div class="footer-line-1">
         <span>© 2026 PUPVANH Projects</span>
@@ -225,6 +246,112 @@ html[data-mode="dark"] body:has(.notes-page) { background: #122522; }
 }
 html[data-mode="dark"] .notes-page .ember-dot { color: #FF7A50; }
 
+/* ============ OPEN-INDICATOR OP UITBREIDBARE POSTS ============ */
+.notes-page .n-post.has-body { cursor: pointer; transition: background 0.2s; }
+.notes-page .n-post.has-body:hover { background: rgba(232, 93, 47, 0.04); }
+.notes-page .n-open-hint {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  color: #E85D2F;
+  margin-left: 8px;
+  opacity: 0.85;
+  transition: opacity 0.2s, transform 0.2s;
+  display: inline-block;
+}
+.notes-page .n-post.has-body:hover .n-open-hint { opacity: 1; transform: translateX(3px); }
+
+/* ============ MODAL ============ */
+.notes-page .n-modal {
+  position: fixed; inset: 0; z-index: 100;
+  display: none; align-items: flex-start; justify-content: center;
+  padding: 60px 20px 40px;
+  overflow-y: auto;
+}
+.notes-page .n-modal.open { display: flex; }
+.notes-page .n-modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(30, 58, 52, 0.55);
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+}
+.notes-page .n-modal-card {
+  position: relative; z-index: 1;
+  max-width: 720px; width: 100%;
+  padding: 40px 44px 48px;
+  border-radius: 4px;
+  box-shadow: 0 24px 60px rgba(30, 58, 52, 0.25);
+  animation: nModalIn 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@keyframes nModalIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.notes-page .n-modal-head {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  gap: 20px; margin-bottom: 20px;
+}
+.notes-page .n-modal-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.notes-page .n-modal-close {
+  background: transparent; border: none; padding: 0; margin: 0;
+  font-size: 28px; line-height: 1; cursor: pointer;
+  font-family: inherit; opacity: 0.6; transition: opacity 0.2s;
+}
+.notes-page .n-modal-close:hover { opacity: 1; }
+.notes-page .n-modal-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 34px; font-weight: 600; line-height: 1.15;
+  letter-spacing: -0.5px; margin: 0 0 16px;
+}
+.notes-page .n-modal-snip {
+  font-size: 16px; line-height: 1.65; margin: 0 0 24px;
+  font-style: italic;
+}
+.notes-page .n-modal-tags {
+  display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px;
+}
+.notes-page .n-modal-tags .pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; padding: 3px 10px; border-radius: 20px;
+}
+.notes-page .n-modal-body {
+  font-size: 16px; line-height: 1.75;
+}
+.notes-page .n-modal-body p { margin: 0 0 18px; }
+.notes-page .n-modal-body p:last-child { margin-bottom: 0; }
+.notes-page .n-modal-body em { font-style: italic; }
+.notes-page .n-modal-body strong { font-weight: 600; }
+.notes-page .n-modal-body a {
+  color: #E85D2F; text-decoration: none;
+  border-bottom: 1px solid rgba(232, 93, 47, 0.3);
+  transition: border-color 0.2s;
+}
+.notes-page .n-modal-body a:hover { border-bottom-color: #E85D2F; }
+
+/* Light mode modal */
+html[data-mode="light"] .notes-page .n-modal-card { background: #FDF9F0; color: #1E3A34; }
+html[data-mode="light"] .notes-page .n-modal-meta { color: #6B6B66; }
+html[data-mode="light"] .notes-page .n-modal-close { color: #1E3A34; }
+html[data-mode="light"] .notes-page .n-modal-snip { color: #4a4a4a; }
+html[data-mode="light"] .notes-page .n-modal-tags .pill { background: rgba(14,107,111,0.1); color: #0E6B6F; }
+html[data-mode="light"] .notes-page .n-modal-body { color: #2a2a2a; }
+
+/* Dark mode modal */
+html[data-mode="dark"] .notes-page .n-modal-card { background: #1B2E2A; color: #F4F0E8; }
+html[data-mode="dark"] .notes-page .n-modal-meta { color: #8A8F88; }
+html[data-mode="dark"] .notes-page .n-modal-close { color: #F4F0E8; }
+html[data-mode="dark"] .notes-page .n-modal-snip { color: #B8B4A8; }
+html[data-mode="dark"] .notes-page .n-modal-tags .pill { background: rgba(94,176,179,0.15); color: #5EB0B3; }
+html[data-mode="dark"] .notes-page .n-modal-body { color: #DDD9CE; }
+html[data-mode="dark"] .notes-page .n-modal-overlay { background: rgba(10, 20, 18, 0.7); }
+
+/* Body scroll-lock als modal open is */
+body.n-modal-open { overflow: hidden; }
+
 /* ============ MOBILE ============ */
 @media (max-width: 640px) {
   .notes-page .n-wrap { padding: 0 18px; }
@@ -238,6 +365,10 @@ html[data-mode="dark"] .notes-page .ember-dot { color: #FF7A50; }
   .notes-page .n-num { padding-top: 6px; }
   .notes-page .n-footer { padding: 32px 0 40px; }
   .notes-page .footer-line-2 { font-size: 10px; }
+  .notes-page .n-modal { padding: 30px 12px; }
+  .notes-page .n-modal-card { padding: 28px 22px 32px; }
+  .notes-page .n-modal-title { font-size: 26px; }
+  .notes-page .n-modal-body { font-size: 15px; }
 }
 </style>
 
@@ -249,11 +380,14 @@ function renderPosts() {
   const list = document.getElementById('nList');
   const filtered = currentFilter === 'all' ? posts : posts.filter(p => p.tags.includes(currentFilter));
 
-  list.innerHTML = filtered.map(p => `
-    <div class="n-post">
+  list.innerHTML = filtered.map(p => {
+    const hasBody = !!(p.body_en && p.body_en.trim());
+    const openHint = hasBody ? '<span class="n-open-hint">read more →</span>' : '';
+    return `
+    <div class="n-post${hasBody ? ' has-body' : ''}" data-num="${p.num}">
       <div class="n-num">#${p.num}</div>
       <div>
-        <h2>${p.title_en}</h2>
+        <h2>${p.title_en}${openHint}</h2>
         <p class="snip">${p.snip_en}</p>
         <div class="row">
           ${p.tags.map(t => `<span class="pill">${t}</span>`).join('')}
@@ -262,10 +396,54 @@ function renderPosts() {
       </div>
       <div class="date">${p.date_en}</div>
     </div>
-  `).join('');
+  `;
+  }).join('');
 
   document.getElementById('nCount').textContent = filtered.length + (filtered.length === 1 ? ' note' : ' notes');
+
+  // Bind click handlers voor posts met een body
+  document.querySelectorAll('.n-post.has-body').forEach(el => {
+    el.addEventListener('click', () => {
+      const num = el.getAttribute('data-num');
+      const post = posts.find(p => p.num === num);
+      if (post) openModal(post);
+    });
+  });
 }
+
+function openModal(p) {
+  document.getElementById('nModalNum').textContent = '#' + p.num;
+  document.getElementById('nModalDate').textContent = p.date_en;
+  document.getElementById('nModalRead').textContent = p.readTime + ' min';
+  document.getElementById('nModalTitle').innerHTML = p.title_en;
+  document.getElementById('nModalSnip').textContent = p.snip_en;
+  document.getElementById('nModalTags').innerHTML = p.tags.map(t => `<span class="pill">${t}</span>`).join('');
+  document.getElementById('nModalBody').innerHTML = p.body_en || '';
+
+  const modal = document.getElementById('nModal');
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('n-modal-open');
+}
+
+function closeModal() {
+  const modal = document.getElementById('nModal');
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('n-modal-open');
+}
+
+// Close via [data-close] elementen (overlay + × knop)
+document.querySelectorAll('#nModal [data-close]').forEach(el => {
+  el.addEventListener('click', closeModal);
+});
+
+// Close via Esc
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && document.getElementById('nModal').classList.contains('open')) {
+    closeModal();
+  }
+});
 
 function applyMode(mode) {
   document.documentElement.setAttribute('data-mode', mode);

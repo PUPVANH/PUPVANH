@@ -4,7 +4,10 @@
       "num": "012",
       "date_nl": "22 aug 2026",
       "date_en": "aug 22, 2026",
-      "tags": ["learning", "building"],
+      "tags": [
+        "learning",
+        "building"
+      ],
       "readTime": 4,
       "title_nl": "Astro islands, eindelijk snap ik het",
       "title_en": "Astro islands finally clicked",
@@ -15,7 +18,10 @@
       "num": "011",
       "date_nl": "19 aug 2026",
       "date_en": "aug 19, 2026",
-      "tags": ["ranting", "building"],
+      "tags": [
+        "ranting",
+        "building"
+      ],
       "readTime": 3,
       "title_nl": "Waarom mijn Vercel deploy om 2u brak",
       "title_en": "Why my Vercel deploy broke at 2am",
@@ -26,7 +32,9 @@
       "num": "010",
       "date_nl": "15 aug 2026",
       "date_en": "aug 15, 2026",
-      "tags": ["learning"],
+      "tags": [
+        "learning"
+      ],
       "readTime": 2,
       "title_nl": "Is 'AI-assisted' wel het juiste woord?",
       "title_en": "Is 'AI-assisted' even the right word?",
@@ -37,7 +45,9 @@
       "num": "009",
       "date_nl": "11 aug 2026",
       "date_en": "aug 11, 2026",
-      "tags": ["poems"],
+      "tags": [
+        "poems"
+      ],
       "readTime": 1,
       "title_nl": "Nachtdienst",
       "title_en": "Night shift",
@@ -48,18 +58,24 @@
       "num": "008",
       "date_nl": "08 aug 2026",
       "date_en": "aug 08, 2026",
-      "tags": ["learning"],
+      "tags": [
+        "learning"
+      ],
       "readTime": 6,
       "title_nl": "Claude schreef 90% van deze site. Voelt raar.",
       "title_en": "Claude wrote 90% of this site. It feels weird.",
       "snip_nl": "Ik ben geen developer. Toch heb ik een portfolio-site die live staat. De credit-vraag houdt me al twee weken bezig.",
-      "snip_en": "I'm not a developer. Yet I have a portfolio site that's live. The credit question has been bugging me for two weeks."
+      "snip_en": "I'm not a developer. Yet I have a portfolio site that's live. The credit question has been bugging me for two weeks.",
+      "body_en": "<p>The credit question has been in my head for two weeks now. I sit down at my desk, open a new chat, describe what I want, and half an hour later a website is deployed. I did not write the code. But I do own the ideas, the choices, the taste, the pushback when something feels off. What does that make me?</p>\n\n<p>The purists will say: <em>you're not building, you're prompting</em>. And they're right, in a narrow sense. I could not open a text editor and write an Astro component from scratch. If Claude disappeared tomorrow, this whole site would freeze in place — I could add a photo, change a JSON, but I could not fix a bug I did not cause.</p>\n\n<p>But then again: I know exactly what I want. I can look at a preview and say <em>the padding is off, the divider is too cold, the font on the CTA does not carry weight</em>. I decide what stays and what gets scrapped. I am the one who says <strong>this feels like me</strong> or <strong>this doesn't</strong>. That is a form of authorship. Not the traditional kind, but a kind.</p>\n\n<p>Maybe the honest answer is: I'm a director, not a developer. And the site is a collaboration, not a solo project. I'll take that. It's more interesting than either extreme.</p>"
     },
     {
       "num": "007",
       "date_nl": "03 aug 2026",
       "date_en": "aug 03, 2026",
-      "tags": ["ranting", "building"],
+      "tags": [
+        "ranting",
+        "building"
+      ],
       "readTime": 3,
       "title_nl": "Wanneer stop je met refactoren?",
       "title_en": "When do you stop refactoring?",
