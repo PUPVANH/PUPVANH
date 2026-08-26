@@ -6,10 +6,14 @@
     <span>PUPVANH</span>
   </div>
   <div class="nav-c">
-    <a href="/siviez">siviez</a>
-    <a href="/ariba">ariba</a>
     <a href="/notes">notes</a>
+    <a href="/bookmarks">bookmarks</a>
+    <a href="/jpg">jpg</a>
+    <span class="cat-sep" aria-hidden="true">•&nbsp;•&nbsp;•</span>
+    <a href="/ariba">ariba</a>
+    <a href="/siviez">siviez</a>
     <a href="/flags">flags</a>
+    <a href="/pups">pups</a>
   </div>
   <div class="nav-r">
     <span>2026 · vol.01</span>
@@ -35,9 +39,10 @@
   }
   .nav-l:hover::after{opacity:.6;}
   @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.85);}}
-  .nav-c{display:flex;gap:24px;font-size:12px;color:var(--muted);}
+  .nav-c{display:flex;gap:24px;font-size:12px;color:var(--muted);align-items:center;}
   .nav-c a{color:var(--muted);text-decoration:none;transition:color .2s;}
   .nav-c a:hover{color:var(--accent);}
+  .cat-sep{color:var(--ember);font-size:10px;letter-spacing:1px;user-select:none;opacity:.75;}
   .nav-r{display:flex;gap:14px;align-items:center;font-size:12px;color:var(--muted);}
   .theme-toggle{background:transparent;border:none;color:var(--text);font-size:14px;cursor:pointer;font-family:inherit;}
   .pup{position:fixed;top:22px;left:-80px;font-size:28px;z-index:200;pointer-events:none;opacity:0;}
