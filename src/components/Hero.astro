@@ -11,7 +11,7 @@
     </div>
   </div>
   <div class="hero-r">
-    <a href="/jpg" class="hp hp1" data-tag="// dolomites, italy"></a>
+    <a href="/pupsjpg" class="hp hp1" data-tag="// dolomites, italy"></a>
     <a href="/siviez" class="hp hp2" data-tag="// siviez, valais"></a>
   </div>
 </div>
@@ -52,12 +52,7 @@
   }
 
   .hero-r{position:relative;height:400px;}
-  .hp{
-    position:absolute;border-radius:2px;overflow:hidden;
-    box-shadow:0 8px 30px rgba(24,33,30,.15);
-    display:block;background-size:cover;background-position:center;
-    transition:transform .4s ease,box-shadow .4s ease;
-  }
+  .hp{position:absolute;border-radius:2px;overflow:hidden;box-shadow:0 8px 30px rgba(24,33,30,.15);display:block;background-size:cover;background-position:center;transition:transform .4s ease,box-shadow .4s ease;}
   .hp:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 14px 40px rgba(24,33,30,.25);}
   .hp1{
     width:65%;height:75%;top:0;right:0;
@@ -123,6 +118,7 @@
   }
   tick();
 
+  // Late-night easter egg
   const h = new Date().getHours();
   if (h >= 21 || h < 6) {
     document.getElementById('late')?.classList.add('show');

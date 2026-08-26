@@ -1,12 +1,11 @@
 ---
 const items = [
-  { n: '01', img: 'photos', href: '/jpg',       bg: '/pupsjpg/italy-04-venice-canal.jpg', title: 'pups.jpg — <em>photographs on the road</em>', kind: 'photos', date: '30 frames' },
-  { n: '02', img: 'pups',   href: '/pups',                                              title: 'po.pups — <em>dog-inspired streetwear</em>', kind: 'project', date: 'via DM only' },
-  { n: '03', img: 'siviez', href: '/siviez',    bg: '/pupsjpg/ch-03-resort.jpg',        title: 'Rosablanche C34 — <em>Siviez, Swiss Alps</em>', kind: 'project', date: 'live on Airbnb' },
-  { n: '04', img: 'ariba',  href: '/ariba',     bg: '/ariba/fc-ariba-logo.svg', bgFit: 'contain', title: 'FC Ariba — <em>MVBI Izegem, reeks 1</em>', kind: 'project', date: 'since 2022' },
-  { n: '05', img: 'text', symbol: '✎', href: '/notes',                                  title: 'Notes — <em>rants, building, learning</em>', kind: 'writing', date: 'ongoing' },
-  { n: '06', img: 'bookmarks', href: '/bookmarks',                                      title: 'Bookmarks — <em>worth your click</em>', kind: 'bookmarks', date: '4 links' },
-  { n: '07', img: 'flags',  href: '/flags',                                             title: 'flags.exe — <em>197 country flag quiz</em>', kind: 'project', date: 'windows 95 vibes' },
+  { n: '01', img: 'photos', href: '/pupsjpg', bg: '/pupsjpg/italy-04-venice-canal.jpg', title: 'pups.jpg — <em>photographs on the road</em>', kind: 'photos', date: '30 frames' },
+  { n: '02', img: 'pups',   href: '/pups',    title: 'po.pups — <em>dog-inspired streetwear</em>', kind: 'project', date: 'via DM only' },
+  { n: '03', img: 'siviez', href: '/siviez',  bg: '/pupsjpg/ch-03-resort.jpg', title: 'Rosablanche C34 — <em>Siviez, Swiss Alps</em>', kind: 'project', date: 'live on Airbnb' },
+  { n: '04', img: 'ariba',  href: '/ariba',   bg: '/ariba/fc-ariba-logo.svg', bgFit: 'contain', title: 'FC Ariba — <em>MVBI Izegem, reeks 1</em>', kind: 'project', date: 'since 2022' },
+  { n: '05', img: 'text', symbol: '✎', href: '/headspace', title: 'Headspace — <em>notes, rants, learning in public</em>', kind: 'writing', date: 'ongoing' },
+  { n: '06', img: 'flags',  href: '/flags',   title: 'flags.exe — <em>197 country flag quiz</em>', kind: 'project', date: 'windows 95 vibes' },
 ];
 ---
 
@@ -68,11 +67,6 @@ const items = [
   .rimg.siviez{background:linear-gradient(200deg,#0E6B6F,#1E3A34);}
   .rimg.ariba{background:linear-gradient(140deg,#C8A35F,#8b6d3a);}
   .rimg.flags{background:linear-gradient(160deg,#008080,#1E3A34);}
-  .rimg.bookmarks{
-    background:linear-gradient(140deg,#C8A35F,#E85D2F);
-    display:flex;align-items:center;justify-content:center;
-    font-family:'JetBrains Mono',monospace;font-size:22px;color:#F4F0E8;
-  }
   .rimg.text{
     background:var(--card);border:1px solid var(--line);
     display:flex;align-items:center;justify-content:center;

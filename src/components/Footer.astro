@@ -1,0 +1,27 @@
+---
+---
+
+<footer>
+  <div>// © 2026 PUP VANH · izegem</div>
+  <div class="socials">
+    <a href="#">instagram</a>
+    <a href="#">tiktok</a>
+    <a href="#">are.na</a>
+    <a href="mailto:hello@pupvanh.com">email</a>
+  </div>
+</footer>
+
+<style>
+  footer{
+    padding:32px;font-family:'JetBrains Mono',monospace;font-size:11px;
+    color:var(--muted);display:flex;justify-content:space-between;
+    flex-wrap:wrap;gap:16px;background:var(--bg);
+  }
+  footer .socials{display:flex;gap:16px;}
+  footer .socials a{color:var(--muted);text-decoration:none;transition:color .2s;}
+  footer .socials a:hover{color:var(--ember);}
+
+  @media(max-width:800px){
+    footer{padding:20px;}
+  }
+</style>

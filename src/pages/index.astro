@@ -8,14 +8,10 @@ import FeedIndex from '../components/FeedIndex.astro';
 import WordMarquee from '../components/WordMarquee.astro';
 import AboutSection from '../components/AboutSection.astro';
 import ContactSection from '../components/ContactSection.astro';
-import PupvanhFooter from '../components/PupvanhFooter.astro';
+import Footer from '../components/Footer.astro';
 ---
 
-<Layout
-  title="PUPVANH · Projects"
-  description="PUPVANH — creative space of Puppy. Photos, caps, poems, sites."
-  favicon="/favicons/homepage.svg"
->
+<Layout title="PUP VANH — portfolio of Puppy">
   <Nav />
   <Hero />
   <Counters />
@@ -24,15 +20,5 @@ import PupvanhFooter from '../components/PupvanhFooter.astro';
   <WordMarquee />
   <AboutSection />
   <ContactSection />
-
-  <PupvanhFooter
-    paginaNaam="Home"
-    built="AUG 2026"
-    updated="AUG 2026"
-    theme="default"
-    socials={[
-      { label: 'INSTAGRAM', href: 'https://instagram.com/pepijnvanhauwere' },
-      { label: 'TIKTOK', href: 'https://tiktok.com/@pups.jpg' },
-    ]}
-  />
+  <Footer />
 </Layout>
