@@ -1,5 +1,6 @@
 ---
 import Analytics from "@vercel/analytics/astro"
+import PupvanhFooter from '../components/PupvanhFooter.astro';
 
 // Alle foto's — data-driven, makkelijk toe te voegen via GitHub
 const photos = [
@@ -256,11 +257,20 @@ html[data-mode="dark"] .pupsjpg-page .land { fill:#2a2825; }
   <div class="foot">
     <span>Fujifilm X100F <span class="em">·</span> Classic Chrome</span>
     <span>Hover a photo <span class="em">·</span> shows title, place, date</span>
-    <span>Part of <a href="/"><span class="em">PUPVANH</span></a> Projects</span>
-    <span>BUILT AUG 2026 <span class="em">·</span> UPDATED AUG 2026</span>
   </div>
 
 </div>
+
+<PupvanhFooter
+  paginaNaam="pups.jpg"
+  built="AUG 2026"
+  updated="AUG 2026"
+  theme="default"
+  socials={[
+    { label: 'INSTAGRAM', href: 'https://instagram.com/pepijnvanhauwere' },
+    { label: 'TIKTOK', href: 'https://tiktok.com/@pups.jpg' },
+  ]}
+/>
 
 <div class="lb" id="lb">
   <button class="lb-close" data-lb-close>Close · Esc</button>

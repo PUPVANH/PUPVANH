@@ -2,6 +2,7 @@
 // FLAGS.EXE — subpagina van PUPVANH
 // Windows 95 vibe · 197 landen · NL/EN · vlaggen uit /public/flag-images/
 import Analytics from '@vercel/analytics/astro';
+import PupvanhFooter from '../components/PupvanhFooter.astro';
 ---
 <!DOCTYPE html>
 <html lang="nl">
@@ -9,6 +10,7 @@ import Analytics from '@vercel/analytics/astro';
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FLAGS.EXE — PUPVANH</title>
+<link rel="icon" type="image/svg+xml" href="/favicons/flags.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=VT323&family=Pixelify+Sans:wght@400;700&family=Kalam:wght@400;700&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
@@ -1602,10 +1604,12 @@ html[data-theme="classroom"] .classroom-books { display: block; }
 
 </div>
 
-<footer class="pupvanh-footer">
-  <div class="pv-line dim">BUILT AUG 2026 · UPDATED AUG 2026</div>
-  <div class="pv-line"><span class="pv-name">FLAGS</span> · <span id="pv-partof">Deel van PUPVANH Projects</span> · <a href="https://pupvanh.vercel.app">pupvanh.vercel.app →</a></div>
-</footer>
+<PupvanhFooter
+  paginaNaam="FLAGS.EXE"
+  built="AUG 2026"
+  updated="AUG 2026"
+  theme="default"
+/>
 
 <script is:inline>
 // ============ CONFIG ============
@@ -2269,6 +2273,5 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
-<Analytics />
 </body>
 </html>

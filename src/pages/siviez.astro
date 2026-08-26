@@ -3,8 +3,9 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout
-  title="Rosablanche C34 · Siviez, Swiss Alps · PUP VANH"
+  title="Rosablanche C34 · Siviez, Swiss Alps · PUPVANH"
   description="A spacious mountain apartment in Siviez, at the heart of the 4 Vallées ski area. Ski-in / ski-out in winter, endless hiking in summer. Bookable on Airbnb."
+  favicon="/favicons/siviez.svg"
 >
   <div class="siviez-page">
 
@@ -231,6 +232,12 @@ import Layout from '../layouts/Layout.astro';
       </div>
       <div class="sv-footer-meta sv-footer-meta-b">
         © 2026 · <span data-i18n="footer.credit">A PUPVANH side project · Hosted by Luc</span>
+      </div>
+      <div class="sv-footer-standard sv-footer-line-1">
+        © 2026 PUPVANH Projects <span class="ember-dot">•</span> alle rechten voorbehouden
+      </div>
+      <div class="sv-footer-standard sv-footer-line-2">
+        BUILT AUG 2026 <span class="ember-dot">•</span> UPDATED AUG 2026 <span class="ember-dot">•</span> Rosablanche C34 <span class="ember-dot">•</span> <a href="https://pupvanh.vercel.app">pupvanh.vercel.app →</a>
       </div>
     </footer>
 
@@ -764,6 +771,15 @@ import Layout from '../layouts/Layout.astro';
     margin-top: 20px;
   }
   .sv-footer-meta-b { margin-top: 12px; }
+  .sv-footer-standard {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.08em; opacity: 0.6;
+    margin-top: 24px; text-transform: uppercase;
+  }
+  .sv-footer-line-1 { margin-top: 40px; padding-top: 24px; border-top: 1px solid rgba(244, 240, 232, 0.15); }
+  .sv-footer-line-2 { margin-top: 4px; opacity: 0.75; }
+  .sv-footer-standard a { color: var(--sv-ivory); text-decoration: none; border-bottom: 1px solid #E85D2F; }
+  .sv-footer-standard .ember-dot { color: #E85D2F; font-size: 8px; }
   .sv-cross {
     display: inline-block; width: 16px; height: 16px;
     background: var(--sv-gold);
