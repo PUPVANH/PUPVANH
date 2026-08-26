@@ -1,0 +1,953 @@
+---
+import { Analytics } from '@vercel/analytics/astro';
+---
+<!DOCTYPE html>
+<html lang="en" data-mode="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bookmarks · PUPVANH</title>
+<meta name="description" content="Sites, poets and places that got to me. No affiliates, no ads — just things worth your click." />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<style is:global>
+  :root {
+    --teal: #0E6B6F;
+    --gold: #C8A35F;
+    --ember: #E85D2F;
+    --ivory: #F4F0E8;
+    --forest: #1E3A34;
+    --mute: #7a8580;
+    --bg: var(--ivory);
+    --text: var(--forest);
+    --card: #ffffff;
+    --line: rgba(30, 58, 52, 0.10);
+    --photo-bg: linear-gradient(135deg, #E8DFCF 0%, #DED2BC 100%);
+  }
+  html[data-mode="dark"] {
+    --bg: #14201C;
+    --text: #E8E4D7;
+    --card: #1B2A25;
+    --line: rgba(232, 228, 215, 0.10);
+    --mute: #8a958f;
+    --photo-bg: linear-gradient(135deg, #2A3A35 0%, #1F2C28 100%);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg); color: var(--text); }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.35;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.12 0 0 0 0 0.23 0 0 0 0 0.20 0 0 0 0.22 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    mix-blend-mode: multiply;
+  }
+
+  /* ── Topbar ─────────────────────────── */
+  .topbar {
+    position: sticky; top: 0; z-index: 20;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 18px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .back-link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: var(--mute);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.25s, transform 0.25s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .back-link:hover { color: var(--ember); transform: translateX(-3px); }
+  .mode-toggle {
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    width: 32px; height: 32px;
+    cursor: pointer;
+    color: var(--text);
+    font-size: 15px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+  .mode-toggle:hover { border-color: var(--ember); color: var(--ember); }
+
+  /* ── Hero ─────────────────────────── */
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 32px 100px;
+    position: relative;
+    z-index: 2;
+  }
+  .hero {
+    margin-bottom: 90px;
+    max-width: 720px;
+  }
+  .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ember);
+    margin-bottom: 24px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .kicker::before {
+    content: '';
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--ember);
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: clamp(56px, 9vw, 108px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--forest);
+    margin-bottom: 28px;
+  }
+  html[data-mode="dark"] .hero h1 { color: var(--ivory); }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--teal);
+  }
+  html[data-mode="dark"] .hero h1 em { color: var(--gold); }
+  .hero p.intro {
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--mute);
+    max-width: 580px;
+    font-weight: 400;
+  }
+
+  /* ── Grid ─────────────────────────── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+  @media (max-width: 800px) {
+    .grid { grid-template-columns: 1fr; gap: 20px; }
+    main { padding: 60px 22px 80px; }
+    .topbar-inner { padding: 14px 22px; }
+  }
+
+  .card {
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 42px 38px 36px;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    min-height: 320px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
+    overflow: hidden;
+    font-family: inherit;
+    text-align: left;
+    width: 100%;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0;
+    width: 2px; height: 0;
+    background: var(--ember);
+    transition: height 0.35s ease;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -20px rgba(30, 58, 52, 0.18);
+    border-color: color-mix(in srgb, var(--forest) 20%, transparent);
+  }
+  .card:hover::before { height: 100%; }
+
+  .card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .card-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--mute);
+    letter-spacing: 0.08em;
+  }
+  .badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ember);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--ember);
+  }
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: 34px;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--forest);
+    margin: 4px 0 0;
+  }
+  html[data-mode="dark"] .card-title { color: var(--ivory); }
+  .card-title em {
+    font-style: italic;
+    color: var(--teal);
+  }
+  html[data-mode="dark"] .card-title em { color: var(--gold); }
+  .card-desc {
+    font-size: 15.5px;
+    line-height: 1.55;
+    color: var(--mute);
+    flex: 1;
+  }
+  .card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding-top: 18px;
+    border-top: 1px dashed var(--line);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--mute);
+    letter-spacing: 0.04em;
+  }
+  .card-meta .url {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 60%;
+  }
+  /* Direct visit pill on the card */
+  .visit-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ember);
+    background: transparent;
+    border: 1px solid color-mix(in srgb, var(--ember) 45%, transparent);
+    padding: 8px 14px;
+    border-radius: 999px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+    z-index: 3;
+    position: relative;
+  }
+  .visit-pill:hover {
+    background: var(--ember);
+    color: var(--ivory);
+    border-color: var(--ember);
+    transform: translateX(2px);
+  }
+  html[data-mode="dark"] .visit-pill:hover { color: var(--forest); }
+  .visit-pill .arrow {
+    font-size: 12px;
+    transition: transform 0.25s ease;
+  }
+  .visit-pill:hover .arrow { transform: translateX(3px); }
+  /* Expand hint appears bottom-left */
+  .card-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--mute);
+    opacity: 0.7;
+    transition: opacity 0.25s, color 0.25s;
+  }
+  .card:hover .card-hint { opacity: 1; color: var(--forest); }
+  html[data-mode="dark"] .card:hover .card-hint { color: var(--ivory); }
+  .card-hint::before {
+    content: '⤢';
+    font-size: 13px;
+  }
+
+  /* ── Modal ─────────────────────────── */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(30, 58, 52, 0.55);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 100;
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 60px 20px;
+    overflow-y: auto;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--card);
+    max-width: 720px;
+    width: 100%;
+    border-radius: 6px;
+    padding: 56px 56px 44px;
+    position: relative;
+    box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.4);
+    animation: rise 0.35s ease;
+    display: none;
+    flex-direction: column;
+  }
+  .modal.active { display: flex; }
+  @keyframes rise {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  .modal-close {
+    position: absolute;
+    top: 20px; right: 20px;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--text);
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    z-index: 2;
+  }
+  .modal-close:hover { border-color: var(--ember); color: var(--ember); transform: rotate(90deg); }
+
+  .modal-kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ember);
+    margin-bottom: 16px;
+  }
+  .modal h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: 46px;
+    line-height: 1.05;
+    color: var(--forest);
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+  .modal h2 em { font-style: italic; color: var(--teal); }
+  html[data-mode="dark"] .modal h2 { color: var(--ivory); }
+  html[data-mode="dark"] .modal h2 em { color: var(--gold); }
+
+  .modal-byline {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--mute);
+    letter-spacing: 0.05em;
+    margin-bottom: 28px;
+  }
+  .modal-byline a { color: var(--teal); text-decoration: none; }
+  html[data-mode="dark"] .modal-byline a { color: var(--gold); }
+
+  /* Action bar under title */
+  .actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 24px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 36px;
+  }
+  .btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 11px 20px;
+    border-radius: 999px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.25s;
+    border: 1px solid transparent;
+  }
+  .btn-primary {
+    background: var(--forest);
+    color: var(--ivory);
+  }
+  html[data-mode="dark"] .btn-primary {
+    background: var(--ember);
+    color: var(--forest);
+  }
+  .btn-primary:hover {
+    background: var(--ember);
+    color: var(--ivory);
+    transform: translateY(-2px);
+  }
+  html[data-mode="dark"] .btn-primary:hover {
+    background: var(--gold);
+    color: var(--forest);
+  }
+  .btn-secondary {
+    background: transparent;
+    color: var(--text);
+    border-color: var(--line);
+  }
+  .btn-secondary:hover {
+    border-color: var(--ember);
+    color: var(--ember);
+    transform: translateY(-2px);
+  }
+  .btn .icon {
+    font-size: 13px;
+  }
+
+  /* Content sections */
+  .content-block { margin-bottom: 32px; }
+  .content-block:last-child { margin-bottom: 0; }
+  .content-block h3 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mute);
+    margin-bottom: 18px;
+  }
+  .content-block p {
+    font-size: 16.5px;
+    line-height: 1.65;
+    color: var(--text);
+    margin-bottom: 14px;
+  }
+  .content-block p:last-child { margin-bottom: 0; }
+
+  /* Poem */
+  .poem {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    line-height: 1.75;
+    color: var(--text);
+  }
+  .poem p { margin-bottom: 22px; }
+  .poem p:first-child::first-letter {
+    font-size: 56px;
+    line-height: 0.9;
+    float: left;
+    margin: 6px 12px 0 0;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--ember);
+  }
+
+  /* Photo slots */
+  .photo-strip {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: repeat(2, 180px);
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .photo-strip .photo:first-child { grid-row: span 2; }
+  .photo-single {
+    height: 320px;
+    margin-bottom: 24px;
+  }
+  .photo-triple {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 200px;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .photo {
+    background: var(--photo-bg);
+    border: 1px dashed color-mix(in srgb, var(--ember) 40%, transparent);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    padding: 12px;
+  }
+  .photo::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='60'><circle cx='30' cy='30' r='0.5' fill='%230E6B6F' opacity='0.3'/></svg>");
+    background-size: 20px 20px;
+    opacity: 0.4;
+  }
+  .photo::after {
+    content: '◇';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 32px;
+    color: color-mix(in srgb, var(--forest) 20%, transparent);
+  }
+  .photo .cap {
+    position: relative;
+    z-index: 1;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--forest);
+    text-transform: uppercase;
+    background: var(--ivory);
+    padding: 4px 8px;
+    border-radius: 2px;
+    opacity: 0.9;
+  }
+  html[data-mode="dark"] .photo .cap {
+    background: var(--forest);
+    color: var(--ivory);
+  }
+
+  /* Quote block */
+  .quote-block {
+    background: color-mix(in srgb, var(--ember) 8%, transparent);
+    border-left: 3px solid var(--ember);
+    padding: 22px 26px;
+    margin: 24px 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .quote-block p {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .quote-block cite {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mute);
+    font-style: normal;
+  }
+
+  /* Poem excerpt (bookmark 3) */
+  .poem-excerpt {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 20px;
+    line-height: 1.6;
+    color: var(--text);
+    padding: 24px 0;
+    text-align: center;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .poem-excerpt .attribution {
+    display: block;
+    margin-top: 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-style: normal;
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mute);
+  }
+
+  .modal-footer-note {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    color: var(--mute);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-align: right;
+  }
+
+  @media (max-width: 640px) {
+    .modal { padding: 40px 24px 32px; }
+    .modal h2 { font-size: 32px; }
+    .poem, .content-block p { font-size: 16px; }
+    .modal-overlay { padding: 20px 12px; }
+    .photo-triple { grid-template-columns: 1fr; grid-template-rows: repeat(3, 160px); }
+    .photo-strip { grid-template-columns: 1fr; grid-template-rows: repeat(3, 160px); }
+    .photo-strip .photo:first-child { grid-row: auto; }
+    .photo-single { height: 220px; }
+  }
+
+  /* ── Footer ─────────────────────────── */
+  footer.pupvanh-footer {
+    background: var(--forest);
+    color: var(--ivory);
+    padding: 26px 32px;
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    position: relative;
+    z-index: 2;
+  }
+  .pupvanh-footer .row1 { margin-bottom: 8px; opacity: 0.9; }
+  .pupvanh-footer .row2 { opacity: 0.75; }
+  .pupvanh-footer .sep { color: var(--ember); margin: 0 10px; font-weight: bold; }
+  .pupvanh-footer a {
+    color: var(--ivory);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .pupvanh-footer a:hover { border-color: var(--ember); }
+</style>
+</head>
+<body class="bookmarks-page">
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <a href="/" class="back-link">← PUPVANH</a>
+    <button class="mode-toggle" id="modeToggle" aria-label="Toggle mode">◐</button>
+  </div>
+</div>
+
+<main>
+  <section class="hero">
+    <div class="kicker">bookmarks</div>
+    <h1>Worth your <em>click.</em></h1>
+    <p class="intro">Sites, poets and places that got to me. No affiliates, no ads — just things worth your click.</p>
+  </section>
+
+  <section class="grid" id="grid">
+
+    <!-- Card 01 -->
+    <div class="card" data-modal="1" role="button" tabindex="0">
+      <div class="card-head">
+        <span class="card-num">01</span>
+        <span class="badge">spoken word</span>
+      </div>
+      <h3 class="card-title">A Toast to <em>Old Friends</em></h3>
+      <p class="card-desc">A spoken-word piece by @georgiesroar that keeps circling back — about the friend you keep meaning to call. Click to read the whole thing.</p>
+      <div class="card-meta">
+        <span class="card-hint">read the piece</span>
+        <a class="visit-pill" href="https://www.tiktok.com/@georgiesroar/video/7440184759575153952" target="_blank" rel="noopener" data-nomodal>
+          Watch <span class="arrow">↗</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Card 02 -->
+    <div class="card" data-modal="2" role="button" tabindex="0">
+      <div class="card-head">
+        <span class="card-num">02</span>
+        <span class="badge">place</span>
+      </div>
+      <h3 class="card-title">Volkshotel <em>Amsterdam</em></h3>
+      <p class="card-desc">Weekend spot with a club, a bar and a rooftop sauna. My go-to whenever I'm in Amsterdam — also the place where I get my yearly tattoo.</p>
+      <div class="card-meta">
+        <span class="card-hint">see more</span>
+        <a class="visit-pill" href="https://www.volkshotel.nl/" target="_blank" rel="noopener" data-nomodal>
+          Visit site <span class="arrow">↗</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Card 03 -->
+    <div class="card" data-modal="3" role="button" tabindex="0">
+      <div class="card-head">
+        <span class="card-num">03</span>
+        <span class="badge">poet</span>
+      </div>
+      <h3 class="card-title">Bri <em>Anora</em></h3>
+      <p class="card-desc">Poet on TikTok — her voice, her writing, her cadence. Must-follow if you like words that land quietly and then don't leave.</p>
+      <div class="card-meta">
+        <span class="card-hint">see more</span>
+        <a class="visit-pill" href="https://www.tiktok.com/@briwritespoetry_" target="_blank" rel="noopener" data-nomodal>
+          TikTok <span class="arrow">↗</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Card 04 -->
+    <div class="card" data-modal="4" role="button" tabindex="0">
+      <div class="card-head">
+        <span class="card-num">04</span>
+        <span class="badge">self-plug</span>
+      </div>
+      <h3 class="card-title">Rosablanche C34 · <em>Siviez</em></h3>
+      <p class="card-desc">Shameless plug — my own subpage. Hiking, raclette, alpine silence in summer; ski-in/out in winter. Also tennis and mountain bikes.</p>
+      <div class="card-meta">
+        <span class="card-hint">see more</span>
+        <a class="visit-pill" href="/siviez" data-nomodal>
+          Go to page <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+  </section>
+</main>
+
+<!-- ══════════════ MODAL 01 · POEM ══════════════ -->
+<div class="modal-overlay" id="modal-overlay">
+
+  <div class="modal" data-id="1">
+    <button class="modal-close">✕</button>
+    <div class="modal-kicker">// spoken word · bookmark 01</div>
+    <h2>A Toast to <em>Old Friends</em></h2>
+    <div class="modal-byline">by <a href="https://www.tiktok.com/@georgiesroar" target="_blank" rel="noopener">@georgiesroar</a> · TikTok · 2024</div>
+
+    <div class="actions">
+      <a class="btn btn-primary" href="https://www.tiktok.com/@georgiesroar/video/7440184759575153952" target="_blank" rel="noopener">
+        <span class="icon">▶</span> Watch on TikTok
+      </a>
+      <a class="btn btn-secondary" href="https://www.tiktok.com/@georgiesroar" target="_blank" rel="noopener">
+        <span class="icon">@</span> Follow @georgiesroar
+      </a>
+    </div>
+
+    <div class="content-block">
+      <h3>full transcript</h3>
+      <div class="poem">
+        <p>I got a call from an old mate last year — a bloke I've not spoken to since I was fourteen. For no particular reason, we just went in different directions, and then never crossed paths. And then the years passed, and so did the seasons, until it got to a point where reaching out after so long felt like treason — to that unspoken manly concept of not being the first to text and say, "How's it going?"</p>
+
+        <p>Now things are less hectic, but those Sunday morning hangovers aren't fucking slowing. And then randomly — he called. He said, "How many years has it been, old friend?" I said, "At least ten, but I still see your posts on Instagram now and then." He told me I should know better than to see life through such a tinted lens — that Instagram bollocks is all pretend.</p>
+
+        <p>I asked, "What do I owe the pleasure? Was it a call for business or leisure? Have you worked out where those dealers from my hometown finally buried their treasure?" He laughed — the same laugh he always had, giggly. And we used to take the piss out of him for it, but now it felt comforting — like a flashback in time, way after, brought upon me by laughter.</p>
+
+        <p>He said, "No rhyme, no reason for the call. My mum asked how you were — she knew we were thick as fools. And I didn't have an answer." He said, "I know you're doing well, and you're still an attention seeker, because all you do is post — but in honesty mate, you've never felt less close."</p>
+
+        <p>Which is bizarre for a man whose bare ass cheeks I've seen more than most. I told him I'd stopped mooning people out of bus windows — on account of being twenty-eight and the concept of being absolutely gross.</p>
+
+        <p>We chatted for ten minutes more, and agreed to meet up when things got less busy. I was up to my eyeballs in work, and his master's thesis was making him dizzy. And I fully intended to catch up with him — a proper catch-up over something fizzy.</p>
+
+        <p>But I've never got the chance. Well, actually… that's not true. I never made the effort to create the chance. I had a ton of time for first dates, so I could socially advance. I had time for randomers who only ever gave me "can'ts." I even ran a fucking marathon in France.</p>
+
+        <p>But now he's not here anymore, and I've missed his last dance. And boy, do I wish I was fourteen again — to see my old friend. Because now, that's twice I've said goodbye, not knowing I'd never see him again.</p>
+      </div>
+    </div>
+
+    <div class="modal-footer-note">first transcript on the internet · © @georgiesroar</div>
+  </div>
+
+  <!-- ══════════════ MODAL 02 · VOLKSHOTEL ══════════════ -->
+  <div class="modal" data-id="2">
+    <button class="modal-close">✕</button>
+    <div class="modal-kicker">// place · bookmark 02</div>
+    <h2>Volkshotel <em>Amsterdam</em></h2>
+    <div class="modal-byline">Wibautstraat 150, 1091 GR · Amsterdam</div>
+
+    <div class="actions">
+      <a class="btn btn-primary" href="https://www.volkshotel.nl/" target="_blank" rel="noopener">
+        <span class="icon">↗</span> Visit volkshotel.nl
+      </a>
+      <a class="btn btn-secondary" href="https://www.volkshotel.nl/en/rooms" target="_blank" rel="noopener">
+        <span class="icon">◆</span> Book a room
+      </a>
+      <a class="btn btn-secondary" href="https://www.instagram.com/volkshotel/" target="_blank" rel="noopener">
+        <span class="icon">◐</span> Instagram
+      </a>
+    </div>
+
+    <div class="content-block">
+      <h3>a few frames</h3>
+      <div class="photo-strip">
+        <div class="photo"><span class="cap">Rooftop · Canvas</span></div>
+        <div class="photo"><span class="cap">Sauna</span></div>
+        <div class="photo"><span class="cap">Room</span></div>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <h3>why this place</h3>
+      <p>Volkshotel is that rare hotel where the building itself is the reason to stay. Former newspaper offices turned into rooms designed by different artists, a club in the basement (Canvas), a bar and restaurant, and a rooftop with hot tubs and a sauna that stays open past midnight.</p>
+      <p>I keep coming back — for the ease of not having to plan the night. You stay, you eat, you dance downstairs, you swim up top. It's an ecosystem, not just a bed.</p>
+    </div>
+
+    <div class="quote-block">
+      <p>"Every year I fly in, I get a new tattoo — same city, same hotel, different piece."</p>
+      <cite>— Puppy, on why he never books elsewhere</cite>
+    </div>
+
+    <div class="modal-footer-note">visited annually · since 2022</div>
+  </div>
+
+  <!-- ══════════════ MODAL 03 · BRI ANORA ══════════════ -->
+  <div class="modal" data-id="3">
+    <button class="modal-close">✕</button>
+    <div class="modal-kicker">// poet · bookmark 03</div>
+    <h2>Bri <em>Anora</em></h2>
+    <div class="modal-byline">poet · TikTok · <a href="https://www.tiktok.com/@briwritespoetry_" target="_blank" rel="noopener">@briwritespoetry_</a></div>
+
+    <div class="actions">
+      <a class="btn btn-primary" href="https://www.tiktok.com/@briwritespoetry_" target="_blank" rel="noopener">
+        <span class="icon">▶</span> Follow on TikTok
+      </a>
+      <a class="btn btn-secondary" href="https://www.instagram.com/briwritespoetry_/" target="_blank" rel="noopener">
+        <span class="icon">◐</span> Instagram
+      </a>
+    </div>
+
+    <div class="content-block">
+      <h3>portrait</h3>
+      <div class="photo photo-single"><span class="cap">Bri · portrait</span></div>
+    </div>
+
+    <div class="content-block">
+      <h3>why follow</h3>
+      <p>Bri writes the kind of poetry that doesn't announce itself — no rhyme scheme showing off, no big philosophical wrap-up. She reads directly to the camera, holds eye contact, and delivers lines that land quietly and then don't leave.</p>
+      <p>The pieces are short. The archive is deep. Start anywhere.</p>
+    </div>
+
+    <div class="poem-excerpt">
+      "[ favourite excerpt from one of her pieces — Puppy to fill in ]"
+      <span class="attribution">— Bri Anora</span>
+    </div>
+
+    <div class="modal-footer-note">discovered · 2024 · followed since</div>
+  </div>
+
+  <!-- ══════════════ MODAL 04 · SIVIEZ ══════════════ -->
+  <div class="modal" data-id="4">
+    <button class="modal-close">✕</button>
+    <div class="modal-kicker">// self-plug · bookmark 04</div>
+    <h2>Rosablanche C34 · <em>Siviez</em></h2>
+    <div class="modal-byline">1730m · Valais, Switzerland · hosted by Luc from Izegem</div>
+
+    <div class="actions">
+      <a class="btn btn-primary" href="/siviez">
+        <span class="icon">→</span> Explore the subpage
+      </a>
+      <a class="btn btn-secondary" href="https://www.airbnb.com/rooms/10012437" target="_blank" rel="noopener">
+        <span class="icon">◆</span> Book on Airbnb
+      </a>
+    </div>
+
+    <div class="content-block">
+      <h3>seasons</h3>
+      <div class="photo-triple">
+        <div class="photo"><span class="cap">Summer · chalet</span></div>
+        <div class="photo"><span class="cap">Valley view</span></div>
+        <div class="photo"><span class="cap">Winter · ski-in/out</span></div>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <h3>the pitch</h3>
+      <p>Shameless plug for the subpage I built for Luc's chalet. Hiking, raclette and alpine silence in summer; direct ski-in/out to Les 4 Vallées in winter. Also: tennis courts a five minute walk away, and mountain bikes on-site.</p>
+      <p>Trilingual (NL / EN / FR), full photo essay, hand-drawn hiking map coming soon. If you're into mountains and not into pretending, it might be your kind of week.</p>
+    </div>
+
+    <div class="modal-footer-note">internal link · pupvanh.vercel.app/siviez</div>
+  </div>
+
+</div>
+
+<footer class="pupvanh-footer">
+  <div class="row1">© 2026 PUPVANH Projects <span class="sep">•</span> all rights reserved</div>
+  <div class="row2">BUILT AUG 2026 <span class="sep">•</span> UPDATED AUG 2026 <span class="sep">•</span> Bookmarks <span class="sep">•</span> <a href="https://pupvanh.vercel.app">pupvanh.vercel.app →</a></div>
+</footer>
+
+<Analytics />
+
+<script>
+  // ── Modal handling ──────────────
+  const overlay = document.getElementById('modal-overlay');
+  const modals = document.querySelectorAll('.modal');
+
+  function openModal(id) {
+    modals.forEach(m => m.classList.toggle('active', m.dataset.id === String(id)));
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    // scroll modal content to top
+    const active = document.querySelector('.modal.active');
+    if (active) active.scrollTop = 0;
+    overlay.scrollTop = 0;
+  }
+  function closeModal() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    setTimeout(() => modals.forEach(m => m.classList.remove('active')), 200);
+  }
+
+  document.querySelectorAll('[data-modal]').forEach(el => {
+    el.addEventListener('click', e => {
+      // If the click bubbled up from a visit-pill (or anything with data-nomodal), ignore it
+      if (e.target.closest('[data-nomodal]')) return;
+      openModal(el.dataset.modal);
+    });
+    // Keyboard accessibility: Enter or Space on the card opens the modal
+    el.addEventListener('keydown', e => {
+      if ((e.key === 'Enter' || e.key === ' ') && !e.target.closest('[data-nomodal]')) {
+        e.preventDefault();
+        openModal(el.dataset.modal);
+      }
+    });
+  });
+  // Stop the pill's click from bubbling up into the card
+  document.querySelectorAll('[data-nomodal]').forEach(el => {
+    el.addEventListener('click', e => e.stopPropagation());
+  });
+  document.querySelectorAll('.modal-close').forEach(btn => btn.addEventListener('click', closeModal));
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // ── Mode toggle ──────────────
+  const modeToggle = document.getElementById('modeToggle');
+  const savedMode = localStorage.getItem('bookmarks-mode') || 'light';
+  document.documentElement.dataset.mode = savedMode;
+  modeToggle.textContent = savedMode === 'dark' ? '◑' : '◐';
+  modeToggle.addEventListener('click', () => {
+    const next = document.documentElement.dataset.mode === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.mode = next;
+    modeToggle.textContent = next === 'dark' ? '◑' : '◐';
+    localStorage.setItem('bookmarks-mode', next);
+  });
+</script>
+
+</body>
+</html>
