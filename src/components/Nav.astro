@@ -1,26 +1,62 @@
 ---
+// Nav.astro
+// PUPVANH homepage navigatie.
+// Categorie B (deelpagina's van de hub) links van • • •
+// Categorie A (eigen merken) rechts van • • •
+// Ember-oranje bolletjes zijn het visuele "lijmpje" van PUPVANH.
 ---
 <nav>
-  <div class="nav-l" id="logoTrigger">
+  <a href="/" class="nav-l" id="logoTrigger" aria-label="PUPVANH home">
     <span class="dot"></span>
     <span>PUPVANH</span>
-  </div>
+  </a>
+
   <div class="nav-c">
+    <!-- Categorie B: hub-pagina's -->
     <a href="/notes">notes</a>
     <a href="/bookmarks">bookmarks</a>
     <a href="/jpg">jpg</a>
-    <span class="cat-sep" aria-hidden="true">•&nbsp;•&nbsp;•</span>
+
+    <!-- Ember splitsing • • • -->
+    <span class="split" aria-hidden="true">
+      <span class="sd"></span>
+      <span class="sd"></span>
+      <span class="sd"></span>
+    </span>
+
+    <!-- Categorie A: eigen merken -->
     <a href="/ariba">ariba</a>
     <a href="/siviez">siviez</a>
     <a href="/flags">flags</a>
     <a href="/pups">pups</a>
   </div>
+
   <div class="nav-r">
-    <span>2026 · vol.01</span>
+    <span class="ver">2026 · vol.01</span>
     <button class="theme-toggle" id="tb" aria-label="Toggle dark mode">◐</button>
+    <button class="ham" id="ham" aria-label="Toggle menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
+
+<!-- Mobile menu overlay -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mm-group">
+    <p class="mm-label">// hub</p>
+    <a href="/notes">notes</a>
+    <a href="/bookmarks">bookmarks</a>
+    <a href="/jpg">jpg</a>
+  </div>
+  <div class="mm-group">
+    <p class="mm-label">// projects</p>
+    <a href="/ariba">ariba</a>
+    <a href="/siviez">siviez</a>
+    <a href="/flags">flags</a>
+    <a href="/pups">pups</a>
+  </div>
+</div>
+
 <div class="pup" id="pup">🐕</div>
+
 <style>
   nav{
     position:fixed;top:0;left:0;right:0;z-index:60;
@@ -30,7 +66,11 @@
     font-family:'JetBrains Mono',monospace;font-size:13px;
   }
   :global(html[data-mode="dark"]) nav{background:rgba(18,37,34,.85);}
-  .nav-l{display:flex;align-items:center;gap:10px;position:relative;cursor:pointer;}
+
+  .nav-l{
+    display:flex;align-items:center;gap:10px;position:relative;cursor:pointer;
+    color:var(--text);text-decoration:none;font-weight:500;
+  }
   .nav-l .dot{width:8px;height:8px;background:var(--ember);border-radius:50%;animation:pulse 2s ease-in-out infinite;}
   .nav-l::after{
     content:'// hover me';position:absolute;left:calc(100% + 10px);top:50%;
@@ -39,12 +79,39 @@
   }
   .nav-l:hover::after{opacity:.6;}
   @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.85);}}
-  .nav-c{display:flex;gap:24px;font-size:12px;color:var(--muted);align-items:center;}
+
+  .nav-c{display:flex;gap:22px;align-items:center;font-size:12px;color:var(--muted);}
   .nav-c a{color:var(--muted);text-decoration:none;transition:color .2s;}
-  .nav-c a:hover{color:var(--accent);}
-  .cat-sep{color:var(--ember);font-size:10px;letter-spacing:1px;user-select:none;opacity:.75;}
+  .nav-c a:hover{color:var(--ember);}
+
+  /* Ember-splitsing • • • — het visuele lijmpje tussen hub en projecten */
+  .split{display:inline-flex;gap:5px;align-items:center;padding:0 4px;}
+  .split .sd{width:4px;height:4px;background:var(--ember);border-radius:50%;opacity:.75;}
+
   .nav-r{display:flex;gap:14px;align-items:center;font-size:12px;color:var(--muted);}
-  .theme-toggle{background:transparent;border:none;color:var(--text);font-size:14px;cursor:pointer;font-family:inherit;}
+  .theme-toggle{background:transparent;border:none;color:var(--text);font-size:14px;cursor:pointer;font-family:inherit;padding:0;}
+
+  /* Hamburger — enkel zichtbaar op mobiel */
+  .ham{display:none;background:transparent;border:none;flex-direction:column;gap:4px;cursor:pointer;padding:6px;}
+  .ham span{display:block;width:20px;height:2px;background:var(--text);transition:transform .25s,opacity .2s;}
+  .ham.open span:nth-child(1){transform:translateY(6px) rotate(45deg);}
+  .ham.open span:nth-child(2){opacity:0;}
+  .ham.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
+
+  .mobile-menu{
+    position:fixed;top:0;left:0;right:0;z-index:55;
+    background:rgba(244,240,232,.98);backdrop-filter:blur(12px);
+    padding:80px 32px 32px;display:none;flex-direction:column;gap:28px;
+    font-family:'JetBrains Mono',monospace;font-size:16px;
+    transform:translateY(-100%);transition:transform .35s ease;
+  }
+  :global(html[data-mode="dark"]) .mobile-menu{background:rgba(18,37,34,.98);}
+  .mobile-menu.open{transform:translateY(0);}
+  .mm-group{display:flex;flex-direction:column;gap:14px;}
+  .mm-label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--ember);margin:0 0 4px;font-family:inherit;}
+  .mobile-menu a{color:var(--text);text-decoration:none;padding:6px 0;border-bottom:1px solid var(--line);transition:color .2s;}
+  .mobile-menu a:hover{color:var(--ember);}
+
   .pup{position:fixed;top:22px;left:-80px;font-size:28px;z-index:200;pointer-events:none;opacity:0;}
   .pup.run{opacity:1;animation:pupRun 5s linear;}
   @keyframes pupRun{
@@ -54,14 +121,24 @@
     75%{transform:translateX(85vw) translateY(-2px) rotate(-2deg);}
     100%{transform:translateX(110vw) translateY(0) rotate(0);}
   }
-  @media(max-width:800px){
+
+  @media(max-width:900px){
     nav{padding:14px 20px;}
     .nav-c{display:none;}
+    .nav-r .ver{display:none;}
+    .ham{display:flex;}
+    .mobile-menu{display:flex;}
   }
 </style>
+
 <script>
-  // Dark mode toggle
+  // Dark mode toggle — persistent via localStorage 'pupvanh-mode'
   const tb = document.getElementById('tb');
+  const savedMode = localStorage.getItem('pupvanh-mode');
+  if (savedMode) {
+    document.documentElement.setAttribute('data-mode', savedMode);
+    if (tb) tb.textContent = savedMode === 'dark' ? '◑' : '◐';
+  }
   if (tb) {
     tb.addEventListener('click', () => {
       const r = document.documentElement;
@@ -69,9 +146,25 @@
       const n = c === 'dark' ? 'light' : 'dark';
       r.setAttribute('data-mode', n);
       tb.textContent = n === 'dark' ? '◑' : '◐';
+      localStorage.setItem('pupvanh-mode', n);
     });
   }
-  // Easter egg: sneaky pupje na 1s hover op logo
+
+  // Hamburger menu
+  const ham = document.getElementById('ham');
+  const mm = document.getElementById('mobileMenu');
+  if (ham && mm) {
+    ham.addEventListener('click', () => {
+      ham.classList.toggle('open');
+      mm.classList.toggle('open');
+    });
+    mm.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      ham.classList.remove('open');
+      mm.classList.remove('open');
+    }));
+  }
+
+  // Easter egg: 🐕 rent over de nav na 1s hover op logo
   const logoTrigger = document.getElementById('logoTrigger');
   const pupEl = document.getElementById('pup');
   let hoverTimer: ReturnType<typeof setTimeout> | null = null;
