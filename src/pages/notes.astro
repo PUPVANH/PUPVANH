@@ -1,52 +1,54 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import postsData from '../data/headspace-posts.json';
+import postsData from '../data/notes-posts.json';
 const posts = postsData.posts;
 ---
 
-<Layout
-  title="Notes · PUPVANH"
-  description="Notes van Puppy — rants, building, learning in public. Onderdeel van PUPVANH."
-  favicon="/favicons/notes.svg"
->
+<Layout title="Notes · PUPVANH" description="Notes by Puppy. Ideeën, gedachten en leercurves terwijl ik bouw aan PUPVANH en side-projects.">
 
-<div class="headspace-page">
-  <div class="hs-wrap">
+<div class="notes-page">
+  <div class="n-wrap">
 
-    <div class="hs-topbar">
+    <div class="n-topbar">
       <a href="/">← <span data-i18n="back">pupvanh</span></a>
       <div class="right">
-        <button class="toggle-btn" id="hsModeToggle" aria-label="Toggle light/dark mode">◐</button>
+        <button class="toggle-btn" id="nModeToggle" aria-label="Toggle light/dark mode">◐</button>
         <span class="lang">
           <span data-lang="nl">NL</span><span class="sep">·</span><span data-lang="en">EN</span>
         </span>
       </div>
     </div>
 
-    <div class="hs-hero">
-      <div class="kicker" data-i18n="kicker">/headspace · vol.01</div>
-      <h1 data-i18n="title">Headspace.</h1>
+    <div class="n-hero">
+      <div class="kicker" data-i18n="kicker">/notes · vol.01</div>
+      <h1 data-i18n="title">Notes by Puppy.</h1>
       <p data-i18n="tagline">De plek in mijn hoofd waar het gebeurt. Ideeën, gedachten en leercurves terwijl ik bouw aan PUPVANH en side-projects. Ruw, onderweg, hardop.</p>
     </div>
 
-    <div class="hs-filters">
-      <span class="hs-tag active" data-filter="all" data-i18n="filter_all">alles</span>
-      <span class="hs-tag" data-filter="ranting">ranting</span>
-      <span class="hs-tag" data-filter="building">building</span>
-      <span class="hs-tag" data-filter="learning">learning</span>
-      <span class="hs-tag" data-filter="poems">poems</span>
-      <span class="hs-count" id="hsCount">6 thoughts</span>
+    <div class="n-filters">
+      <span class="n-tag active" data-filter="all" data-i18n="filter_all">alles</span>
+      <span class="n-tag" data-filter="ranting">ranting</span>
+      <span class="n-tag" data-filter="building">building</span>
+      <span class="n-tag" data-filter="learning">learning</span>
+      <span class="n-tag" data-filter="poems">poems</span>
+      <span class="n-count" id="nCount">6 notes</span>
     </div>
 
-    <div class="hs-list" id="hsList"></div>
+    <div class="n-list" id="nList"></div>
 
-    <div class="hs-footer">
-      <div class="footer-line-1">BUILT AUG 2026 · UPDATED AUG 2026</div>
+    <div class="n-footer">
+      <div class="footer-line-1">
+        <span>© 2026 PUPVANH Projects</span>
+        <span class="ember-dot">•</span>
+        <span data-i18n="rights">alle rechten voorbehouden</span>
+      </div>
       <div class="footer-line-2">
-        <span>HEADSPACE</span>
-        <span class="dot">·</span>
-        <span data-i18n="footer_part">Deel van PUPVANH Projects</span>
-        <span class="dot">·</span>
+        <span>BUILT AUG 2026</span>
+        <span class="ember-dot">•</span>
+        <span>UPDATED AUG 2026</span>
+        <span class="ember-dot">•</span>
+        <span>NOTES</span>
+        <span class="ember-dot">•</span>
         <a href="https://pupvanh.vercel.app">pupvanh.vercel.app →</a>
       </div>
     </div>
@@ -55,195 +57,195 @@ const posts = postsData.posts;
 </div>
 
 <style is:global>
-/* ============ GLOBAL OVERRIDES als headspace-page in body zit ============ */
-body:has(.headspace-page) { background: #DDE3E8; }
-html[data-mode="dark"] body:has(.headspace-page) { background: #1E2A3A; }
-body:has(.headspace-page) .grain { display: none; }
-
-/* ============ SCOPED headspace styling ============ */
-.headspace-page * { box-sizing: border-box; }
-.headspace-page {
+/* ============ SCOPED notes styling (PUPVANH homepage DNA) ============ */
+.notes-page * { box-sizing: border-box; }
+.notes-page {
   font-family: 'Inter', sans-serif;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
-  background: #DDE3E8;
-  color: #1E3A34;
   transition: background 0.35s ease, color 0.35s ease;
 }
-html[data-mode="dark"] .headspace-page { background: #1E2A3A; color: #E8E4D8; }
 
-/* ============ THEME: light (graph blue) ============ */
-.headspace-page .hs-topbar { border-color: rgba(30,58,52,0.1); }
-.headspace-page .hs-topbar a,
-.headspace-page .lang-active { color: #3B4E6B; }
-.headspace-page .lang-inactive,
-.headspace-page .toggle-btn { color: #6a7580; }
-.headspace-page .hs-hero .kicker { color: #3B4E6B; }
-.headspace-page .hs-hero h1 { color: #1E3A34; }
-.headspace-page .hs-hero p { color: #3a4a5a; }
-.headspace-page .hs-filters { background: rgba(255,255,255,0.4); border-color: rgba(30,58,52,0.08); }
-.headspace-page .hs-tag { border-color: rgba(30,58,52,0.18); color: #4a5a68; }
-.headspace-page .hs-tag.active { background: #3B4E6B; color: #DDE3E8; border-color: #3B4E6B; }
-.headspace-page .hs-count { color: #6a7580; }
-.headspace-page .hs-post { border-color: rgba(30,58,52,0.12); }
-.headspace-page .hs-num { color: #3B4E6B; }
-.headspace-page .hs-post h2 { color: #1E3A34; }
-.headspace-page .hs-post .snip { color: #4a5a68; }
-.headspace-page .hs-post .row,
-.headspace-page .hs-post .date { color: #6a7580; }
-.headspace-page .hs-post .pill { background: rgba(59,78,107,0.12); color: #3B4E6B; }
-.headspace-page .hs-footer { border-color: rgba(30,58,52,0.1); }
-.headspace-page .footer-line-1 { color: #6a7580; }
-.headspace-page .footer-line-2 { color: #1E3A34; }
-.headspace-page .footer-line-2 a { color: #3B4E6B; }
-.headspace-page .footer-line-2 .dot { color: #6a7580; }
+/* ============ THEME: light (homepage DNA) ============ */
+html[data-mode="light"] .notes-page { background: #F4F0E8; color: #1E3A34; }
+html[data-mode="light"] .notes-page .n-topbar { border-color: #D8D2C2; }
+html[data-mode="light"] .notes-page .n-topbar a,
+html[data-mode="light"] .notes-page .lang-active { color: #0E6B6F; }
+html[data-mode="light"] .notes-page .lang-inactive,
+html[data-mode="light"] .notes-page .toggle-btn { color: #6B6B66; }
+html[data-mode="light"] .notes-page .n-hero .kicker { color: #0E6B6F; }
+html[data-mode="light"] .notes-page .n-hero h1 { color: #1E3A34; }
+html[data-mode="light"] .notes-page .n-hero p { color: #4a4a4a; }
+html[data-mode="light"] .notes-page .n-filters { background: rgba(200,163,95,0.06); border-color: #D8D2C2; }
+html[data-mode="light"] .notes-page .n-tag { border-color: #D8D2C2; color: #6B6B66; }
+html[data-mode="light"] .notes-page .n-tag.active { background: #E85D2F; color: #F4F0E8; border-color: #E85D2F; }
+html[data-mode="light"] .notes-page .n-count { color: #6B6B66; }
+html[data-mode="light"] .notes-page .n-post { border-color: #D8D2C2; }
+html[data-mode="light"] .notes-page .n-num { color: #C8A35F; }
+html[data-mode="light"] .notes-page .n-post h2 { color: #1E3A34; }
+html[data-mode="light"] .notes-page .n-post .snip { color: #4a4a4a; }
+html[data-mode="light"] .notes-page .n-post .row,
+html[data-mode="light"] .notes-page .n-post .date { color: #6B6B66; }
+html[data-mode="light"] .notes-page .n-post .pill { background: rgba(14,107,111,0.1); color: #0E6B6F; }
+html[data-mode="light"] .notes-page .n-footer { border-color: #D8D2C2; }
+html[data-mode="light"] .notes-page .footer-line-1 { color: #6B6B66; }
+html[data-mode="light"] .notes-page .footer-line-2 { color: #1E3A34; }
+html[data-mode="light"] .notes-page .footer-line-2 a { color: #0E6B6F; }
 
-/* ============ THEME: dark (midnight) ============ */
-html[data-mode="dark"] .headspace-page .hs-topbar { border-color: rgba(232,228,216,0.1); }
-html[data-mode="dark"] .headspace-page .hs-topbar a,
-html[data-mode="dark"] .headspace-page .lang-active { color: #8AA3C4; }
-html[data-mode="dark"] .headspace-page .lang-inactive,
-html[data-mode="dark"] .headspace-page .toggle-btn { color: #8a9aad; }
-html[data-mode="dark"] .headspace-page .hs-hero .kicker { color: #8AA3C4; }
-html[data-mode="dark"] .headspace-page .hs-hero h1 { color: #E8E4D8; }
-html[data-mode="dark"] .headspace-page .hs-hero p { color: #B8B4A8; }
-html[data-mode="dark"] .headspace-page .hs-filters { background: rgba(0,0,0,0.15); border-color: rgba(232,228,216,0.08); }
-html[data-mode="dark"] .headspace-page .hs-tag { border-color: rgba(232,228,216,0.15); color: #B8B4A8; }
-html[data-mode="dark"] .headspace-page .hs-tag.active { background: #8AA3C4; color: #1E2A3A; border-color: #8AA3C4; }
-html[data-mode="dark"] .headspace-page .hs-count { color: #8a9aad; }
-html[data-mode="dark"] .headspace-page .hs-post { border-color: rgba(232,228,216,0.12); }
-html[data-mode="dark"] .headspace-page .hs-num { color: #8AA3C4; }
-html[data-mode="dark"] .headspace-page .hs-post h2 { color: #E8E4D8; }
-html[data-mode="dark"] .headspace-page .hs-post .snip { color: #B8B4A8; }
-html[data-mode="dark"] .headspace-page .hs-post .row,
-html[data-mode="dark"] .headspace-page .hs-post .date { color: #8a9aad; }
-html[data-mode="dark"] .headspace-page .hs-post .pill { background: rgba(138,163,196,0.18); color: #8AA3C4; }
-html[data-mode="dark"] .headspace-page .hs-footer { border-color: rgba(232,228,216,0.1); }
-html[data-mode="dark"] .headspace-page .footer-line-1 { color: #8a9aad; }
-html[data-mode="dark"] .headspace-page .footer-line-2 { color: #E8E4D8; }
-html[data-mode="dark"] .headspace-page .footer-line-2 a { color: #8AA3C4; }
-html[data-mode="dark"] .headspace-page .footer-line-2 .dot { color: #8a9aad; }
+/* ============ THEME: dark (homepage DNA) ============ */
+html[data-mode="dark"] .notes-page { background: #122522; color: #F4F0E8; }
+html[data-mode="dark"] .notes-page .n-topbar { border-color: #2A3833; }
+html[data-mode="dark"] .notes-page .n-topbar a,
+html[data-mode="dark"] .notes-page .lang-active { color: #5EB0B3; }
+html[data-mode="dark"] .notes-page .lang-inactive,
+html[data-mode="dark"] .notes-page .toggle-btn { color: #8A8F88; }
+html[data-mode="dark"] .notes-page .n-hero .kicker { color: #5EB0B3; }
+html[data-mode="dark"] .notes-page .n-hero h1 { color: #F4F0E8; }
+html[data-mode="dark"] .notes-page .n-hero p { color: #B8B4A8; }
+html[data-mode="dark"] .notes-page .n-filters { background: rgba(212,178,122,0.05); border-color: #2A3833; }
+html[data-mode="dark"] .notes-page .n-tag { border-color: #2A3833; color: #B8B4A8; }
+html[data-mode="dark"] .notes-page .n-tag.active { background: #FF7A50; color: #122522; border-color: #FF7A50; }
+html[data-mode="dark"] .notes-page .n-count { color: #8A8F88; }
+html[data-mode="dark"] .notes-page .n-post { border-color: #2A3833; }
+html[data-mode="dark"] .notes-page .n-num { color: #D4B27A; }
+html[data-mode="dark"] .notes-page .n-post h2 { color: #F4F0E8; }
+html[data-mode="dark"] .notes-page .n-post .snip { color: #B8B4A8; }
+html[data-mode="dark"] .notes-page .n-post .row,
+html[data-mode="dark"] .notes-page .n-post .date { color: #8A8F88; }
+html[data-mode="dark"] .notes-page .n-post .pill { background: rgba(94,176,179,0.15); color: #5EB0B3; }
+html[data-mode="dark"] .notes-page .n-footer { border-color: #2A3833; }
+html[data-mode="dark"] .notes-page .footer-line-1 { color: #8A8F88; }
+html[data-mode="dark"] .notes-page .footer-line-2 { color: #F4F0E8; }
+html[data-mode="dark"] .notes-page .footer-line-2 a { color: #5EB0B3; }
+
+/* Body-background matcht per mode (voor overgangen) */
+html[data-mode="light"] body:has(.notes-page) { background: #F4F0E8; }
+html[data-mode="dark"] body:has(.notes-page) { background: #122522; }
 
 /* ============ LAYOUT ============ */
-.headspace-page .hs-wrap { max-width: 780px; margin: 0 auto; padding: 0 28px; }
+.notes-page .n-wrap { max-width: 780px; margin: 0 auto; padding: 0 28px; position: relative; z-index: 1; }
 
-.headspace-page .hs-topbar {
+.notes-page .n-topbar {
   display: flex; justify-content: space-between; align-items: center;
   padding: 20px 0; border-bottom: 1px solid;
   font-family: 'JetBrains Mono', monospace; font-size: 11px;
   letter-spacing: 0.12em; text-transform: uppercase;
 }
-.headspace-page .hs-topbar a { text-decoration: none; }
-.headspace-page .hs-topbar .right { display: flex; gap: 18px; align-items: center; }
-.headspace-page .toggle-btn {
+.notes-page .n-topbar a { text-decoration: none; }
+.notes-page .n-topbar .right { display: flex; gap: 18px; align-items: center; }
+.notes-page .toggle-btn {
   background: none; border: none; font-family: inherit; font-size: 14px;
   cursor: pointer; padding: 4px 6px; letter-spacing: 0.1em;
   transition: opacity 0.2s;
 }
-.headspace-page .toggle-btn:hover { opacity: 0.6; }
-.headspace-page .lang [data-lang] { cursor: pointer; transition: opacity 0.2s; padding: 2px 3px; }
-.headspace-page .lang [data-lang]:hover { opacity: 0.7; }
-.headspace-page .lang-inactive { opacity: 0.45; }
-.headspace-page .lang-active { font-weight: 600; opacity: 1; }
-.headspace-page .lang .sep { opacity: 0.35; margin: 0 2px; }
+.notes-page .toggle-btn:hover { opacity: 0.6; }
+.notes-page .lang [data-lang] { cursor: pointer; transition: opacity 0.2s; padding: 2px 3px; }
+.notes-page .lang [data-lang]:hover { opacity: 0.7; }
+.notes-page .lang-inactive { opacity: 0.45; }
+.notes-page .lang-active { font-weight: 600; opacity: 1; }
+.notes-page .lang .sep { opacity: 0.35; margin: 0 2px; }
 
-.headspace-page .hs-hero { padding: 72px 0 48px; }
-.headspace-page .hs-hero .kicker {
+.notes-page .n-hero { padding: 72px 0 48px; }
+.notes-page .n-hero .kicker {
   font-family: 'JetBrains Mono', monospace; font-size: 11px;
   letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 16px;
 }
-.headspace-page .hs-hero h1 {
+.notes-page .n-hero h1 {
   font-family: 'Playfair Display', serif; font-style: italic; font-weight: 500;
   font-size: 68px; line-height: 1; margin: 0 0 22px; letter-spacing: -0.015em;
 }
-.headspace-page .hs-hero p { font-size: 16px; line-height: 1.7; margin: 0; max-width: 540px; }
+.notes-page .n-hero p { font-size: 16px; line-height: 1.7; margin: 0; max-width: 540px; }
 
-.headspace-page .hs-filters {
+.notes-page .n-filters {
   display: flex; gap: 8px; padding: 16px 28px; margin: 0 -28px;
   flex-wrap: wrap; border-top: 1px solid; border-bottom: 1px solid;
   align-items: center;
 }
-.headspace-page .hs-tag {
+.notes-page .n-tag {
   font-family: 'JetBrains Mono', monospace; font-size: 11px;
   padding: 6px 14px; border-radius: 20px; border: 1px solid;
   letter-spacing: 0.06em; cursor: pointer;
   transition: background 0.2s, color 0.2s, transform 0.15s;
   background: transparent; user-select: none;
 }
-.headspace-page .hs-tag:hover { transform: translateY(-1px); }
-.headspace-page .hs-count {
+.notes-page .n-tag:hover { transform: translateY(-1px); }
+.notes-page .n-count {
   margin-left: auto; font-family: 'JetBrains Mono', monospace;
   font-size: 11px; letter-spacing: 0.08em;
 }
 
-.headspace-page .hs-list { padding: 8px 0 48px; }
-.headspace-page .hs-post {
+.notes-page .n-list { padding: 8px 0 48px; }
+.notes-page .n-post {
   display: grid; grid-template-columns: 70px 1fr auto; gap: 24px;
   padding: 30px 0; border-bottom: 1px solid; align-items: baseline;
   cursor: pointer; transition: transform 0.25s ease;
 }
-.headspace-page .hs-post:hover { transform: translateX(4px); }
-.headspace-page .hs-post:last-child { border-bottom: none; }
-.headspace-page .hs-num { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; padding-top: 8px; }
-.headspace-page .hs-post h2 {
+.notes-page .n-post:hover { transform: translateX(4px); }
+.notes-page .n-post:last-child { border-bottom: none; }
+.notes-page .n-num { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; padding-top: 8px; }
+.notes-page .n-post h2 {
   font-family: 'Playfair Display', serif; font-style: italic;
   font-weight: 400; font-size: 26px; margin: 0 0 10px; line-height: 1.2;
 }
-.headspace-page .hs-post .snip { font-size: 14px; line-height: 1.6; margin: 0 0 14px; }
-.headspace-page .hs-post .row {
+.notes-page .n-post .snip { font-size: 14px; line-height: 1.6; margin: 0 0 14px; }
+.notes-page .n-post .row {
   display: flex; gap: 10px; font-family: 'JetBrains Mono', monospace;
   font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
   align-items: center; flex-wrap: wrap;
 }
-.headspace-page .hs-post .pill { padding: 3px 9px; border-radius: 10px; }
-.headspace-page .hs-post .date {
+.notes-page .n-post .pill { padding: 3px 9px; border-radius: 10px; }
+.notes-page .n-post .date {
   font-family: 'JetBrains Mono', monospace; font-size: 11px;
   text-align: right; padding-top: 8px; white-space: nowrap; line-height: 1.4;
 }
 
-/* ============ FOOTER (uniforme standaard: full-width centered 2 lines) ============ */
-.headspace-page .hs-footer {
+/* ============ FOOTER (uniforme standaard met ember bolletjes) ============ */
+.notes-page .n-footer {
   padding: 40px 0 48px; border-top: 1px solid;
   text-align: center;
   font-family: 'JetBrains Mono', monospace;
   text-transform: uppercase;
   letter-spacing: 0.12em;
 }
-.headspace-page .footer-line-1 {
+.notes-page .footer-line-1 {
   font-size: 10px;
-  font-weight: 400;
-  opacity: 0.75;
   margin-bottom: 10px;
+  display: inline-flex; gap: 8px;
+  align-items: center; flex-wrap: wrap; justify-content: center;
 }
-.headspace-page .footer-line-2 {
+.notes-page .footer-line-2 {
   font-size: 11px;
   font-weight: 500;
-  display: inline-flex;
-  gap: 8px;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: inline-flex; gap: 8px;
+  align-items: center; flex-wrap: wrap; justify-content: center;
 }
-.headspace-page .footer-line-2 a {
+.notes-page .footer-line-2 a {
   text-decoration: none;
   transition: opacity 0.2s;
 }
-.headspace-page .footer-line-2 a:hover { opacity: 0.7; }
-.headspace-page .footer-line-2 .dot { opacity: 0.6; }
+.notes-page .footer-line-2 a:hover { opacity: 0.7; }
+.notes-page .ember-dot {
+  color: #E85D2F;
+  font-size: 14px;
+  line-height: 1;
+  display: inline-block;
+  transform: translateY(-1px);
+}
+html[data-mode="dark"] .notes-page .ember-dot { color: #FF7A50; }
 
 /* ============ MOBILE ============ */
 @media (max-width: 640px) {
-  .headspace-page .hs-wrap { padding: 0 18px; }
-  .headspace-page .hs-hero { padding: 48px 0 32px; }
-  .headspace-page .hs-hero h1 { font-size: 46px; }
-  .headspace-page .hs-hero p { font-size: 15px; }
-  .headspace-page .hs-filters { padding: 14px 18px; margin: 0 -18px; }
-  .headspace-page .hs-post { grid-template-columns: 44px 1fr; gap: 14px; padding: 24px 0; }
-  .headspace-page .hs-post h2 { font-size: 22px; }
-  .headspace-page .hs-post .date { grid-column: 2; padding-top: 4px; text-align: left; }
-  .headspace-page .hs-num { padding-top: 6px; }
-  .headspace-page .hs-footer { padding: 32px 0 40px; }
-  .headspace-page .footer-line-2 { font-size: 10px; }
+  .notes-page .n-wrap { padding: 0 18px; }
+  .notes-page .n-hero { padding: 48px 0 32px; }
+  .notes-page .n-hero h1 { font-size: 46px; }
+  .notes-page .n-hero p { font-size: 15px; }
+  .notes-page .n-filters { padding: 14px 18px; margin: 0 -18px; }
+  .notes-page .n-post { grid-template-columns: 44px 1fr; gap: 14px; padding: 24px 0; }
+  .notes-page .n-post h2 { font-size: 22px; }
+  .notes-page .n-post .date { grid-column: 2; padding-top: 4px; text-align: left; }
+  .notes-page .n-num { padding-top: 6px; }
+  .notes-page .n-footer { padding: 32px 0 40px; }
+  .notes-page .footer-line-2 { font-size: 10px; }
 }
 </style>
 
@@ -251,21 +253,21 @@ html[data-mode="dark"] .headspace-page .footer-line-2 .dot { color: #8a9aad; }
 const i18n = {
   nl: {
     back: 'pupvanh',
-    kicker: '/headspace · vol.01',
-    title: 'Headspace.',
+    kicker: '/notes · vol.01',
+    title: 'Notes by Puppy.',
     tagline: 'De plek in mijn hoofd waar het gebeurt. Ideeën, gedachten en leercurves terwijl ik bouw aan PUPVANH en side-projects. Ruw, onderweg, hardop.',
     filter_all: 'alles',
-    countSuffix: (n) => n === 1 ? ' thought' : ' thoughts',
-    footer_part: 'Deel van PUPVANH Projects'
+    countSuffix: (n) => n === 1 ? ' note' : ' notes',
+    rights: 'alle rechten voorbehouden'
   },
   en: {
     back: 'pupvanh',
-    kicker: '/headspace · vol.01',
-    title: 'Headspace.',
+    kicker: '/notes · vol.01',
+    title: 'Notes by Puppy.',
     tagline: 'The place in my head where it happens. Ideas, thoughts and learning curves while I build PUPVANH and side projects. Raw, in progress, out loud.',
     filter_all: 'all',
-    countSuffix: (n) => n === 1 ? ' thought' : ' thoughts',
-    footer_part: 'Part of PUPVANH Projects'
+    countSuffix: (n) => n === 1 ? ' note' : ' notes',
+    rights: 'all rights reserved'
   }
 };
 
@@ -274,12 +276,12 @@ let currentLang = 'nl';
 let currentFilter = 'all';
 
 function renderPosts() {
-  const list = document.getElementById('hsList');
+  const list = document.getElementById('nList');
   const filtered = currentFilter === 'all' ? posts : posts.filter(p => p.tags.includes(currentFilter));
 
   list.innerHTML = filtered.map(p => `
-    <div class="hs-post">
-      <div class="hs-num">#${p.num}</div>
+    <div class="n-post">
+      <div class="n-num">#${p.num}</div>
       <div>
         <h2>${p['title_' + currentLang]}</h2>
         <p class="snip">${p['snip_' + currentLang]}</p>
@@ -292,13 +294,13 @@ function renderPosts() {
     </div>
   `).join('');
 
-  document.getElementById('hsCount').textContent = filtered.length + i18n[currentLang].countSuffix(filtered.length);
+  document.getElementById('nCount').textContent = filtered.length + i18n[currentLang].countSuffix(filtered.length);
 }
 
 function applyLang(lang) {
   currentLang = lang;
   document.documentElement.lang = lang;
-  localStorage.setItem('headspace-lang', lang);
+  localStorage.setItem('notes-lang', lang);
 
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
@@ -316,16 +318,16 @@ function applyLang(lang) {
 
 function applyMode(mode) {
   document.documentElement.setAttribute('data-mode', mode);
-  localStorage.setItem('headspace-mode', mode);
-  const btn = document.getElementById('hsModeToggle');
+  localStorage.setItem('notes-mode', mode);
+  const btn = document.getElementById('nModeToggle');
   if (btn) btn.textContent = mode === 'dark' ? '◑' : '◐';
 }
 
-const savedLang = localStorage.getItem('headspace-lang');
+const savedLang = localStorage.getItem('notes-lang');
 const browserLang = navigator.language.toLowerCase().startsWith('en') ? 'en' : 'nl';
 applyLang(savedLang || browserLang);
 
-const savedMode = localStorage.getItem('headspace-mode');
+const savedMode = localStorage.getItem('notes-mode');
 const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 applyMode(savedMode || (prefersDark ? 'dark' : 'light'));
 
@@ -333,7 +335,7 @@ document.querySelectorAll('[data-lang]').forEach(el => {
   el.addEventListener('click', () => applyLang(el.getAttribute('data-lang')));
 });
 
-const modeToggle = document.getElementById('hsModeToggle');
+const modeToggle = document.getElementById('nModeToggle');
 if (modeToggle) {
   modeToggle.addEventListener('click', () => {
     const current = document.documentElement.getAttribute('data-mode');
@@ -341,9 +343,9 @@ if (modeToggle) {
   });
 }
 
-document.querySelectorAll('.hs-tag').forEach(tag => {
+document.querySelectorAll('.n-tag').forEach(tag => {
   tag.addEventListener('click', () => {
-    document.querySelectorAll('.hs-tag').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.n-tag').forEach(t => t.classList.remove('active'));
     tag.classList.add('active');
     currentFilter = tag.getAttribute('data-filter');
     renderPosts();
