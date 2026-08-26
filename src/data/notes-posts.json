@@ -1,0 +1,70 @@
+{
+  "posts": [
+    {
+      "num": "012",
+      "date_nl": "22 aug 2026",
+      "date_en": "aug 22, 2026",
+      "tags": ["learning", "building"],
+      "readTime": 4,
+      "title_nl": "Astro islands, eindelijk snap ik het",
+      "title_en": "Astro islands finally clicked",
+      "snip_nl": "Drie weken lang dacht ik dat 'islands' een hype-term was. Toen bouwde ik de FC Ariba countdown en zag ik waarom het écht slim is.",
+      "snip_en": "For three weeks I thought 'islands' was just a hype word. Then I built the FC Ariba countdown and saw why it actually makes sense."
+    },
+    {
+      "num": "011",
+      "date_nl": "19 aug 2026",
+      "date_en": "aug 19, 2026",
+      "tags": ["ranting", "building"],
+      "readTime": 3,
+      "title_nl": "Waarom mijn Vercel deploy om 2u brak",
+      "title_en": "Why my Vercel deploy broke at 2am",
+      "snip_nl": "Node version mismatch. Ik heb het in 4 minuten gefixt en 40 minuten geraasd. Wat ik leerde over error logs lezen als een grote jongen.",
+      "snip_en": "Node version mismatch. Fixed it in 4 minutes, ranted for 40. Here's what I learned about reading error logs like a grown-up."
+    },
+    {
+      "num": "010",
+      "date_nl": "15 aug 2026",
+      "date_en": "aug 15, 2026",
+      "tags": ["learning"],
+      "readTime": 2,
+      "title_nl": "Is 'AI-assisted' wel het juiste woord?",
+      "title_en": "Is 'AI-assisted' even the right word?",
+      "snip_nl": "Ik typ minder code dan vroeger, maar ik denk méér over wat ik bouw. Assisted? Amplified? Iemand een beter woord?",
+      "snip_en": "I type less code than before, but I think more about what I build. Assisted? Amplified? Anyone got a better word?"
+    },
+    {
+      "num": "009",
+      "date_nl": "11 aug 2026",
+      "date_en": "aug 11, 2026",
+      "tags": ["poems"],
+      "readTime": 1,
+      "title_nl": "Nachtdienst",
+      "title_en": "Night shift",
+      "snip_nl": "De cursor knippert. Het is stil. Ik druk op enter en de wereld verandert een klein beetje, maar niemand ziet het.",
+      "snip_en": "The cursor blinks. It is quiet. I press enter and the world shifts a little, but no one sees it."
+    },
+    {
+      "num": "008",
+      "date_nl": "08 aug 2026",
+      "date_en": "aug 08, 2026",
+      "tags": ["learning"],
+      "readTime": 6,
+      "title_nl": "Claude schreef 90% van deze site. Voelt raar.",
+      "title_en": "Claude wrote 90% of this site. It feels weird.",
+      "snip_nl": "Ik ben geen developer. Toch heb ik een portfolio-site die live staat. De credit-vraag houdt me al twee weken bezig.",
+      "snip_en": "I'm not a developer. Yet I have a portfolio site that's live. The credit question has been bugging me for two weeks."
+    },
+    {
+      "num": "007",
+      "date_nl": "03 aug 2026",
+      "date_en": "aug 03, 2026",
+      "tags": ["ranting", "building"],
+      "readTime": 3,
+      "title_nl": "Wanneer stop je met refactoren?",
+      "title_en": "When do you stop refactoring?",
+      "snip_nl": "De pagina werkt. Ik heb hem drie keer herschreven 'om het cleaner te maken'. Dit is een probleem.",
+      "snip_en": "The page works. I have rewritten it three times 'to make it cleaner'. This is a problem."
+    }
+  ]
+}
