@@ -6,18 +6,8 @@
       "permanent": true
     },
     {
-      "source": "/pupsjpg/:path*",
-      "destination": "/jpg/:path*",
-      "permanent": true
-    },
-    {
       "source": "/headspace",
       "destination": "/notes",
-      "permanent": true
-    },
-    {
-      "source": "/headspace/:path*",
-      "destination": "/notes/:path*",
       "permanent": true
     }
   ]
