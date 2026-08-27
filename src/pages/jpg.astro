@@ -31,6 +31,23 @@ const photos = [
   { file:'be-03-cappy-lilies.jpg',       size:'tall', place:'fr', title:'Lilies on still water',        loc:'Cappy',                    date:'06.2025' },
   { file:'bled-03-loungers.jpg',         size:'tall', place:'si', title:'Loungers, late afternoon',     loc:'Lake Bled, Slovenia',      date:'07.2024' },
   { file:'be-07-cappy-kite.jpg',         size:'tall', place:'fr', title:'A kite at dusk',              loc:'Cappy',                    date:'06.2025' },
+  { file:'fr-08-cappy-somme.jpg',        size:'tall', place:'fr', title:'Along the Somme',              loc:'Cappy',                    date:'07.2026' },
+  { file:'fr-09-cappy-summer.jpg',       size:'tall', place:'fr', title:'Cappy in July',                loc:'Cappy',                    date:'07.2026' },
+  { file:'fr-10-cappy-quiet.jpg',        size:'tall', place:'fr', title:'A quieter bank',               loc:'Cappy',                    date:'07.2026' },
+  { file:'fr-11-amiens-birds.jpg',       size:'tall', place:'fr', title:'Paper birds over the cathedral', loc:'Amiens, France',        date:'07.2026' },
+  { file:'fr-12-thiepval-memorial.jpg',  size:'tall', place:'fr', title:'One man, one hundred thousand names', loc:'Thiepval Memorial',  date:'07.2026' },
+  { file:'fi-01-helsinki-cathedral.jpg', size:'tall', place:'fi', title:'The white on the hill',        loc:'Helsinki, Finland',        date:'05.2026' },
+  { file:'fi-02-helsinki-ferry.jpg',     size:'tall', place:'fi', title:'Uspenski, framed',             loc:'Helsinki, Finland',        date:'05.2026' },
+  { file:'fi-03-helsinki-facades.jpg',   size:'wide', place:'fi', title:'Nordic pastels',               loc:'Helsinki, Finland',        date:'05.2026' },
+  { file:'fi-04-helsinki-amosrex.jpg',   size:'tall', place:'fi', title:'On top of Amos Rex',           loc:'Helsinki, Finland',        date:'05.2026' },
+  { file:'ee-01-tallinn-alley.jpg',      size:'tall', place:'ee', title:'Down the stairs, into old town', loc:'Tallinn, Estonia',       date:'05.2026' },
+  { file:'ee-02-tallinn-mg.jpg',         size:'tall', place:'ee', title:'A quiet Sunday, an old MG',    loc:'Tallinn, Estonia',         date:'05.2026' },
+  { file:'ee-03-tallinn-rooftops.jpg',   size:'wide', place:'ee', title:'The red roofs of Tallinn',     loc:'Tallinn, Estonia',         date:'05.2026' },
+  { file:'it-09-dolomites-moon.jpg',     size:'tall', place:'it', title:'Moon over the pass',           loc:'Alta Badia, Dolomites',    date:'06.2024' },
+  { file:'it-10-lago-di-braies.jpg',     size:'tall', place:'it', title:'Wooden boats on a mirror',     loc:'Lago di Braies, Dolomites',date:'06.2024' },
+  { file:'it-11-manarola-cliff.jpg',     size:'tall', place:'it', title:'Golden hour over the swim spot', loc:'Manarola, Cinque Terre', date:'06.2024' },
+  { file:'ch-09-basel-rhine.jpg',        size:'wide', place:'ch', title:'The Münster from the Rhine',   loc:'Basel, Switzerland',       date:'06.2024' },
+  { file:'ch-10-vevey-stranger.jpg',     size:'tall', place:'ch', title:'First shot with a stranger',   loc:'Vevey, Lake Geneva',       date:'06.2024' },
 ];
 
 const filters = [
@@ -38,6 +55,8 @@ const filters = [
   { key:'fr',  label:'France',      count: photos.filter(p=>p.place==='fr').length },
   { key:'ch',  label:'Switzerland', count: photos.filter(p=>p.place==='ch').length },
   { key:'it',  label:'Italy',       count: photos.filter(p=>p.place==='it').length },
+  { key:'fi',  label:'Finland',     count: photos.filter(p=>p.place==='fi').length },
+  { key:'ee',  label:'Estonia',     count: photos.filter(p=>p.place==='ee').length },
   { key:'si',  label:'Slovenia',    count: photos.filter(p=>p.place==='si').length },
 ];
 ---
@@ -178,6 +197,7 @@ html[data-mode="dark"] .pupsjpg-page .map-legend-new { background:rgba(40,40,38,
 .pupsjpg-page .lg-1 { width:8px; height:8px; }
 .pupsjpg-page .lg-2 { width:12px; height:12px; }
 .pupsjpg-page .lg-3 { width:18px; height:18px; }
+.pupsjpg-page .lg-4 { width:24px; height:24px; }
 
 /* Quote polaroid rechtsboven */
 .pupsjpg-page .quote-polaroid { position:absolute; top:20px; right:16px; background:#FDFBF5; padding:12px; border-radius:2px; box-shadow:0 4px 20px rgba(0,0,0,0.15); transform:rotate(3deg); max-width:170px; z-index:1000; }
@@ -317,6 +337,18 @@ html[data-mode="dark"] .pupsjpg-page .qp-note { color:#D8D4CE; }
             <span class="count">{photos.filter(p=>p.place==='it').length}</span>
             <span class="chev">›</span>
           </button>
+          <button class="place-row" data-map-filter="fi">
+            <span class="flag">🇫🇮</span>
+            <span class="name">Finland</span>
+            <span class="count">{photos.filter(p=>p.place==='fi').length}</span>
+            <span class="chev">›</span>
+          </button>
+          <button class="place-row" data-map-filter="ee">
+            <span class="flag">🇪🇪</span>
+            <span class="name">Estonia</span>
+            <span class="count">{photos.filter(p=>p.place==='ee').length}</span>
+            <span class="chev">›</span>
+          </button>
           <button class="place-row" data-map-filter="si">
             <span class="flag">🇸🇮</span>
             <span class="name">Slovenia</span>
@@ -333,7 +365,8 @@ html[data-mode="dark"] .pupsjpg-page .qp-note { color:#D8D4CE; }
           <div class="map-legend-new">
             <span class="lg-item"><span class="lg-dot lg-1"></span>1</span>
             <span class="lg-item"><span class="lg-dot lg-2"></span>2–5</span>
-            <span class="lg-item"><span class="lg-dot lg-3"></span>6+</span>
+            <span class="lg-item"><span class="lg-dot lg-3"></span>6–9</span>
+            <span class="lg-item"><span class="lg-dot lg-4"></span>10+</span>
           </div>
 
           <!-- Quote polaroid rechtsboven (overlay) -->
@@ -401,15 +434,28 @@ html[data-mode="dark"] .pupsjpg-page .qp-note { color:#D8D4CE; }
 
   // ============ LEAFLET MAP ============
   const cities = [
-    { name: 'Cappy',         country: 'fr', lat: 49.918, lng: 2.734,  count: 7 },
-    { name: 'Siviez region', country: 'ch', lat: 46.176, lng: 7.290,  count: 8 },
-    { name: 'Turin',         country: 'it', lat: 45.070, lng: 7.686,  count: 1 },
-    { name: 'Genoa',         country: 'it', lat: 44.408, lng: 8.933,  count: 1 },
-    { name: 'Cinque Terre',  country: 'it', lat: 44.107, lng: 9.735,  count: 2 },
-    { name: 'Bologna',       country: 'it', lat: 44.494, lng: 11.343, count: 1 },
-    { name: 'Venice',        country: 'it', lat: 45.440, lng: 12.316, count: 2 },
-    { name: 'Alta Badia',    country: 'it', lat: 46.554, lng: 11.893, count: 1 },
-    { name: 'Lake Bled',     country: 'si', lat: 46.363, lng: 14.113, count: 4 }
+    // FRANCE
+    { name: 'Cappy',              country: 'fr', lat: 49.918, lng: 2.734,  count: 10 },
+    { name: 'Amiens',             country: 'fr', lat: 49.894, lng: 2.296,  count: 1 },
+    { name: 'Thiepval Memorial',  country: 'fr', lat: 50.051, lng: 2.688,  count: 1 },
+    // SWITZERLAND
+    { name: 'Siviez region',      country: 'ch', lat: 46.176, lng: 7.290,  count: 8 },
+    { name: 'Basel',              country: 'ch', lat: 47.559, lng: 7.588,  count: 1 },
+    { name: 'Vevey',              country: 'ch', lat: 46.463, lng: 6.843,  count: 1 },
+    // ITALY
+    { name: 'Turin',              country: 'it', lat: 45.070, lng: 7.686,  count: 1 },
+    { name: 'Genoa',              country: 'it', lat: 44.408, lng: 8.933,  count: 1 },
+    { name: 'Cinque Terre',       country: 'it', lat: 44.107, lng: 9.735,  count: 3 },
+    { name: 'Bologna',            country: 'it', lat: 44.494, lng: 11.343, count: 1 },
+    { name: 'Venice',             country: 'it', lat: 45.440, lng: 12.316, count: 2 },
+    { name: 'Alta Badia',         country: 'it', lat: 46.554, lng: 11.893, count: 2 },
+    { name: 'Lago di Braies',     country: 'it', lat: 46.694, lng: 12.086, count: 1 },
+    // FINLAND
+    { name: 'Helsinki',           country: 'fi', lat: 60.170, lng: 24.938, count: 4 },
+    // ESTONIA
+    { name: 'Tallinn',            country: 'ee', lat: 59.437, lng: 24.745, count: 3 },
+    // SLOVENIA
+    { name: 'Lake Bled',          country: 'si', lat: 46.363, lng: 14.113, count: 4 }
   ];
 
   let mapInited = false;
@@ -425,19 +471,20 @@ html[data-mode="dark"] .pupsjpg-page .qp-note { color:#D8D4CE; }
       zoomControl: true,
       scrollWheelZoom: false,
       attributionControl: true
-    }).setView([47, 8], 5);
+    }).setView([52, 12], 4);
 
-    // CartoDB Voyager (light) - warm, ivory-getint
-    lightTiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-      attribution: '© OpenStreetMap · CartoDB',
-      subdomains: 'abcd',
-      maxZoom: 18
+    // Stamen Watercolor (light) - waterverf-look, past bij een fotografie-hub
+    lightTiles = L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_watercolor/{z}/{x}/{y}.jpg', {
+      attribution: '© <a href="https://stadiamaps.com/">Stadia Maps</a> · Stamen · OSM',
+      minZoom: 1,
+      maxZoom: 16,
+      ext: 'jpg'
     });
-    // CartoDB Dark Matter (dark)
-    darkTiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-      attribution: '© OpenStreetMap · CartoDB',
-      subdomains: 'abcd',
-      maxZoom: 18
+    // Stamen Toner (dark alternative)
+    darkTiles = L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}.png', {
+      attribution: '© <a href="https://stadiamaps.com/">Stadia Maps</a> · Stamen · OSM',
+      minZoom: 1,
+      maxZoom: 20
     });
 
     const isDark = document.documentElement.dataset.mode === 'dark';
@@ -445,7 +492,7 @@ html[data-mode="dark"] .pupsjpg-page .qp-note { color:#D8D4CE; }
 
     // Markers per city
     cities.forEach(city => {
-      const size = city.count === 1 ? 14 : city.count <= 5 ? 22 : 30;
+      const size = city.count === 1 ? 14 : city.count <= 5 ? 22 : city.count <= 9 ? 30 : 38;
       const marker = L.marker([city.lat, city.lng], {
         icon: L.divIcon({
           className: 'city-pin',
