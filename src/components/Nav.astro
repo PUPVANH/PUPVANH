@@ -16,10 +16,33 @@
     <a href="/pups">pups</a>
   </div>
   <div class="nav-r">
-    <span>2026 · vol.01</span>
+    <span class="vol-label">2026 · vol.01</span>
     <button class="theme-toggle" id="tb" aria-label="Toggle dark mode">◐</button>
+    <button class="hamburger" id="hb" aria-label="Open menu" aria-expanded="false">☰</button>
   </div>
 </nav>
+
+<!-- Mobile overlay menu -->
+<div class="mobile-menu" id="mm" aria-hidden="true">
+  <div class="mm-overlay" data-close></div>
+  <div class="mm-panel" role="dialog" aria-modal="true">
+    <button class="mm-close" data-close aria-label="Close menu">×</button>
+    <nav class="mm-links">
+      <a href="/notes" data-close>notes</a>
+      <a href="/bookmarks" data-close>bookmarks</a>
+      <a href="/jpg" data-close>jpg</a>
+      <span class="mm-sep" aria-hidden="true">•&nbsp;•&nbsp;•</span>
+      <a href="/ariba" data-close>ariba</a>
+      <a href="/siviez" data-close>siviez</a>
+      <a href="/flags" data-close>flags</a>
+      <a href="/pups" data-close>pups</a>
+    </nav>
+    <div class="mm-foot">
+      <span>2026 · vol.01</span>
+    </div>
+  </div>
+</div>
+
 <div class="pup" id="pup">🐕</div>
 <style>
   nav{
@@ -45,6 +68,63 @@
   .cat-sep{color:var(--ember);font-size:10px;letter-spacing:1px;user-select:none;opacity:.75;}
   .nav-r{display:flex;gap:14px;align-items:center;font-size:12px;color:var(--muted);}
   .theme-toggle{background:transparent;border:none;color:var(--text);font-size:14px;cursor:pointer;font-family:inherit;}
+
+  /* Hamburger — verborgen op desktop */
+  .hamburger{
+    display:none;background:transparent;border:none;color:var(--text);
+    font-size:20px;cursor:pointer;font-family:inherit;padding:0;line-height:1;
+  }
+
+  /* Mobile menu overlay */
+  .mobile-menu{
+    position:fixed;inset:0;z-index:100;display:none;
+  }
+  .mobile-menu.open{display:block;}
+  .mm-overlay{
+    position:absolute;inset:0;background:rgba(30,58,52,.6);
+    backdrop-filter:blur(8px);cursor:pointer;
+    animation:mmFadeIn .25s ease;
+  }
+  .mm-panel{
+    position:absolute;top:0;right:0;bottom:0;
+    width:min(320px,85vw);background:var(--bg);
+    display:flex;flex-direction:column;
+    padding:80px 32px 32px;
+    box-shadow:-4px 0 24px rgba(0,0,0,.15);
+    animation:mmSlideIn .3s cubic-bezier(.2,.8,.2,1);
+  }
+  :global(html[data-mode="dark"]) .mm-panel{background:#0F2622;}
+  @keyframes mmFadeIn{from{opacity:0;}to{opacity:1;}}
+  @keyframes mmSlideIn{from{transform:translateX(100%);}to{transform:translateX(0);}}
+  .mm-close{
+    position:absolute;top:20px;right:24px;
+    background:transparent;border:none;color:var(--text);
+    font-size:32px;cursor:pointer;padding:0;line-height:1;
+    font-family:inherit;transition:transform .2s;
+  }
+  .mm-close:hover{transform:rotate(90deg);}
+  .mm-links{
+    display:flex;flex-direction:column;gap:20px;
+    font-family:'JetBrains Mono',monospace;font-size:16px;
+  }
+  .mm-links a{
+    color:var(--text);text-decoration:none;transition:color .2s;
+    letter-spacing:.05em;
+  }
+  .mm-links a:hover{color:var(--ember);}
+  .mm-sep{
+    color:var(--ember);font-size:12px;letter-spacing:2px;
+    opacity:.75;padding:8px 0;user-select:none;
+  }
+  .mm-foot{
+    margin-top:auto;padding-top:24px;
+    font-family:'JetBrains Mono',monospace;font-size:11px;
+    color:var(--muted);letter-spacing:.1em;
+    border-top:1px solid rgba(232,93,47,.15);
+  }
+
+  body.mm-open{overflow:hidden;}
+
   .pup{position:fixed;top:22px;left:-80px;font-size:28px;z-index:200;pointer-events:none;opacity:0;}
   .pup.run{opacity:1;animation:pupRun 5s linear;}
   @keyframes pupRun{
@@ -57,6 +137,8 @@
   @media(max-width:800px){
     nav{padding:14px 20px;}
     .nav-c{display:none;}
+    .vol-label{display:none;}
+    .hamburger{display:inline-block;}
   }
 </style>
 <script>
@@ -79,6 +161,31 @@
       localStorage.setItem('pupvanh-mode', n);
     });
   }
+  // Hamburger mobile menu
+  const hb = document.getElementById('hb');
+  const mm = document.getElementById('mm');
+  if (hb && mm) {
+    const openMenu = () => {
+      mm.classList.add('open');
+      mm.setAttribute('aria-hidden', 'false');
+      hb.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('mm-open');
+    };
+    const closeMenu = () => {
+      mm.classList.remove('open');
+      mm.setAttribute('aria-hidden', 'true');
+      hb.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('mm-open');
+    };
+    hb.addEventListener('click', openMenu);
+    mm.querySelectorAll('[data-close]').forEach(el => {
+      el.addEventListener('click', closeMenu);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mm.classList.contains('open')) closeMenu();
+    });
+  }
+
   // Easter egg: sneaky pupje na 1s hover op logo
   const logoTrigger = document.getElementById('logoTrigger');
   const pupEl = document.getElementById('pup');
