@@ -176,19 +176,30 @@ html[data-mode="dark"] .pupsjpg-page .leaflet-control-attribution a { color:#aaa
 html[data-mode="dark"] .pupsjpg-page .leaflet-control-zoom a { background:rgba(40,40,38,0.9) !important; color:#e0dcd0 !important; border-color:rgba(255,255,255,0.1) !important; }
 
 /* Custom pin marker */
-.pupsjpg-page .city-pin { display:flex !important; align-items:center; justify-content:center; z-index:1000 !important; }
-.pupsjpg-page .pin-dot { background:#E85D2F !important; border:2px solid #ffffff !important; border-radius:50% !important; box-shadow:0 2px 6px rgba(0,0,0,0.4) !important; transition:transform .2s; cursor:pointer; }
-.pupsjpg-page .city-pin:hover .pin-dot { transform:scale(1.15); box-shadow:0 4px 12px rgba(232,93,47,0.6); }
-.pupsjpg-page .leaflet-marker-icon { z-index:1000 !important; }
+.pupsjpg-page .leaflet-marker-pane { z-index:700 !important; }
+.pupsjpg-page .city-pin { display:flex !important; align-items:center; justify-content:center; }
+.pupsjpg-page .leaflet-marker-icon { z-index:700 !important; }
 
-/* Leaflet popup styling */
-.pupsjpg-page .leaflet-popup-content-wrapper { background:var(--bg) !important; color:var(--text) !important; border-radius:4px !important; box-shadow:0 4px 20px rgba(0,0,0,0.15) !important; padding:2px !important; }
-.pupsjpg-page .leaflet-popup-content { margin:8px 14px !important; font-family:'JetBrains Mono',monospace !important; font-size:11px !important; letter-spacing:0.5px !important; text-transform:uppercase !important; line-height:1.5 !important; }
-.pupsjpg-page .leaflet-popup-content strong { color:var(--ember); font-weight:500; letter-spacing:1px; }
+/* Leaflet popup — city preview card */
+.pupsjpg-page .leaflet-popup-content-wrapper { padding:0 !important; background:var(--bg) !important; color:var(--text) !important; border-radius:6px !important; box-shadow:0 6px 24px rgba(0,0,0,0.2) !important; overflow:hidden; }
+.pupsjpg-page .leaflet-popup-content { margin:0 !important; width:auto !important; }
 .pupsjpg-page .leaflet-popup-tip { background:var(--bg) !important; }
 html[data-mode="dark"] .pupsjpg-page .leaflet-popup-content-wrapper,
-html[data-mode="dark"] .pupsjpg-page .leaflet-popup-tip { background:#2a2825 !important; }
-.pupsjpg-page .leaflet-popup-close-button { color:var(--muted) !important; }
+html[data-mode="dark"] .pupsjpg-page .leaflet-popup-tip { background:#2a2825 !important; color:#e8e4d8 !important; }
+.pupsjpg-page .leaflet-popup-close-button { color:var(--muted) !important; padding:8px 8px 0 0 !important; font-size:18px !important; z-index:10; }
+html[data-mode="dark"] .pupsjpg-page .leaflet-popup-close-button { color:#a8a496 !important; }
+
+.pupsjpg-page .popup-city { font-family:'Inter',sans-serif; min-width:220px; }
+.pupsjpg-page .popup-header { display:flex; align-items:center; gap:10px; padding:12px 30px 10px 12px; }
+.pupsjpg-page .popup-flag { font-size:26px; line-height:1; }
+.pupsjpg-page .popup-info { flex:1; }
+.pupsjpg-page .popup-name { font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:500; text-transform:uppercase; letter-spacing:1.2px; color:var(--text); }
+.pupsjpg-page .popup-count { font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--muted); letter-spacing:0.5px; margin-top:2px; }
+.pupsjpg-page .popup-thumbs { display:grid; gap:2px; padding:0 2px; }
+.pupsjpg-page .popup-thumb { width:100%; aspect-ratio:1/1; object-fit:cover; cursor:pointer; transition:opacity .15s; display:block; }
+.pupsjpg-page .popup-thumb:hover { opacity:0.82; }
+.pupsjpg-page .popup-view-all { display:block; width:100%; padding:10px 12px; background:var(--ember); color:#fff; border:none; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; cursor:pointer; transition:background .2s; font-weight:500; margin-top:2px; }
+.pupsjpg-page .popup-view-all:hover { background:#c94a1e; }
 
 /* Legend rechtsonder */
 .pupsjpg-page .map-legend-new { position:absolute; bottom:16px; right:16px; display:flex; gap:14px; align-items:center; background:rgba(255,255,255,0.95); padding:8px 14px; border-radius:999px; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:1px; text-transform:uppercase; color:var(--text); backdrop-filter:blur(4px); z-index:1000; box-shadow:0 2px 8px rgba(0,0,0,0.1); }
@@ -436,28 +447,33 @@ html[data-mode="dark"] .pupsjpg-page .qp-note { color:#D8D4CE; }
   // ============ LEAFLET MAP ============
   const cities = [
     // FRANCE
-    { name: 'Cappy',              country: 'fr', lat: 49.918, lng: 2.734,  count: 10 },
-    { name: 'Amiens',             country: 'fr', lat: 49.894, lng: 2.296,  count: 1 },
-    { name: 'Thiepval Memorial',  country: 'fr', lat: 50.051, lng: 2.688,  count: 1 },
+    { name: 'Cappy',             country: 'fr', flag: '🇫🇷', lat: 49.918, lng: 2.734,  locs: ['Cappy'] },
+    { name: 'Amiens',            country: 'fr', flag: '🇫🇷', lat: 49.894, lng: 2.296,  locs: ['Amiens, France'] },
+    { name: 'Thiepval Memorial', country: 'fr', flag: '🇫🇷', lat: 50.051, lng: 2.688,  locs: ['Thiepval Memorial'] },
     // SWITZERLAND
-    { name: 'Siviez region',      country: 'ch', lat: 46.176, lng: 7.290,  count: 8 },
-    { name: 'Basel',              country: 'ch', lat: 47.559, lng: 7.588,  count: 1 },
-    { name: 'Vevey',              country: 'ch', lat: 46.463, lng: 6.843,  count: 1 },
+    { name: 'Siviez region',     country: 'ch', flag: '🇨🇭', lat: 46.176, lng: 7.290,  locs: ['Siviez, Valais', 'Val de Nendaz, Valais', 'Lac de Cleuson, Valais'] },
+    { name: 'Basel',             country: 'ch', flag: '🇨🇭', lat: 47.559, lng: 7.588,  locs: ['Basel, Switzerland'] },
+    { name: 'Vevey',             country: 'ch', flag: '🇨🇭', lat: 46.463, lng: 6.843,  locs: ['Vevey, Lake Geneva'] },
     // ITALY
-    { name: 'Turin',              country: 'it', lat: 45.070, lng: 7.686,  count: 1 },
-    { name: 'Genoa',              country: 'it', lat: 44.408, lng: 8.933,  count: 1 },
-    { name: 'Cinque Terre',       country: 'it', lat: 44.107, lng: 9.735,  count: 3 },
-    { name: 'Bologna',            country: 'it', lat: 44.494, lng: 11.343, count: 1 },
-    { name: 'Venice',             country: 'it', lat: 45.440, lng: 12.316, count: 2 },
-    { name: 'Alta Badia',         country: 'it', lat: 46.554, lng: 11.893, count: 2 },
-    { name: 'Lago di Braies',     country: 'it', lat: 46.694, lng: 12.086, count: 1 },
+    { name: 'Turin',             country: 'it', flag: '🇮🇹', lat: 45.070, lng: 7.686,  locs: ['Turin, Italy'] },
+    { name: 'Genoa',             country: 'it', flag: '🇮🇹', lat: 44.408, lng: 8.933,  locs: ['Genoa, Italy'] },
+    { name: 'Cinque Terre',      country: 'it', flag: '🇮🇹', lat: 44.107, lng: 9.735,  locs: ['Riomaggiore, Cinque Terre', 'Manarola, Cinque Terre'] },
+    { name: 'Bologna',           country: 'it', flag: '🇮🇹', lat: 44.494, lng: 11.343, locs: ['Bologna, Italy'] },
+    { name: 'Venice',            country: 'it', flag: '🇮🇹', lat: 45.440, lng: 12.316, locs: ['Venice, Italy'] },
+    { name: 'Alta Badia',        country: 'it', flag: '🇮🇹', lat: 46.554, lng: 11.893, locs: ['Alta Badia, Dolomites'] },
+    { name: 'Lago di Braies',    country: 'it', flag: '🇮🇹', lat: 46.694, lng: 12.086, locs: ['Lago di Braies, Dolomites'] },
     // FINLAND
-    { name: 'Helsinki',           country: 'fi', lat: 60.170, lng: 24.938, count: 4 },
+    { name: 'Helsinki',          country: 'fi', flag: '🇫🇮', lat: 60.170, lng: 24.938, locs: ['Helsinki, Finland'] },
     // ESTONIA
-    { name: 'Tallinn',            country: 'ee', lat: 59.437, lng: 24.745, count: 3 },
+    { name: 'Tallinn',           country: 'ee', flag: '🇪🇪', lat: 59.437, lng: 24.745, locs: ['Tallinn, Estonia'] },
     // SLOVENIA
-    { name: 'Lake Bled',          country: 'si', lat: 46.363, lng: 14.113, count: 4 }
+    { name: 'Lake Bled',         country: 'si', flag: '🇸🇮', lat: 46.363, lng: 14.113, locs: ['Lake Bled, Slovenia'] }
   ];
+
+  // Helper: welke foto's horen bij een stad
+  function getCityPhotos(city) {
+    return photos.filter(p => city.locs.includes(p.loc));
+  }
 
   let mapInited = false;
   let leafletMap = null;
@@ -498,7 +514,10 @@ html[data-mode="dark"] .pupsjpg-page .qp-note { color:#D8D4CE; }
 
     // Markers per city
     cities.forEach(city => {
-      const size = city.count === 1 ? 14 : city.count <= 5 ? 22 : city.count <= 9 ? 30 : 38;
+      const cityPhotos = getCityPhotos(city);
+      const count = cityPhotos.length;
+      if (count === 0) return;
+      const size = count === 1 ? 14 : count <= 5 ? 22 : count <= 9 ? 30 : 38;
       const marker = L.marker([city.lat, city.lng], {
         icon: L.divIcon({
           className: 'city-pin',
@@ -507,13 +526,56 @@ html[data-mode="dark"] .pupsjpg-page .qp-note { color:#D8D4CE; }
           iconAnchor: [size / 2, size / 2]
         })
       }).addTo(leafletMap);
-      marker.bindPopup('<strong>' + city.name + '</strong><br/>' + city.count + ' photograph' + (city.count > 1 ? 's' : ''));
-      marker.on('click', () => {
-        // Klik op pin filtert grid + switch naar grid view
-        applyFilter(city.country);
-        document.querySelector('.viewsw button[data-view="grid"]').click();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // Popup content: flag + name + count + 2 preview thumbs + view-all button
+      const previewPhotos = cityPhotos.slice(0, 2);
+      const gridCols = previewPhotos.length === 1 ? '1fr' : '1fr 1fr';
+      const thumbsHtml = previewPhotos.map(p => {
+        const idx = photos.indexOf(p);
+        return '<img class="popup-thumb" src="/jpg/' + p.file + '" data-photo-idx="' + idx + '" alt="' + p.title + '" />';
+      }).join('');
+      const popupHtml =
+        '<div class="popup-city">' +
+          '<div class="popup-header">' +
+            '<span class="popup-flag">' + city.flag + '</span>' +
+            '<div class="popup-info">' +
+              '<div class="popup-name">' + city.name + '</div>' +
+              '<div class="popup-count">' + count + ' photograph' + (count > 1 ? 's' : '') + '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="popup-thumbs" style="grid-template-columns:' + gridCols + '">' + thumbsHtml + '</div>' +
+          '<button class="popup-view-all" data-country="' + city.country + '">View all ' + count + ' →</button>' +
+        '</div>';
+
+      marker.bindPopup(popupHtml, {
+        maxWidth: 260,
+        minWidth: 220,
+        closeButton: true,
+        autoPan: true
       });
+      // Geen filter meer bij klik op pin - alleen popup opent
+    });
+
+    // Event delegation voor popup content (thumbs + view-all)
+    leafletMap.on('popupopen', (e) => {
+      const popupEl = e.popup.getElement();
+      if (!popupEl) return;
+      // Klik op preview thumb → open lightbox voor die foto
+      popupEl.querySelectorAll('.popup-thumb').forEach(img => {
+        img.addEventListener('click', () => {
+          const idx = parseInt(img.dataset.photoIdx, 10);
+          if (!isNaN(idx) && window.openLbFromMap) window.openLbFromMap(idx);
+        });
+      });
+      // Klik op "View all" → filter grid + switch naar grid view
+      const viewAllBtn = popupEl.querySelector('.popup-view-all');
+      if (viewAllBtn) {
+        viewAllBtn.addEventListener('click', () => {
+          applyFilter(viewAllBtn.dataset.country);
+          document.querySelector('.viewsw button[data-view="grid"]').click();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
     });
   }
 
@@ -567,6 +629,7 @@ html[data-mode="dark"] .pupsjpg-page .qp-note { color:#D8D4CE; }
     document.getElementById('lb').classList.add('on');
     document.body.style.overflow = 'hidden';
   }
+  window.openLbFromMap = openLb;
   function closeLb() {
     document.getElementById('lb').classList.remove('on');
     document.body.style.overflow = '';
