@@ -119,6 +119,23 @@
   height:2px; background:var(--pups-accent);
 }
 
+/* NL / EN language switcher */
+.pups-page .pups-lang {
+  display:flex; align-items:center; gap:6px;
+  margin-left:12px; padding-left:20px;
+  border-left:1px solid var(--pups-line);
+  font-family:'Space Grotesk','Inter',sans-serif;
+}
+.pups-page .pups-lang-btn {
+  background:transparent; border:none; padding:0; cursor:pointer;
+  font:inherit; font-size:14px; font-weight:500;
+  letter-spacing:0.5px; color:var(--pups-ink);
+  opacity:0.5; transition:opacity 0.2s, color 0.2s;
+}
+.pups-page .pups-lang-btn:hover { opacity:0.8; }
+.pups-page .pups-lang-btn.active { opacity:1; color:var(--pups-accent); }
+.pups-page .pups-lang-sep { opacity:0.3; font-size:12px; }
+
 .pups-page .view { display:none; animation: pupsFadeIn 0.5s ease; }
 .pups-page .view.active { display:block; }
 @keyframes pupsFadeIn { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:translateY(0);} }
@@ -651,27 +668,32 @@
 
 <div class="drag-pup" id="dragPup">
   <img src="/pups/designs/sleeping.png" alt="drag me">
-  <span class="drag-hint">← drag me!</span>
+  <span class="drag-hint" data-i18n="drag.hint">← drag me!</span>
 </div>
 
-<button class="rain-btn" id="rainBtn">🌧️ Rain mode</button>
+<button class="rain-btn" id="rainBtn" data-i18n="rain.btn">🌧️ Rain mode</button>
 
-<div class="announce">
+<div class="announce" data-i18n="announce">
   🐾 <span>@po.pups</span> · DM to order · handmade drops · sinds 2023
 </div>
 
 <nav class="nav">
-  <a href="/" class="nav-back">← pupvanh</a>
+  <a href="/" class="nav-back" data-i18n="nav.back">← pupvanh</a>
   <div class="nav-brand" data-view="main">
     <img src="/pups/designs/og.png" alt="Pups mascotte">
     <span class="nav-brand-name">Pups</span>
   </div>
   <div class="nav-links">
-    <a data-view="main" data-scroll="collection" class="nav-collection active">Collection</a>
-    <a data-view="main" data-scroll="merch">Merch</a>
-    <a data-view="vinnie" class="nav-vinnie">Meet Vinnie</a>
-    <a data-view="main" data-scroll="animals">My animals</a>
-    <a data-view="main" data-scroll="story">Story</a>
+    <a data-view="main" data-scroll="collection" class="nav-collection active" data-i18n="nav.collection">Collection</a>
+    <a data-view="main" data-scroll="merch" data-i18n="nav.merch">Merch</a>
+    <a data-view="vinnie" class="nav-vinnie" data-i18n="nav.vinnie">Meet Vinnie</a>
+    <a data-view="main" data-scroll="animals" data-i18n="nav.animals">My animals</a>
+    <a data-view="main" data-scroll="story" data-i18n="nav.story">Story</a>
+    <div class="pups-lang">
+      <button class="pups-lang-btn active" data-lang="nl">NL</button>
+      <span class="pups-lang-sep">·</span>
+      <button class="pups-lang-btn" data-lang="en">EN</button>
+    </div>
   </div>
 </nav>
 
@@ -679,17 +701,17 @@
 
 <section class="hero">
   <div>
-    <div class="hero-kicker">Wearable creative energy · sinds 2023</div>
+    <div class="hero-kicker" data-i18n="hero.kicker">Wearable creative energy · sinds 2023</div>
     <h1 class="hero-title">Pups<br><span class="serif">by</span> <span class="accent">Puppy</span></h1>
-    <p class="hero-lead">Hondgeïnspireerde streetwear met eigen creaties. <strong>Kleinschalig, handmade, en enkel via DM te bestellen.</strong></p>
+    <p class="hero-lead" data-i18n="hero.lead">Hondgeïnspireerde streetwear met eigen creaties. <strong>Kleinschalig, handmade, en enkel via DM te bestellen.</strong></p>
     <div class="hero-ctas">
-      <a href="#collection" class="hero-cta">De collectie →</a>
-      <a href="#" class="hero-cta secondary" data-view="vinnie">Meet Vinnie</a>
+      <a href="#collection" class="hero-cta" data-i18n="hero.cta1">De collectie →</a>
+      <a href="#" class="hero-cta secondary" data-view="vinnie" data-i18n="hero.cta2">Meet Vinnie</a>
     </div>
   </div>
   <div class="hero-image">
-    <span class="hero-sticker top-right">Drop 01</span>
-    <span class="hero-sticker bottom-left">18 designs</span>
+    <span class="hero-sticker top-right" data-i18n="hero.sticker1">Drop 01</span>
+    <span class="hero-sticker bottom-left" data-i18n="hero.sticker2">18 designs</span>
     <img src="/pups/photos/bono_hero_new.jpg" alt="Bono with Pups cap">
   </div>
 </section>
@@ -702,10 +724,10 @@
   <div class="lookbook-inner">
     <div class="section-header">
       <div>
-        <div class="section-kicker">The lookbook</div>
-        <h2 class="section-title">In het <em>wild</em></h2>
+        <div class="section-kicker" data-i18n="lookbook.kicker">The lookbook</div>
+        <h2 class="section-title" data-i18n="lookbook.title">In het <em>wild</em></h2>
       </div>
-      <div class="section-meta">Shoot 2024<br><strong>The Pups fam</strong></div>
+      <div class="section-meta" data-i18n="lookbook.meta">Shoot 2024<br><strong>The Pups fam</strong></div>
     </div>
     <div class="lookbook-grid">
       <div class="lookbook-item tall"><img src="/pups/photos/g_couple.jpg" alt=""></div>
@@ -726,10 +748,10 @@
 <section class="section" id="collection">
   <div class="section-header">
     <div>
-      <div class="section-kicker">The collection</div>
-      <h2 class="section-title">Meet the <em>pack</em></h2>
+      <div class="section-kicker" data-i18n="collection.kicker">The collection</div>
+      <h2 class="section-title" data-i18n="collection.title">Meet the <em>pack</em></h2>
     </div>
-    <div class="section-meta">18 designs live · try <strong>rain mode</strong><br>tilt cards with your mouse</div>
+    <div class="section-meta" data-i18n="collection.meta">18 designs live · try <strong>rain mode</strong><br>tilt cards with your mouse</div>
   </div>
   <div class="design-grid">
     <div class="design-card" data-tilt>
@@ -810,10 +832,10 @@
   <div class="merch-inner">
     <div class="section-header">
       <div>
-        <div class="section-kicker">The merch</div>
-        <h2 class="section-title">Wearing <em>it</em></h2>
+        <div class="section-kicker" data-i18n="merch.kicker">The merch</div>
+        <h2 class="section-title" data-i18n="merch.title">Wearing <em>it</em></h2>
       </div>
-      <div class="section-meta">Caps · totes · phone cases<br><strong>click tote to flip</strong></div>
+      <div class="section-meta" data-i18n="merch.meta">Caps · totes · phone cases<br><strong>click tote to flip</strong></div>
     </div>
     <div class="merch-grid">
     <div class="merch-card tote-flip" onclick="this.classList.toggle('flipped')">
@@ -821,7 +843,7 @@
         <img class="tote-front" src="/pups/mockups/mock_tote_front.jpg" alt="Pups Tote Bag front">
         <img class="tote-back" src="/pups/mockups/mock_tote_back.jpg" alt="Pups Tote Bag back">
       </div>
-      <div class="merch-body"><div class="merch-name">Pups Tote Bag</div><div class="merch-tag">Click to flip · front & back</div></div>
+      <div class="merch-body"><div class="merch-name">Pups Tote Bag</div><div class="merch-tag" data-i18n="merch.tote.tag">Click to flip · front & back</div></div>
     </div>
     <div class="merch-card">
       <div class="merch-image"><img src="/pups/mockups/mock_iphone_1.jpg" alt="Vinnie iPhone Case"></div>
@@ -848,24 +870,24 @@
 
 <section class="animals" id="animals">
   <div class="animals-header">
-    <div class="animals-kicker">The real deal</div>
-    <h2 class="animals-title">My <em>animals</em></h2>
+    <div class="animals-kicker" data-i18n="animals.kicker">The real deal</div>
+    <h2 class="animals-title" data-i18n="animals.title">My <em>animals</em></h2>
   </div>
   <div class="animals-grid">
     <div class="animal-card">
-      <div class="animal-badge">The muse</div>
+      <div class="animal-badge" data-i18n="animals.bono.badge">The muse</div>
       <div class="animal-photo"><img src="/pups/photos/bono.jpg" alt="Bono"></div>
       <div class="animal-name">Bono</div>
-      <div class="animal-role">Golden retriever · mascotte inspiration</div>
-      <div class="animal-desc">De hond van mijn beste vrienden, waar ik peter van ben. Samen met mijn nickname de basis van de Pups-mascotte.</div>
+      <div class="animal-role" data-i18n="animals.bono.role">Golden retriever · mascotte inspiration</div>
+      <div class="animal-desc" data-i18n="animals.bono.desc">De hond van mijn beste vrienden, waar ik peter van ben. Samen met mijn nickname de basis van de Pups-mascotte.</div>
     </div>
     <div class="animal-card">
-      <div class="animal-badge">The model</div>
+      <div class="animal-badge" data-i18n="animals.vinnie.badge">The model</div>
       <div class="animal-photo"><img src="/pups/photos/v_hero.jpg" alt="Vinnie"></div>
       <div class="animal-name">Vinnie</div>
-      <div class="animal-role">Aussie shepherd · brand model</div>
-      <div class="animal-desc">De Australian Shepherd met blauwe ogen en energie voor drie. Modelt alle nieuwe drops.</div>
-      <a data-view="vinnie" class="animal-cta">Naar Vinnie →</a>
+      <div class="animal-role" data-i18n="animals.vinnie.role">Aussie shepherd · brand model</div>
+      <div class="animal-desc" data-i18n="animals.vinnie.desc">De Australian Shepherd met blauwe ogen en energie voor drie. Modelt alle nieuwe drops.</div>
+      <a data-view="vinnie" class="animal-cta" data-i18n="animals.vinnie.cta">Naar Vinnie →</a>
     </div>
   </div>
 </section>
@@ -875,19 +897,19 @@
     <img src="/pups/photos/story_man.jpg" alt="Puppy">
   </div>
   <div class="story-content">
-    <div class="story-kicker">The story</div>
+    <div class="story-kicker" data-i18n="story.kicker">The story</div>
     <h2>Pups &<br><em>Puppy</em></h2>
-    <p>Hi, ik ben <strong>Pepijn — of Puppy</strong>, zoals vrienden mij noemen. Ik startte Pups om creatieve energie, emoties en gedachten kwijt te kunnen op iets dat ik zelf graag draag.</p>
-    <p>De <strong>Pups-mascotte</strong> is een mix van mijn nickname en <strong>Bono</strong>, de golden retriever van mijn beste vrienden. Reflectie van mijn liefde voor honden, muziek en fun.</p>
-    <p>Elke drop is beperkt — vaak maar 1 of 2 stuks per ontwerp. Alles handmatig gemaakt of bedrukt, en enkel via <strong>DM te bestellen</strong>.</p>
+    <p data-i18n="story.p1">Hi, ik ben <strong>Pepijn — of Puppy</strong>, zoals vrienden mij noemen. Ik startte Pups om creatieve energie, emoties en gedachten kwijt te kunnen op iets dat ik zelf graag draag.</p>
+    <p data-i18n="story.p2">De <strong>Pups-mascotte</strong> is een mix van mijn nickname en <strong>Bono</strong>, de golden retriever van mijn beste vrienden. Reflectie van mijn liefde voor honden, muziek en fun.</p>
+    <p data-i18n="story.p3">Elke drop is beperkt — vaak maar 1 of 2 stuks per ontwerp. Alles handmatig gemaakt of bedrukt, en enkel via <strong>DM te bestellen</strong>.</p>
   </div>
 </section>
 
 <section class="cta-section">
-  <div class="cta-kicker">Want one?</div>
-  <h2 class="cta-title">Slide into <em>the DMs</em></h2>
-  <p class="cta-lead">Kies een design uit de collectie, stuur mij een berichtje op Instagram — we regelen de rest.</p>
-  <button class="cta-btn" id="ctaDMBtn">DM @po.pups →</button>
+  <div class="cta-kicker" data-i18n="cta.kicker">Want one?</div>
+  <h2 class="cta-title" data-i18n="cta.title">Slide into <em>the DMs</em></h2>
+  <p class="cta-lead" data-i18n="cta.lead">Kies een design uit de collectie, stuur mij een berichtje op Instagram — we regelen de rest.</p>
+  <button class="cta-btn" id="ctaDMBtn" data-i18n="cta.btn">DM @po.pups →</button>
 </section>
 
 </div>
@@ -900,9 +922,9 @@
       <img src="/pups/photos/v_hero.jpg" alt="Vinnie the Aussie">
     </div>
     <div class="vinnie-hero-info">
-      <div class="v-kicker">Meet the model · aussie shepherd</div>
+      <div class="v-kicker" data-i18n="vinnie.kicker">Meet the model · aussie shepherd</div>
       <h1>Vinnie<br><em>the aussie.</em></h1>
-      <p class="vinnie-tagline">Australian Shepherd · <strong>blauwe ogen</strong> · energie voor drie · officieel model van alle Pups-drops.</p>
+      <p class="vinnie-tagline" data-i18n="vinnie.tagline">Australian Shepherd · <strong>blauwe ogen</strong> · energie voor drie · officieel model van alle Pups-drops.</p>
       <a href="https://www.instagram.com/vinnie_theaussie/" target="_blank" class="vinnie-insta">📷 @vinnie_theaussie</a>
     </div>
   </div>
@@ -910,24 +932,24 @@
 
 <section class="vinnie-facts">
   <div class="animals-header" style="margin-bottom:40px;">
-    <div class="animals-kicker">Fun facts</div>
-    <h2 class="animals-title">Vinnie in <em>cijfers</em></h2>
+    <div class="animals-kicker" data-i18n="vinnie.facts.kicker">Fun facts</div>
+    <h2 class="animals-title" data-i18n="vinnie.facts.title">Vinnie in <em>cijfers</em></h2>
   </div>
   <div class="vinnie-facts-grid">
-    <div class="fact-card"><span class="fact-icon">👁️</span><div class="fact-value">💙💙</div><div class="fact-label">Blauwe ogen</div></div>
-    <div class="fact-card"><span class="fact-icon">⚡</span><div class="fact-value">10/10</div><div class="fact-label">Energie levels</div></div>
-    <div class="fact-card"><span class="fact-icon">📸</span><div class="fact-value">18</div><div class="fact-label">Designs gemodelleerd</div></div>
-    <div class="fact-card"><span class="fact-icon">🎾</span><div class="fact-value">∞</div><div class="fact-label">Ballen apporteren</div></div>
+    <div class="fact-card"><span class="fact-icon">👁️</span><div class="fact-value">💙💙</div><div class="fact-label" data-i18n="vinnie.fact1">Blauwe ogen</div></div>
+    <div class="fact-card"><span class="fact-icon">⚡</span><div class="fact-value">10/10</div><div class="fact-label" data-i18n="vinnie.fact2">Energie levels</div></div>
+    <div class="fact-card"><span class="fact-icon">📸</span><div class="fact-value">18</div><div class="fact-label" data-i18n="vinnie.fact3">Designs gemodelleerd</div></div>
+    <div class="fact-card"><span class="fact-icon">🎾</span><div class="fact-value">∞</div><div class="fact-label" data-i18n="vinnie.fact4">Ballen apporteren</div></div>
   </div>
 </section>
 
 <section class="vinnie-gallery">
   <div class="section-header">
     <div>
-      <div class="section-kicker">The gallery</div>
-      <h2 class="section-title">Vinnie <em>op zijn best</em></h2>
+      <div class="section-kicker" data-i18n="vinnie.gallery.kicker">The gallery</div>
+      <h2 class="section-title" data-i18n="vinnie.gallery.title">Vinnie <em>op zijn best</em></h2>
     </div>
-    <div class="section-meta">Fotoshoot 2024<br><strong>Squad favorite</strong></div>
+    <div class="section-meta" data-i18n="vinnie.gallery.meta">Fotoshoot 2024<br><strong>Squad favorite</strong></div>
   </div>
   <div class="vinnie-gallery-grid">
     <div class="vinnie-photo tall"><img src="/pups/photos/v_hero.jpg" alt=""></div>
@@ -942,7 +964,7 @@
 </section>
 
 <div class="back-to-pups">
-  <a data-view="main">← Terug naar Pups</a>
+  <a data-view="main" data-i18n="vinnie.back">← Terug naar Pups</a>
 </div>
 
 </div>
@@ -952,20 +974,171 @@
     <img src="/pups/designs/og.png" alt="Pups">
     <span>Pups</span>
   </div>
-  <a href="/" class="footer-back">← Terug naar pupvanh</a>
+  <a href="/" class="footer-back" data-i18n="footer.back">← Terug naar pupvanh</a>
   <div class="footer-socials">
     <a href="https://www.instagram.com/po.pups/" target="_blank">Instagram Pups</a>
     <a href="https://www.instagram.com/vinnie_theaussie/" target="_blank">Instagram Vinnie</a>
     <a href="https://www.facebook.com/profile.php?id=100095219786747" target="_blank">Facebook</a>
     <a href="https://www.tiktok.com/@pixelslaves_" target="_blank">TikTok</a>
   </div>
-  <div class="footer-copy-line0">© 2026 PUPVANH Projects <span class="ember-dot">•</span> alle rechten voorbehouden</div>
+  <div class="footer-copy-line0"><span data-i18n="footer.line0">© 2026 PUPVANH Projects <span class="ember-dot">•</span> alle rechten voorbehouden</span></div>
   <div class="footer-copy-line1">BUILT AUG 2026 <span class="ember-dot">•</span> UPDATED AUG 2026</div>
-  <div class="footer-copy-line2">Pups <span class="ember-dot">•</span> Deel van PUPVANH Projects <span class="ember-dot">•</span> <a href="https://pupvanh.vercel.app">pupvanh.vercel.app →</a></div>
+  <div class="footer-copy-line2">Pups <span class="ember-dot">•</span> <span data-i18n="footer.partof">Deel van PUPVANH Projects</span> <span class="ember-dot">•</span> <a href="https://pupvanh.vercel.app">pupvanh.vercel.app →</a></div>
 </footer>
 
 <script is:inline>
-const rainPups = ["/pups/designs/og.png","/pups/designs/puppy_self.png","/pups/designs/dj.png","/pups/designs/soccer.png","/pups/designs/sleeping.png","/pups/designs/skate.png","/pups/designs/cocktail.png","/pups/designs/kitty.png","/pups/designs/christmas.png","/pups/designs/photographer.png","/pups/designs/rich.png","/pups/designs/ski.png","/pups/designs/beer.png","/pups/designs/smoking.png","/pups/designs/frenchie_black.png","/pups/designs/frenchie_fawn.png","/pups/designs/grey_pup.png","/pups/designs/vinnie.png"];document.addEventListener('DOMContentLoaded', () => {
+const rainPups = ["/pups/designs/og.png","/pups/designs/puppy_self.png","/pups/designs/dj.png","/pups/designs/soccer.png","/pups/designs/sleeping.png","/pups/designs/skate.png","/pups/designs/cocktail.png","/pups/designs/kitty.png","/pups/designs/christmas.png","/pups/designs/photographer.png","/pups/designs/rich.png","/pups/designs/ski.png","/pups/designs/beer.png","/pups/designs/smoking.png","/pups/designs/frenchie_black.png","/pups/designs/frenchie_fawn.png","/pups/designs/grey_pup.png","/pups/designs/vinnie.png"];
+
+// ============ NL / EN LANGUAGE SWITCHER ============
+const pupsI18n = {
+  nl: {
+    "nav.back": "← pupvanh",
+    "nav.collection": "Collectie",
+    "nav.merch": "Merch",
+    "nav.vinnie": "Meet Vinnie",
+    "nav.animals": "Mijn dieren",
+    "nav.story": "Verhaal",
+    "announce": '🐾 <span>@po.pups</span> · DM om te bestellen · handmade drops · sinds 2023',
+    "drag.hint": "← sleep me!",
+    "rain.btn": "🌧️ Rain mode",
+    "hero.kicker": "Wearable creative energy · sinds 2023",
+    "hero.lead": "Hondgeïnspireerde streetwear met eigen creaties. <strong>Kleinschalig, handmade, en enkel via DM te bestellen.</strong>",
+    "hero.cta1": "De collectie →",
+    "hero.cta2": "Meet Vinnie",
+    "hero.sticker1": "Drop 01",
+    "hero.sticker2": "18 designs",
+    "lookbook.kicker": "The lookbook",
+    "lookbook.title": "In het <em>wild</em>",
+    "lookbook.meta": "Shoot 2024<br><strong>The Pups fam</strong>",
+    "collection.kicker": "The collection",
+    "collection.title": "Meet the <em>pack</em>",
+    "collection.meta": "18 designs live · try <strong>rain mode</strong><br>tilt cards with your mouse",
+    "merch.kicker": "The merch",
+    "merch.title": "Wearing <em>it</em>",
+    "merch.meta": "Caps · totes · phone cases<br><strong>klik tote om te draaien</strong>",
+    "merch.tote.tag": "Klik om te draaien · voor & achter",
+    "animals.kicker": "The real deal",
+    "animals.title": "Mijn <em>dieren</em>",
+    "animals.bono.badge": "The muse",
+    "animals.bono.role": "Golden retriever · mascotte inspiration",
+    "animals.bono.desc": "De hond van mijn beste vrienden, waar ik peter van ben. Samen met mijn nickname de basis van de Pups-mascotte.",
+    "animals.vinnie.badge": "The model",
+    "animals.vinnie.role": "Aussie shepherd · brand model",
+    "animals.vinnie.desc": "De Australian Shepherd met blauwe ogen en energie voor drie. Modelt alle nieuwe drops.",
+    "animals.vinnie.cta": "Naar Vinnie →",
+    "story.kicker": "The story",
+    "story.p1": "Hi, ik ben <strong>Pepijn — of Puppy</strong>, zoals vrienden mij noemen. Ik startte Pups om creatieve energie, emoties en gedachten kwijt te kunnen op iets dat ik zelf graag draag.",
+    "story.p2": "De <strong>Pups-mascotte</strong> is een mix van mijn nickname en <strong>Bono</strong>, de golden retriever van mijn beste vrienden. Reflectie van mijn liefde voor honden, muziek en fun.",
+    "story.p3": "Elke drop is beperkt — vaak maar 1 of 2 stuks per ontwerp. Alles handmatig gemaakt of bedrukt, en enkel via <strong>DM te bestellen</strong>.",
+    "cta.kicker": "Zin in eentje?",
+    "cta.title": "Slide into <em>the DMs</em>",
+    "cta.lead": "Kies een design uit de collectie, stuur mij een berichtje op Instagram — we regelen de rest.",
+    "cta.btn": "DM @po.pups →",
+    "vinnie.kicker": "Meet the model · aussie shepherd",
+    "vinnie.tagline": "Australian Shepherd · <strong>blauwe ogen</strong> · energie voor drie · officieel model van alle Pups-drops.",
+    "vinnie.facts.kicker": "Fun facts",
+    "vinnie.facts.title": "Vinnie in <em>cijfers</em>",
+    "vinnie.fact1": "Blauwe ogen",
+    "vinnie.fact2": "Energie levels",
+    "vinnie.fact3": "Designs gemodelleerd",
+    "vinnie.fact4": "Ballen apporteren",
+    "vinnie.gallery.kicker": "The gallery",
+    "vinnie.gallery.title": "Vinnie <em>op zijn best</em>",
+    "vinnie.gallery.meta": "Fotoshoot 2024<br><strong>Squad favorite</strong>",
+    "vinnie.back": "← Terug naar Pups",
+    "footer.back": "← Terug naar pupvanh",
+    "footer.line0": '© 2026 PUPVANH Projects <span class="ember-dot">•</span> alle rechten voorbehouden',
+    "footer.partof": "Deel van PUPVANH Projects"
+  },
+  en: {
+    "nav.back": "← pupvanh",
+    "nav.collection": "Collection",
+    "nav.merch": "Merch",
+    "nav.vinnie": "Meet Vinnie",
+    "nav.animals": "My animals",
+    "nav.story": "Story",
+    "announce": '🐾 <span>@po.pups</span> · DM to order · handmade drops · since 2023',
+    "drag.hint": "← drag me!",
+    "rain.btn": "🌧️ Rain mode",
+    "hero.kicker": "Wearable creative energy · since 2023",
+    "hero.lead": "Dog-inspired streetwear with original creations. <strong>Small-batch, handmade, and only available via DM.</strong>",
+    "hero.cta1": "The collection →",
+    "hero.cta2": "Meet Vinnie",
+    "hero.sticker1": "Drop 01",
+    "hero.sticker2": "18 designs",
+    "lookbook.kicker": "The lookbook",
+    "lookbook.title": "In the <em>wild</em>",
+    "lookbook.meta": "Shoot 2024<br><strong>The Pups fam</strong>",
+    "collection.kicker": "The collection",
+    "collection.title": "Meet the <em>pack</em>",
+    "collection.meta": "18 designs live · try <strong>rain mode</strong><br>tilt cards with your mouse",
+    "merch.kicker": "The merch",
+    "merch.title": "Wearing <em>it</em>",
+    "merch.meta": "Caps · totes · phone cases<br><strong>click tote to flip</strong>",
+    "merch.tote.tag": "Click to flip · front & back",
+    "animals.kicker": "The real deal",
+    "animals.title": "My <em>animals</em>",
+    "animals.bono.badge": "The muse",
+    "animals.bono.role": "Golden retriever · mascot inspiration",
+    "animals.bono.desc": "The dog of my best friends, and I'm his godfather. Together with my nickname, the foundation of the Pups mascot.",
+    "animals.vinnie.badge": "The model",
+    "animals.vinnie.role": "Aussie shepherd · brand model",
+    "animals.vinnie.desc": "The Australian Shepherd with blue eyes and energy for three. Models every new drop.",
+    "animals.vinnie.cta": "Go to Vinnie →",
+    "story.kicker": "The story",
+    "story.p1": "Hi, I'm <strong>Pepijn — or Puppy</strong>, as friends call me. I started Pups to channel creative energy, emotions and thoughts into something I actually want to wear.",
+    "story.p2": "The <strong>Pups mascot</strong> is a mix of my nickname and <strong>Bono</strong>, the golden retriever of my best friends. A reflection of my love for dogs, music and fun.",
+    "story.p3": "Every drop is limited — usually just 1 or 2 pieces per design. All handmade or printed, and only available via <strong>DM</strong>.",
+    "cta.kicker": "Want one?",
+    "cta.title": "Slide into <em>the DMs</em>",
+    "cta.lead": "Pick a design from the collection, send me a message on Instagram — we'll sort the rest.",
+    "cta.btn": "DM @po.pups →",
+    "vinnie.kicker": "Meet the model · aussie shepherd",
+    "vinnie.tagline": "Australian Shepherd · <strong>blue eyes</strong> · energy for three · official model of every Pups drop.",
+    "vinnie.facts.kicker": "Fun facts",
+    "vinnie.facts.title": "Vinnie in <em>numbers</em>",
+    "vinnie.fact1": "Blue eyes",
+    "vinnie.fact2": "Energy levels",
+    "vinnie.fact3": "Designs modelled",
+    "vinnie.fact4": "Balls fetched",
+    "vinnie.gallery.kicker": "The gallery",
+    "vinnie.gallery.title": "Vinnie <em>at his best</em>",
+    "vinnie.gallery.meta": "Photo shoot 2024<br><strong>Squad favorite</strong>",
+    "vinnie.back": "← Back to Pups",
+    "footer.back": "← Back to pupvanh",
+    "footer.line0": '© 2026 PUPVANH Projects <span class="ember-dot">•</span> all rights reserved',
+    "footer.partof": "Part of PUPVANH Projects"
+  }
+};
+
+function pupsSetLanguage(lang) {
+  if (!pupsI18n[lang]) return;
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (pupsI18n[lang][key] !== undefined) {
+      el.innerHTML = pupsI18n[lang][key];
+    }
+  });
+  document.querySelectorAll('.pups-lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+  try { localStorage.setItem('pups-lang', lang); } catch(e) {}
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Language switcher init
+  document.querySelectorAll('.pups-lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => pupsSetLanguage(btn.dataset.lang));
+  });
+  const savedLang = localStorage.getItem('pups-lang');
+  if (savedLang && pupsI18n[savedLang]) {
+    pupsSetLanguage(savedLang);
+  } else {
+    const browserLang = (navigator.language || 'nl').slice(0, 2);
+    pupsSetLanguage(pupsI18n[browserLang] ? browserLang : 'nl');
+  }
+
   // View switching
   function showView(name) {
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
