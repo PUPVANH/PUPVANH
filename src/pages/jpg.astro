@@ -194,17 +194,18 @@ html[data-mode="dark"] .pupsjpg-page .leaflet-popup-tip { background:#2a2825 !im
 .pupsjpg-page .leaflet-popup-close-button { color:var(--muted) !important; padding:8px 8px 0 0 !important; font-size:18px !important; z-index:10; }
 html[data-mode="dark"] .pupsjpg-page .leaflet-popup-close-button { color:#a8a496 !important; }
 
-.pupsjpg-page .popup-city { font-family:'Inter',sans-serif; width:220px; }
-.pupsjpg-page .popup-header { display:flex; align-items:center; gap:10px; padding:12px 30px 10px 12px; }
-.pupsjpg-page .popup-flag { width:24px; height:auto; max-height:18px; object-fit:cover; border-radius:2px; box-shadow:0 0 0 1px rgba(0,0,0,0.1); display:block; flex-shrink:0; }
+.pupsjpg-page .popup-city { font-family:'Inter',sans-serif; width:180px; }
+.pupsjpg-page .popup-thumbs { display:block; padding:0; }
+.pupsjpg-page .popup-thumb { width:180px; height:100px; object-fit:cover; cursor:pointer; transition:opacity .15s; display:block; }
+.pupsjpg-page .popup-thumb:hover { opacity:0.85; }
+.pupsjpg-page .popup-header { display:flex; align-items:center; gap:8px; padding:8px 26px 8px 10px; }
+.pupsjpg-page .popup-flag { width:20px; height:auto; max-height:15px; object-fit:cover; border-radius:2px; box-shadow:0 0 0 1px rgba(0,0,0,0.1); display:block; flex-shrink:0; }
 .pupsjpg-page .popup-info { flex:1; min-width:0; }
-.pupsjpg-page .popup-name { font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:500; text-transform:uppercase; letter-spacing:1.2px; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.pupsjpg-page .popup-count { font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--muted); letter-spacing:0.5px; margin-top:2px; }
-.pupsjpg-page .popup-thumbs { display:flex; gap:2px; padding:0 2px; justify-content:center; }
-.pupsjpg-page .popup-thumb { width:90px; height:90px; object-fit:cover; cursor:pointer; transition:opacity .15s; display:block; }
-.pupsjpg-page .popup-thumb:hover { opacity:0.82; }
-.pupsjpg-page .popup-view-all { display:block; width:100%; padding:11px 12px; background:var(--ember); color:#fff !important; border:none; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; cursor:pointer; transition:background .2s; font-weight:500; margin-top:2px; text-decoration:none; }
+.pupsjpg-page .popup-name { font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:500; text-transform:uppercase; letter-spacing:1.1px; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.pupsjpg-page .popup-count { font-family:'JetBrains Mono',monospace; font-size:9px; color:var(--muted); letter-spacing:0.5px; margin-top:1px; }
+.pupsjpg-page .popup-view-all { display:block; width:100%; padding:9px 10px; background:var(--ember); color:#fff !important; border:none; font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; cursor:pointer; transition:background .2s; font-weight:500; text-decoration:none; text-align:center; }
 .pupsjpg-page .popup-view-all:hover { background:#c94a1e; color:#fff !important; text-decoration:none; }
+.pupsjpg-page .leaflet-popup-close-button { padding:4px 6px 0 0 !important; font-size:16px !important; }
 
 /* Legend rechtsonder */
 .pupsjpg-page .map-legend-new { position:absolute; bottom:16px; right:16px; display:flex; gap:14px; align-items:center; background:rgba(255,255,255,0.95); padding:8px 14px; border-radius:999px; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:1px; text-transform:uppercase; color:var(--text); backdrop-filter:blur(4px); z-index:1000; box-shadow:0 2px 8px rgba(0,0,0,0.1); }
@@ -541,15 +542,14 @@ html[data-mode="dark"] .pupsjpg-page .qp-note { color:#D8D4CE; }
         })
       }).addTo(leafletMap);
 
-      // Popup content: flag + name + count + 2 preview thumbs + view-all button
-      const previewPhotos = cityPhotos.slice(0, 2);
-      const thumbsHtml = previewPhotos.map(p => {
-        const idx = photos.indexOf(p);
-        return '<img class="popup-thumb" src="/jpg/' + p.file + '" data-photo-idx="' + idx + '" alt="' + p.title + '" />';
-      }).join('');
+      // Popup content: 1 preview thumb bovenaan, dan flag+name+count, dan view-all button
+      const previewPhoto = cityPhotos[0];
+      const previewIdx = photos.indexOf(previewPhoto);
+      const thumbHtml = '<img class="popup-thumb" src="/jpg/' + previewPhoto.file + '" data-photo-idx="' + previewIdx + '" alt="' + previewPhoto.title + '" />';
       const btnLabel = count === 1 ? 'View photo →' : 'View all ' + count + ' →';
       const popupHtml =
         '<div class="popup-city">' +
+          '<div class="popup-thumbs">' + thumbHtml + '</div>' +
           '<div class="popup-header">' +
             '<img class="popup-flag" src="' + city.flag + '" alt="" />' +
             '<div class="popup-info">' +
@@ -557,13 +557,12 @@ html[data-mode="dark"] .pupsjpg-page .qp-note { color:#D8D4CE; }
               '<div class="popup-count">' + count + ' photograph' + (count > 1 ? 's' : '') + '</div>' +
             '</div>' +
           '</div>' +
-          '<div class="popup-thumbs">' + thumbsHtml + '</div>' +
           '<button class="popup-view-all" data-country="' + city.country + '">' + btnLabel + '</button>' +
         '</div>';
 
       marker.bindPopup(popupHtml, {
-        maxWidth: 260,
-        minWidth: 220,
+        maxWidth: 200,
+        minWidth: 180,
         closeButton: true,
         autoPan: true
       });
