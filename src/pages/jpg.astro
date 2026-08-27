@@ -147,11 +147,11 @@ html[data-mode="dark"] .pupsjpg-page .map-area { background:#2A2825; }
 html[data-mode="dark"] .pupsjpg-page .map-bg { opacity:0.6; filter:hue-rotate(180deg); }
 
 /* Country + sea labels */
-.pupsjpg-page .ctry-lbl, .pupsjpg-page .sea-lbl { position:absolute; transform:translate(-50%, -50%); pointer-events:none; text-align:center; line-height:1.1; }
-.pupsjpg-page .ctry-lbl { font-family:'Playfair Display',serif; font-style:italic; font-size:11px; color:rgba(60,60,60,0.75); letter-spacing:1px; }
-.pupsjpg-page .sea-lbl { font-family:'Playfair Display',serif; font-style:italic; font-size:12px; color:rgba(90,120,140,0.6); letter-spacing:0.5px; }
-html[data-mode="dark"] .pupsjpg-page .ctry-lbl { color:rgba(220,220,220,0.6); }
-html[data-mode="dark"] .pupsjpg-page .sea-lbl { color:rgba(160,180,200,0.5); }
+.pupsjpg-page .ctry-lbl, .pupsjpg-page .sea-lbl { position:absolute; transform:translate(-50%, -50%); pointer-events:none; text-align:center; line-height:1.15; }
+.pupsjpg-page .ctry-lbl { font-family:'Playfair Display',serif; font-style:italic; font-size:12px; font-weight:500; color:#2C3A2E; letter-spacing:1.5px; text-shadow:0 0 4px rgba(245,241,232,0.9), 0 0 4px rgba(245,241,232,0.9); text-transform:uppercase; }
+.pupsjpg-page .sea-lbl { font-family:'Playfair Display',serif; font-style:italic; font-size:13px; font-weight:400; color:#3F5568; letter-spacing:0.5px; text-shadow:0 0 4px rgba(245,241,232,0.9), 0 0 4px rgba(245,241,232,0.9); }
+html[data-mode="dark"] .pupsjpg-page .ctry-lbl { color:#E8E4D8; text-shadow:0 0 5px rgba(20,30,25,0.9), 0 0 5px rgba(20,30,25,0.9); }
+html[data-mode="dark"] .pupsjpg-page .sea-lbl { color:#B8CDDF; text-shadow:0 0 5px rgba(20,30,25,0.9), 0 0 5px rgba(20,30,25,0.9); }
 
 /* Pins */
 .pupsjpg-page .pin { position:absolute; transform:translate(-50%, -50%); background:var(--ember); border:2px solid rgba(255,255,255,0.9); border-radius:50%; cursor:pointer; padding:0; transition:all .2s; box-shadow:0 2px 6px rgba(0,0,0,0.15); z-index:5; }
@@ -350,18 +350,37 @@ html[data-mode="dark"] .pupsjpg-page .qp-note { color:#D8D4CE; }
           <span class="sea-lbl" style="top:82%;left:64%;">Adriatic<br/>Sea</span>
           <span class="sea-lbl" style="top:93%;left:48%;">Mediterranean Sea</span>
 
-          <!-- Pins -->
-          <button class="pin pin-md" style="top:52%;left:41%;" data-map-filter="fr" title="Cappy, France">
-            <span class="pin-lbl">Cappy · {photos.filter(p=>p.place==='fr').length}</span>
+          <!-- Pins per stad (geografisch geplaatst) -->
+          <!-- FRANCE -->
+          <button class="pin pin-lg" style="top:53%;left:41%;" data-map-filter="fr" title="Cappy, France · 7 photos">
+            <span class="pin-lbl">Cappy · 7</span>
           </button>
-          <button class="pin pin-md" style="top:66%;left:47%;" data-map-filter="ch" title="Siviez, Switzerland">
-            <span class="pin-lbl">Siviez · {photos.filter(p=>p.place==='ch').length}</span>
+          <!-- SWITZERLAND (Siviez + Val de Nendaz + Lac de Cleuson — Valais cluster) -->
+          <button class="pin pin-lg" style="top:65%;left:50%;" data-map-filter="ch" title="Siviez region · 8 photos">
+            <span class="pin-lbl">Siviez · 8</span>
           </button>
-          <button class="pin pin-md" style="top:72%;left:52%;" data-map-filter="it" title="Italy">
-            <span class="pin-lbl">Italy · {photos.filter(p=>p.place==='it').length}</span>
+          <!-- ITALY: 6 aparte steden -->
+          <button class="pin pin-sm" style="top:69%;left:49%;" data-map-filter="it" title="Turin, Italy · 1 photo">
+            <span class="pin-lbl">Turin · 1</span>
           </button>
-          <button class="pin pin-sm" style="top:69%;left:60%;" data-map-filter="si" title="Lake Bled, Slovenia">
-            <span class="pin-lbl">Lake Bled · {photos.filter(p=>p.place==='si').length}</span>
+          <button class="pin pin-sm" style="top:71%;left:51%;" data-map-filter="it" title="Genoa, Italy · 1 photo">
+            <span class="pin-lbl">Genoa · 1</span>
+          </button>
+          <button class="pin pin-md" style="top:72%;left:52%;" data-map-filter="it" title="Cinque Terre, Italy · 2 photos">
+            <span class="pin-lbl">Cinque Terre · 2</span>
+          </button>
+          <button class="pin pin-sm" style="top:71%;left:56%;" data-map-filter="it" title="Bologna, Italy · 1 photo">
+            <span class="pin-lbl">Bologna · 1</span>
+          </button>
+          <button class="pin pin-md" style="top:68%;left:60%;" data-map-filter="it" title="Venice, Italy · 2 photos">
+            <span class="pin-lbl">Venice · 2</span>
+          </button>
+          <button class="pin pin-sm" style="top:66%;left:58%;" data-map-filter="it" title="Alta Badia, Dolomites · 1 photo">
+            <span class="pin-lbl">Alta Badia · 1</span>
+          </button>
+          <!-- SLOVENIA -->
+          <button class="pin pin-md" style="top:67%;left:63%;" data-map-filter="si" title="Lake Bled, Slovenia · 4 photos">
+            <span class="pin-lbl">Lake Bled · 4</span>
           </button>
 
           <!-- Legend -->
