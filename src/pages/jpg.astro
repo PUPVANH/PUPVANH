@@ -15,7 +15,10 @@ const photos = [
   { file:'fi-04-helsinki-amosrex.jpg',   size:'tall', place:'fi', title:'On top of Amos Rex',           loc:'Helsinki, Finland',        date:'05.2026' },
   { file:'ee-01-tallinn-alley.jpg',      size:'tall', place:'ee', title:'Down the stairs, into old town', loc:'Tallinn, Estonia',       date:'05.2026' },
   { file:'ee-02-tallinn-mg.jpg',         size:'tall', place:'ee', title:'A quiet Sunday, an old MG',    loc:'Tallinn, Estonia',         date:'05.2026' },
-  { file:'ee-03-tallinn-rooftops.jpg',   size:'wide', place:'ee', title:'The red roofs of Tallinn',     loc:'Tallinn, Estonia',         date:'05.2026' },
+  { file:'ee-03-tallinn-rooftops.jpg',   size:'tall', place:'ee', title:'The red roofs of Tallinn',     loc:'Tallinn, Estonia',         date:'05.2026' },
+  { file:'nl-01-amsterdam-market.jpg',   size:'tall', place:'nl', title:'Albert Cuyp, in shadow',       loc:'Amsterdam, Netherlands',   date:'02.2026' },
+  { file:'nl-02-amsterdam-damrak.jpg',   size:'tall', place:'nl', title:'Damrak, leaning',              loc:'Amsterdam, Netherlands',   date:'02.2026' },
+  { file:'nl-03-amsterdam-cormorant.jpg',size:'tall', place:'nl', title:'Cormorant on the Amstel',      loc:'Amsterdam, Netherlands',   date:'02.2026' },
   { file:'be-01-cappy-canal.jpg',        size:'tall', place:'fr', title:'Canal light',                  loc:'Cappy',                    date:'06.2025' },
   { file:'be-04-cappy-reflection.jpg',   size:'tall', place:'fr', title:'Sky in the water',             loc:'Cappy',                    date:'06.2025' },
   { file:'be-05-cappy-boats.jpg',        size:'tall', place:'fr', title:'Two boats, one shed',          loc:'Cappy',                    date:'06.2025' },
@@ -23,6 +26,7 @@ const photos = [
   { file:'be-06-cappy-neighbor.jpg',     size:'tall', place:'fr', title:'The neighbour photographs back',loc:'Cappy',                   date:'06.2025' },
   { file:'be-03-cappy-lilies.jpg',       size:'tall', place:'fr', title:'Lilies on still water',        loc:'Cappy',                    date:'06.2025' },
   { file:'be-07-cappy-kite.jpg',         size:'tall', place:'fr', title:'A kite at dusk',              loc:'Cappy',                    date:'06.2025' },
+  { file:'fr-13-paris-roubaix.jpg',      size:'tall', place:'fr', title:'Waiting for the cobbles',      loc:'Camphin-en-Pevele, Paris-Roubaix', date:'04.2025' },
   { file:'italy-06-riomaggiore.jpg',     size:'tall', place:'it', title:'Painted houses at the port',   loc:'Riomaggiore, Cinque Terre',date:'08.2024' },
   { file:'italy-03-turin.jpg',           size:'tall', place:'it', title:'Via Roma, golden hour',        loc:'Turin, Italy',             date:'08.2024' },
   { file:'italy-07-manarola.jpg',        size:'tall', place:'it', title:'Laundry over the alley',       loc:'Manarola, Cinque Terre',   date:'08.2024' },
@@ -53,6 +57,7 @@ const photos = [
 const filters = [
   { key:'all', label:'All',         count: photos.length },
   { key:'fr',  label:'France',      count: photos.filter(p=>p.place==='fr').length },
+  { key:'nl',  label:'Netherlands', count: photos.filter(p=>p.place==='nl').length },
   { key:'ch',  label:'Switzerland', count: photos.filter(p=>p.place==='ch').length },
   { key:'it',  label:'Italy',       count: photos.filter(p=>p.place==='it').length },
   { key:'fi',  label:'Finland',     count: photos.filter(p=>p.place==='fi').length },
@@ -337,6 +342,12 @@ html[data-mode="dark"] .pupsjpg-page .qp-note { color:#D8D4CE; }
             <span class="count">{photos.filter(p=>p.place==='fr').length}</span>
             <span class="chev">›</span>
           </button>
+          <button class="place-row" data-map-filter="nl">
+            <span class="flag">🇳🇱</span>
+            <span class="name">Netherlands</span>
+            <span class="count">{photos.filter(p=>p.place==='nl').length}</span>
+            <span class="chev">›</span>
+          </button>
           <button class="place-row" data-map-filter="ch">
             <span class="flag">🇨🇭</span>
             <span class="name">Switzerland</span>
@@ -450,6 +461,9 @@ html[data-mode="dark"] .pupsjpg-page .qp-note { color:#D8D4CE; }
     { name: 'Cappy',             country: 'fr', flag: '🇫🇷', lat: 49.918, lng: 2.734,  locs: ['Cappy'] },
     { name: 'Amiens',            country: 'fr', flag: '🇫🇷', lat: 49.894, lng: 2.296,  locs: ['Amiens, France'] },
     { name: 'Thiepval Memorial', country: 'fr', flag: '🇫🇷', lat: 50.051, lng: 2.688,  locs: ['Thiepval Memorial'] },
+    { name: 'Camphin-en-Pevele', country: 'fr', flag: '🇫🇷', lat: 50.585, lng: 3.249,  locs: ['Camphin-en-Pevele, Paris-Roubaix'] },
+    // NETHERLANDS
+    { name: 'Amsterdam',         country: 'nl', flag: '🇳🇱', lat: 52.370, lng: 4.895,  locs: ['Amsterdam, Netherlands'] },
     // SWITZERLAND
     { name: 'Siviez region',     country: 'ch', flag: '🇨🇭', lat: 46.176, lng: 7.290,  locs: ['Siviez, Valais', 'Val de Nendaz, Valais', 'Lac de Cleuson, Valais'] },
     { name: 'Basel',             country: 'ch', flag: '🇨🇭', lat: 47.559, lng: 7.588,  locs: ['Basel, Switzerland'] },
