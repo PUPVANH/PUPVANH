@@ -23,7 +23,7 @@
 
 <style>
   .contact-sec{
-    background:var(--forest);color:#F4F0E8;padding:100px 32px;
+    background:var(--forest);color:#F4F0E8;padding:70px 32px;
     position:relative;overflow:hidden;
     border-top:1px solid rgba(232,93,47,0.15);
   }
@@ -51,7 +51,7 @@
   }
   :global(html[data-mode="dark"]) .contact-sec .lead{color:var(--muted);}
 
-  .contact-cta-group{display:flex;flex-direction:column;gap:14px;align-items:flex-start;}
+  .contact-cta-group{display:flex;flex-direction:row;gap:14px;align-items:flex-start;flex-wrap:wrap;}
   .contact-cta{
     display:inline-flex;align-items:center;gap:14px;
     font-family:'JetBrains Mono',monospace;font-size:14px;
@@ -73,6 +73,6 @@
   .contact-cta:hover .arr{color:#F4F0E8;transform:translateX(6px);}
 
   @media(max-width:800px){
-    .contact-sec{padding:80px 20px;}
+    .contact-sec{padding:60px 20px;}
   }
 </style>
