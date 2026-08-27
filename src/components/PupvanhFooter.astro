@@ -27,7 +27,7 @@ interface Props {
   paginaNaam: string;              // bv. 'Bookmarks', 'FC Ariba', 'Notes'
   built: string;                   // bv. 'AUG 2026'
   updated: string;                 // bv. 'AUG 2026'
-  theme?: 'default' | 'ariba' | 'siviez' | 'notes';
+  theme?: 'default' | 'ariba' | 'siviez' | 'notes' | 'pups';
   socials?: Social[];              // optioneel — verschijnt rechts op regel 1
   link?: string;                   // default pupvanh.vercel.app; later pupvanh.pixelslaves.com
   linkLabel?: string;              // default 'pupvanh.vercel.app →'
@@ -191,6 +191,16 @@ const {
   .pv-theme-notes {
     background: #3B4E6B;
     color: #DDE3E8;
+  }
+
+  /* Pups — creamy achtergrond met dark ink tekst */
+  .pv-theme-pups {
+    background: #F5EBD9;
+    color: #2A1810;
+    border-top: 1px solid rgba(42, 24, 16, 0.12);
+  }
+  .pv-theme-pups .pv-page {
+    color: #E85D2F;
   }
 
   /* Responsive — op mobiel elke regel eigen wrap toestaan */

@@ -1,6 +1,7 @@
 ---
 // pups.astro - PUPVANH subpage
 // Pups by Puppy - hondgeïnspireerde streetwear
+import PupvanhFooter from '../components/PupvanhFooter.astro';
 ---
 <!DOCTYPE html>
 <html lang="nl">
@@ -9,7 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Pups — by Puppy</title>
 <link rel="icon" type="image/png" href="/pups/designs/og.png" />
-<meta name="description" content="Hondgeïnspireerde streetwear met eigen creaties. Kleinschalig, handmade, en enkel via DM te bestellen.">
+<meta name="description" content="Hondgeïnspireerde streetwear met eigen creaties. Kleinschalig, made on order, en enkel via DM te bestellen.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
@@ -83,12 +84,6 @@
   border-bottom:1px solid var(--pups-line); background:var(--pups-bg);
   position:sticky; top:0; z-index:50; backdrop-filter: blur(8px);
 }
-.pups-page .nav-back {
-  font-family:'JetBrains Mono', monospace;
-  font-size:12px; text-transform:uppercase; letter-spacing:0.1em;
-  color:var(--pups-ink-soft); text-decoration:none; transition: color 0.2s;
-}
-.pups-page .nav-back:hover { color:var(--pups-accent); }
 .pups-page .nav-brand {
   display:flex; align-items:center; gap:12px;
   position:absolute; left:50%; transform:translateX(-50%);
@@ -593,31 +588,17 @@
 }
 .pups-page .back-to-pups a:hover { background:var(--pups-ink); color:var(--pups-cream); }
 
-.pups-page .footer { padding:70px 40px 40px; border-top:2px solid var(--pups-ink); text-align:center; }
+.pups-page .pups-footer-brand-bar { padding:70px 40px 30px; border-top:2px solid var(--pups-ink); text-align:center; background:var(--pups-bg); }
 .pups-page .footer-brand { display:flex; align-items:center; justify-content:center; gap:14px; margin-bottom:20px; }
 .pups-page .footer-brand img { width:40px; height:40px; border-radius:50%; background:var(--pups-accent-soft); padding:2px; }
 .pups-page .footer-brand span { font-family:'Bebas Neue', sans-serif; font-size:26px; letter-spacing:0.1em; }
-.pups-page .footer-back {
-  font-family:'JetBrains Mono', monospace;
-  font-size:12px; text-transform:uppercase; letter-spacing:0.1em;
-  color:var(--pups-ink-soft); text-decoration:none;
-  display:inline-flex; align-items:center; gap:8px;
-  margin-bottom:28px; transition: color 0.2s;
-}
-.pups-page .footer-back:hover { color:var(--pups-accent); }
 .pups-page .footer-socials {
   display:flex; justify-content:center; gap:20px;
-  margin-bottom:28px;
   font-family:'JetBrains Mono', monospace;
   font-size:12px; text-transform:uppercase; letter-spacing:0.1em; flex-wrap:wrap;
 }
 .pups-page .footer-socials a { color:var(--pups-ink-soft); text-decoration:none; transition: color 0.2s; }
 .pups-page .footer-socials a:hover { color:var(--pups-accent); }
-.pups-page .footer-copy-line0 { font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--pups-ink); opacity:0.75; font-weight:500; margin-bottom:6px; letter-spacing:0.05em; }
-.pups-page .ember-dot { color:#E85D2F; font-size:9px; vertical-align:middle; }
-.pups-page .footer-copy-line1 { font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--pups-accent-2); font-weight:500; margin-bottom:6px; letter-spacing:0.08em; }
-.pups-page .footer-copy-line2 { font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--pups-ink); opacity:0.85; }
-.pups-page .footer-copy-line2 a { color:var(--pups-accent); text-decoration:none; font-weight:600; }
 
 .pups-page #pup-rain {
   position:fixed; inset:0; pointer-events:none; z-index:9999; overflow:hidden;
@@ -674,11 +655,10 @@
 <button class="rain-btn" id="rainBtn" data-i18n="rain.btn">🌧️ Rain mode</button>
 
 <div class="announce" data-i18n="announce">
-  🐾 <span>@po.pups</span> · DM to order · handmade drops · sinds 2023
+  🐾 <span>@po.pups</span> · DM to order · made on order · sinds 2023
 </div>
 
 <nav class="nav">
-  <a href="/" class="nav-back" data-i18n="nav.back">← pupvanh</a>
   <div class="nav-brand" data-view="main">
     <img src="/pups/designs/og.png" alt="Pups mascotte">
     <span class="nav-brand-name">Pups</span>
@@ -703,7 +683,7 @@
   <div>
     <div class="hero-kicker" data-i18n="hero.kicker">Wearable creative energy · sinds 2023</div>
     <h1 class="hero-title">Pups<br><span class="serif">by</span> <span class="accent">Puppy</span></h1>
-    <p class="hero-lead" data-i18n="hero.lead">Hondgeïnspireerde streetwear met eigen creaties. <strong>Kleinschalig, handmade, en enkel via DM te bestellen.</strong></p>
+    <p class="hero-lead" data-i18n="hero.lead">Hondgeïnspireerde streetwear met eigen creaties. <strong>Kleinschalig, made on order, en enkel via DM te bestellen.</strong></p>
     <div class="hero-ctas">
       <a href="#collection" class="hero-cta" data-i18n="hero.cta1">De collectie →</a>
       <a href="#" class="hero-cta secondary" data-view="vinnie" data-i18n="hero.cta2">Meet Vinnie</a>
@@ -899,9 +879,9 @@
   <div class="story-content">
     <div class="story-kicker" data-i18n="story.kicker">The story</div>
     <h2>Pups &<br><em>Puppy</em></h2>
-    <p data-i18n="story.p1">Hi, ik ben <strong>Pepijn — of Puppy</strong>, zoals vrienden mij noemen. Ik startte Pups om creatieve energie, emoties en gedachten kwijt te kunnen op iets dat ik zelf graag draag.</p>
+    <p data-i18n="story.p1">Hi, ik ben <strong>Puppy</strong>, zoals vrienden mij noemen. Ik startte Pups om creatieve energie, emoties en gedachten kwijt te kunnen op iets dat ik zelf graag draag.</p>
     <p data-i18n="story.p2">De <strong>Pups-mascotte</strong> is een mix van mijn nickname en <strong>Bono</strong>, de golden retriever van mijn beste vrienden. Reflectie van mijn liefde voor honden, muziek en fun.</p>
-    <p data-i18n="story.p3">Elke drop is beperkt — vaak maar 1 of 2 stuks per ontwerp. Alles handmatig gemaakt of bedrukt, en enkel via <strong>DM te bestellen</strong>.</p>
+    <p data-i18n="story.p3">Elke drop is beperkt — vaak maar 1 of 2 stuks per ontwerp. Alles op bestelling gemaakt of bedrukt, en enkel via <strong>DM te bestellen</strong>.</p>
   </div>
 </section>
 
@@ -969,22 +949,25 @@
 
 </div>
 
-<footer class="footer">
+<div class="pups-footer-brand-bar">
   <div class="footer-brand">
     <img src="/pups/designs/og.png" alt="Pups">
     <span>Pups</span>
   </div>
-  <a href="/" class="footer-back" data-i18n="footer.back">← Terug naar pupvanh</a>
   <div class="footer-socials">
     <a href="https://www.instagram.com/po.pups/" target="_blank">Instagram Pups</a>
     <a href="https://www.instagram.com/vinnie_theaussie/" target="_blank">Instagram Vinnie</a>
     <a href="https://www.facebook.com/profile.php?id=100095219786747" target="_blank">Facebook</a>
     <a href="https://www.tiktok.com/@pixelslaves_" target="_blank">TikTok</a>
   </div>
-  <div class="footer-copy-line0"><span data-i18n="footer.line0">© 2026 PUPVANH Projects <span class="ember-dot">•</span> alle rechten voorbehouden</span></div>
-  <div class="footer-copy-line1">BUILT AUG 2026 <span class="ember-dot">•</span> UPDATED AUG 2026</div>
-  <div class="footer-copy-line2">Pups <span class="ember-dot">•</span> <span data-i18n="footer.partof">Deel van PUPVANH Projects</span> <span class="ember-dot">•</span> <a href="https://pupvanh.vercel.app">pupvanh.vercel.app →</a></div>
-</footer>
+</div>
+
+<PupvanhFooter
+  paginaNaam="Pups"
+  built="AUG 2026"
+  updated="AUG 2026"
+  theme="pups"
+/>
 
 <script is:inline>
 const rainPups = ["/pups/designs/og.png","/pups/designs/puppy_self.png","/pups/designs/dj.png","/pups/designs/soccer.png","/pups/designs/sleeping.png","/pups/designs/skate.png","/pups/designs/cocktail.png","/pups/designs/kitty.png","/pups/designs/christmas.png","/pups/designs/photographer.png","/pups/designs/rich.png","/pups/designs/ski.png","/pups/designs/beer.png","/pups/designs/smoking.png","/pups/designs/frenchie_black.png","/pups/designs/frenchie_fawn.png","/pups/designs/grey_pup.png","/pups/designs/vinnie.png"];
@@ -992,17 +975,16 @@ const rainPups = ["/pups/designs/og.png","/pups/designs/puppy_self.png","/pups/d
 // ============ NL / EN LANGUAGE SWITCHER ============
 const pupsI18n = {
   nl: {
-    "nav.back": "← pupvanh",
     "nav.collection": "Collectie",
     "nav.merch": "Merch",
     "nav.vinnie": "Meet Vinnie",
     "nav.animals": "Mijn dieren",
     "nav.story": "Verhaal",
-    "announce": '🐾 <span>@po.pups</span> · DM om te bestellen · handmade drops · sinds 2023',
+    "announce": '🐾 <span>@po.pups</span> · DM om te bestellen · made on order · sinds 2023',
     "drag.hint": "← sleep me!",
     "rain.btn": "🌧️ Rain mode",
     "hero.kicker": "Wearable creative energy · sinds 2023",
-    "hero.lead": "Hondgeïnspireerde streetwear met eigen creaties. <strong>Kleinschalig, handmade, en enkel via DM te bestellen.</strong>",
+    "hero.lead": "Hondgeïnspireerde streetwear met eigen creaties. <strong>Kleinschalig, made on order, en enkel via DM te bestellen.</strong>",
     "hero.cta1": "De collectie →",
     "hero.cta2": "Meet Vinnie",
     "hero.sticker1": "Drop 01",
@@ -1027,9 +1009,9 @@ const pupsI18n = {
     "animals.vinnie.desc": "De Australian Shepherd met blauwe ogen en energie voor drie. Modelt alle nieuwe drops.",
     "animals.vinnie.cta": "Naar Vinnie →",
     "story.kicker": "The story",
-    "story.p1": "Hi, ik ben <strong>Pepijn — of Puppy</strong>, zoals vrienden mij noemen. Ik startte Pups om creatieve energie, emoties en gedachten kwijt te kunnen op iets dat ik zelf graag draag.",
+    "story.p1": "Hi, ik ben <strong>Puppy</strong>, zoals vrienden mij noemen. Ik startte Pups om creatieve energie, emoties en gedachten kwijt te kunnen op iets dat ik zelf graag draag.",
     "story.p2": "De <strong>Pups-mascotte</strong> is een mix van mijn nickname en <strong>Bono</strong>, de golden retriever van mijn beste vrienden. Reflectie van mijn liefde voor honden, muziek en fun.",
-    "story.p3": "Elke drop is beperkt — vaak maar 1 of 2 stuks per ontwerp. Alles handmatig gemaakt of bedrukt, en enkel via <strong>DM te bestellen</strong>.",
+    "story.p3": "Elke drop is beperkt — vaak maar 1 of 2 stuks per ontwerp. Alles op bestelling gemaakt of bedrukt, en enkel via <strong>DM te bestellen</strong>.",
     "cta.kicker": "Zin in eentje?",
     "cta.title": "Slide into <em>the DMs</em>",
     "cta.lead": "Kies een design uit de collectie, stuur mij een berichtje op Instagram — we regelen de rest.",
@@ -1045,23 +1027,19 @@ const pupsI18n = {
     "vinnie.gallery.kicker": "The gallery",
     "vinnie.gallery.title": "Vinnie <em>op zijn best</em>",
     "vinnie.gallery.meta": "Fotoshoot 2024<br><strong>Squad favorite</strong>",
-    "vinnie.back": "← Terug naar Pups",
-    "footer.back": "← Terug naar pupvanh",
-    "footer.line0": '© 2026 PUPVANH Projects <span class="ember-dot">•</span> alle rechten voorbehouden',
-    "footer.partof": "Deel van PUPVANH Projects"
+    "vinnie.back": "← Terug naar Pups"
   },
   en: {
-    "nav.back": "← pupvanh",
     "nav.collection": "Collection",
     "nav.merch": "Merch",
     "nav.vinnie": "Meet Vinnie",
     "nav.animals": "My animals",
     "nav.story": "Story",
-    "announce": '🐾 <span>@po.pups</span> · DM to order · handmade drops · since 2023',
+    "announce": '🐾 <span>@po.pups</span> · DM to order · made on order · since 2023',
     "drag.hint": "← drag me!",
     "rain.btn": "🌧️ Rain mode",
     "hero.kicker": "Wearable creative energy · since 2023",
-    "hero.lead": "Dog-inspired streetwear with original creations. <strong>Small-batch, handmade, and only available via DM.</strong>",
+    "hero.lead": "Dog-inspired streetwear with original creations. <strong>Small-batch, made on order, and only available via DM.</strong>",
     "hero.cta1": "The collection →",
     "hero.cta2": "Meet Vinnie",
     "hero.sticker1": "Drop 01",
@@ -1086,9 +1064,9 @@ const pupsI18n = {
     "animals.vinnie.desc": "The Australian Shepherd with blue eyes and energy for three. Models every new drop.",
     "animals.vinnie.cta": "Go to Vinnie →",
     "story.kicker": "The story",
-    "story.p1": "Hi, I'm <strong>Pepijn — or Puppy</strong>, as friends call me. I started Pups to channel creative energy, emotions and thoughts into something I actually want to wear.",
+    "story.p1": "Hi, I'm <strong>Puppy</strong>, as friends call me. I started Pups to channel creative energy, emotions and thoughts into something I actually want to wear.",
     "story.p2": "The <strong>Pups mascot</strong> is a mix of my nickname and <strong>Bono</strong>, the golden retriever of my best friends. A reflection of my love for dogs, music and fun.",
-    "story.p3": "Every drop is limited — usually just 1 or 2 pieces per design. All handmade or printed, and only available via <strong>DM</strong>.",
+    "story.p3": "Every drop is limited — usually just 1 or 2 pieces per design. All made on order or printed, and only available via <strong>DM</strong>.",
     "cta.kicker": "Want one?",
     "cta.title": "Slide into <em>the DMs</em>",
     "cta.lead": "Pick a design from the collection, send me a message on Instagram — we'll sort the rest.",
@@ -1104,10 +1082,7 @@ const pupsI18n = {
     "vinnie.gallery.kicker": "The gallery",
     "vinnie.gallery.title": "Vinnie <em>at his best</em>",
     "vinnie.gallery.meta": "Photo shoot 2024<br><strong>Squad favorite</strong>",
-    "vinnie.back": "← Back to Pups",
-    "footer.back": "← Back to pupvanh",
-    "footer.line0": '© 2026 PUPVANH Projects <span class="ember-dot">•</span> all rights reserved',
-    "footer.partof": "Part of PUPVANH Projects"
+    "vinnie.back": "← Back to Pups"
   }
 };
 
