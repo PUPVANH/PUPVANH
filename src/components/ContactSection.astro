@@ -23,10 +23,11 @@
 
 <style>
   .contact-sec{
-    background:var(--forest);color:#F4F0E8;padding:160px 32px;
+    background:var(--forest);color:#F4F0E8;padding:100px 32px;
     position:relative;overflow:hidden;
+    border-top:1px solid rgba(232,93,47,0.15);
   }
-  :global(html[data-mode="dark"]) .contact-sec{background:var(--card);color:var(--text);}
+  :global(html[data-mode="dark"]) .contact-sec{background:#0A1614;color:var(--text);border-top:1px solid rgba(232,93,47,0.2);}
   .contact-sec::before{
     content:'';position:absolute;inset:0;
     background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
