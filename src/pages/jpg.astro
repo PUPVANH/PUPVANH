@@ -186,7 +186,7 @@ html[data-mode="dark"] .pupsjpg-page .leaflet-control-zoom a { background:rgba(4
 .pupsjpg-page .leaflet-marker-icon { z-index:700 !important; }
 
 /* Info-panel rechts van map — vervangt oude Leaflet popup */
-.pupsjpg-page .map-info-panel { background:var(--card-bg); border-radius:8px; overflow:hidden; font-family:'Inter',sans-serif; position:sticky; top:20px; align-self:start; width:240px; max-width:100%; }
+.pupsjpg-page .map-info-panel { background:var(--card-bg); border-radius:8px; overflow:hidden; font-family:'Inter',sans-serif; position:sticky; top:20px; align-self:start; width:320px; max-width:100%; }
 
 /* Tussenscherm (<1150px): info-paneel onder map, sidebar nog links */
 @media (max-width:1150px) {
@@ -197,7 +197,7 @@ html[data-mode="dark"] .pupsjpg-page .leaflet-control-zoom a { background:rgba(4
 }
 .pupsjpg-page .map-info-empty { padding:40px 20px; text-align:center; color:var(--muted); font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; line-height:1.7; }
 .pupsjpg-page .map-info-empty .mi-icon { font-size:24px; opacity:0.4; margin-bottom:12px; display:block; }
-.pupsjpg-page .mi-thumb-wrap { width:100%; height:150px; overflow:hidden; display:block; position:relative; }
+.pupsjpg-page .mi-thumb-wrap { width:100%; aspect-ratio:3/4; overflow:hidden; display:block; position:relative; }
 .pupsjpg-page .mi-thumb { width:100%; height:100%; object-fit:cover; cursor:pointer; display:block; transition:opacity .15s; }
 .pupsjpg-page .mi-thumb:hover { opacity:0.88; }
 .pupsjpg-page .mi-header { display:flex; align-items:center; gap:10px; padding:14px 14px 12px; }
@@ -564,12 +564,13 @@ html[data-mode="dark"] .pupsjpg-page .qp-note { color:#D8D4CE; }
     function showCityInfo(city, cityPhotos, count) {
       const panel = document.getElementById('map-info-panel');
       if (!panel) return;
-      const previewPhoto = cityPhotos[0];
+      // Kies bij voorkeur een verticale foto (size !== 'wide') zodat het portret goed vult
+      const previewPhoto = cityPhotos.find(p => p.size !== 'wide') || cityPhotos[0];
       const previewIdx = photos.indexOf(previewPhoto);
       const btnLabel = count === 1 ? 'View photo →' : 'View all ' + count + ' →';
       // Inline styles op wrappers als extra failsafe — winnen altijd van CSS
       panel.innerHTML =
-        '<div class="mi-thumb-wrap" style="width:100%;height:150px;overflow:hidden;display:block;position:relative;">' +
+        '<div class="mi-thumb-wrap" style="width:100%;aspect-ratio:3/4;overflow:hidden;display:block;position:relative;">' +
           '<img class="mi-thumb" src="/jpg/' + previewPhoto.file + '" data-photo-idx="' + previewIdx + '" alt="' + previewPhoto.title + '" style="width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;" />' +
         '</div>' +
         '<div class="mi-header">' +
