@@ -342,6 +342,112 @@ import PupvanhFooter from '../components/PupvanhFooter.astro';
   font-size:10px; text-transform:uppercase; letter-spacing:0.1em; color:var(--pups-ink-soft);
 }
 
+/* Product cards v2 — flippable met kleur-swatches */
+.pups-page .product-card {
+  background:var(--pups-cream); border:1.5px solid var(--pups-ink);
+  border-radius:12px; overflow:hidden; transition: all 0.3s;
+  cursor:pointer; position:relative;
+  perspective: 1200px;
+}
+.pups-page .product-card:hover { transform: translateY(-4px); box-shadow: 4px 4px 0 var(--pups-accent-2); }
+.pups-page .product-card::after {
+  content:'⇄'; position:absolute; top:10px; right:10px;
+  background:var(--pups-ink); color:var(--pups-cream);
+  width:26px; height:26px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:14px; font-weight:bold;
+  z-index:5; pointer-events:none;
+}
+.pups-page .product-card-inner {
+  position:relative; width:100%; min-height:320px;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+}
+.pups-page .product-card.flipped .product-card-inner { transform: rotateY(180deg); }
+.pups-page .product-front, .pups-page .product-back {
+  position:absolute; inset:0; width:100%; height:100%;
+  backface-visibility: hidden;
+  display:flex; flex-direction:column;
+}
+.pups-page .product-back {
+  transform: rotateY(180deg);
+  background:var(--pups-cream);
+  padding:22px 20px; justify-content:space-between;
+  overflow-y:auto;
+}
+.pups-page .product-front .product-image {
+  aspect-ratio: 1/1; background:#fff; overflow:hidden;
+  display:flex; align-items:center; justify-content:center;
+  border-bottom:1.5px solid var(--pups-ink);
+}
+.pups-page .product-front .product-image img { width:100%; height:100%; object-fit:contain; transition: opacity 0.2s; }
+.pups-page .product-front .product-body { padding:14px 18px; }
+.pups-page .product-family-badge {
+  display:inline-block;
+  font-family:'JetBrains Mono', monospace;
+  font-size:9px; text-transform:uppercase; letter-spacing:0.15em;
+  padding:3px 8px; border-radius:100px;
+  background:var(--pups-ink); color:var(--pups-cream);
+  margin-bottom:8px; font-weight:600;
+}
+.pups-page .product-family-badge.vinnie { background:var(--pups-accent); }
+.pups-page .product-name {
+  font-family:'DM Serif Display', serif;
+  font-size:20px; line-height:1.2; color:var(--pups-ink); margin-bottom:4px;
+}
+.pups-page .product-tag {
+  font-family:'JetBrains Mono', monospace;
+  font-size:10px; text-transform:uppercase; letter-spacing:0.1em; color:var(--pups-ink-soft);
+}
+
+/* Product back — kleur-swatches */
+.pups-page .product-back-header .product-name { font-size:22px; margin-bottom:6px; }
+.pups-page .product-back-desc {
+  font-size:13px; line-height:1.55; color:var(--pups-ink-soft);
+  margin:12px 0 18px;
+}
+.pups-page .swatch-label {
+  font-family:'JetBrains Mono', monospace;
+  font-size:10px; text-transform:uppercase; letter-spacing:0.15em;
+  color:var(--pups-ink-soft); margin-bottom:10px; display:block;
+}
+.pups-page .swatch-active {
+  font-family:'JetBrains Mono', monospace;
+  font-size:11px; text-transform:uppercase; letter-spacing:0.1em;
+  color:var(--pups-ink); font-weight:600; margin-top:12px;
+}
+.pups-page .swatches {
+  display:flex; flex-wrap:wrap; gap:10px; margin-bottom:6px;
+}
+.pups-page .swatch {
+  width:28px; height:28px; border-radius:50%;
+  cursor:pointer; border:2px solid var(--pups-ink);
+  transition: transform 0.15s, box-shadow 0.2s;
+  position:relative;
+}
+.pups-page .swatch:hover { transform:scale(1.15); }
+.pups-page .swatch.active {
+  box-shadow: 0 0 0 2px var(--pups-cream), 0 0 0 4px var(--pups-accent);
+  transform:scale(1.1);
+}
+.pups-page .product-dm-btn {
+  display:block; width:100%; margin-top:16px;
+  padding:12px 16px; background:var(--pups-ink); color:var(--pups-cream);
+  font-family:'JetBrains Mono', monospace;
+  font-size:11px; text-transform:uppercase; letter-spacing:0.1em;
+  border:none; border-radius:100px; cursor:pointer;
+  text-align:center; text-decoration:none; font-weight:600;
+  transition: background 0.2s;
+}
+.pups-page .product-dm-btn:hover { background:var(--pups-accent); }
+
+/* Product grid v2 */
+.pups-page .product-grid {
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap:22px;
+}
+
 .pups-page .animals { padding:120px 40px; max-width:1200px; margin:0 auto; }
 .pups-page .animals-header { text-align:center; margin-bottom:64px; }
 .pups-page .animals-kicker {
@@ -704,8 +810,8 @@ import PupvanhFooter from '../components/PupvanhFooter.astro';
   <div class="lookbook-inner">
     <div class="section-header">
       <div>
-        <div class="section-kicker" data-i18n="lookbook.kicker">The lookbook</div>
-        <h2 class="section-title" data-i18n="lookbook.title">In het <em>wild</em></h2>
+        <div class="section-kicker" data-i18n="lookbook.kicker">The shoot</div>
+        <h2 class="section-title" data-i18n="lookbook.title">The <em>lookbook</em></h2>
       </div>
       <div class="section-meta" data-i18n="lookbook.meta">Shoot 2024<br><strong>The Pups fam</strong></div>
     </div>
@@ -815,36 +921,9 @@ import PupvanhFooter from '../components/PupvanhFooter.astro';
         <div class="section-kicker" data-i18n="merch.kicker">The merch</div>
         <h2 class="section-title" data-i18n="merch.title">Wearing <em>it</em></h2>
       </div>
-      <div class="section-meta" data-i18n="merch.meta">Caps · totes · phone cases<br><strong>click tote to flip</strong></div>
+      <div class="section-meta" data-i18n="merch.meta">10 pieces · OG Pup & Vinnie<br><strong>click card to flip</strong></div>
     </div>
-    <div class="merch-grid">
-    <div class="merch-card tote-flip" onclick="this.classList.toggle('flipped')">
-      <div class="merch-image">
-        <img class="tote-front" src="/pups/mockups/mock_tote_front.jpg" alt="Pups Tote Bag front">
-        <img class="tote-back" src="/pups/mockups/mock_tote_back.jpg" alt="Pups Tote Bag back">
-      </div>
-      <div class="merch-body"><div class="merch-name">Pups Tote Bag</div><div class="merch-tag" data-i18n="merch.tote.tag">Click to flip · front & back</div></div>
-    </div>
-    <div class="merch-card">
-      <div class="merch-image"><img src="/pups/mockups/mock_iphone_1.jpg" alt="Vinnie iPhone Case"></div>
-      <div class="merch-body"><div class="merch-name">Vinnie iPhone Case</div><div class="merch-tag">Clear case · Vinnie print</div></div>
-    </div>
-    <div class="merch-card">
-      <div class="merch-image"><img src="/pups/mockups/mock_hat_stone.jpg" alt="Vinnie Cap"></div>
-      <div class="merch-body"><div class="merch-name">Vinnie Cap</div><div class="merch-tag">Classic dad hat · stone</div></div>
-    </div>
-    <div class="merch-card">
-      <div class="merch-image"><img src="/pups/mockups/mock_hat_black.jpg" alt="OG Pup Cap"></div>
-      <div class="merch-body"><div class="merch-name">OG Pup Cap</div><div class="merch-tag">Classic dad hat · black</div></div>
-    </div>
-    <div class="merch-card">
-      <div class="merch-image"><img src="/pups/mockups/mock_corduroy_olive.jpg" alt="OG Pup Corduroy"></div>
-      <div class="merch-body"><div class="merch-name">OG Pup Corduroy</div><div class="merch-tag">Corduroy cap · olive</div></div>
-    </div>
-    <div class="merch-card">
-      <div class="merch-image"><img src="/pups/mockups/mock_corduroy_black.jpg" alt="OG Pup Corduroy"></div>
-      <div class="merch-body"><div class="merch-name">OG Pup Corduroy</div><div class="merch-tag">Corduroy cap · black</div></div>
-    </div></div>
+    <div class="product-grid" id="productGridMain"></div>
   </div>
 </section>
 
@@ -879,7 +958,7 @@ import PupvanhFooter from '../components/PupvanhFooter.astro';
   <div class="story-content">
     <div class="story-kicker" data-i18n="story.kicker">The story</div>
     <h2>Pups &<br><em>Puppy</em></h2>
-    <p data-i18n="story.p1">Hi, ik ben <strong>Puppy</strong>. Pups is begonnen zoals de meeste van mijn projectjes — ik hou van dingen maken. De branding, de socials, een klein site'ke errond. Het product kwam later.</p>
+    <p data-i18n="story.p1">Hi, ik ben <strong>Puppy</strong>. Pups begon zoals de meeste van mijn projectjes — met een idee dat vroeg om vorm. De branding, de socials, een eigen hoekje online. Het product kwam later.</p>
     <p data-i18n="story.p2">Petjes eerst, want ik draag er elke dag één. Daarna hoodies, shirts en nog meer petjes, allemaal met diezelfde <strong>funny dog energy</strong>.</p>
     <p data-i18n="story.p3">De mascotte is een mix van mijn bijnaam en <strong>Bono</strong>, de golden retriever van mijn beste vrienden. Honden, muziek, en het niet te serieus nemen.</p>
     <p data-i18n="story.p4">Ik drop niet actief meer, maar Pups blijft hier bestaan als deel van mijn <strong>creative hub</strong>.</p>
@@ -924,6 +1003,19 @@ import PupvanhFooter from '../components/PupvanhFooter.astro';
   </div>
 </section>
 
+<section class="merch-section" id="vinnie-merch">
+  <div class="merch-inner">
+    <div class="section-header">
+      <div>
+        <div class="section-kicker" data-i18n="vinnie.merch.kicker">Vinnie merch</div>
+        <h2 class="section-title" data-i18n="vinnie.merch.title">Wearing <em>it</em></h2>
+      </div>
+      <div class="section-meta" data-i18n="vinnie.merch.meta">Alleen Vinnie designs<br><strong>click card to flip</strong></div>
+    </div>
+    <div class="product-grid" id="productGridVinnie"></div>
+  </div>
+</section>
+
 <section class="vinnie-gallery">
   <div class="section-header">
     <div>
@@ -939,8 +1031,8 @@ import PupvanhFooter from '../components/PupvanhFooter.astro';
     <div class="vinnie-photo"><img src="/pups/photos/v_stairs.jpg" alt=""></div>
     <div class="vinnie-photo"><img src="/pups/photos/v_cap.jpg" alt=""></div>
     <div class="vinnie-photo wide"><img src="/pups/photos/v_tees.jpg" alt=""></div>
-    <div class="vinnie-photo"><img src="/pups/mockups/mock_tote_front.jpg" alt=""></div>
-    <div class="vinnie-photo"><img src="/pups/mockups/mock_tote_back.jpg" alt=""></div>
+    <div class="vinnie-photo"><img src="/pups/merch/vinnie-tote-oyster.jpg" alt=""></div>
+    <div class="vinnie-photo"><img src="/pups/merch/vinnie-tote-oyster-back.jpg" alt=""></div>
   </div>
 </section>
 
@@ -990,16 +1082,21 @@ const pupsI18n = {
     "hero.cta2": "Meet Vinnie",
     "hero.sticker1": "Drop 01",
     "hero.sticker2": "18 designs",
-    "lookbook.kicker": "The lookbook",
-    "lookbook.title": "In het <em>wild</em>",
+    "lookbook.kicker": "The shoot",
+    "lookbook.title": "The <em>lookbook</em>",
     "lookbook.meta": "Shoot 2024<br><strong>The Pups fam</strong>",
     "collection.kicker": "The collection",
     "collection.title": "Meet the <em>pack</em>",
     "collection.meta": "18 designs live · try <strong>rain mode</strong><br>tilt cards with your mouse",
     "merch.kicker": "The merch",
     "merch.title": "Wearing <em>it</em>",
-    "merch.meta": "Caps · totes · phone cases<br><strong>klik tote om te draaien</strong>",
+    "merch.meta": "10 stuks · OG Pup & Vinnie<br><strong>klik op kaart om te draaien</strong>",
     "merch.tote.tag": "Klik om te draaien · voor & achter",
+    "vinnie.merch.kicker": "Vinnie merch",
+    "vinnie.merch.title": "Wearing <em>it</em>",
+    "vinnie.merch.meta": "Alleen Vinnie designs<br><strong>klik op kaart om te draaien</strong>",
+    "product.dmBtn": "DM om te bestellen →",
+    "product.colorLabel": "Kies je kleur",
     "animals.kicker": "The real deal",
     "animals.title": "Mijn <em>dieren</em>",
     "animals.bono.badge": "The muse",
@@ -1010,7 +1107,7 @@ const pupsI18n = {
     "animals.vinnie.desc": "De Australian Shepherd met blauwe ogen en energie voor drie. Modelt alle nieuwe drops.",
     "animals.vinnie.cta": "Naar Vinnie →",
     "story.kicker": "Het verhaal",
-    "story.p1": "Hi, ik ben <strong>Puppy</strong>. Pups is begonnen zoals de meeste van mijn projectjes — ik hou van dingen maken. De branding, de socials, een klein site'ke errond. Het product kwam later.",
+    "story.p1": "Hi, ik ben <strong>Puppy</strong>. Pups begon zoals de meeste van mijn projectjes — met een idee dat vroeg om vorm. De branding, de socials, een eigen hoekje online. Het product kwam later.",
     "story.p2": "Petjes eerst, want ik draag er elke dag één. Daarna hoodies, shirts en nog meer petjes, allemaal met diezelfde <strong>funny dog energy</strong>.",
     "story.p3": "De mascotte is een mix van mijn bijnaam en <strong>Bono</strong>, de golden retriever van mijn beste vrienden. Honden, muziek, en het niet te serieus nemen.",
     "story.p4": "Ik drop niet actief meer, maar Pups blijft hier bestaan als deel van mijn <strong>creative hub</strong>.",
@@ -1046,16 +1143,21 @@ const pupsI18n = {
     "hero.cta2": "Meet Vinnie",
     "hero.sticker1": "Drop 01",
     "hero.sticker2": "18 designs",
-    "lookbook.kicker": "The lookbook",
-    "lookbook.title": "In the <em>wild</em>",
+    "lookbook.kicker": "The shoot",
+    "lookbook.title": "The <em>lookbook</em>",
     "lookbook.meta": "Shoot 2024<br><strong>The Pups fam</strong>",
     "collection.kicker": "The collection",
     "collection.title": "Meet the <em>pack</em>",
     "collection.meta": "18 designs live · try <strong>rain mode</strong><br>tilt cards with your mouse",
     "merch.kicker": "The merch",
     "merch.title": "Wearing <em>it</em>",
-    "merch.meta": "Caps · totes · phone cases<br><strong>click tote to flip</strong>",
+    "merch.meta": "10 pieces · OG Pup & Vinnie<br><strong>click card to flip</strong>",
     "merch.tote.tag": "Click to flip · front & back",
+    "vinnie.merch.kicker": "Vinnie merch",
+    "vinnie.merch.title": "Wearing <em>it</em>",
+    "vinnie.merch.meta": "Vinnie designs only<br><strong>click card to flip</strong>",
+    "product.dmBtn": "DM to order →",
+    "product.colorLabel": "Pick your colour",
     "animals.kicker": "The real deal",
     "animals.title": "My <em>animals</em>",
     "animals.bono.badge": "The muse",
@@ -1066,7 +1168,7 @@ const pupsI18n = {
     "animals.vinnie.desc": "The Australian Shepherd with blue eyes and energy for three. Models every new drop.",
     "animals.vinnie.cta": "Go to Vinnie →",
     "story.kicker": "The story",
-    "story.p1": "Hi, I'm <strong>Puppy</strong>. Pups started the way most of my projects do — I like making things. Branding, socials, a little site around it. The product came later.",
+    "story.p1": "Hi, I'm <strong>Puppy</strong>. Pups started the way most of my projects do — with an idea that asked to take shape. Branding, socials, my own little corner online. The product came later.",
     "story.p2": "Caps first, because I wear them daily. Then hoodies, tees and more caps, all with the same <strong>funny dog energy</strong>.",
     "story.p3": "The mascot is a mix of my nickname and <strong>Bono</strong>, my best friends' golden retriever. Dogs, music, and not taking it too seriously.",
     "story.p4": "I'm not actively dropping anymore, but Pups lives on here as part of my <strong>creative hub</strong>.",
@@ -1102,6 +1204,263 @@ function pupsSetLanguage(lang) {
     btn.classList.toggle('active', btn.dataset.lang === lang);
   });
   try { localStorage.setItem('pups-lang', lang); } catch(e) {}
+  // Re-render swatch labels
+  if (typeof renderSwatchLabels === 'function') renderSwatchLabels(lang);
+}
+
+// ============ PRODUCT DATA ============
+// Elk product: family (og|vinnie), naam per taal, korte tag per taal, kleuren met hex + image pad
+const pupsProducts = [
+  {
+    id: 'og-hoodie',
+    family: 'og',
+    name: { nl: 'OG Pup Hoodie', en: 'OG Pup Hoodie' },
+    tag: { nl: 'Heavy blend hoodie · geborduurd', en: 'Heavy blend hoodie · embroidered' },
+    desc: {
+      nl: 'Gildan heavy blend hoodie met geborduurde OG Pup mascotte op de borst. Unisex fit.',
+      en: 'Gildan heavy blend hoodie with embroidered OG Pup mascot on the chest. Unisex fit.'
+    },
+    colors: [
+      { name: 'Azalea', hex: '#F4A6C4', img: '/pups/merch/og-hoodie-azalea.png' },
+      { name: 'Black', hex: '#1a1a1a', img: '/pups/merch/og-hoodie-black.png' },
+      { name: 'Carolina Blue', hex: '#7BB3D9', img: '/pups/merch/og-hoodie-carolina.png' },
+      { name: 'Forest Green', hex: '#1E3A34', img: '/pups/merch/og-hoodie-forest.png' },
+      { name: 'Navy', hex: '#14213D', img: '/pups/merch/og-hoodie-navy.png' }
+    ]
+  },
+  {
+    id: 'og-tee',
+    family: 'og',
+    name: { nl: 'OG Pup Tee', en: 'OG Pup Tee' },
+    tag: { nl: 'Organic cotton t-shirt · print', en: 'Organic cotton t-shirt · print' },
+    desc: {
+      nl: 'Unisex organic cotton Creator 2.0 tee met printed OG Pup design. Zacht en duurzaam.',
+      en: 'Unisex organic cotton Creator 2.0 tee with printed OG Pup design. Soft and sustainable.'
+    },
+    colors: [
+      { name: 'Black', hex: '#1a1a1a', img: '/pups/merch/og-tee-black.png' },
+      { name: 'White', hex: '#FFFFFF', img: '/pups/merch/og-tee-white.png' }
+    ]
+  },
+  {
+    id: 'og-cap',
+    family: 'og',
+    name: { nl: 'OG Pup Cap', en: 'OG Pup Cap' },
+    tag: { nl: 'Classic dad hat · geborduurd', en: 'Classic dad hat · embroidered' },
+    desc: {
+      nl: 'Classic dad hat met verstelbare buckle en geborduurde OG Pup mascotte.',
+      en: 'Classic dad hat with adjustable buckle and embroidered OG Pup mascot.'
+    },
+    colors: [
+      { name: 'Black', hex: '#1a1a1a', img: '/pups/merch/og-cap-black.png' },
+      { name: 'Light Blue', hex: '#B8D6E8', img: '/pups/merch/og-cap-lightblue.png' },
+      { name: 'Navy', hex: '#14213D', img: '/pups/merch/og-cap-navy.png' },
+      { name: 'Pink', hex: '#F4C4CD', img: '/pups/merch/og-cap-pink.png' },
+      { name: 'Stone', hex: '#D8CFC4', img: '/pups/merch/og-cap-stone.png' }
+    ]
+  },
+  {
+    id: 'og-corduroy',
+    family: 'og',
+    name: { nl: 'OG Pup Corduroy', en: 'OG Pup Corduroy' },
+    tag: { nl: 'Ribfluweel cap · geborduurd', en: 'Corduroy cap · embroidered' },
+    desc: {
+      nl: 'Ribfluwelen dad hat met metalen sluiting en geborduurde OG Pup mascotte. Retro-vibes.',
+      en: 'Corduroy dad hat with metal clasp and embroidered OG Pup mascot. Retro vibes.'
+    },
+    colors: [
+      { name: 'Black', hex: '#1a1a1a', img: '/pups/merch/og-corduroy-black.png' },
+      { name: 'Camel', hex: '#C89968', img: '/pups/merch/og-corduroy-camel.png' },
+      { name: 'Dark Olive', hex: '#4A5D3F', img: '/pups/merch/og-corduroy-olive.png' },
+      { name: 'Oxford Navy', hex: '#1F2E4E', img: '/pups/merch/og-corduroy-oxfordnavy.png' }
+    ]
+  },
+  {
+    id: 'og-tote',
+    family: 'og',
+    name: { nl: 'OG Pup Tote Bag', en: 'OG Pup Tote Bag' },
+    tag: { nl: 'Eco tote · print · one size', en: 'Eco tote · print · one size' },
+    desc: {
+      nl: 'Eco cotton tote bag met printed OG Pup design. Perfect voor dagelijks gebruik.',
+      en: 'Eco cotton tote bag with printed OG Pup design. Perfect for daily use.'
+    },
+    colors: [
+      { name: 'Oyster', hex: '#E8DCC1', img: '/pups/merch/og-tote-oyster.png' }
+    ]
+  },
+  {
+    id: 'vinnie-hoodie',
+    family: 'vinnie',
+    name: { nl: 'Vinnie Hoodie', en: 'Vinnie Hoodie' },
+    tag: { nl: 'Heavy blend hoodie · geborduurd', en: 'Heavy blend hoodie · embroidered' },
+    desc: {
+      nl: 'Gildan heavy blend hoodie met geborduurde Vinnie mascotte (blue merle Aussie). Unisex fit.',
+      en: 'Gildan heavy blend hoodie with embroidered Vinnie mascot (blue merle Aussie). Unisex fit.'
+    },
+    colors: [
+      { name: 'Azalea', hex: '#F4A6C4', img: '/pups/merch/vinnie-hoodie-azalea.png' },
+      { name: 'Black', hex: '#1a1a1a', img: '/pups/merch/vinnie-hoodie-black.png' },
+      { name: 'Carolina Blue', hex: '#7BB3D9', img: '/pups/merch/vinnie-hoodie-carolina.png' },
+      { name: 'Military Green', hex: '#5B6142', img: '/pups/merch/vinnie-hoodie-military.png' },
+      { name: 'Navy', hex: '#14213D', img: '/pups/merch/vinnie-hoodie-navy.png' }
+    ]
+  },
+  {
+    id: 'vinnie-tee',
+    family: 'vinnie',
+    name: { nl: 'Vinnie Tee', en: 'Vinnie Tee' },
+    tag: { nl: 'Organic cotton t-shirt · print', en: 'Organic cotton t-shirt · print' },
+    desc: {
+      nl: 'Unisex organic cotton Creator 2.0 tee met printed Vinnie design. Zacht en duurzaam.',
+      en: 'Unisex organic cotton Creator 2.0 tee with printed Vinnie design. Soft and sustainable.'
+    },
+    colors: [
+      { name: 'Black', hex: '#1a1a1a', img: '/pups/merch/vinnie-tee-black.png' },
+      { name: 'Khaki', hex: '#7A7550', img: '/pups/merch/vinnie-tee-khaki.png' },
+      { name: 'White', hex: '#FFFFFF', img: '/pups/merch/vinnie-tee-white.png' }
+    ]
+  },
+  {
+    id: 'vinnie-cap',
+    family: 'vinnie',
+    name: { nl: 'Vinnie Cap', en: 'Vinnie Cap' },
+    tag: { nl: 'Classic dad hat · geborduurd', en: 'Classic dad hat · embroidered' },
+    desc: {
+      nl: 'Classic dad hat met verstelbare buckle en geborduurde Vinnie mascotte.',
+      en: 'Classic dad hat with adjustable buckle and embroidered Vinnie mascot.'
+    },
+    colors: [
+      { name: 'Black', hex: '#1a1a1a', img: '/pups/merch/vinnie-cap-black.png' },
+      { name: 'Light Blue', hex: '#B8D6E8', img: '/pups/merch/vinnie-cap-lightblue.png' },
+      { name: 'Navy', hex: '#14213D', img: '/pups/merch/vinnie-cap-navy.png' },
+      { name: 'Stone', hex: '#D8CFC4', img: '/pups/merch/vinnie-cap-stone.png' }
+    ]
+  },
+  {
+    id: 'vinnie-tote',
+    family: 'vinnie',
+    name: { nl: 'Vinnie Tote Bag', en: 'Vinnie Tote Bag' },
+    tag: { nl: 'Eco tote · print · one size', en: 'Eco tote · print · one size' },
+    desc: {
+      nl: 'Eco cotton tote bag met Vinnie design op de voorkant. Klik om de andere kant te zien.',
+      en: 'Eco cotton tote bag with Vinnie design on the front. Click to flip and see the back.'
+    },
+    colors: [
+      { name: 'Oyster', hex: '#E8DCC1', img: '/pups/merch/vinnie-tote-oyster.jpg' }
+    ]
+  },
+  {
+    id: 'vinnie-case',
+    family: 'vinnie',
+    name: { nl: 'Vinnie iPhone Case', en: 'Vinnie iPhone Case' },
+    tag: { nl: 'Clear case · Vinnie print', en: 'Clear case · Vinnie print' },
+    desc: {
+      nl: 'Transparante iPhone case met printed Vinnie design. Beschikbaar voor de meest recente modellen.',
+      en: 'Clear iPhone case with printed Vinnie design. Available for latest models.'
+    },
+    colors: [
+      { name: 'Clear', hex: '#EFEFEF', img: '/pups/merch/vinnie-case-clear.jpg' }
+    ]
+  }
+];
+
+function renderProductCards(containerId, filterFamily) {
+  const grid = document.getElementById(containerId);
+  if (!grid) return;
+  const lang = document.documentElement.lang || 'nl';
+  const products = filterFamily
+    ? pupsProducts.filter(p => p.family === filterFamily)
+    : pupsProducts;
+  grid.innerHTML = products.map(p => {
+    const first = p.colors[0];
+    const swatches = p.colors.map((c, i) =>
+      `<button class="swatch${i === 0 ? ' active' : ''}" style="background:${c.hex};" data-img="${c.img}" data-name="${c.name}" aria-label="${c.name}" title="${c.name}"></button>`
+    ).join('');
+    const familyBadge = p.family === 'vinnie' ? 'Vinnie' : 'OG Pup';
+    return `
+      <article class="product-card" data-family="${p.family}" data-id="${p.id}">
+        <div class="product-card-inner">
+          <div class="product-front">
+            <div class="product-image">
+              <img class="product-image-img" src="${first.img}" alt="${p.name[lang]}">
+            </div>
+            <div class="product-body">
+              <span class="product-family-badge ${p.family}">${familyBadge}</span>
+              <div class="product-name" data-name-nl="${p.name.nl}" data-name-en="${p.name.en}">${p.name[lang]}</div>
+              <div class="product-tag" data-tag-nl="${p.tag.nl}" data-tag-en="${p.tag.en}">${p.tag[lang]}</div>
+            </div>
+          </div>
+          <div class="product-back">
+            <div class="product-back-header">
+              <span class="product-family-badge ${p.family}">${familyBadge}</span>
+              <div class="product-name">${p.name[lang]}</div>
+            </div>
+            <p class="product-back-desc" data-desc-nl="${p.desc.nl}" data-desc-en="${p.desc.en}">${p.desc[lang]}</p>
+            <div>
+              <span class="swatch-label" data-i18n="product.colorLabel">Kies je kleur</span>
+              <div class="swatches">${swatches}</div>
+              <div class="swatch-active">${first.name}</div>
+            </div>
+            <a href="https://instagram.com/po.pups" target="_blank" rel="noopener" class="product-dm-btn" data-i18n="product.dmBtn">DM om te bestellen →</a>
+          </div>
+        </div>
+      </article>
+    `;
+  }).join('');
+
+  // Hook up flip on card click
+  grid.querySelectorAll('.product-card').forEach(card => {
+    card.addEventListener('click', (e) => {
+      // Don't flip when clicking swatches, dm-btn or badge
+      if (e.target.closest('.swatch')) return;
+      if (e.target.closest('.product-dm-btn')) return;
+      card.classList.toggle('flipped');
+    });
+  });
+
+  // Hook up swatch clicks
+  grid.querySelectorAll('.swatch').forEach(sw => {
+    sw.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const card = sw.closest('.product-card');
+      if (!card) return;
+      const img = card.querySelector('.product-image-img');
+      if (img) img.src = sw.dataset.img;
+      card.querySelectorAll('.swatch').forEach(s => s.classList.remove('active'));
+      sw.classList.add('active');
+      const activeLabel = card.querySelector('.swatch-active');
+      if (activeLabel) activeLabel.textContent = sw.dataset.name;
+    });
+  });
+
+  // Apply current language to i18n bits inside the grid
+  const currentLang = document.documentElement.lang || 'nl';
+  grid.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (pupsI18n[currentLang] && pupsI18n[currentLang][key] !== undefined) {
+      el.innerHTML = pupsI18n[currentLang][key];
+    }
+  });
+}
+
+function renderSwatchLabels(lang) {
+  // Update product name/tag/desc when language changes
+  document.querySelectorAll('.product-card').forEach(card => {
+    const nameEl = card.querySelector('.product-front .product-name');
+    if (nameEl && nameEl.dataset['name' + (lang === 'en' ? 'En' : 'Nl')]) {
+      nameEl.textContent = nameEl.dataset['name' + (lang === 'en' ? 'En' : 'Nl')];
+    }
+    const backNameEl = card.querySelector('.product-back .product-name');
+    if (backNameEl && nameEl) backNameEl.textContent = nameEl.textContent;
+    const tagEl = card.querySelector('.product-tag');
+    if (tagEl && tagEl.dataset['tag' + (lang === 'en' ? 'En' : 'Nl')]) {
+      tagEl.textContent = tagEl.dataset['tag' + (lang === 'en' ? 'En' : 'Nl')];
+    }
+    const descEl = card.querySelector('.product-back-desc');
+    if (descEl && descEl.dataset['desc' + (lang === 'en' ? 'En' : 'Nl')]) {
+      descEl.textContent = descEl.dataset['desc' + (lang === 'en' ? 'En' : 'Nl')];
+    }
+  });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -1214,10 +1573,9 @@ document.addEventListener('DOMContentLoaded', () => {
     img.addEventListener('click', () => startRain());
   });
 
-  // Tote flip
-  document.querySelectorAll('.tote-flip').forEach(card => {
-    card.addEventListener('click', () => card.classList.toggle('flipped'));
-  });
+  // Product cards render (main + vinnie subpage)
+  renderProductCards('productGridMain', null);
+  renderProductCards('productGridVinnie', 'vinnie');
 
   // Draggable pup
   const dragPup = document.getElementById('dragPup');
