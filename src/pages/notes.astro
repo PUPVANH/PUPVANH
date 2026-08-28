@@ -14,7 +14,11 @@ const posts = postsData.posts;
   <div class="n-wrap">
 
     <div class="n-topbar">
-      <a href="/">← pupvanh</a>
+      <div class="mini-nav">
+        <a href="/">home</a>
+        <a href="/bookmarks">bookmarks</a>
+        <a href="/jpg">jpg</a>
+      </div>
       <div class="right">
         <button class="toggle-btn" id="nModeToggle" aria-label="Toggle light/dark mode">◐</button>
       </div>
@@ -92,7 +96,9 @@ const posts = postsData.posts;
 html[data-mode="light"] .notes-page { background: #F4F0E8; color: #1E3A34; }
 html[data-mode="light"] .notes-page .n-topbar { border-color: #D8D2C2; }
 html[data-mode="light"] .notes-page .n-topbar a,
+html[data-mode="light"] .notes-page .n-topbar .mini-nav a,
 html[data-mode="light"] .notes-page .toggle-btn { color: #6B6B66; }
+html[data-mode="light"] .notes-page .n-topbar .mini-nav a:hover { color: #E85D2F; }
 html[data-mode="light"] .notes-page .n-hero .kicker { color: #0E6B6F; }
 html[data-mode="light"] .notes-page .n-hero h1 { color: #1E3A34; }
 html[data-mode="light"] .notes-page .n-hero p { color: #4a4a4a; }
@@ -116,7 +122,9 @@ html[data-mode="light"] .notes-page .footer-line-2 a { color: #0E6B6F; }
 html[data-mode="dark"] .notes-page { background: #122522; color: #F4F0E8; }
 html[data-mode="dark"] .notes-page .n-topbar { border-color: #2A3833; }
 html[data-mode="dark"] .notes-page .n-topbar a,
+html[data-mode="dark"] .notes-page .n-topbar .mini-nav a,
 html[data-mode="dark"] .notes-page .toggle-btn { color: #8A8F88; }
+html[data-mode="dark"] .notes-page .n-topbar .mini-nav a:hover { color: #E85D2F; }
 html[data-mode="dark"] .notes-page .n-hero .kicker { color: #5EB0B3; }
 html[data-mode="dark"] .notes-page .n-hero h1 { color: #F4F0E8; }
 html[data-mode="dark"] .notes-page .n-hero p { color: #B8B4A8; }
@@ -150,6 +158,8 @@ html[data-mode="dark"] body:has(.notes-page) { background: #122522; }
   letter-spacing: 0.12em; text-transform: uppercase;
 }
 .notes-page .n-topbar a { text-decoration: none; }
+.notes-page .n-topbar .mini-nav { display: flex; gap: 22px; }
+.notes-page .n-topbar .mini-nav a { transition: color 0.2s; }
 .notes-page .n-topbar .right { display: flex; gap: 18px; align-items: center; }
 .notes-page .toggle-btn {
   background: none; border: none; font-family: inherit; font-size: 14px;

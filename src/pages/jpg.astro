@@ -93,8 +93,9 @@ html[data-mode="dark"] {
 .pupsjpg-page .wrap { max-width:1400px; margin:0 auto; padding:0 40px; position:relative; z-index:2; }
 
 .pupsjpg-page .nav { display:flex; justify-content:space-between; align-items:center; padding:28px 0; border-bottom:0.5px solid var(--border); transition:border-color .35s; gap:20px; flex-wrap:wrap; }
-.pupsjpg-page .back-link { font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:var(--ember); text-decoration:none; transition:opacity .2s; }
-.pupsjpg-page .back-link:hover { opacity:0.7; }
+.pupsjpg-page .mini-nav { display:flex; gap:24px; font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:1.5px; text-transform:lowercase; }
+.pupsjpg-page .mini-nav a { color:var(--muted); text-decoration:none; transition:color .2s; }
+.pupsjpg-page .mini-nav a:hover { color:var(--ember); }
 .pupsjpg-page .nav-r { display:flex; gap:20px; align-items:center; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; }
 .pupsjpg-page .intro-controls { display:flex; gap:20px; align-items:center; margin-top:20px; flex-wrap:wrap; }
 .pupsjpg-page .viewsw { display:flex; padding:3px; border-radius:6px; background:var(--swatch); transition:background .35s; }
@@ -278,7 +279,11 @@ html[data-mode="dark"] .pupsjpg-page .qp-note { color:#D8D4CE; }
 <div class="wrap">
 
   <div class="nav">
-    <a href="/" class="em back-link">← PUPVANH</a>
+    <div class="mini-nav">
+      <a href="/">home</a>
+      <a href="/notes">notes</a>
+      <a href="/bookmarks">bookmarks</a>
+    </div>
     <div class="nav-r">
       <button class="toggle" data-toggle aria-label="Toggle dark mode"></button>
     </div>

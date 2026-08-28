@@ -72,19 +72,20 @@ import Analytics from '@vercel/analytics/astro';
     justify-content: space-between;
     gap: 20px;
   }
-  .back-link {
+  .mini-nav {
+    display: inline-flex;
+    gap: 22px;
     font-family: 'JetBrains Mono', monospace;
     font-size: 12px;
     letter-spacing: 0.08em;
+    text-transform: lowercase;
+  }
+  .mini-nav a {
     color: var(--mute);
     text-decoration: none;
-    text-transform: uppercase;
-    transition: color 0.25s, transform 0.25s;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
+    transition: color 0.25s;
   }
-  .back-link:hover { color: var(--ember); transform: translateX(-3px); }
+  .mini-nav a:hover { color: var(--ember); }
   .mode-toggle {
     background: transparent;
     border: 1px solid var(--line);
@@ -651,7 +652,11 @@ import Analytics from '@vercel/analytics/astro';
 
 <div class="topbar">
   <div class="topbar-inner">
-    <a href="/" class="back-link">← PUPVANH</a>
+    <div class="mini-nav">
+      <a href="/">home</a>
+      <a href="/notes">notes</a>
+      <a href="/jpg">jpg</a>
+    </div>
     <button class="mode-toggle" id="modeToggle" aria-label="Toggle mode">◐</button>
   </div>
 </div>
