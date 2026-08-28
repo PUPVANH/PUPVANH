@@ -988,8 +988,8 @@ import PupvanhFooter from '../components/PupvanhFooter.astro';
 <section class="vinnie-gallery">
   <div class="section-header">
     <div>
-      <div class="section-kicker" data-i18n="vinnie.gallery.kicker">The gallery</div>
-      <h2 class="section-title" data-i18n="vinnie.gallery.title">Vinnie <em>op zijn best</em></h2>
+      <div class="section-kicker" data-i18n="vinnie.gallery.kicker">The shoot</div>
+      <h2 class="section-title" data-i18n="vinnie.gallery.title">The <em>lookbook</em></h2>
     </div>
     <div class="section-meta" data-i18n="vinnie.gallery.meta">Fotoshoot 2024<br><strong>Squad favorite</strong></div>
   </div>
@@ -1090,8 +1090,8 @@ const pupsI18n = {
     "vinnie.fact2": "Energie levels",
     "vinnie.fact3": "Designs gemodelleerd",
     "vinnie.fact4": "Ballen apporteren",
-    "vinnie.gallery.kicker": "The gallery",
-    "vinnie.gallery.title": "Vinnie <em>op zijn best</em>",
+    "vinnie.gallery.kicker": "The shoot",
+    "vinnie.gallery.title": "The <em>lookbook</em>",
     "vinnie.gallery.meta": "Fotoshoot 2024<br><strong>Squad favorite</strong>",
     "vinnie.back": "← Terug naar Pups"
   },
@@ -1151,8 +1151,8 @@ const pupsI18n = {
     "vinnie.fact2": "Energy levels",
     "vinnie.fact3": "Designs modelled",
     "vinnie.fact4": "Balls fetched",
-    "vinnie.gallery.kicker": "The gallery",
-    "vinnie.gallery.title": "Vinnie <em>at his best</em>",
+    "vinnie.gallery.kicker": "The shoot",
+    "vinnie.gallery.title": "The <em>lookbook</em>",
     "vinnie.gallery.meta": "Photo shoot 2024<br><strong>Squad favorite</strong>",
     "vinnie.back": "← Back to Pups"
   }
@@ -1208,11 +1208,16 @@ const pupsProducts = [
     name: { nl: 'OG Pup Cap', en: 'OG Pup Cap' },
     tag: { nl: 'Classic dad hat · geborduurd', en: 'Classic dad hat · embroidered' },
     colors: [
-      { name: 'Black', hex: '#1a1a1a', img: '/pups/merch/og-cap-black.png' },
-      { name: 'Light Blue', hex: '#B8D6E8', img: '/pups/merch/og-cap-lightblue.png' },
-      { name: 'Navy', hex: '#14213D', img: '/pups/merch/og-cap-navy.png' },
-      { name: 'Pink', hex: '#F4C4CD', img: '/pups/merch/og-cap-pink.png' },
-      { name: 'Stone', hex: '#D8CFC4', img: '/pups/merch/og-cap-stone.png' }
+      { name: 'Black', hex: '#1a1a1a', img: '/pups/merch/og-cap-black.png',
+        views: ['/pups/merch/og-cap-black.png', '/pups/merch/og-cap-black-side.png', '/pups/merch/og-cap-black-back.png'] },
+      { name: 'Light Blue', hex: '#B8D6E8', img: '/pups/merch/og-cap-lightblue.png',
+        views: ['/pups/merch/og-cap-lightblue.png', '/pups/merch/og-cap-lightblue-side.png', '/pups/merch/og-cap-lightblue-back.png'] },
+      { name: 'Navy', hex: '#14213D', img: '/pups/merch/og-cap-navy.png',
+        views: ['/pups/merch/og-cap-navy.png', '/pups/merch/og-cap-navy-side.png', '/pups/merch/og-cap-navy-back.png'] },
+      { name: 'Pink', hex: '#F4C4CD', img: '/pups/merch/og-cap-pink.png',
+        views: ['/pups/merch/og-cap-pink.png', '/pups/merch/og-cap-pink-side.png', '/pups/merch/og-cap-pink-back.png'] },
+      { name: 'Stone', hex: '#D8CFC4', img: '/pups/merch/og-cap-stone.png',
+        views: ['/pups/merch/og-cap-stone.png', '/pups/merch/og-cap-stone-side.png', '/pups/merch/og-cap-stone-back.png'] }
     ]
   },
   {
@@ -1221,10 +1226,14 @@ const pupsProducts = [
     name: { nl: 'OG Pup Corduroy', en: 'OG Pup Corduroy' },
     tag: { nl: 'Ribfluweel cap · geborduurd', en: 'Corduroy cap · embroidered' },
     colors: [
-      { name: 'Dark Olive', hex: '#4A5D3F', img: '/pups/merch/og-corduroy-olive.png' },
-      { name: 'Black', hex: '#1a1a1a', img: '/pups/merch/og-corduroy-black.png' },
-      { name: 'Camel', hex: '#C89968', img: '/pups/merch/og-corduroy-camel.png' },
-      { name: 'Oxford Navy', hex: '#1F2E4E', img: '/pups/merch/og-corduroy-oxfordnavy.png' }
+      { name: 'Dark Olive', hex: '#4A5D3F', img: '/pups/merch/og-corduroy-olive.png',
+        views: ['/pups/merch/og-corduroy-olive.png', '/pups/merch/og-corduroy-olive-side.png', '/pups/merch/og-corduroy-olive-back.png'] },
+      { name: 'Black', hex: '#1a1a1a', img: '/pups/merch/og-corduroy-black.png',
+        views: ['/pups/merch/og-corduroy-black.png', '/pups/merch/og-corduroy-black-side.png', '/pups/merch/og-corduroy-black-back.png'] },
+      { name: 'Camel', hex: '#C89968', img: '/pups/merch/og-corduroy-camel.png',
+        views: ['/pups/merch/og-corduroy-camel.png', '/pups/merch/og-corduroy-camel-side.png', '/pups/merch/og-corduroy-camel-back.png'] },
+      { name: 'Oxford Navy', hex: '#1F2E4E', img: '/pups/merch/og-corduroy-oxfordnavy.png',
+        views: ['/pups/merch/og-corduroy-oxfordnavy.png', '/pups/merch/og-corduroy-oxfordnavy-side.png', '/pups/merch/og-corduroy-oxfordnavy-back.png'] }
     ]
   },
   {
@@ -1266,10 +1275,14 @@ const pupsProducts = [
     name: { nl: 'Vinnie Cap', en: 'Vinnie Cap' },
     tag: { nl: 'Classic dad hat · geborduurd', en: 'Classic dad hat · embroidered' },
     colors: [
-      { name: 'Stone', hex: '#D8CFC4', img: '/pups/merch/vinnie-cap-stone.png' },
-      { name: 'Black', hex: '#1a1a1a', img: '/pups/merch/vinnie-cap-black.png' },
-      { name: 'Light Blue', hex: '#B8D6E8', img: '/pups/merch/vinnie-cap-lightblue.png' },
-      { name: 'Navy', hex: '#14213D', img: '/pups/merch/vinnie-cap-navy.png' }
+      { name: 'Stone', hex: '#D8CFC4', img: '/pups/merch/vinnie-cap-stone.png',
+        views: ['/pups/merch/vinnie-cap-stone.png', '/pups/merch/vinnie-cap-stone-side.png', '/pups/merch/vinnie-cap-stone-back.png'] },
+      { name: 'Black', hex: '#1a1a1a', img: '/pups/merch/vinnie-cap-black.png',
+        views: ['/pups/merch/vinnie-cap-black.png', '/pups/merch/vinnie-cap-black-side.png', '/pups/merch/vinnie-cap-black-back.png'] },
+      { name: 'Light Blue', hex: '#B8D6E8', img: '/pups/merch/vinnie-cap-lightblue.png',
+        views: ['/pups/merch/vinnie-cap-lightblue.png', '/pups/merch/vinnie-cap-lightblue-side.png', '/pups/merch/vinnie-cap-lightblue-back.png'] },
+      { name: 'Navy', hex: '#14213D', img: '/pups/merch/vinnie-cap-navy.png',
+        views: ['/pups/merch/vinnie-cap-navy.png', '/pups/merch/vinnie-cap-navy-side.png', '/pups/merch/vinnie-cap-navy-back.png'] }
     ]
   },
   {
