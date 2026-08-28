@@ -1,86 +1,26 @@
 {
   "posts": [
     {
-      "num": "012",
-      "date_nl": "22 aug 2026",
-      "date_en": "aug 22, 2026",
-      "tags": [
-        "learning",
-        "building"
-      ],
-      "readTime": 4,
-      "title_nl": "Astro islands, eindelijk snap ik het",
-      "title_en": "Astro islands finally clicked",
-      "snip_nl": "Drie weken lang dacht ik dat 'islands' een hype-term was. Toen bouwde ik de FC Ariba countdown en zag ik waarom het écht slim is.",
-      "snip_en": "For three weeks I thought 'islands' was just a hype word. Then I built the FC Ariba countdown and saw why it actually makes sense."
-    },
-    {
-      "num": "011",
-      "date_nl": "19 aug 2026",
-      "date_en": "aug 19, 2026",
-      "tags": [
-        "ranting",
-        "building"
-      ],
-      "readTime": 3,
-      "title_nl": "Waarom mijn Vercel deploy om 2u brak",
-      "title_en": "Why my Vercel deploy broke at 2am",
-      "snip_nl": "Node version mismatch. Ik heb het in 4 minuten gefixt en 40 minuten geraasd. Wat ik leerde over error logs lezen als een grote jongen.",
-      "snip_en": "Node version mismatch. Fixed it in 4 minutes, ranted for 40. Here's what I learned about reading error logs like a grown-up."
-    },
-    {
-      "num": "010",
-      "date_nl": "15 aug 2026",
-      "date_en": "aug 15, 2026",
-      "tags": [
-        "learning"
-      ],
+      "num": "002",
+      "date_nl": "28 aug 2026",
+      "date_en": "aug 28, 2026",
+      "tags": ["learning", "building"],
       "readTime": 2,
-      "title_nl": "Is 'AI-assisted' wel het juiste woord?",
-      "title_en": "Is 'AI-assisted' even the right word?",
-      "snip_nl": "Ik typ minder code dan vroeger, maar ik denk méér over wat ik bouw. Assisted? Amplified? Iemand een beter woord?",
-      "snip_en": "I type less code than before, but I think more about what I build. Assisted? Amplified? Anyone got a better word?"
+      "title_nl": "Elke laag brengt me verder.",
+      "title_en": "Every layer teaches me something.",
+      "snip_nl": "Begonnen met AI vragen om een template na te bouwen. Ondertussen snap ik wat headers, hero's, feeds en footers zijn, weet ik welke fonts werken en heb ik iets dat er goed uitziet. Maar nu komt de volgende laag — SEO — die me leert dat mijn website eigenlijk nog niet zo goed is.",
+      "snip_en": "Started by asking AI to copy a template. Now I get what headers, heroes, feeds and footers are, I know which fonts work, and I've built something that looks good. But now comes the next layer — SEO — to teach me my website isn't actually any good."
     },
     {
-      "num": "009",
-      "date_nl": "11 aug 2026",
-      "date_en": "aug 11, 2026",
-      "tags": [
-        "poems"
-      ],
-      "readTime": 1,
-      "title_nl": "Nachtdienst",
-      "title_en": "Night shift",
-      "snip_nl": "De cursor knippert. Het is stil. Ik druk op enter en de wereld verandert een klein beetje, maar niemand ziet het.",
-      "snip_en": "The cursor blinks. It is quiet. I press enter and the world shifts a little, but no one sees it."
-    },
-    {
-      "num": "008",
-      "date_nl": "08 aug 2026",
-      "date_en": "aug 08, 2026",
-      "tags": [
-        "learning"
-      ],
-      "readTime": 6,
-      "title_nl": "Claude schreef 90% van deze site. Voelt raar.",
-      "title_en": "Claude wrote 90% of this site. It feels weird.",
-      "snip_nl": "Ik ben geen developer. Toch heb ik een portfolio-site die live staat. De credit-vraag houdt me al twee weken bezig.",
-      "snip_en": "I'm not a developer. Yet I have a portfolio site that's live. The credit question has been bugging me for two weeks.",
-      "body_en": "<p>The credit question has been in my head for two weeks now. I sit down at my desk, open a new chat, describe what I want, and half an hour later a website is deployed. I did not write the code. But I do own the ideas, the choices, the taste, the pushback when something feels off. What does that make me?</p>\n\n<p>The purists will say: <em>you're not building, you're prompting</em>. And they're right, in a narrow sense. I could not open a text editor and write an Astro component from scratch. If Claude disappeared tomorrow, this whole site would freeze in place — I could add a photo, change a JSON, but I could not fix a bug I did not cause.</p>\n\n<p>But then again: I know exactly what I want. I can look at a preview and say <em>the padding is off, the divider is too cold, the font on the CTA does not carry weight</em>. I decide what stays and what gets scrapped. I am the one who says <strong>this feels like me</strong> or <strong>this doesn't</strong>. That is a form of authorship. Not the traditional kind, but a kind.</p>\n\n<p>Maybe the honest answer is: I'm a director, not a developer. And the site is a collaboration, not a solo project. I'll take that. It's more interesting than either extreme.</p>"
-    },
-    {
-      "num": "007",
-      "date_nl": "03 aug 2026",
-      "date_en": "aug 03, 2026",
-      "tags": [
-        "ranting",
-        "building"
-      ],
-      "readTime": 3,
-      "title_nl": "Wanneer stop je met refactoren?",
-      "title_en": "When do you stop refactoring?",
-      "snip_nl": "De pagina werkt. Ik heb hem drie keer herschreven 'om het cleaner te maken'. Dit is een probleem.",
-      "snip_en": "The page works. I have rewritten it three times 'to make it cleaner'. This is a problem."
+      "num": "001",
+      "date_nl": "28 aug 2026",
+      "date_en": "aug 28, 2026",
+      "tags": ["learning", "building"],
+      "readTime": 2,
+      "title_nl": "Niet dommer. Ik bouw gewoon anders.",
+      "title_en": "Not dumber. Building differently.",
+      "snip_nl": "Voor iemand met een hoofd vol ideeën maar te weinig tijd of skills, voelt AI als een collega die dekt wat ik niet kan. De angst dat het ons dommer maakt klopt misschien — maar enkel op één vlak. Voor wie in zijn hoofd creëert, opent het net meer ruimte.",
+      "snip_en": "For someone with a head full of ideas but short on time and skills, AI feels like a co-worker who covers what I can't. The fear that it's making us dumber might be true — but only on one level. For people who create in their heads, it opens more room, not less."
     }
   ]
 }
