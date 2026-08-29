@@ -27,7 +27,7 @@ interface Props {
   paginaNaam: string;              // bv. 'Bookmarks', 'FC Ariba', 'Notes'
   built: string;                   // bv. 'AUG 2026'
   updated: string;                 // bv. 'AUG 2026'
-  theme?: 'default' | 'ariba' | 'siviez' | 'notes' | 'pups';
+  theme?: 'default' | 'ariba' | 'notes' | 'pups';
   socials?: Social[];              // optioneel — verschijnt rechts op regel 1
   link?: string;                   // default pupvanh.vercel.app; later pupvanh.pixelslaves.com
   linkLabel?: string;              // default 'pupvanh.vercel.app →'
@@ -160,16 +160,6 @@ const {
   .pv-theme-default {
     background: #1E3A34;
     color: #F4F0E8;
-  }
-
-  /* Siviez — ivory met bovenrand + forest tekst */
-  .pv-theme-siviez {
-    background: #F4F0E8;
-    color: #1E3A34;
-    border-top: 1px solid rgba(30, 58, 52, 0.15);
-  }
-  .pv-theme-siviez .pv-page {
-    color: #0E6B6F;
   }
 
   /* Ariba — donkere forest, Bebas Neue overriden */
