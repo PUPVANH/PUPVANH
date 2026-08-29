@@ -446,8 +446,13 @@ import Analytics from '@vercel/analytics/astro';
     color: var(--ember);
     transform: translateY(-2px);
   }
-  .btn .icon {
-    font-size: 13px;
+  .btn .ext {
+    display: inline-block;
+    margin-left: 4px;
+    transition: transform 0.25s ease;
+  }
+  .btn:hover .ext {
+    transform: translate(2px, -2px);
   }
 
   /* Content sections */
@@ -756,10 +761,10 @@ import Analytics from '@vercel/analytics/astro';
 
     <div class="actions">
       <a class="btn btn-primary" href="https://www.tiktok.com/@georgiesroar/video/7440184759575153952" target="_blank" rel="noopener">
-        <span class="icon">▶</span> Watch on TikTok
+        Watch on TikTok <span class="ext">↗</span>
       </a>
-      <a class="btn btn-secondary" href="https://www.tiktok.com/@georgiesroar" target="_blank" rel="noopener">
-        <span class="icon">@</span> Follow @georgiesroar
+      <a class="btn btn-secondary" href="https://www.instagram.com/georgiesroar/" target="_blank" rel="noopener">
+        Instagram <span class="ext">↗</span>
       </a>
     </div>
 
@@ -796,13 +801,13 @@ import Analytics from '@vercel/analytics/astro';
 
     <div class="actions">
       <a class="btn btn-primary" href="https://www.volkshotel.nl/" target="_blank" rel="noopener">
-        <span class="icon">↗</span> Visit volkshotel.nl
+        Visit volkshotel.nl <span class="ext">↗</span>
       </a>
       <a class="btn btn-secondary" href="https://www.volkshotel.nl/en/rooms" target="_blank" rel="noopener">
-        <span class="icon">◆</span> Book a room
+        Book a room <span class="ext">↗</span>
       </a>
       <a class="btn btn-secondary" href="https://www.instagram.com/volkshotel/" target="_blank" rel="noopener">
-        <span class="icon">◐</span> Instagram
+        Instagram <span class="ext">↗</span>
       </a>
     </div>
 
@@ -838,10 +843,10 @@ import Analytics from '@vercel/analytics/astro';
 
     <div class="actions">
       <a class="btn btn-primary" href="https://www.tiktok.com/@briwritespoetry_" target="_blank" rel="noopener">
-        <span class="icon">▶</span> Follow on TikTok
+        Follow on TikTok <span class="ext">↗</span>
       </a>
       <a class="btn btn-secondary" href="https://www.instagram.com/briwritespoetry/" target="_blank" rel="noopener">
-        <span class="icon">◐</span> Instagram
+        Instagram <span class="ext">↗</span>
       </a>
     </div>
 
@@ -873,10 +878,10 @@ import Analytics from '@vercel/analytics/astro';
 
     <div class="actions">
       <a class="btn btn-primary" href="https://siviez.com" target="_blank" rel="noopener noreferrer">
-        <span class="icon">↗</span> Visit siviez.com
+        Visit siviez.com <span class="ext">↗</span>
       </a>
       <a class="btn btn-secondary" href="https://www.airbnb.com/rooms/10012437" target="_blank" rel="noopener">
-        <span class="icon">◆</span> Book on Airbnb
+        Book on Airbnb <span class="ext">↗</span>
       </a>
     </div>
 
