@@ -52,6 +52,21 @@ const photos = [
   { file:'ch-10-vevey-stranger.jpg',     size:'tall', place:'ch', title:'First shot with a stranger',   loc:'Vevey, Lake Geneva',       date:'06.2024' },
   { file:'italy-02-genoa.jpg',           size:'tall', place:'it', title:'Two, at the Pasticceria',      loc:'Genoa, Italy',             date:'05.2024' },
   { file:'italy-08-bologna.jpg',         size:'tall', place:'it', title:'Under the porticos',           loc:'Bologna, Italy',           date:'05.2024' },
+  { file:'fr-14-amiens-interior.jpg',    size:'tall', place:'fr', title:'Sun through the nave',         loc:'Amiens Cathedral, France', date:'07.2026' },
+  { file:'fr-15-thiepval-cemetery.jpg',  size:'tall', place:'fr', title:'Rows and rows',                loc:'Thiepval, France',         date:'07.2026' },
+  { file:'fi-05-helsinki-station.jpg',   size:'tall', place:'fi', title:'Rautatieasema',                loc:'Helsinki, Finland',        date:'05.2026' },
+  { file:'fi-06-helsinki-tower.jpg',     size:'tall', place:'fi', title:'A tower on the corner',        loc:'Helsinki, Finland',        date:'05.2026' },
+  { file:'fi-07-helsinki-uspenski.jpg',  size:'tall', place:'fi', title:'Uspenski in evening light',    loc:'Helsinki, Finland',        date:'05.2026' },
+  { file:'fi-08-helsinki-metro.jpg',     size:'tall', place:'fi', title:'Down into the metro',          loc:'Helsinki, Finland',        date:'05.2026' },
+  { file:'ee-04-tallinn-square.jpg',     size:'wide', place:'ee', title:'Raekoja plats, wide sky',      loc:'Tallinn, Estonia',         date:'05.2026' },
+  { file:'ch-11-lausanne-sparkle.jpg',   size:'tall', place:'ch', title:'Gold on the water',            loc:'Lausanne, Lake Geneva',    date:'07.2025' },
+  { file:'ch-12-sion-hug.jpg',           size:'tall', place:'ch', title:'A hug beneath the castle',     loc:'Sion, Women\u2019s Euro',    date:'07.2025' },
+  { file:'ch-13-siviez-balcony.jpg',     size:'sq',   place:'ch', title:'From the balcony',             loc:'Siviez, Valais',           date:'07.2025' },
+  { file:'be-08-cappy-dogs.jpg',         size:'tall', place:'fr', title:'Two swimmers in August',       loc:'Cappy',                    date:'08.2024' },
+  { file:'be-09-cappy-far-side.jpg',     size:'wide', place:'fr', title:'The far side, still',          loc:'Cappy',                    date:'08.2024' },
+  { file:'it-12-turin-balconies.jpg',    size:'tall', place:'it', title:'Balconies and geraniums',      loc:'Turin, Italy',             date:'06.2024' },
+  { file:'bled-05-swimming.jpg',         size:'tall', place:'si', title:'Where everyone swims',         loc:'Lake Bled, Slovenia',      date:'06.2024' },
+  { file:'bled-06-man.jpg',              size:'tall', place:'si', title:'The man who watched',          loc:'Lake Bled, Slovenia',      date:'06.2024' },
 ];
 
 const filters = [
@@ -84,8 +99,8 @@ const filters = [
   --card-bg:#EBE5D4;--ember:#E85D2F;--swatch:#e8e3d4;
 }
 html[data-mode="dark"] {
-  --bg:#0E0E0E;--text:#e8e6e0;--muted:#666;--border:#252525;
-  --card-bg:#161615;--swatch:#1c1c1c;
+  --bg:#1E3A34;--text:#F4F0E8;--muted:#8a9e97;--border:#2c4c44;
+  --card-bg:#254c44;--swatch:#182f2a;
 }
 .pupsjpg-page * { box-sizing:border-box }
 .pupsjpg-page { font-family:'Inter',-apple-system,sans-serif; background:var(--bg); color:var(--text); transition:background .35s ease,color .35s ease; min-height:100vh; -webkit-font-smoothing:antialiased; margin:0; padding:0; }
@@ -104,10 +119,10 @@ html[data-mode="dark"] {
 .pupsjpg-page .intro-socials { display:flex; gap:10px; align-items:center; font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:1px; text-transform:uppercase; }
 .pupsjpg-page .intro-socials a { color:#0E6B6F; text-decoration:none; padding:7px 16px; border:1.5px solid #0E6B6F; border-radius:999px; transition:all .2s; font-weight:500; }
 .pupsjpg-page .intro-socials a:hover { background:#0E6B6F; color:#F4F0E8; }
-.pupsjpg-page .toggle { width:36px; height:20px; border-radius:20px; position:relative; cursor:pointer; border:none; padding:0; background:var(--border); transition:background .35s; }
-.pupsjpg-page .toggle::after { content:''; position:absolute; top:2px; width:16px; height:16px; border-radius:50%; background:var(--ember); transition:left .35s; }
-html[data-mode="light"] .pupsjpg-page .toggle::after { left:2px; }
-html[data-mode="dark"] .pupsjpg-page .toggle::after { left:18px; }
+.pupsjpg-page .toggle { background:transparent; border:none; color:var(--text); font-size:18px; cursor:pointer; padding:6px 8px; line-height:1; transition:opacity .2s, color .35s; font-family:'JetBrains Mono',monospace; }
+.pupsjpg-page .toggle:hover { opacity:0.65; }
+html[data-mode="light"] .pupsjpg-page .toggle::before { content:'◐'; }
+html[data-mode="dark"] .pupsjpg-page .toggle::before { content:'◑'; }
 
 .pupsjpg-page .intro { padding:28px 0 20px; max-width:720px; }
 .pupsjpg-page .intro h1 { font-size:clamp(36px,5.5vw,68px); letter-spacing:-.04em; line-height:.95; margin:0 0 14px; font-weight:700; }
@@ -486,6 +501,8 @@ html[data-mode="dark"] .pupsjpg-page .qp-note { color:#D8D4CE; }
     { name: 'Siviez region',     country: 'ch', flag: '/flag-images/Europe/SVG/Switzerland.svg', lat: 46.176, lng: 7.290,  locs: ['Siviez, Valais', 'Val de Nendaz, Valais', 'Lac de Cleuson, Valais'] },
     { name: 'Basel',             country: 'ch', flag: '/flag-images/Europe/SVG/Switzerland.svg', lat: 47.559, lng: 7.588,  locs: ['Basel, Switzerland'] },
     { name: 'Vevey',             country: 'ch', flag: '/flag-images/Europe/SVG/Switzerland.svg', lat: 46.463, lng: 6.843,  locs: ['Vevey, Lake Geneva'] },
+    { name: 'Lausanne',          country: 'ch', flag: '/flag-images/Europe/SVG/Switzerland.svg', lat: 46.520, lng: 6.634,  locs: ['Lausanne, Lake Geneva'] },
+    { name: 'Sion',              country: 'ch', flag: '/flag-images/Europe/SVG/Switzerland.svg', lat: 46.230, lng: 7.360,  locs: ['Sion, Women\u2019s Euro'] },
     // ITALY
     { name: 'Turin',             country: 'it', flag: '/flag-images/Europe/SVG/Italy.svg', lat: 45.070, lng: 7.686,  locs: ['Turin, Italy'] },
     { name: 'Genoa',             country: 'it', flag: '/flag-images/Europe/SVG/Italy.svg', lat: 44.408, lng: 8.933,  locs: ['Genoa, Italy'] },
