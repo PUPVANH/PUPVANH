@@ -72,20 +72,19 @@ import Analytics from '@vercel/analytics/astro';
     justify-content: space-between;
     gap: 20px;
   }
-  .mini-nav {
-    display: inline-flex;
-    gap: 22px;
+  .back-link {
     font-family: 'JetBrains Mono', monospace;
     font-size: 12px;
     letter-spacing: 0.08em;
-    text-transform: lowercase;
-  }
-  .mini-nav a {
     color: var(--mute);
     text-decoration: none;
-    transition: color 0.25s;
+    text-transform: uppercase;
+    transition: color 0.25s, transform 0.25s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
   }
-  .mini-nav a:hover { color: var(--ember); }
+  .back-link:hover { color: var(--ember); transform: translateX(-3px); }
   .mode-toggle {
     background: transparent;
     border: 1px solid var(--line);
@@ -491,23 +490,24 @@ import Analytics from '@vercel/analytics/astro';
   /* Photo slots */
   .photo-strip {
     display: grid;
-    grid-template-columns: 2fr 1fr;
-    grid-template-rows: repeat(2, 180px);
+    grid-template-columns: repeat(3, 1fr);
     gap: 10px;
     margin-bottom: 24px;
   }
-  .photo-strip .photo:first-child { grid-row: span 2; }
+  .photo-strip .photo { aspect-ratio: 3/4; }
+
   .photo-single {
-    height: 320px;
+    aspect-ratio: 1400/745;
     margin-bottom: 24px;
   }
   .photo-triple {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 200px;
     gap: 10px;
     margin-bottom: 24px;
   }
+  .photo-triple .photo { aspect-ratio: 4/3; }
+
   .photo {
     background: var(--photo-bg);
     border: 1px dashed color-mix(in srgb, var(--ember) 40%, transparent);
@@ -518,7 +518,22 @@ import Analytics from '@vercel/analytics/astro';
     align-items: flex-end;
     padding: 12px;
   }
-  .photo::before {
+  /* When a real image is inside the photo slot, drop the placeholder look */
+  .photo:has(img) {
+    border: none;
+    background: transparent;
+  }
+  .photo img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 4px;
+    display: block;
+  }
+  .photo:not(:has(img))::before {
     content: '';
     position: absolute;
     inset: 0;
@@ -526,7 +541,7 @@ import Analytics from '@vercel/analytics/astro';
     background-size: 20px 20px;
     opacity: 0.4;
   }
-  .photo::after {
+  .photo:not(:has(img))::after {
     content: '◇';
     position: absolute;
     top: 50%;
@@ -618,10 +633,7 @@ import Analytics from '@vercel/analytics/astro';
     .modal h2 { font-size: 32px; }
     .poem, .content-block p { font-size: 16px; }
     .modal-overlay { padding: 20px 12px; }
-    .photo-triple { grid-template-columns: 1fr; grid-template-rows: repeat(3, 160px); }
-    .photo-strip { grid-template-columns: 1fr; grid-template-rows: repeat(3, 160px); }
-    .photo-strip .photo:first-child { grid-row: auto; }
-    .photo-single { height: 220px; }
+    .photo-triple, .photo-strip { grid-template-columns: 1fr; }
   }
 
   /* ── Footer ─────────────────────────── */
@@ -652,11 +664,7 @@ import Analytics from '@vercel/analytics/astro';
 
 <div class="topbar">
   <div class="topbar-inner">
-    <div class="mini-nav">
-      <a href="/">home</a>
-      <a href="/notes">notes</a>
-      <a href="/jpg">jpg</a>
-    </div>
+    <a href="/" class="back-link">← PUPVANH</a>
     <button class="mode-toggle" id="modeToggle" aria-label="Toggle mode">◐</button>
   </div>
 </div>
@@ -801,9 +809,9 @@ import Analytics from '@vercel/analytics/astro';
     <div class="content-block">
       <h3>a few frames</h3>
       <div class="photo-strip">
-        <div class="photo"><span class="cap">Rooftop · Canvas</span></div>
-        <div class="photo"><span class="cap">Sauna</span></div>
-        <div class="photo"><span class="cap">Room</span></div>
+        <div class="photo"><img src="/bookmarks/volkshotel-hottub.jpg" alt="Rooftop hot tub overlooking the Amsterdam skyline" /><span class="cap">Rooftop · hot tub</span></div>
+        <div class="photo"><img src="/bookmarks/volkshotel-sauna.jpg" alt="Wooden barrel sauna on the Volkshotel rooftop" /><span class="cap">Rooftop · sauna</span></div>
+        <div class="photo"><img src="/bookmarks/volkshotel-room.jpg" alt="Volkshotel room with city view at night" /><span class="cap">Room · at night</span></div>
       </div>
     </div>
 
@@ -832,14 +840,14 @@ import Analytics from '@vercel/analytics/astro';
       <a class="btn btn-primary" href="https://www.tiktok.com/@briwritespoetry_" target="_blank" rel="noopener">
         <span class="icon">▶</span> Follow on TikTok
       </a>
-      <a class="btn btn-secondary" href="https://www.instagram.com/briwritespoetry_/" target="_blank" rel="noopener">
+      <a class="btn btn-secondary" href="https://www.instagram.com/briwritespoetry/" target="_blank" rel="noopener">
         <span class="icon">◐</span> Instagram
       </a>
     </div>
 
     <div class="content-block">
-      <h3>portrait</h3>
-      <div class="photo photo-single"><span class="cap">Bri · portrait</span></div>
+      <h3>recent work</h3>
+      <div class="photo photo-single"><img src="/bookmarks/bri-grid.jpg" alt="Bri Anora's Instagram grid with recent poems and video excerpts" /><span class="cap">@briwritespoetry · instagram grid</span></div>
     </div>
 
     <div class="content-block">
@@ -875,9 +883,9 @@ import Analytics from '@vercel/analytics/astro';
     <div class="content-block">
       <h3>seasons</h3>
       <div class="photo-triple">
-        <div class="photo"><span class="cap">Summer · chalet</span></div>
-        <div class="photo"><span class="cap">Valley view</span></div>
-        <div class="photo"><span class="cap">Winter · ski-in/out</span></div>
+        <div class="photo"><img src="/bookmarks/siviez-summer.jpg" alt="Summer view from the balcony of Rosablanche C34" /><span class="cap">Summer · balcony</span></div>
+        <div class="photo"><img src="/bookmarks/siviez-lake.jpg" alt="Turquoise alpine lake near Siviez, framed by snow-capped peaks" /><span class="cap">Alpine lake</span></div>
+        <div class="photo"><img src="/bookmarks/siviez-winter.jpg" alt="Winter view of Siviez ski resort with fresh snow" /><span class="cap">Winter · ski-in/out</span></div>
       </div>
     </div>
 
