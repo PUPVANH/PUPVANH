@@ -28,26 +28,24 @@ function shortName(n: string) {
 }
 ---
 
-<aside class="ariba-sidebar ariba-sidebar-left">
-  <div class="ariba-side-card">
-    <div class="ariba-side-header">
-      <span class="ariba-side-kicker">Klassement</span>
-      {huidig.actief && <span class="ariba-side-live">LIVE</span>}
-    </div>
-    <div class="ariba-side-sub">{huidig.seizoen} · {huidig.reeks}</div>
-    <table class="ariba-side-table">
-      <tbody>
-        {zichtbaar.map((r: any, i: number) => (
-          <tr class={r.us ? 'us' : ''}>
-            <td>{start + i + 1}</td>
-            <td>{shortName(r.ploeg)}</td>
-            <td>{r.pt}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-    <button class="ariba-side-more" data-modal="modalKlas">
-      Volledig klassement →
-    </button>
+<div class="ariba-side-card">
+  <div class="ariba-side-header">
+    <span class="ariba-side-kicker">Klassement</span>
+    {huidig.actief && <span class="ariba-side-live">LIVE</span>}
   </div>
-</aside>
+  <div class="ariba-side-sub">{huidig.seizoen} · {huidig.reeks}</div>
+  <table class="ariba-side-table">
+    <tbody>
+      {zichtbaar.map((r: any, i: number) => (
+        <tr class={r.us ? 'us' : ''}>
+          <td>{start + i + 1}</td>
+          <td>{shortName(r.ploeg)}</td>
+          <td>{r.pt}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+  <button class="ariba-side-more" data-modal="modalKlas">
+    Volledig klassement →
+  </button>
+</div>
