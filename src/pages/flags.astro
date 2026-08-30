@@ -458,21 +458,34 @@ fieldset legend { padding: 0 4px; font-weight: 700; font-size: 11px; }
 .pupvanh-footer a { color: #000; text-decoration: none; border-bottom: 1px dotted rgba(0,0,0,0.4); }
 .pupvanh-footer a:hover { color: #E85D2F; border-bottom-color: #E85D2F; }
 
-/* Classroom-theme override — krijtwit op de muur, boven de plinth zichtbaar */
+/* Classroom-theme override — footer wordt ON de plinth (bruine bureau balk) geplakt */
 html[data-theme="classroom"] .pupvanh-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-width: none;
+  margin: 0;
+  padding: 10px 20px;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   color: #f5efe0;
   font-family: 'Kalam', cursive;
-  font-size: 14px;
+  font-size: 13px;
   letter-spacing: 0.5px;
-  margin-bottom: 80px; /* ruimte laten voor de fixed plinth eronder */
-  position: relative;
-  z-index: 10; /* boven de plinth */
+  z-index: 10; /* boven de plinth (z-index 5) */
+  pointer-events: auto;
 }
-html[data-theme="classroom"] .pupvanh-footer .pv-line.dim { color: rgba(245,239,224,0.65); font-size: 12px; }
+html[data-theme="classroom"] .pupvanh-footer .pv-line.dim { color: rgba(245,239,224,0.65); font-size: 11px; }
 html[data-theme="classroom"] .pupvanh-footer .pv-name { color: #f4d97a; font-weight: 700; }
 html[data-theme="classroom"] .pupvanh-footer .pv-sep { color: #f4d97a; opacity: 0.7; }
 html[data-theme="classroom"] .pupvanh-footer a { color: #f5efe0; border-bottom: 1px dotted rgba(245,239,224,0.4); }
 html[data-theme="classroom"] .pupvanh-footer a:hover { color: #f4d97a; border-bottom-color: #f4d97a; }
+
+/* Zorg voor ruimte onderaan de body zodat content niet onder de plinth+footer schuift */
+html[data-theme="classroom"] body { padding-bottom: 70px; }
 
 /* Setup warning banner if flags folder missing */
 .setup-warning {
@@ -1153,7 +1166,7 @@ html[data-theme="classroom"] .classroom-clock { display: block; }
   border-top: none;
   border-radius: 0 0 6px 6px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-  z-index: 15;
+  z-index: 4;
   padding: 2px 20px;
 }
 html[data-theme="classroom"] .chalk-tray { display: flex; align-items: center; gap: 14px; }
