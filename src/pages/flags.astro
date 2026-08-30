@@ -68,6 +68,22 @@ body {
   margin: 0 auto;
 }
 
+/* Classroom: bord breder + compactere content zodat alles boven de plinth past */
+html[data-theme="classroom"] .win { max-width: 920px; }
+html[data-theme="classroom"] .window-body { padding: 10px 14px; }
+html[data-theme="classroom"] .brand-block { margin-bottom: 8px; padding-top: 4px; }
+html[data-theme="classroom"] .brand { font-size: 82px; letter-spacing: -2px; margin: 0; line-height: 1; }
+html[data-theme="classroom"] .tagline { font-size: 14px; margin-top: 4px; }
+html[data-theme="classroom"] .dialog-group { padding: 8px 12px; margin-bottom: 8px; }
+html[data-theme="classroom"] .dialog-title { font-size: 13px; margin-bottom: 6px; }
+html[data-theme="classroom"] .radio-row { gap: 14px; }
+html[data-theme="classroom"] .command-preview { padding: 6px 10px; font-size: 12px; margin-top: 6px; }
+html[data-theme="classroom"] .button-row { margin-top: 8px; }
+html[data-theme="classroom"] .win-btn.large { padding: 8px 26px; font-size: 14px; }
+html[data-theme="classroom"] .help-list { font-size: 12px; line-height: 1.55; }
+html[data-theme="classroom"] .help-list p { margin: 1px 0; }
+html[data-theme="classroom"] .statusbar { padding: 3px 8px; font-size: 10px; }
+
 .titlebar {
   background: linear-gradient(90deg, var(--titlebar) 0%, var(--titlebar-2) 100%);
   color: var(--white);
