@@ -2,7 +2,6 @@
 // FLAGS.EXE — subpagina van PUPVANH
 // Windows 95 vibe · 197 landen · NL/EN · vlaggen uit /public/flag-images/
 import Analytics from '@vercel/analytics/astro';
-import PupvanhFooter from '../components/PupvanhFooter.astro';
 ---
 <!DOCTYPE html>
 <html lang="nl">
@@ -436,34 +435,44 @@ fieldset legend { padding: 0 4px; font-weight: 700; font-size: 11px; }
 
 .center-btns { display: flex; gap: 8px; justify-content: center; margin-top: 12px; flex-wrap: wrap; }
 
+/* PUPVANH-footer — transparant, past bij beide themes, blijft onderaan de flow */
 .pupvanh-footer {
   max-width: 780px;
-  margin: 20px auto 8px;
+  margin: 24px auto 20px;
   padding: 10px 12px;
   text-align: center;
-  font-family: var(--lcd-font);
+  background: transparent;
+  font-family: 'ms_sans_serif', 'Segoe UI', Tahoma, sans-serif;
   font-size: 11px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.75);
+  letter-spacing: 0.5px;
+  text-transform: none;
+  color: #000;
   line-height: 1.7;
+  position: relative;
+  z-index: 4;
 }
 .pupvanh-footer .pv-line { display: block; }
-.pupvanh-footer .pv-line.dim { color: rgba(255,255,255,0.5); font-size: 10px; margin-bottom: 2px; }
-.pupvanh-footer .pv-name { color: var(--gold); font-weight: 700; }
-.pupvanh-footer a { color: rgba(255,255,255,0.75); text-decoration: none; border-bottom: 1px dotted rgba(255,255,255,0.35); }
-.pupvanh-footer a:hover { color: var(--gold); border-bottom-color: var(--gold); }
+.pupvanh-footer .pv-line.dim { color: #333; opacity: 0.75; font-size: 11px; margin-bottom: 2px; }
+.pupvanh-footer .pv-name { color: #000; font-weight: 700; }
+.pupvanh-footer .pv-sep { color: #E85D2F; margin: 0 4px; font-size: 8px; vertical-align: middle; }
+.pupvanh-footer a { color: #000; text-decoration: none; border-bottom: 1px dotted rgba(0,0,0,0.4); }
+.pupvanh-footer a:hover { color: #E85D2F; border-bottom-color: #E85D2F; }
+
+/* Classroom-theme override — krijtwit op de muur, boven de plinth zichtbaar */
 html[data-theme="classroom"] .pupvanh-footer {
-  color: #4a3220;
+  color: #f5efe0;
   font-family: 'Kalam', cursive;
-  text-transform: none;
+  font-size: 14px;
   letter-spacing: 0.5px;
-  font-size: 13px;
+  margin-bottom: 80px; /* ruimte laten voor de fixed plinth eronder */
+  position: relative;
+  z-index: 10; /* boven de plinth */
 }
-html[data-theme="classroom"] .pupvanh-footer .pv-line.dim { color: rgba(74,50,32,0.55); font-size: 11px; }
-html[data-theme="classroom"] .pupvanh-footer .pv-name { color: #8b5e3c; font-weight: 700; }
-html[data-theme="classroom"] .pupvanh-footer a { color: #4a3220; border-bottom: 1px dotted rgba(74,50,32,0.4); }
-html[data-theme="classroom"] .pupvanh-footer a:hover { color: #8b5e3c; border-bottom-color: #8b5e3c; }
+html[data-theme="classroom"] .pupvanh-footer .pv-line.dim { color: rgba(245,239,224,0.65); font-size: 12px; }
+html[data-theme="classroom"] .pupvanh-footer .pv-name { color: #f4d97a; font-weight: 700; }
+html[data-theme="classroom"] .pupvanh-footer .pv-sep { color: #f4d97a; opacity: 0.7; }
+html[data-theme="classroom"] .pupvanh-footer a { color: #f5efe0; border-bottom: 1px dotted rgba(245,239,224,0.4); }
+html[data-theme="classroom"] .pupvanh-footer a:hover { color: #f4d97a; border-bottom-color: #f4d97a; }
 
 /* Setup warning banner if flags folder missing */
 .setup-warning {
@@ -1144,7 +1153,7 @@ html[data-theme="classroom"] .classroom-clock { display: block; }
   border-top: none;
   border-radius: 0 0 6px 6px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-  z-index: 5;
+  z-index: 15;
   padding: 2px 20px;
 }
 html[data-theme="classroom"] .chalk-tray { display: flex; align-items: center; gap: 14px; }
@@ -1604,12 +1613,10 @@ html[data-theme="classroom"] .classroom-books { display: block; }
 
 </div>
 
-<PupvanhFooter
-  paginaNaam="FLAGS.EXE"
-  built="AUG 2026"
-  updated="AUG 2026"
-  theme="default"
-/>
+<footer class="pupvanh-footer">
+  <span class="pv-line dim">© 2026 <span class="pv-name">PUPVANH</span> Projects <span class="pv-sep">•</span> alle rechten voorbehouden</span>
+  <span class="pv-line">BUILT AUG 2026 <span class="pv-sep">•</span> UPDATED AUG 2026 <span class="pv-sep">•</span> FLAGS.EXE <span class="pv-sep">•</span> <a href="https://pupvanh.vercel.app">pupvanh.vercel.app →</a></span>
+</footer>
 
 <script is:inline>
 // ============ CONFIG ============
