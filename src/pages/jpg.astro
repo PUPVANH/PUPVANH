@@ -1,73 +1,7 @@
 ---
 import Analytics from "@vercel/analytics/astro"
 import PupvanhFooter from '../components/PupvanhFooter.astro';
-
-// Alle foto's — data-driven, makkelijk toe te voegen via GitHub
-const photos = [
-  { file:'fr-08-cappy-somme.jpg',        size:'tall', place:'fr', title:'Along the Somme',              loc:'Cappy',                    date:'07.2026' },
-  { file:'fr-09-cappy-summer.jpg',       size:'tall', place:'fr', title:'Cappy in July',                loc:'Cappy',                    date:'07.2026' },
-  { file:'fr-10-cappy-quiet.jpg',        size:'tall', place:'fr', title:'A quieter bank',               loc:'Cappy',                    date:'07.2026' },
-  { file:'fr-11-amiens-birds.jpg',       size:'tall', place:'fr', title:'Paper birds over the cathedral', loc:'Amiens, France',        date:'07.2026' },
-  { file:'fr-12-thiepval-memorial.jpg',  size:'tall', place:'fr', title:'One man, one hundred thousand names', loc:'Thiepval Memorial',  date:'07.2026' },
-  { file:'fi-01-helsinki-cathedral.jpg', size:'tall', place:'fi', title:'The white on the hill',        loc:'Helsinki, Finland',        date:'05.2026' },
-  { file:'fi-02-helsinki-ferry.jpg',     size:'tall', place:'fi', title:'Uspenski, framed',             loc:'Helsinki, Finland',        date:'05.2026' },
-  { file:'fi-03-helsinki-facades.jpg',   size:'wide', place:'fi', title:'Nordic pastels',               loc:'Helsinki, Finland',        date:'05.2026' },
-  { file:'fi-04-helsinki-amosrex.jpg',   size:'tall', place:'fi', title:'On top of Amos Rex',           loc:'Helsinki, Finland',        date:'05.2026' },
-  { file:'ee-01-tallinn-alley.jpg',      size:'tall', place:'ee', title:'Down the stairs, into old town', loc:'Tallinn, Estonia',       date:'05.2026' },
-  { file:'ee-02-tallinn-mg.jpg',         size:'tall', place:'ee', title:'A quiet Sunday, an old MG',    loc:'Tallinn, Estonia',         date:'05.2026' },
-  { file:'ee-03-tallinn-rooftops.jpg',   size:'tall', place:'ee', title:'The red roofs of Tallinn',     loc:'Tallinn, Estonia',         date:'05.2026' },
-  { file:'nl-01-amsterdam-market.jpg',   size:'tall', place:'nl', title:'Albert Cuyp, in shadow',       loc:'Amsterdam, Netherlands',   date:'02.2026' },
-  { file:'nl-02-amsterdam-damrak.jpg',   size:'tall', place:'nl', title:'Damrak, leaning',              loc:'Amsterdam, Netherlands',   date:'02.2026' },
-  { file:'nl-03-amsterdam-cormorant.jpg',size:'tall', place:'nl', title:'Cormorant on the Amstel',      loc:'Amsterdam, Netherlands',   date:'02.2026' },
-  { file:'be-01-cappy-canal.jpg',        size:'tall', place:'fr', title:'Canal light',                  loc:'Cappy',                    date:'06.2025' },
-  { file:'be-04-cappy-reflection.jpg',   size:'tall', place:'fr', title:'Sky in the water',             loc:'Cappy',                    date:'06.2025' },
-  { file:'be-05-cappy-boats.jpg',        size:'tall', place:'fr', title:'Two boats, one shed',          loc:'Cappy',                    date:'06.2025' },
-  { file:'be-02-cappy-river.jpg',        size:'tall', place:'fr', title:'River bend',                   loc:'Cappy',                    date:'06.2025' },
-  { file:'be-06-cappy-neighbor.jpg',     size:'tall', place:'fr', title:'The neighbour photographs back',loc:'Cappy',                   date:'06.2025' },
-  { file:'be-03-cappy-lilies.jpg',       size:'tall', place:'fr', title:'Lilies on still water',        loc:'Cappy',                    date:'06.2025' },
-  { file:'be-07-cappy-kite.jpg',         size:'tall', place:'fr', title:'A kite at dusk',              loc:'Cappy',                    date:'06.2025' },
-  { file:'fr-13-paris-roubaix.jpg',      size:'tall', place:'fr', title:'Waiting for the cobbles',      loc:'Camphin-en-Pevele, Paris-Roubaix', date:'04.2025' },
-  { file:'italy-06-riomaggiore.jpg',     size:'tall', place:'it', title:'Painted houses at the port',   loc:'Riomaggiore, Cinque Terre',date:'08.2024' },
-  { file:'italy-03-turin.jpg',           size:'tall', place:'it', title:'Via Roma, golden hour',        loc:'Turin, Italy',             date:'08.2024' },
-  { file:'italy-07-manarola.jpg',        size:'tall', place:'it', title:'Laundry over the alley',       loc:'Manarola, Cinque Terre',   date:'08.2024' },
-  { file:'italy-04-venice-canal.jpg',    size:'tall', place:'it', title:'Grand Canal, from the bridge', loc:'Venice, Italy',            date:'08.2024' },
-  { file:'italy-05-venice-artist.jpg',   size:'tall', place:'it', title:'The artist reads on',          loc:'Venice, Italy',            date:'08.2024' },
-  { file:'bled-01-kayak.jpg',            size:'wide', place:'si', title:'Kayak past the island',        loc:'Lake Bled, Slovenia',      date:'07.2024' },
-  { file:'italy-01-dolomites.jpg',       size:'tall', place:'it', title:'Alpenglow, Alta Badia',        loc:'Alta Badia, Dolomites',    date:'07.2024' },
-  { file:'bled-04-ivy.jpg',              size:'tall', place:'si', title:'Ivy on every window',          loc:'Lake Bled, Slovenia',      date:'07.2024' },
-  { file:'bled-02-island.jpg',           size:'tall', place:'si', title:'The island alone',             loc:'Lake Bled, Slovenia',      date:'07.2024' },
-  { file:'bled-03-loungers.jpg',         size:'tall', place:'si', title:'Loungers, late afternoon',     loc:'Lake Bled, Slovenia',      date:'07.2024' },
-  { file:'ch-01-chapel.jpg',             size:'tall', place:'ch', title:'Chapel in the drizzle',        loc:'Siviez, Valais',           date:'06.2024' },
-  { file:'ch-05-turquoise.jpg',          size:'tall', place:'ch', title:'Turquoise, held by snow',      loc:'Lac de Cleuson, Valais',   date:'06.2024' },
-  { file:'ch-04-valley.jpg',             size:'tall', place:'ch', title:'A stream cuts through',       loc:'Val de Nendaz, Valais',    date:'06.2024' },
-  { file:'ch-08-cows.jpg',               size:'tall', place:'ch', title:'Cows, watching back',          loc:'Lac de Cleuson, Valais',   date:'06.2024' },
-  { file:'ch-06-cleuson-above.jpg',      size:'tall', place:'ch', title:'From the ridge',              loc:'Lac de Cleuson, Valais',   date:'06.2024' },
-  { file:'ch-02-forest.jpg',             size:'tall', place:'ch', title:'Larches and last snow',        loc:'Siviez, Valais',           date:'06.2024' },
-  { file:'ch-03-resort.jpg',             size:'tall', place:'ch', title:'The valley wakes',             loc:'Siviez, Valais',           date:'06.2024' },
-  { file:'ch-07-cleuson-dam.jpg',        size:'tall', place:'ch', title:'The dam wall',                loc:'Lac de Cleuson, Valais',   date:'06.2024' },
-  { file:'it-09-dolomites-moon.jpg',     size:'tall', place:'it', title:'Moon over the pass',           loc:'Alta Badia, Dolomites',    date:'06.2024' },
-  { file:'it-10-lago-di-braies.jpg',     size:'tall', place:'it', title:'Wooden boats on a mirror',     loc:'Lago di Braies, Dolomites',date:'06.2024' },
-  { file:'it-11-manarola-cliff.jpg',     size:'tall', place:'it', title:'Golden hour over the swim spot', loc:'Manarola, Cinque Terre', date:'06.2024' },
-  { file:'ch-09-basel-rhine.jpg',        size:'wide', place:'ch', title:'The Münster from the Rhine',   loc:'Basel, Switzerland',       date:'06.2024' },
-  { file:'ch-10-vevey-stranger.jpg',     size:'tall', place:'ch', title:'First shot with a stranger',   loc:'Vevey, Lake Geneva',       date:'06.2024' },
-  { file:'italy-02-genoa.jpg',           size:'tall', place:'it', title:'Two, at the Pasticceria',      loc:'Genoa, Italy',             date:'05.2024' },
-  { file:'italy-08-bologna.jpg',         size:'tall', place:'it', title:'Under the porticos',           loc:'Bologna, Italy',           date:'05.2024' },
-  { file:'fr-14-amiens-interior.jpg',    size:'tall', place:'fr', title:'Sun through the nave',         loc:'Amiens Cathedral, France', date:'07.2026' },
-  { file:'fr-15-thiepval-cemetery.jpg',  size:'tall', place:'fr', title:'Rows and rows',                loc:'Thiepval, France',         date:'07.2026' },
-  { file:'fi-05-helsinki-station.jpg',   size:'tall', place:'fi', title:'Rautatieasema',                loc:'Helsinki, Finland',        date:'05.2026' },
-  { file:'fi-06-helsinki-tower.jpg',     size:'tall', place:'fi', title:'A tower on the corner',        loc:'Helsinki, Finland',        date:'05.2026' },
-  { file:'fi-07-helsinki-uspenski.jpg',  size:'tall', place:'fi', title:'Uspenski in evening light',    loc:'Helsinki, Finland',        date:'05.2026' },
-  { file:'fi-08-helsinki-metro.jpg',     size:'tall', place:'fi', title:'Down into the metro',          loc:'Helsinki, Finland',        date:'05.2026' },
-  { file:'ee-04-tallinn-square.jpg',     size:'wide', place:'ee', title:'Raekoja plats, wide sky',      loc:'Tallinn, Estonia',         date:'05.2026' },
-  { file:'ch-11-lausanne-sparkle.jpg',   size:'tall', place:'ch', title:'Gold on the water',            loc:'Lausanne, Lake Geneva',    date:'07.2025' },
-  { file:'ch-12-sion-hug.jpg',           size:'tall', place:'ch', title:'A hug beneath the castle',     loc:'Sion, Women\u2019s Euro',    date:'07.2025' },
-  { file:'ch-13-siviez-balcony.jpg',     size:'sq',   place:'ch', title:'From the balcony',             loc:'Siviez, Valais',           date:'07.2025' },
-  { file:'be-08-cappy-dogs.jpg',         size:'tall', place:'fr', title:'Two swimmers in August',       loc:'Cappy',                    date:'08.2024' },
-  { file:'be-09-cappy-far-side.jpg',     size:'wide', place:'fr', title:'The far side, still',          loc:'Cappy',                    date:'08.2024' },
-  { file:'it-12-turin-balconies.jpg',    size:'tall', place:'it', title:'Balconies and geraniums',      loc:'Turin, Italy',             date:'06.2024' },
-  { file:'bled-05-swimming.jpg',         size:'tall', place:'si', title:'Where everyone swims',         loc:'Lake Bled, Slovenia',      date:'06.2024' },
-  { file:'bled-06-man.jpg',              size:'tall', place:'si', title:'The man who watched',          loc:'Lake Bled, Slovenia',      date:'06.2024' },
-];
+import photos from '../data/jpg-photos.json';
 
 const filters = [
   { key:'all', label:'All',         count: photos.length },
@@ -701,6 +635,20 @@ html[data-mode="dark"] .pupsjpg-page .qp-note { color:#D8D4CE; }
     if (e.key === 'ArrowLeft') prevLb();
     if (e.key === 'ArrowRight') nextLb();
   });
+
+  // Open lightbox via URL hash (bv. /jpg#photo-17 vanaf de Featured Today op de homepage)
+  function openFromHash() {
+    const hash = window.location.hash;
+    const m = hash.match(/^#photo-(\d+)$/);
+    if (m) {
+      const idx = parseInt(m[1], 10);
+      if (!isNaN(idx) && idx >= 0 && idx < photos.length) {
+        openLb(idx);
+      }
+    }
+  }
+  openFromHash();
+  window.addEventListener('hashchange', openFromHash);
 </script>
 <Analytics />
 </body>

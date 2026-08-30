@@ -1,17 +1,40 @@
 ---
+import photos from '../data/jpg-photos.json';
 ---
 
-<a href="/jpg" class="split-sec">
+<a href="/jpg" class="split-sec" id="featured-today">
   <div class="split-inner">
     <div class="split-l">
-      <p class="kicker">// featured this week</p>
+      <p class="kicker">// featured today</p>
       <h2>PUPVANH.jpg — <em>photographs on the road.</em></h2>
-      <p>Thirty frames, four countries, one camera. A Fujifilm X100F carried through Slovenia, Italy, Switzerland and back home to Belgium. Filterable by place, viewable as grid or map.</p>
+      <p>An ongoing pile of travel frames. No theme, no plan — just a Fujifilm X100F that follows me around, amazing places, and a lot of fun. Zero expertise, still figuring out the perfect recipe and what makes the perfect shot.</p>
       <p class="frame-meta">→ open PUPVANH.jpg</p>
     </div>
-    <div class="split-r"></div>
+    <div class="split-r" id="ft-bg"></div>
   </div>
 </a>
+
+<script is:inline define:vars={{ photos }}>
+  // Rotatiecyclus: dagen sinds 30-08-2026, modulo aantal foto's
+  // Vandaag = foto #1 (index 0), morgen = foto #2, enz. Cyclus start opnieuw na 63 dagen.
+  const EPOCH = new Date('2026-08-30T00:00:00Z').getTime();
+  const now = new Date();
+  const dayIndex = Math.floor((now.getTime() - EPOCH) / 86400000);
+  const idx = ((dayIndex % photos.length) + photos.length) % photos.length;
+  const p = photos[idx];
+
+  if (p) {
+    const bg = document.getElementById('ft-bg');
+    if (bg) {
+      bg.style.backgroundImage =
+        "linear-gradient(160deg,rgba(24,33,30,.15),rgba(24,33,30,.35)),url('/jpg/" + p.file + "')";
+    }
+    const link = document.getElementById('featured-today');
+    if (link) {
+      link.setAttribute('href', '/jpg#photo-' + idx);
+    }
+  }
+</script>
 
 <style>
   .split-sec{
@@ -34,14 +57,14 @@
   }
   .split-l{padding:120px 60px 120px 32px;}
   .split-r{
-    background-image:linear-gradient(160deg,rgba(24,33,30,.15),rgba(24,33,30,.35)),url('/jpg/italy-01-dolomites.jpg');
+    background-image:linear-gradient(160deg,rgba(24,33,30,.15),rgba(24,33,30,.35)),url('/jpg/fr-08-cappy-somme.jpg');
     background-size:cover;background-position:center;
     min-height:600px;position:relative;overflow:hidden;
     transition:transform .8s ease;
   }
   .split-sec:hover .split-r{transform:scale(1.02);}
   .split-r::after{
-    content:'// PUPVANH.jpg · 30 frames';position:absolute;
+    content:'// PUPVANH.jpg · 63 frames';position:absolute;
     bottom:24px;right:24px;
     font-family:'JetBrains Mono',monospace;font-size:11px;
     color:rgba(244,240,232,.75);letter-spacing:.1em;text-transform:uppercase;z-index:1;
