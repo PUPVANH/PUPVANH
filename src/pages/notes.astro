@@ -392,9 +392,13 @@ function renderPosts() {
 
   list.innerHTML = filtered.map(p => {
     const hasBody = !!(p.body_en && p.body_en.trim());
-    const openHint = hasBody ? '<span class="n-open-hint">read more →</span>' : '';
+    // Elke post is klikbaar. "read more →" hint als er extra body is,
+    // anders "expand →" om aan te geven dat er een uitgebreide view is.
+    const openHint = hasBody
+      ? '<span class="n-open-hint">read more →</span>'
+      : '<span class="n-open-hint">expand →</span>';
     return `
-    <div class="n-post${hasBody ? ' has-body' : ''}" data-num="${p.num}">
+    <div class="n-post has-body" data-num="${p.num}">
       <div class="n-num">#${p.num}</div>
       <div>
         <h2>${p.title_en}${openHint}</h2>
@@ -411,8 +415,8 @@ function renderPosts() {
 
   document.getElementById('nCount').textContent = filtered.length + (filtered.length === 1 ? ' note' : ' notes');
 
-  // Bind click handlers voor posts met een body
-  document.querySelectorAll('.n-post.has-body').forEach(el => {
+  // Bind click handlers voor ALLE posts
+  document.querySelectorAll('.n-post').forEach(el => {
     el.addEventListener('click', () => {
       const num = el.getAttribute('data-num');
       const post = posts.find(p => p.num === num);
