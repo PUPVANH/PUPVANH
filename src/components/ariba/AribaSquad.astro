@@ -4,6 +4,12 @@ import data from '../../data/ariba-spelers.json';
 function slug(n: string) {
   return n.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 }
+
+const tenues = [
+  { id: 'thuis', label: 'Thuis', voor: '/ariba/shirt-thuis-voorkant.png', achter: '/ariba/shirt-thuis-achterkant.png' },
+  { id: 'uit',   label: 'Uit',   voor: '/ariba/shirt-uit-voorkant.png',   achter: '/ariba/shirt-uit-achterkant.png' },
+  { id: 'derde', label: 'Derde', voor: '/ariba/shirt-derde-voorkant.png', achter: '/ariba/shirt-derde-achterkant.png' },
+];
 ---
 
 <section class="ariba-section" id="ariba-selectie">
@@ -13,12 +19,27 @@ function slug(n: string) {
 
   <div class="ariba-team-grid">
     <div class="ariba-kit-wrap">
-      <p class="ariba-kit-label">Thuistenue · klik om te draaien</p>
+      <p class="ariba-kit-label">Tenue · klik shirt om te draaien</p>
+
+      <div class="ariba-kit-tabs" role="tablist" aria-label="Kies tenue">
+        {tenues.map((t, i) => (
+          <button
+            type="button"
+            class={`ariba-kit-tab${i === 0 ? ' active' : ''}`}
+            data-tenue={t.id}
+            data-voor={t.voor}
+            data-achter={t.achter}
+            role="tab"
+            aria-selected={i === 0 ? 'true' : 'false'}
+          >{t.label}</button>
+        ))}
+      </div>
+
       <div class="ariba-kit-shirts">
         <div class="ariba-kit-shirt-img" onclick="this.querySelector('.ariba-kit-shirt-flipper').classList.toggle('flipped')">
           <div class="ariba-kit-shirt-flipper">
-            <div class="ariba-kit-shirt-face"><img src="/ariba/shirt-voorkant.png" alt="Shirt voor"/></div>
-            <div class="ariba-kit-shirt-face back"><img src="/ariba/shirt-achterkant.png" alt="Shirt achter"/></div>
+            <div class="ariba-kit-shirt-face"><img id="ariba-kit-shirt-voor" src={tenues[0].voor} alt="Shirt voor"/></div>
+            <div class="ariba-kit-shirt-face back"><img id="ariba-kit-shirt-achter" src={tenues[0].achter} alt="Shirt achter"/></div>
           </div>
           <span class="ariba-kit-shirt-lbl">Shirt</span>
         </div>
@@ -47,3 +68,23 @@ function slug(n: string) {
     </div>
   </div>
 </section>
+
+<script is:inline>
+  (function(){
+    var tabs = document.querySelectorAll('.ariba-kit-tab');
+    var voorImg = document.getElementById('ariba-kit-shirt-voor');
+    var achterImg = document.getElementById('ariba-kit-shirt-achter');
+    if (!voorImg || !achterImg) return;
+    tabs.forEach(function(tab){
+      tab.addEventListener('click', function(){
+        tabs.forEach(function(t){ t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected','true');
+        voorImg.src = tab.getAttribute('data-voor');
+        achterImg.src = tab.getAttribute('data-achter');
+        var flipper = voorImg.closest('.ariba-kit-shirt-flipper');
+        if (flipper) flipper.classList.remove('flipped');
+      });
+    });
+  })();
+</script>

@@ -889,6 +889,36 @@
   text-transform: uppercase;
 }
 
+/* Tenue-switcher tabs (Thuis / Uit / Derde) */
+.ariba-kit-tabs {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.ariba-kit-tab {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(30, 58, 52, .25);
+  background: transparent;
+  color: var(--ar-muted);
+  cursor: pointer;
+  transition: all .2s;
+}
+.ariba-kit-tab:hover {
+  border-color: var(--ar-gold);
+  color: var(--ar-forest);
+}
+.ariba-kit-tab.active {
+  background: var(--ar-gold);
+  border-color: var(--ar-gold);
+  color: var(--ar-forest);
+}
+
 /* Klikbare spelers */
 .ariba-player { cursor: pointer; }
 .ariba-player:hover { background: rgba(14,110,111,.06); }
