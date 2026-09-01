@@ -859,8 +859,8 @@
   position: relative;
   transform-style: preserve-3d;
   transition: transform .6s;
-  width: 200px !important;
-  height: 220px !important;
+  width: 315px !important;
+  height: 435px !important;
 }
 .ariba-kit-shirt-flipper.flipped { transform: rotateY(180deg); }
 .ariba-kit-shirt-face {
@@ -878,8 +878,8 @@
 }
 .ariba-kit-shirt-face.back { transform: rotateY(180deg); }
 .ariba-kit-broek-flipper {
-  width: 170px !important;
-  height: 180px !important;
+  width: 185px !important;
+  height: 177px !important;
 }
 .ariba-kit-shirt-lbl {
   font-family: 'Bebas Neue', sans-serif;
@@ -1000,8 +1000,8 @@
   .ariba-nav-right { gap: 6px; }
   .ariba-nav-social { width: 28px; height: 28px; }
   .ariba-nav-social svg { width: 16px; height: 16px; }
-  .ariba-kit-shirt-flipper { width: 170px !important; height: 190px !important; }
-  .ariba-kit-broek-flipper { width: 140px !important; height: 150px !important; }
+  .ariba-kit-shirt-flipper { width: 240px !important; height: 332px !important; }
+  .ariba-kit-broek-flipper { width: 150px !important; height: 143px !important; }
   .ariba-speler-num { width: 70px; height: 70px; font-size: 42px; }
   .ariba-speler-naam { font-size: 24px; }
 }
