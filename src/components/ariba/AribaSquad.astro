@@ -56,12 +56,15 @@ const tenues = [
     <div class="ariba-players">
       {data.spelers.map((s: any) => (
         <div
-          class={`ariba-player${s.captain ? ' captain' : ''}`}
+          class={`ariba-player${s.captain ? ' captain' : ''}${s.mascotte ? ' mascotte' : ''}`}
           data-speler={slug(s.naam)}
           role="button"
           tabindex="0"
         >
-          <span class="ariba-player-name">{s.naam}</span>
+          <div class="ariba-player-txt">
+            <span class="ariba-player-name">{s.naam}</span>
+            {s.roepnaam && <span class="ariba-player-bijnaam">{s.roepnaam}</span>}
+          </div>
           <span class="ariba-player-num">{s.nummer}</span>
         </div>
       ))}

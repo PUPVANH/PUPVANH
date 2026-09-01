@@ -130,8 +130,11 @@
 .ariba-player { padding: 16px 20px; background: var(--ar-card); display: flex; justify-content: space-between; align-items: center; gap: 16px; transition: all .2s; cursor: default; }
 .ariba-player:hover { background: var(--ar-bg); padding-left: 24px; }
 .ariba-player-name { font-family: 'DM Serif Display', serif; font-size: 18px; letter-spacing: -.01em; flex: 1; }
+.ariba-player-txt { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.ariba-player-txt .ariba-player-name { flex: none; }
+.ariba-player-bijnaam { font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: .02em; color: var(--ar-muted); }
 .ariba-player-num { font-family: 'Bebas Neue', sans-serif; font-size: 20px; color: #F4F0E8; background: var(--ar-accent); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 4px; letter-spacing: 0; flex-shrink: 0; }
-.ariba-player.captain .ariba-player-name::before { content: '★ '; color: var(--ar-gold); font-family: 'Inter', sans-serif; }
+.ariba-player.captain .ariba-player-name::before { content: 'Ⓒ '; color: var(--ar-gold); font-family: 'Inter', sans-serif; }
 .ariba-player.captain .ariba-player-num { background: var(--ar-gold); color: var(--ar-forest); }
 
 /* GESCHIEDENIS */
@@ -971,12 +974,11 @@
   gap: 12px;
 }
 .ariba-speler-cap-badge {
-  background: var(--ar-gold);
-  color: var(--ar-forest);
-  padding: 2px 8px;
-  border-radius: 3px;
-  font-size: 11px;
-  letter-spacing: .15em;
+  color: var(--ar-gold);
+  font-size: 18px;
+  line-height: 1;
+  margin-left: 8px;
+  vertical-align: middle;
 }
 .ariba-speler-stats h3 {
   font-family: 'Bebas Neue', sans-serif;
@@ -1005,3 +1007,6 @@
   .ariba-speler-num { width: 70px; height: 70px; font-size: 42px; }
   .ariba-speler-naam { font-size: 24px; }
 }
+
+/* Mascotte-tegel (Ari De Aap) subtiel accent */
+.ariba-player.mascotte .ariba-player-num { background: var(--ar-forest); color: var(--ar-gold); }
