@@ -184,6 +184,7 @@
 .ariba-article-body p { margin-bottom: 16px; }
 .ariba-article-body em { color: var(--ar-accent); font-style: italic; }
 .ariba-article-quote { font-family: 'DM Serif Display', serif; font-size: 28px; line-height: 1.3; color: var(--ar-accent); margin: 32px 0; padding: 0 20px; border-left: 3px solid var(--ar-gold); font-style: italic; }
+.ariba-article-subkicker { font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: .18em; color: var(--ar-gold); text-transform: uppercase; margin-top: 40px; margin-bottom: 4px; }
 .ariba-article-meta { margin-top: 32px; font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: .15em; color: var(--ar-muted); text-transform: uppercase; }
 
 /* BESTUUR */
