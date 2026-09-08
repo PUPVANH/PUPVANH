@@ -134,6 +134,11 @@
 .ariba-player-txt .ariba-player-name { flex: none; }
 .ariba-player-bijnaam { font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: .02em; color: var(--ar-muted); }
 .ariba-player-num { font-family: 'Bebas Neue', sans-serif; font-size: 20px; color: #F4F0E8; background: var(--ar-accent); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 4px; letter-spacing: 0; flex-shrink: 0; }
+.ariba-player-head { width: 52px; height: 52px; flex-shrink: 0; border-radius: 50%; overflow: hidden; background: var(--ar-bg); border: 2px solid var(--ar-line); display: flex; align-items: flex-end; justify-content: center; transition: all .2s; }
+.ariba-player-head img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.ariba-player:hover .ariba-player-head { border-color: var(--ar-accent); transform: scale(1.06); }
+.ariba-player.captain .ariba-player-head { border-color: var(--ar-gold); }
+.ariba-player.mascotte .ariba-player-head { border-color: var(--ar-forest); background: var(--ar-forest); }
 .ariba-player.captain .ariba-player-name::before { content: 'Ⓒ '; color: var(--ar-gold); font-family: 'Inter', sans-serif; }
 .ariba-player.captain .ariba-player-num { background: var(--ar-gold); color: var(--ar-forest); }
 
@@ -1011,3 +1016,52 @@
 
 /* Mascotte-tegel (Ari De Aap) subtiel accent */
 .ariba-player.mascotte .ariba-player-num { background: var(--ar-forest); color: var(--ar-gold); }
+
+/* ---- Speler-modal: hoofd links + rugnummer naast de naam ---- */
+.ariba-speler-header { display: flex; align-items: center; gap: 20px; margin-bottom: 24px; }
+.ariba-speler-avatar-wrap {
+  width: 96px; height: 96px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--ar-accent);
+  display: flex; align-items: flex-end; justify-content: center;
+}
+.ariba-speler-avatar-wrap.cap { background: var(--ar-gold); }
+.ariba-speler-avatar-wrap.mascotte { background: var(--ar-forest); }
+.ariba-speler-avatar {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: top center;
+}
+.ariba-speler-naam-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.ariba-speler-num-badge {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 40px; line-height: 1;
+  color: #F4F0E8;
+  background: var(--ar-accent);
+  min-width: 52px;
+  padding: 2px 12px;
+  border-radius: 6px;
+  text-align: center;
+  letter-spacing: .02em;
+}
+.ariba-speler-num-badge.cap { background: var(--ar-gold); color: var(--ar-forest); }
+.ariba-speler-num-badge.mascotte { background: var(--ar-forest); color: var(--ar-gold); }
+
+/* Hero-mascotte (Ari De Aap) rechts */
+.ariba-hero { position: relative; }
+.ariba-hero-mascotte {
+  position: absolute;
+  right: 4%;
+  bottom: 0;
+  height: 88%;
+  max-height: 620px;
+  width: auto;
+  z-index: 1;
+  pointer-events: none;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,.25));
+}
+.ariba-hero-inner { position: relative; z-index: 2; }
+@media (max-width: 900px) {
+  .ariba-hero-mascotte { display: none; }
+}

@@ -65,7 +65,9 @@ const tenues = [
             <span class="ariba-player-name">{s.naam}</span>
             {s.roepnaam && <span class="ariba-player-bijnaam">{s.roepnaam}</span>}
           </div>
-          <span class="ariba-player-num">{s.nummer}</span>
+          <span class="ariba-player-head">
+            <img src={`/ariba/spelers/${slug(s.naam)}.png`} alt={s.naam} loading="lazy" />
+          </span>
         </div>
       ))}
     </div>

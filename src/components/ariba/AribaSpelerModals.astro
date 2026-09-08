@@ -29,11 +29,16 @@ const seizoenenOrder = ['2026-27', '2025-26', '2024-25', '2023-24', '2022-23'];
         <button class="ariba-modal-close" data-close aria-label="Sluiten">×</button>
         <div class="ariba-modal-body">
           <div class="ariba-speler-header">
-            <div class={`ariba-speler-num${sp.captain ? ' cap' : ''}`}>{sp.nummer}</div>
+            <div class={`ariba-speler-avatar-wrap${sp.captain ? ' cap' : ''}${sp.mascotte ? ' mascotte' : ''}`}>
+              <img src={`/ariba/spelers/${sl}.png`} alt={sp.naam} class="ariba-speler-avatar" loading="lazy" />
+            </div>
             <div class="ariba-speler-info">
-              <h2 class="ariba-speler-naam">{sp.naam}</h2>
+              <div class="ariba-speler-naam-row">
+                <h2 class="ariba-speler-naam">{sp.naam}</h2>
+                <span class={`ariba-speler-num-badge${sp.captain ? ' cap' : ''}${sp.mascotte ? ' mascotte' : ''}`}>{sp.nummer}</span>
+              </div>
               <div class="ariba-speler-sub">
-                "{sp.roepnaam}"
+                {sp.roepnaam}
                 {sp.captain && <span class="ariba-speler-cap-badge" aria-label="Kapitein">Ⓒ</span>}
               </div>
             </div>
