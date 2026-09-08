@@ -18,6 +18,10 @@ function initials(n: string) {
   return (p[0][0] + (p[p.length - 1][0] || '')).toUpperCase();
 }
 
+function slug(n: string) {
+  return n.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+}
+
 // Huidig seizoen: 26-27. Als leeg, toon top 3 van vorig seizoen als teaser.
 const topNow = topschutters('2026-27').slice(0, 3);
 const topPrev = topschutters('2025-26').slice(0, 3);
@@ -42,7 +46,7 @@ const list = showFallback ? topPrev : topNow;
       <div class={`ariba-side-topsc-row ${i === 0 ? 'gold' : 'silver'}`}>
         <div class="ariba-side-topsc-rank">{i + 1}</div>
         <div class="ariba-side-topsc-avatar">
-          {sp.foto ? <img src={sp.foto} alt={sp.naam} /> : <span>{initials(sp.naam)}</span>}
+          <img src={`/ariba/spelers/${slug(sp.naam)}.png`} alt={sp.naam} loading="lazy" />
         </div>
         <div class="ariba-side-topsc-info">
           <div class="ariba-side-topsc-name">{sp.naam}</div>

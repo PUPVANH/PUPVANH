@@ -510,7 +510,7 @@
   background-image: var(--ar-p-goud);
 }
 .ariba-podium-photo img {
-  width: 100%; height: 100%; object-fit: cover; position: relative; z-index: 1;
+  width: 100%; height: 100%; object-fit: cover; object-position: top center; position: relative; z-index: 1;
 }
 .ariba-podium-initials {
   font-family: 'DM Serif Display', serif; font-size: 32px;
@@ -663,7 +663,7 @@
 .ariba-side-topsc-row.gold .ariba-side-topsc-avatar {
   background: var(--ar-gold); color: var(--ar-forest);
 }
-.ariba-side-topsc-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.ariba-side-topsc-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
 .ariba-side-topsc-info { flex: 1; min-width: 0; }
 .ariba-side-topsc-name {
   font-family: 'DM Serif Display', serif; font-size: 13px;
