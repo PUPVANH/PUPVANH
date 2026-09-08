@@ -1033,20 +1033,13 @@
   width: 100%; height: 100%;
   object-fit: cover; object-position: top center;
 }
-.ariba-speler-naam-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-.ariba-speler-num-badge {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 40px; line-height: 1;
-  color: #F4F0E8;
-  background: var(--ar-accent);
-  min-width: 52px;
-  padding: 2px 12px;
-  border-radius: 6px;
-  text-align: center;
-  letter-spacing: .02em;
+.ariba-speler-naam-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.ariba-speler-num-img {
+  height: 56px;
+  width: auto;
+  object-fit: contain;
+  flex-shrink: 0;
 }
-.ariba-speler-num-badge.cap { background: var(--ar-gold); color: var(--ar-forest); }
-.ariba-speler-num-badge.mascotte { background: var(--ar-forest); color: var(--ar-gold); }
 
 /* Hero-mascotte (Ari De Aap) rechts */
 .ariba-hero { position: relative; }

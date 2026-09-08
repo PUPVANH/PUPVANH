@@ -35,7 +35,7 @@ const seizoenenOrder = ['2026-27', '2025-26', '2024-25', '2023-24', '2022-23'];
             <div class="ariba-speler-info">
               <div class="ariba-speler-naam-row">
                 <h2 class="ariba-speler-naam">{sp.naam}</h2>
-                <span class={`ariba-speler-num-badge${sp.captain ? ' cap' : ''}${sp.mascotte ? ' mascotte' : ''}`}>{sp.nummer}</span>
+                <img src={`/ariba/nummers/${sp.nummer}.png`} alt={`Nummer ${sp.nummer}`} class="ariba-speler-num-img" loading="lazy" />
               </div>
               <div class="ariba-speler-sub">
                 {sp.roepnaam}
