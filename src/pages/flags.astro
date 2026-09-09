@@ -1473,7 +1473,7 @@ html[data-theme="classroom"] .classroom-books { display: block; }
     <div class="titlebar-controls">
       <button class="titlebar-btn" title="Minimize">_</button>
       <button class="titlebar-btn" title="Maximize">□</button>
-      <button class="titlebar-btn" title="Close" onclick="window.location.href='/'">×</button>
+      <button class="titlebar-btn" title="Close" onclick="showScreen('setup')">×</button>
     </div>
   </div>
 
@@ -1620,7 +1620,6 @@ html[data-theme="classroom"] .classroom-books { display: block; }
 
       <div class="center-btns">
         <button class="win-btn primary large" id="restart-btn" data-i18n="play_again">Speel opnieuw</button>
-        <a href="/" class="win-btn large" style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center;" data-i18n="back_home">← PUPVANH</a>
       </div>
 
     </section>
@@ -1644,7 +1643,7 @@ html[data-theme="classroom"] .classroom-books { display: block; }
 
 <footer class="pupvanh-footer">
   <span class="pv-line dim">© 2026 <span class="pv-name">PUPVANH</span> Projects <span class="pv-sep">•</span> alle rechten voorbehouden</span>
-  <span class="pv-line">BUILT AUG 2026 <span class="pv-sep">•</span> UPDATED AUG 2026 <span class="pv-sep">•</span> FLAGS.EXE <span class="pv-sep">•</span> <a href="https://pupvanh.vercel.app">pupvanh.vercel.app →</a></span>
+  <span class="pv-line">BUILT AUG 2026 <span class="pv-sep">•</span> UPDATED AUG 2026 <span class="pv-sep">•</span> FLAGS.EXE <span class="pv-sep">•</span> <a href="https://www.pupvanh.com">pupvanh.com →</a></span>
 </footer>
 
 <script is:inline>
@@ -1906,7 +1905,7 @@ const i18n = {
     skip: 'Skip →',
     end_streak: 'Beste streak:', end_region: 'Regio:',
     mistakes_title: 'Fouten om te onthouden',
-    play_again: 'Speel opnieuw', back_home: '← PUPVANH',
+    play_again: 'Speel opnieuw',
     correct: '✓ CORRECT',
     wrong: '✗ FOUT · ANTWOORD:',
     skipped: '↷ OVERGESLAGEN · ANTWOORD:',
@@ -1935,7 +1934,7 @@ const i18n = {
     skip: 'Skip →',
     end_streak: 'Best streak:', end_region: 'Region:',
     mistakes_title: 'Mistakes to remember',
-    play_again: 'Play again', back_home: '← PUPVANH',
+    play_again: 'Play again',
     correct: '✓ CORRECT', wrong: '✗ WRONG · ANSWER:', skipped: '↷ SKIPPED · ANSWER:',
     placeholder: 'Type a country name...',
     v_perfect: 'PERFECT SCORE', v_great: 'WELL DONE', v_ok: 'NOT BAD', v_bad: 'KEEP PRACTICING',

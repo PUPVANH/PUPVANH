@@ -3,7 +3,7 @@
 // -----------------------------------------------------------------------------
 // Twee regels:
 //   Regel 1: © 2026 PUPVANH Projects · alle rechten voorbehouden  [+ socials]
-//   Regel 2: BUILT MMM YYYY · UPDATED MMM YYYY · [PaginaNaam] · pupvanh.vercel.app →
+//   Regel 2: BUILT MMM YYYY · UPDATED MMM YYYY · [PaginaNaam] · pupvanh.com →
 // Scheidingstekens: ember bolletje (#E85D2F).
 // Voorbeeld gebruik:
 //   <PupvanhFooter
@@ -29,8 +29,8 @@ interface Props {
   updated: string;                 // bv. 'AUG 2026'
   theme?: 'default' | 'ariba' | 'notes' | 'pups';
   socials?: Social[];              // optioneel — verschijnt rechts op regel 1
-  link?: string;                   // default pupvanh.vercel.app; later pupvanh.pixelslaves.com
-  linkLabel?: string;              // default 'pupvanh.vercel.app →'
+  link?: string;                   // default pupvanh.com
+  linkLabel?: string;              // default 'pupvanh.com →'
 }
 
 const {
@@ -39,8 +39,8 @@ const {
   updated,
   theme = 'default',
   socials = [],
-  link = 'https://pupvanh.vercel.app',
-  linkLabel = 'pupvanh.vercel.app →',
+  link = 'https://www.pupvanh.com',
+  linkLabel = 'pupvanh.com →',
 } = Astro.props;
 ---
 
