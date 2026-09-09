@@ -505,6 +505,13 @@ import Analytics from '@vercel/analytics/astro';
     aspect-ratio: 1400/745;
     margin-bottom: 24px;
   }
+  .photo-duo {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .photo-duo .photo { aspect-ratio: 3/4; }
   .photo-triple {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -638,7 +645,7 @@ import Analytics from '@vercel/analytics/astro';
     .modal h2 { font-size: 32px; }
     .poem, .content-block p { font-size: 16px; }
     .modal-overlay { padding: 20px 12px; }
-    .photo-triple, .photo-strip { grid-template-columns: 1fr; }
+    .photo-triple, .photo-strip, .photo-duo { grid-template-columns: 1fr; }
   }
 
   /* ── Footer ─────────────────────────── */
@@ -743,6 +750,86 @@ import Analytics from '@vercel/analytics/astro';
         <span class="card-hint">see more</span>
         <a class="visit-pill" href="https://siviez.com" target="_blank" rel="noopener noreferrer" data-nomodal>
           Visit site <span class="arrow">↗</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Card 05 -->
+    <div class="card" data-modal="5" role="button" tabindex="0">
+      <div class="card-head">
+        <span class="card-num">05</span>
+        <span class="badge">tattoo artist</span>
+      </div>
+      <h3 class="card-title">Dylan <em>Hoogerwerf</em></h3>
+      <p class="card-desc">The artist behind most of my ink. Fine-line lettering and small pieces that each carry a story — dreams, family, home.</p>
+      <div class="card-meta">
+        <span class="card-hint">see more</span>
+        <a class="visit-pill" href="https://www.instagram.com/dylanhoogerwerf/" target="_blank" rel="noopener" data-nomodal>
+          Instagram <span class="arrow">↗</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Card 06 -->
+    <div class="card" data-modal="6" role="button" tabindex="0">
+      <div class="card-head">
+        <span class="card-num">06</span>
+        <span class="badge">tattoo artist</span>
+      </div>
+      <h3 class="card-title">Linéa <em>D'amore</em></h3>
+      <p class="card-desc">Still too under the radar. Amazing fine-line work that keeps getting bigger and more detailed. Five pieces in and counting.</p>
+      <div class="card-meta">
+        <span class="card-hint">see more</span>
+        <a class="visit-pill" href="https://www.instagram.com/linea_damore/" target="_blank" rel="noopener" data-nomodal>
+          Instagram <span class="arrow">↗</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Card 07 -->
+    <div class="card" data-modal="7" role="button" tabindex="0">
+      <div class="card-head">
+        <span class="card-num">07</span>
+        <span class="badge">photographer</span>
+      </div>
+      <h3 class="card-title">Emanuele <em>De Luca</em></h3>
+      <p class="card-desc">Maybe my number one Fujifilm X100 photographer. The mood, the story in every frame — and his recipes are a must for travel pics.</p>
+      <div class="card-meta">
+        <span class="card-hint">see more</span>
+        <a class="visit-pill" href="https://www.instagram.com/emadeluca89/" target="_blank" rel="noopener" data-nomodal>
+          Instagram <span class="arrow">↗</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Card 08 -->
+    <div class="card" data-modal="8" role="button" tabindex="0">
+      <div class="card-head">
+        <span class="card-num">08</span>
+        <span class="badge">creator</span>
+      </div>
+      <h3 class="card-title">Soleo <em>Studio</em></h3>
+      <p class="card-desc">A newer TikTok find. Vibey day-in-the-life shots that make you want to book a flight to Canada — and Teddy, the most photogenic dog alive.</p>
+      <div class="card-meta">
+        <span class="card-hint">see more</span>
+        <a class="visit-pill" href="https://www.instagram.com/soleostudioo/" target="_blank" rel="noopener" data-nomodal>
+          Instagram <span class="arrow">↗</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Card 09 -->
+    <div class="card" data-modal="9" role="button" tabindex="0">
+      <div class="card-head">
+        <span class="card-num">09</span>
+        <span class="badge">musician</span>
+      </div>
+      <h3 class="card-title">Jon <em>Bellion</em></h3>
+      <p class="card-desc">My favourite artist. His words hit so hard I've got three of his lyrics tattooed on me. Start with New York Soul.</p>
+      <div class="card-meta">
+        <span class="card-hint">see more</span>
+        <a class="visit-pill" href="https://www.instagram.com/jonbellion/" target="_blank" rel="noopener" data-nomodal>
+          Instagram <span class="arrow">↗</span>
         </a>
       </div>
     </div>
@@ -904,11 +991,167 @@ import Analytics from '@vercel/analytics/astro';
     <div class="modal-footer-note">external link · siviez.com</div>
   </div>
 
+  <!-- ══════════════ MODAL 05 · DYLAN HOOGERWERF ══════════════ -->
+  <div class="modal" data-id="5">
+    <button class="modal-close">✕</button>
+    <div class="modal-kicker">// tattoo artist · bookmark 05</div>
+    <h2>Dylan <em>Hoogerwerf</em></h2>
+    <div class="modal-byline">tattoo artist · fine-line & lettering</div>
+
+    <div class="actions">
+      <a class="btn btn-primary" href="https://www.instagram.com/dylanhoogerwerf/" target="_blank" rel="noopener">
+        Instagram <span class="ext">↗</span>
+      </a>
+    </div>
+
+    <div class="content-block">
+      <h3>a few pieces</h3>
+      <div class="photo-triple">
+        <div class="photo"><img src="/bookmarks/dylan-dragon.jpg" alt="Small fine-line dragon tattoo by Dylan Hoogerwerf" /><span class="cap">The dragon</span></div>
+        <div class="photo"><img src="/bookmarks/dylan-daisy.jpg" alt="Daisy flower tattoo by Dylan Hoogerwerf" /><span class="cap">The daisy</span></div>
+        <div class="photo"><img src="/bookmarks/dylan-atwork.jpg" alt="Tattoo artist Dylan Hoogerwerf at work" /><span class="cap">Dylan at work</span></div>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <h3>the stories</h3>
+      <p>Dylan did most of the ink I carry, and each piece means something. The dragon is part Lord of the Rings, but mostly it's about my own head — a fantasy world, a utopia. I love to dream, and I spend a lot of time thinking up a better world than the one we live in.</p>
+      <p>The daisy is for my grandmother. The rose, just above it, is for my grandfather. I've since bought their house — the place where I always felt most at home.</p>
+    </div>
+
+    <div class="modal-footer-note">most of my ink · one artist</div>
+  </div>
+
+  <!-- ══════════════ MODAL 06 · LINÉA D'AMORE ══════════════ -->
+  <div class="modal" data-id="6">
+    <button class="modal-close">✕</button>
+    <div class="modal-kicker">// tattoo artist · bookmark 06</div>
+    <h2>Linéa <em>D'amore</em></h2>
+    <div class="modal-byline">tattoo artist · fine-line</div>
+
+    <div class="actions">
+      <a class="btn btn-primary" href="https://www.instagram.com/linea_damore/" target="_blank" rel="noopener">
+        Instagram <span class="ext">↗</span>
+      </a>
+      <a class="btn btn-secondary" href="https://www.facebook.com/profile.php?id=100075907872422" target="_blank" rel="noopener">
+        Facebook <span class="ext">↗</span>
+      </a>
+    </div>
+
+    <div class="content-block">
+      <h3>why follow</h3>
+      <p>Still too far under the radar for how good she is. Linéa does amazing fine-line work, and I go back every year — five tattoos in so far.</p>
+      <p>Over the years I've watched her range grow: bigger pieces, more detail, more ambition. If you're into delicate line work, she's a must. Go before everyone else catches on.</p>
+    </div>
+
+    <div class="modal-footer-note">five pieces · and counting</div>
+  </div>
+
+  <!-- ══════════════ MODAL 07 · EMANUELE DE LUCA ══════════════ -->
+  <div class="modal" data-id="7">
+    <button class="modal-close">✕</button>
+    <div class="modal-kicker">// photographer · bookmark 07</div>
+    <h2>Emanuele <em>De Luca</em></h2>
+    <div class="modal-byline">photographer · Fujifilm X100</div>
+
+    <div class="actions">
+      <a class="btn btn-primary" href="https://www.instagram.com/emadeluca89/" target="_blank" rel="noopener">
+        Instagram <span class="ext">↗</span>
+      </a>
+      <a class="btn btn-secondary" href="https://film.recipes/2024/04/28/la-dolce-vita-capture-the-good-life/" target="_blank" rel="noopener">
+        Fujifilm recipe <span class="ext">↗</span>
+      </a>
+    </div>
+
+    <div class="content-block">
+      <h3>why follow</h3>
+      <p>Maybe my number one Fujifilm X100 photographer. It's the mood in his frames, the story inside each one — and a lot of them are shot in my two favourite countries, Italy and Switzerland.</p>
+      <p>It's not just his own work either. There's a great community around him sharing other photographers, so your feed fills up with Fujifilm frames worth studying.</p>
+    </div>
+
+    <div class="content-block">
+      <h3>bonus</h3>
+      <p>If you don't want to go deep into settings and just want to shoot, use his Fujifilm recipes — the button above links to his "La Dolce Vita" one. Perfect for travel pics, straight out of camera, no editing.</p>
+    </div>
+
+    <div class="modal-footer-note">fujifilm · recipes · must install</div>
+  </div>
+
+  <!-- ══════════════ MODAL 08 · SOLEO STUDIO ══════════════ -->
+  <div class="modal" data-id="8">
+    <button class="modal-close">✕</button>
+    <div class="modal-kicker">// creator · bookmark 08</div>
+    <h2>Soleo <em>Studio</em></h2>
+    <div class="modal-byline">creator · TikTok · Canada</div>
+
+    <div class="actions">
+      <a class="btn btn-primary" href="https://www.instagram.com/soleostudioo/" target="_blank" rel="noopener">
+        Instagram <span class="ext">↗</span>
+      </a>
+      <a class="btn btn-secondary" href="https://www.tiktok.com/@soleostudio" target="_blank" rel="noopener">
+        TikTok · studio <span class="ext">↗</span>
+      </a>
+      <a class="btn btn-secondary" href="https://www.tiktok.com/@catoulinou" target="_blank" rel="noopener">
+        TikTok · daily <span class="ext">↗</span>
+      </a>
+    </div>
+
+    <div class="content-block">
+      <h3>why follow</h3>
+      <p>A newer find on TikTok. Across two profiles she posts gorgeous photos and vibey day-in-the-life videos of life in Canada, through every season — the kind that make you want to book a flight right now.</p>
+      <p>But I'll be honest about why I really keep scrolling: Teddy. Her dog, who shows up in a slide or a clip here and there. Nothing cuter than a dog. I melt every time.</p>
+    </div>
+
+    <div class="modal-footer-note">canada · seasons · and Teddy</div>
+  </div>
+
+  <!-- ══════════════ MODAL 09 · JON BELLION ══════════════ -->
+  <div class="modal" data-id="9">
+    <button class="modal-close">✕</button>
+    <div class="modal-kicker">// musician · bookmark 09</div>
+    <h2>Jon <em>Bellion</em></h2>
+    <div class="modal-byline">musician · songwriter · producer</div>
+
+    <div class="actions">
+      <a class="btn btn-primary" href="https://www.instagram.com/jonbellion/" target="_blank" rel="noopener">
+        Instagram <span class="ext">↗</span>
+      </a>
+      <a class="btn btn-secondary" href="https://open.spotify.com/artist/50JJSqHUf2RQ9xsHs0KMHg" target="_blank" rel="noopener">
+        Spotify <span class="ext">↗</span>
+      </a>
+      <a class="btn btn-secondary" href="https://www.youtube.com/@jonbellion" target="_blank" rel="noopener">
+        YouTube <span class="ext">↗</span>
+      </a>
+    </div>
+
+    <div class="content-block">
+      <h3>words on skin</h3>
+      <div class="photo-duo">
+        <div class="photo"><img src="/bookmarks/jonbellion-nysoul.jpg" alt="Jon Bellion New York Soul Part II album artwork" /><span class="cap">New York Soul (Pt. II)</span></div>
+        <div class="photo"><img src="/bookmarks/jonbellion-tattoo.jpg" alt="Tattoo of Jon Bellion lyric: what if who I hoped to be was always me" /><span class="cap">Lyric tattoo</span></div>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <h3>why he's my favourite</h3>
+      <p>You might not know the name, but the music world does. Jon Bellion writes and produces for the biggest names out there — Justin Bieber, Rihanna, Jason Derulo and plenty more. But it's his own music where it gets ridiculous.</p>
+      <p>The man was born for this. Every beat, every lyric, all of it his own. A genius, honestly — unique, jumping across genres, chasing perfection so hard that sometimes you wait years for the next release. Watch his behind-the-scenes videos and you'll see it: how it all comes together in his head.</p>
+      <p>And the evolution across the albums, the way the live versions reinvent the songs — his Cove City live set during COVID is a vibe on its own. I've got three of his lyrics tattooed on me: "what if who I hoped to be was always me?", "maybe idk, maybe that's okay", and "insert something really dope right here."</p>
+    </div>
+
+    <div class="content-block">
+      <h3>where to start</h3>
+      <p>New York Soul is the place to begin. Then keep going — and don't skip the behind-the-scenes. The catalogue is deep.</p>
+    </div>
+
+    <div class="modal-footer-note">three lyric tattoos · one favourite</div>
+  </div>
+
 </div>
 
 <footer class="pupvanh-footer">
   <div class="row1">© 2026 PUPVANH Projects <span class="sep">•</span> all rights reserved</div>
-  <div class="row2">BUILT AUG 2026 <span class="sep">•</span> UPDATED AUG 2026 <span class="sep">•</span> Bookmarks <span class="sep">•</span> <a href="https://www.pupvanh.com">pupvanh.com →</a></div>
+  <div class="row2">BUILT AUG 2026 <span class="sep">•</span> UPDATED SEP 2026 <span class="sep">•</span> Bookmarks <span class="sep">•</span> <a href="https://www.pupvanh.com">pupvanh.com →</a></div>
 </footer>
 
 <Analytics />
