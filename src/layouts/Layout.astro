@@ -6,13 +6,21 @@ interface Props {
   title?: string;
   description?: string;
   favicon?: string;
+  ogImage?: string;        // deelbare afbeelding (1200x630) voor social previews
+  canonicalPath?: string;  // bv. '/notes' — voor de canonical + og:url
 }
 
 const {
-  title = 'PUPVANH · Projects',
-  description = 'PUPVANH — creative space of Puppy. Photos, caps, poems, sites.',
+  title = 'Puppy\'s creative hub: website projects, photography, merch & more',
+  description = 'A personal creative hub by Puppy — learning to build with AI. Website projects, travel photography on a Fujifilm X100F, Pups merch, FC Ariba and more.',
   favicon = '/favicons/homepage.svg',
+  ogImage = '/og/pupvanh-og.jpg',
+  canonicalPath = '/',
 } = Astro.props;
+
+const SITE = 'https://www.pupvanh.com';
+const canonical = SITE + canonicalPath;
+const ogImageUrl = ogImage.startsWith('http') ? ogImage : SITE + ogImage;
 ---
 
 <!DOCTYPE html>
@@ -20,12 +28,52 @@ const {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Primaire SEO -->
+  <title>{title}</title>
   <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  <meta name="author" content="Puppy" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph (Facebook, WhatsApp, Discord, LinkedIn) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="PUPVANH" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={ogImageUrl} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImageUrl} />
+
+  <!-- Structured data (JSON-LD) — vertelt Google wie Puppy is -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "PUPVANH",
+    "alternateName": "Puppy's creative hub",
+    "url": SITE,
+    "author": {
+      "@type": "Person",
+      "name": "Puppy",
+      "sameAs": [
+        "https://instagram.com/pepijnvanhauwere",
+        "https://tiktok.com/@pups.jpg"
+      ]
+    }
+  })} />
+
   <link rel="icon" type="image/svg+xml" href={favicon} />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet" />
-  <title>{title}</title>
 </head>
 <body>
   <div class="grain"></div>
