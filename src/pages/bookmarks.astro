@@ -505,6 +505,20 @@ import Analytics from '@vercel/analytics/astro';
     aspect-ratio: 1400/745;
     margin-bottom: 24px;
   }
+  .photo-feed {
+    aspect-ratio: 1/1;
+    margin-bottom: 12px;
+    max-width: 480px;
+  }
+  .photo-credit {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    line-height: 1.5;
+    letter-spacing: 0.03em;
+    color: var(--mute);
+    margin: 0 0 4px;
+    font-style: normal;
+  }
   .photo-duo {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -901,9 +915,9 @@ import Analytics from '@vercel/analytics/astro';
     <div class="content-block">
       <h3>a few frames</h3>
       <div class="photo-strip">
-        <div class="photo"><img src="/bookmarks/volkshotel-hottub.jpg" alt="Rooftop hot tub overlooking the Amsterdam skyline" /><span class="cap">Rooftop · hot tub</span></div>
-        <div class="photo"><img src="/bookmarks/volkshotel-sauna.jpg" alt="Wooden barrel sauna on the Volkshotel rooftop" /><span class="cap">Rooftop · sauna</span></div>
-        <div class="photo"><img src="/bookmarks/volkshotel-room.jpg" alt="Volkshotel room with city view at night" /><span class="cap">Room · at night</span></div>
+        <div class="photo"><img src="/bookmarks/volkshotel-amsterdam-rooftop-hottub.jpg" alt="Rooftop hot tub overlooking the Amsterdam skyline" /><span class="cap">Rooftop · hot tub</span></div>
+        <div class="photo"><img src="/bookmarks/volkshotel-amsterdam-rooftop-sauna.jpg" alt="Wooden barrel sauna on the Volkshotel rooftop" /><span class="cap">Rooftop · sauna</span></div>
+        <div class="photo"><img src="/bookmarks/volkshotel-amsterdam-room.jpg" alt="Volkshotel room with city view at night" /><span class="cap">Room · at night</span></div>
       </div>
     </div>
 
@@ -939,7 +953,7 @@ import Analytics from '@vercel/analytics/astro';
 
     <div class="content-block">
       <h3>recent work</h3>
-      <div class="photo photo-single"><img src="/bookmarks/bri-grid.jpg" alt="Bri Anora's Instagram grid with recent poems and video excerpts" /><span class="cap">@briwritespoetry · instagram grid</span></div>
+      <div class="photo photo-single"><img src="/bookmarks/bri-anora-poetry-instagram.jpg" alt="Bri Anora's Instagram grid with recent poems and video excerpts" /><span class="cap">@briwritespoetry · instagram grid</span></div>
     </div>
 
     <div class="content-block">
@@ -976,9 +990,9 @@ import Analytics from '@vercel/analytics/astro';
     <div class="content-block">
       <h3>seasons</h3>
       <div class="photo-triple">
-        <div class="photo"><img src="/bookmarks/siviez-summer.jpg" alt="Summer view from the balcony of Rosablanche C34" /><span class="cap">Summer · balcony</span></div>
-        <div class="photo"><img src="/bookmarks/siviez-lake.jpg" alt="Turquoise alpine lake near Siviez, framed by snow-capped peaks" /><span class="cap">Alpine lake</span></div>
-        <div class="photo"><img src="/bookmarks/siviez-winter.jpg" alt="Winter view of Siviez ski resort with fresh snow" /><span class="cap">Winter · ski-in/out</span></div>
+        <div class="photo"><img src="/bookmarks/siviez-summer-balcony-view.jpg" alt="Summer view from the balcony of Rosablanche C34" /><span class="cap">Summer · balcony</span></div>
+        <div class="photo"><img src="/bookmarks/siviez-alpine-lake.jpg" alt="Turquoise alpine lake near Siviez, framed by snow-capped peaks" /><span class="cap">Alpine lake</span></div>
+        <div class="photo"><img src="/bookmarks/siviez-winter-ski-view.jpg" alt="Winter view of Siviez ski resort with fresh snow" /><span class="cap">Winter · ski-in/out</span></div>
       </div>
     </div>
 
@@ -1007,9 +1021,9 @@ import Analytics from '@vercel/analytics/astro';
     <div class="content-block">
       <h3>a few pieces</h3>
       <div class="photo-triple">
-        <div class="photo"><img src="/bookmarks/dylan-dragon.jpg" alt="Small fine-line dragon tattoo by Dylan Hoogerwerf" /><span class="cap">The dragon</span></div>
-        <div class="photo"><img src="/bookmarks/dylan-daisy.jpg" alt="Daisy flower tattoo by Dylan Hoogerwerf" /><span class="cap">The daisy</span></div>
-        <div class="photo"><img src="/bookmarks/dylan-atwork.jpg" alt="Tattoo artist Dylan Hoogerwerf at work" /><span class="cap">Dylan at work</span></div>
+        <div class="photo"><img src="/bookmarks/dylan-hoogerwerf-dragon-tattoo.jpg" alt="Fine-line dragon tattoo by tattoo artist Dylan Hoogerwerf" /><span class="cap">The dragon</span></div>
+        <div class="photo"><img src="/bookmarks/dylan-hoogerwerf-daisy-tattoo.jpg" alt="Daisy flower tattoo by Dylan Hoogerwerf, for my grandmother" /><span class="cap">The daisy</span></div>
+        <div class="photo"><img src="/bookmarks/dylan-hoogerwerf-tattoo-artist-at-work.jpg" alt="Tattoo artist Dylan Hoogerwerf at work in his studio" /><span class="cap">Dylan at work</span></div>
       </div>
     </div>
 
@@ -1039,6 +1053,15 @@ import Analytics from '@vercel/analytics/astro';
     </div>
 
     <div class="content-block">
+      <h3>a few pieces</h3>
+      <div class="photo-triple">
+        <div class="photo"><img src="/bookmarks/linea-damore-mountains-lettering-tattoo.jpg" alt="Fine-line lettering tattoo 'I want to see mountains again' by Linéa D'amore" /><span class="cap">Mountains</span></div>
+        <div class="photo"><img src="/bookmarks/linea-damore-wander-lettering-tattoo.jpg" alt="Fine-line lettering tattoo 'Not all those who wander are lost' by Linéa D'amore" /><span class="cap">Wander</span></div>
+        <div class="photo"><img src="/bookmarks/linea-damore-jon-bellion-lyric-tattoo.jpg" alt="Fine-line lettering tattoo of a Jon Bellion lyric by Linéa D'amore" /><span class="cap">Jon Bellion lyric</span></div>
+      </div>
+    </div>
+
+    <div class="content-block">
       <h3>why follow</h3>
       <p>Still too far under the radar for how good she is. Linéa does amazing fine-line work, and I go back every year — five tattoos in so far.</p>
       <p>Over the years I've watched her range grow: bigger pieces, more detail, more ambition. If you're into delicate line work, she's a must. Go before everyone else catches on.</p>
@@ -1064,8 +1087,13 @@ import Analytics from '@vercel/analytics/astro';
     </div>
 
     <div class="content-block">
+      <h3>his feed</h3>
+      <div class="photo photo-feed"><img src="/bookmarks/emanuele-deluca-fujifilm-instagram-feed.jpg" alt="Emanuele De Luca Instagram feed with Fujifilm X100 travel photography" /><span class="cap">@emadeluca89 · instagram</span></div>
+      <p class="photo-credit">Photos © Emanuele De Luca — shared with credit. Visit his profile for the full feed.</p>
+    </div>
+
+    <div class="content-block">
       <h3>why follow</h3>
-      <p>Maybe my number one Fujifilm X100 photographer. It's the mood in his frames, the story inside each one — and a lot of them are shot in my two favourite countries, Italy and Switzerland.</p>
       <p>It's not just his own work either. There's a great community around him sharing other photographers, so your feed fills up with Fujifilm frames worth studying.</p>
     </div>
 
@@ -1097,8 +1125,13 @@ import Analytics from '@vercel/analytics/astro';
     </div>
 
     <div class="content-block">
+      <h3>her feed</h3>
+      <div class="photo photo-feed"><img src="/bookmarks/soleo-studio-canada-instagram-feed.jpg" alt="Soleo Studio Instagram feed with cozy Canadian nature photography and Teddy the dog" /><span class="cap">@soleostudioo · instagram</span></div>
+      <p class="photo-credit">Photos © Soleo Studio — shared with credit. Visit her profile for the full feed (and more Teddy).</p>
+    </div>
+
+    <div class="content-block">
       <h3>why follow</h3>
-      <p>A newer find on TikTok. Across two profiles she posts gorgeous photos and vibey day-in-the-life videos of life in Canada, through every season — the kind that make you want to book a flight right now.</p>
       <p>But I'll be honest about why I really keep scrolling: Teddy. Her dog, who shows up in a slide or a clip here and there. Nothing cuter than a dog. I melt every time.</p>
     </div>
 
@@ -1127,8 +1160,8 @@ import Analytics from '@vercel/analytics/astro';
     <div class="content-block">
       <h3>words on skin</h3>
       <div class="photo-duo">
-        <div class="photo"><img src="/bookmarks/jonbellion-nysoul.jpg" alt="Jon Bellion New York Soul Part II album artwork" /><span class="cap">New York Soul (Pt. II)</span></div>
-        <div class="photo"><img src="/bookmarks/jonbellion-tattoo.jpg" alt="Tattoo of Jon Bellion lyric: what if who I hoped to be was always me" /><span class="cap">Lyric tattoo</span></div>
+        <div class="photo"><img src="/bookmarks/jon-bellion-new-york-soul-album.jpg" alt="Jon Bellion New York Soul Part II album artwork" /><span class="cap">New York Soul (Pt. II)</span></div>
+        <div class="photo"><img src="/bookmarks/jon-bellion-lyric-tattoo.jpg" alt="Tattoo of Jon Bellion lyric: what if who I hoped to be was always me" /><span class="cap">Lyric tattoo</span></div>
       </div>
     </div>
 
