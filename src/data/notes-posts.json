@@ -1,7 +1,20 @@
 {
   "posts": [
     {
+      "num": "003",
+      "theme": "BUILD-03",
+      "date_nl": "28 aug 2026",
+      "date_en": "aug 28, 2026",
+      "tags": ["learning", "building"],
+      "readTime": 2,
+      "title_nl": "Genoeg gebouwd. Nu snappen.",
+      "title_en": "Enough building. Time to understand.",
+      "snip_nl": "Ik merk dat ik veel bouw maar minder léér. Tijd om dat om te draaien: een handleiding over mijn hele project, de mappenstructuur echt snappen, code lezen, en eens proberen bouwen zónder AI. De layout en de lijn staan — nu wil ik de steun wegtrekken en zelf leren werken met updates.",
+      "snip_en": "I notice I build a lot but learn less. Time to flip that: a manual covering my whole project, actually understanding the folder structure, reading code, and trying to build without AI. The layout and the direction are set — now I want to pull away the support and learn to handle updates myself."
+    },
+    {
       "num": "002",
+      "theme": "BUILD-02",
       "date_nl": "28 aug 2026",
       "date_en": "aug 28, 2026",
       "tags": ["learning", "building"],
@@ -13,6 +26,7 @@
     },
     {
       "num": "001",
+      "theme": "BUILD-01",
       "date_nl": "28 aug 2026",
       "date_en": "aug 28, 2026",
       "tags": ["learning", "building"],

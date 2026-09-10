@@ -205,7 +205,15 @@ html[data-mode="dark"] body:has(.notes-page) { background: #122522; }
 }
 .notes-page .n-post:hover { transform: translateX(4px); }
 .notes-page .n-post:last-child { border-bottom: none; }
-.notes-page .n-num { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; padding-top: 8px; }
+.notes-page .n-num { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; padding-top: 8px; line-height: 1.4; }
+.notes-page .n-num .n-theme {
+  display: block;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  opacity: 0.65;
+  margin-top: 3px;
+}
 .notes-page .n-post h2 {
   font-family: 'Playfair Display', serif; font-style: italic;
   font-weight: 400; font-size: 26px; margin: 0 0 10px; line-height: 1.2;
@@ -399,7 +407,7 @@ function renderPosts() {
       : '<span class="n-open-hint">expand →</span>';
     return `
     <div class="n-post has-body" data-num="${p.num}">
-      <div class="n-num">#${p.num}</div>
+      <div class="n-num">#${p.num}${p.theme ? `<span class="n-theme">${p.theme}</span>` : ''}</div>
       <div>
         <h2>${p.title_en}${openHint}</h2>
         <p class="snip">${p.snip_en}</p>
@@ -426,7 +434,7 @@ function renderPosts() {
 }
 
 function openModal(p) {
-  document.getElementById('nModalNum').textContent = '#' + p.num;
+  document.getElementById('nModalNum').textContent = p.theme ? ('#' + p.num + ' · ' + p.theme) : ('#' + p.num);
   document.getElementById('nModalDate').textContent = p.date_en;
   document.getElementById('nModalRead').textContent = p.readTime + ' min';
   document.getElementById('nModalTitle').innerHTML = p.title_en;
