@@ -152,6 +152,53 @@ import Analytics from '@vercel/analytics/astro';
     font-weight: 400;
   }
 
+  /* ── Filter pills ─────────────────────────── */
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 40px;
+  }
+  .filter-pill {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mute);
+    background: transparent;
+    border: 1px solid var(--line);
+    padding: 9px 16px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+  }
+  .filter-pill:hover {
+    border-color: color-mix(in srgb, var(--ember) 50%, transparent);
+    color: var(--text);
+  }
+  .filter-pill.active {
+    background: var(--forest);
+    color: var(--ivory);
+    border-color: var(--forest);
+  }
+  html[data-mode="dark"] .filter-pill.active {
+    background: var(--ember);
+    color: var(--forest);
+    border-color: var(--ember);
+  }
+  .filter-pill .count {
+    opacity: 0.55;
+    margin-left: 5px;
+  }
+  /* Card hide/show transition */
+  .card.hidden {
+    display: none;
+  }
+  @media (max-width: 800px) {
+    .filters { margin-bottom: 28px; }
+  }
+
   /* ── Grid ─────────────────────────── */
   .grid {
     display: grid;
@@ -693,10 +740,19 @@ import Analytics from '@vercel/analytics/astro';
     <p class="intro">People, places, poems, sites and artists that got to me. No affiliates, no ads — just things worth your click.</p>
   </section>
 
+  <nav class="filters" id="filters" aria-label="Filter bookmarks by theme">
+    <button class="filter-pill active" data-filter="all">all<span class="count">9</span></button>
+    <button class="filter-pill" data-filter="places">places<span class="count">2</span></button>
+    <button class="filter-pill" data-filter="spoken word">spoken word<span class="count">2</span></button>
+    <button class="filter-pill" data-filter="tattoo artist">tattoo artist<span class="count">2</span></button>
+    <button class="filter-pill" data-filter="photography">photography<span class="count">2</span></button>
+    <button class="filter-pill" data-filter="music">music<span class="count">1</span></button>
+  </nav>
+
   <section class="grid" id="grid">
 
     <!-- Card 01 -->
-    <div class="card" data-modal="1" role="button" tabindex="0">
+    <div class="card" data-modal="1" data-theme="spoken word" role="button" tabindex="0">
       <div class="card-head">
         <span class="card-num">01</span>
         <span class="badge">spoken word</span>
@@ -712,7 +768,7 @@ import Analytics from '@vercel/analytics/astro';
     </div>
 
     <!-- Card 02 -->
-    <div class="card" data-modal="2" role="button" tabindex="0">
+    <div class="card" data-modal="2" data-theme="places" role="button" tabindex="0">
       <div class="card-head">
         <span class="card-num">02</span>
         <span class="badge">place</span>
@@ -728,7 +784,7 @@ import Analytics from '@vercel/analytics/astro';
     </div>
 
     <!-- Card 03 -->
-    <div class="card" data-modal="3" role="button" tabindex="0">
+    <div class="card" data-modal="3" data-theme="spoken word" role="button" tabindex="0">
       <div class="card-head">
         <span class="card-num">03</span>
         <span class="badge">poet</span>
@@ -744,7 +800,7 @@ import Analytics from '@vercel/analytics/astro';
     </div>
 
     <!-- Card 04 -->
-    <div class="card" data-modal="4" role="button" tabindex="0">
+    <div class="card" data-modal="4" data-theme="places" role="button" tabindex="0">
       <div class="card-head">
         <span class="card-num">04</span>
         <span class="badge">self-plug</span>
@@ -760,7 +816,7 @@ import Analytics from '@vercel/analytics/astro';
     </div>
 
     <!-- Card 05 -->
-    <div class="card" data-modal="5" role="button" tabindex="0">
+    <div class="card" data-modal="5" data-theme="tattoo artist" role="button" tabindex="0">
       <div class="card-head">
         <span class="card-num">05</span>
         <span class="badge">tattoo artist</span>
@@ -776,7 +832,7 @@ import Analytics from '@vercel/analytics/astro';
     </div>
 
     <!-- Card 06 -->
-    <div class="card" data-modal="6" role="button" tabindex="0">
+    <div class="card" data-modal="6" data-theme="tattoo artist" role="button" tabindex="0">
       <div class="card-head">
         <span class="card-num">06</span>
         <span class="badge">tattoo artist</span>
@@ -792,7 +848,7 @@ import Analytics from '@vercel/analytics/astro';
     </div>
 
     <!-- Card 07 -->
-    <div class="card" data-modal="7" role="button" tabindex="0">
+    <div class="card" data-modal="7" data-theme="photography" role="button" tabindex="0">
       <div class="card-head">
         <span class="card-num">07</span>
         <span class="badge">photographer</span>
@@ -808,10 +864,10 @@ import Analytics from '@vercel/analytics/astro';
     </div>
 
     <!-- Card 08 -->
-    <div class="card" data-modal="8" role="button" tabindex="0">
+    <div class="card" data-modal="8" data-theme="photography" role="button" tabindex="0">
       <div class="card-head">
         <span class="card-num">08</span>
-        <span class="badge">creator</span>
+        <span class="badge">photography</span>
       </div>
       <h3 class="card-title">Soleo <em>Studio</em></h3>
       <p class="card-desc">A newer TikTok find. Vibey day-in-the-life shots that make you want to book a flight to Canada — and Teddy, the most photogenic dog alive.</p>
@@ -824,7 +880,7 @@ import Analytics from '@vercel/analytics/astro';
     </div>
 
     <!-- Card 09 -->
-    <div class="card" data-modal="9" role="button" tabindex="0">
+    <div class="card" data-modal="9" data-theme="music" role="button" tabindex="0">
       <div class="card-head">
         <span class="card-num">09</span>
         <span class="badge">musician</span>
@@ -1180,6 +1236,20 @@ import Analytics from '@vercel/analytics/astro';
 <Analytics />
 
 <script>
+  // ── Filter pills ──────────────
+  const filterPills = document.querySelectorAll('.filter-pill');
+  const allCards = document.querySelectorAll('.card');
+  filterPills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      const filter = pill.dataset.filter;
+      filterPills.forEach(p => p.classList.toggle('active', p === pill));
+      allCards.forEach(card => {
+        const show = filter === 'all' || card.dataset.theme === filter;
+        card.classList.toggle('hidden', !show);
+      });
+    });
+  });
+
   // ── Modal handling ──────────────
   const overlay = document.getElementById('modal-overlay');
   const modals = document.querySelectorAll('.modal');
