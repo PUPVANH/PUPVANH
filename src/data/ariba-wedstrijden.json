@@ -8,13 +8,34 @@
       "thuis": "Fc Ariba",
       "uit": "De Kasjotters",
       "locatie": "",
-      "uitslag": null
+      "uitslag": "18-4"
     },
     {
       "datum": "2026-09-21T20:00:00",
       "thuis": "Fc Ariba",
       "uit": "FC De Ondank",
       "locatie": "",
+      "uitslag": "20-0"
+    },
+    {
+      "datum": "2026-09-30T21:00:00",
+      "thuis": "Checked by Vanhulle",
+      "uit": "Fc Ariba",
+      "locatie": "Kachtem",
+      "uitslag": null
+    },
+    {
+      "datum": "2026-10-05T21:30:00",
+      "thuis": "Fc Ariba",
+      "uit": "T'Schroefke",
+      "locatie": "Izegem",
+      "uitslag": null
+    },
+    {
+      "datum": "2026-10-12T20:30:00",
+      "thuis": "Panna FC",
+      "uit": "Fc Ariba",
+      "locatie": "Izegem",
       "uitslag": null
     }
   ]
