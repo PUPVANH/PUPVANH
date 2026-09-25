@@ -1,0 +1,3 @@
+# Deze map wordt automatisch ingelezen door src/pages/jpg.astro
+# Zet hier je foto's met naam: JJJJ-MM_land_Stad_Bijschrift_grootte.jpg
+# (dit txt-bestand wordt genegeerd, mag je laten staan of wissen)
