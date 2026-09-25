@@ -1,0 +1,354 @@
+{
+  "_uitleg": "Alle bookmarks van /bookmarks. Elke bookmark heeft een kaartje (num, badge, theme, title, titleEm, cardDesc, cardHint, visit) en een modal (modalKicker, byline, actions, blocks, footerNote). BLOKKEN: elk blok in 'blocks' heeft een 'type'. Mogelijke types: 'text' (h3 + paragraphs[]), 'photos' (h3 + layout + items[] met src/alt/cap), 'quote' (text + cite), 'poem' (paragraphs[] met drop-cap), 'poemExcerpt' (text + attribution). LAYOUT bij photos: 'strip' (3 staand), 'duo' (2 staand), 'triple' (3 liggend), 'single' (1 breed), 'feed' (1 vierkant). THEME bepaalt de filter (places/spoken word/tattoo artist/photography/music). Nieuwe bookmark toevoegen? Kopieer een bestaand blok, pas aan, verhoog num. Foto's komen in public/bookmarks/. Na commit deployt Vercel automatisch.",
+  "bookmarks": [
+    {
+      "num": "01",
+      "theme": "spoken word",
+      "badge": "spoken word",
+      "title": "A Toast to ",
+      "titleEm": "Old Friends",
+      "cardDesc": "A spoken-word piece by @georgiesroar that keeps circling back — about the friend you keep meaning to call. Click to read the whole thing.",
+      "cardHint": "read the piece",
+      "visit": { "label": "Watch", "href": "https://www.tiktok.com/@georgiesroar/video/7440184759575153952" },
+      "modalKicker": "// spoken word · bookmark 01",
+      "byline": "by <a href=\"https://www.tiktok.com/@georgiesroar\" target=\"_blank\" rel=\"noopener\">@georgiesroar</a> · TikTok · 2024",
+      "actions": [
+        { "label": "Watch on TikTok", "href": "https://www.tiktok.com/@georgiesroar/video/7440184759575153952", "primary": true },
+        { "label": "Instagram", "href": "https://www.instagram.com/georgiesroar/", "primary": false }
+      ],
+      "blocks": [
+        {
+          "type": "poem",
+          "h3": "full transcript",
+          "paragraphs": [
+            "I got a call from an old mate last year — a bloke I've not spoken to since I was fourteen. For no particular reason, we just went in different directions, and then never crossed paths. And then the years passed, and so did the seasons, until it got to a point where reaching out after so long felt like treason — to that unspoken manly concept of not being the first to text and say, \"How's it going?\"",
+            "Now things are less hectic, but those Sunday morning hangovers aren't fucking slowing. And then randomly — he called. He said, \"How many years has it been, old friend?\" I said, \"At least ten, but I still see your posts on Instagram now and then.\" He told me I should know better than to see life through such a tinted lens — that Instagram bollocks is all pretend.",
+            "I asked, \"What do I owe the pleasure? Was it a call for business or leisure? Have you worked out where those dealers from my hometown finally buried their treasure?\" He laughed — the same laugh he always had, giggly. And we used to take the piss out of him for it, but now it felt comforting — like a flashback in time, way after, brought upon me by laughter.",
+            "He said, \"No rhyme, no reason for the call. My mum asked how you were — she knew we were thick as fools. And I didn't have an answer.\" He said, \"I know you're doing well, and you're still an attention seeker, because all you do is post — but in honesty mate, you've never felt less close.\"",
+            "Which is bizarre for a man whose bare ass cheeks I've seen more than most. I told him I'd stopped mooning people out of bus windows — on account of being twenty-eight and the concept of being absolutely gross.",
+            "We chatted for ten minutes more, and agreed to meet up when things got less busy. I was up to my eyeballs in work, and his master's thesis was making him dizzy. And I fully intended to catch up with him — a proper catch-up over something fizzy.",
+            "But I've never got the chance. Well, actually… that's not true. I never made the effort to create the chance. I had a ton of time for first dates, so I could socially advance. I had time for randomers who only ever gave me \"can'ts.\" I even ran a fucking marathon in France.",
+            "But now he's not here anymore, and I've missed his last dance. And boy, do I wish I was fourteen again — to see my old friend. Because now, that's twice I've said goodbye, not knowing I'd never see him again."
+          ]
+        }
+      ],
+      "footerNote": "first transcript on the internet · © @georgiesroar"
+    },
+    {
+      "num": "02",
+      "theme": "places",
+      "badge": "place",
+      "title": "Volkshotel ",
+      "titleEm": "Amsterdam",
+      "cardDesc": "Weekend spot with a club, a bar and a rooftop sauna. My go-to whenever I'm in Amsterdam — also the place where I get my yearly tattoo.",
+      "cardHint": "see more",
+      "visit": { "label": "Visit site", "href": "https://www.volkshotel.nl/" },
+      "modalKicker": "// place · bookmark 02",
+      "byline": "Wibautstraat 150, 1091 GR · Amsterdam",
+      "actions": [
+        { "label": "Visit volkshotel.nl", "href": "https://www.volkshotel.nl/", "primary": true },
+        { "label": "Book a room", "href": "https://www.volkshotel.nl/en/rooms", "primary": false },
+        { "label": "Instagram", "href": "https://www.instagram.com/volkshotel/", "primary": false }
+      ],
+      "blocks": [
+        {
+          "type": "photos",
+          "h3": "a few frames",
+          "layout": "strip",
+          "items": [
+            { "src": "/bookmarks/volkshotel-amsterdam-rooftop-hottub.jpg", "alt": "Rooftop hot tub overlooking the Amsterdam skyline", "cap": "Rooftop · hot tub" },
+            { "src": "/bookmarks/volkshotel-amsterdam-rooftop-sauna.jpg", "alt": "Wooden barrel sauna on the Volkshotel rooftop", "cap": "Rooftop · sauna" },
+            { "src": "/bookmarks/volkshotel-amsterdam-room.jpg", "alt": "Volkshotel room with city view at night", "cap": "Room · at night" }
+          ]
+        },
+        {
+          "type": "text",
+          "h3": "why this place",
+          "paragraphs": [
+            "Volkshotel is that rare hotel where the building itself is the reason to stay. Former newspaper offices turned into rooms designed by different artists, a club in the basement (Canvas), a bar and restaurant, and a rooftop with hot tubs and a sauna that stays open past midnight.",
+            "I keep coming back — for the ease of not having to plan your weekend. You stay, you eat, you can party downstairs, enjoy the views, relax up top, or head into the city. The hotel gives you many ways to spend a weekend."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Every year I visit for a day or two, I get a new tattoo... probably. Of course, it has to be from Dylan Hoogerwerf.",
+          "cite": "— Puppy, on his Amsterdam ritual"
+        }
+      ],
+      "footerNote": "visited annually · since 2022"
+    },
+    {
+      "num": "03",
+      "theme": "spoken word",
+      "badge": "poet",
+      "title": "Bri ",
+      "titleEm": "Anora",
+      "cardDesc": "Poet on TikTok — her voice, her writing, her cadence. Must-follow if you like words that land quietly and then don't leave.",
+      "cardHint": "see more",
+      "visit": { "label": "TikTok", "href": "https://www.tiktok.com/@briwritespoetry_" },
+      "modalKicker": "// poet · bookmark 03",
+      "byline": "poet · TikTok · <a href=\"https://www.tiktok.com/@briwritespoetry_\" target=\"_blank\" rel=\"noopener\">@briwritespoetry_</a>",
+      "actions": [
+        { "label": "Follow on TikTok", "href": "https://www.tiktok.com/@briwritespoetry_", "primary": true },
+        { "label": "Instagram", "href": "https://www.instagram.com/briwritespoetry/", "primary": false }
+      ],
+      "blocks": [
+        {
+          "type": "photos",
+          "h3": "recent work",
+          "layout": "single",
+          "items": [
+            { "src": "/bookmarks/bri-anora-poetry-instagram.jpg", "alt": "Bri Anora's Instagram grid with recent poems and video excerpts", "cap": "@briwritespoetry" }
+          ]
+        },
+        {
+          "type": "text",
+          "h3": "why follow",
+          "paragraphs": [
+            "When one of her videos scrolls by, you pause. The voice, the delivery, the words themselves — you stay a beat longer than you meant to, listening, watching, taking it in.",
+            "Reading her writing is a quiet pleasure. Some people just find the perfect words — and Bri manages to carry them across the screen, video after video.",
+            "Must check."
+          ]
+        },
+        {
+          "type": "poemExcerpt",
+          "text": "\"Ask me how I'm feeling and I might stutter… but I can write you a poem that will tell all.\"",
+          "attribution": "— Bri Anora"
+        }
+      ],
+      "footerNote": "discovered · 2024 · followed since"
+    },
+    {
+      "num": "04",
+      "theme": "places",
+      "badge": "self-plug",
+      "title": "Rosablanche C34 · ",
+      "titleEm": "Siviez",
+      "cardDesc": "Shameless plug — my own site. Hiking, raclette, alpine silence in summer; ski-in/out in winter. Also tennis and mountain bikes.",
+      "cardHint": "see more",
+      "visit": { "label": "Visit site", "href": "https://siviez.com" },
+      "modalKicker": "// self-plug · bookmark 04",
+      "byline": "1730m · Valais, Switzerland · hosted by Luc from Izegem",
+      "actions": [
+        { "label": "Visit siviez.com", "href": "https://siviez.com", "primary": true },
+        { "label": "Book on Airbnb", "href": "https://www.airbnb.com/rooms/10012437", "primary": false }
+      ],
+      "blocks": [
+        {
+          "type": "photos",
+          "h3": "seasons",
+          "layout": "triple",
+          "items": [
+            { "src": "/bookmarks/siviez-summer-balcony-view.jpg", "alt": "Summer view from the balcony of Rosablanche C34", "cap": "Summer · balcony" },
+            { "src": "/bookmarks/siviez-alpine-lake.jpg", "alt": "Turquoise alpine lake near Siviez, framed by snow-capped peaks", "cap": "Alpine lake" },
+            { "src": "/bookmarks/siviez-winter-ski-view.jpg", "alt": "Winter view of Siviez ski resort with fresh snow", "cap": "Winter · ski-in/out" }
+          ]
+        },
+        {
+          "type": "text",
+          "h3": "the pitch",
+          "paragraphs": [
+            "Shameless plug for my own built site in progress. Except it's not really about the site — it's about the place. Hiking, raclette and alpine lakes in summer; direct ski-in/out to Les 4 Vallées in winter. A drink with a view at Chez Caroline, then a game of pétanque or a tennis match if the weather holds.",
+            "For me it's mostly the summers — the mountain air, the sounds of nature, the walks, the views. I keep going back and I still haven't done all four seasons yet. On the list."
+          ]
+        }
+      ],
+      "footerNote": "external link · siviez.com"
+    },
+    {
+      "num": "05",
+      "theme": "tattoo artist",
+      "badge": "tattoo artist",
+      "title": "Dylan ",
+      "titleEm": "Hoogerwerf",
+      "cardDesc": "The artist behind most of my ink. Fine-line lettering and small pieces that each carry a story — dreams, family, home.",
+      "cardHint": "see more",
+      "visit": { "label": "Instagram", "href": "https://www.instagram.com/dylanhoogerwerf/" },
+      "modalKicker": "// tattoo artist · bookmark 05",
+      "byline": "tattoo artist · fine-line & lettering",
+      "actions": [
+        { "label": "Instagram", "href": "https://www.instagram.com/dylanhoogerwerf/", "primary": true }
+      ],
+      "blocks": [
+        {
+          "type": "photos",
+          "h3": "a few pieces",
+          "layout": "triple",
+          "items": [
+            { "src": "/bookmarks/dylan-hoogerwerf-dragon-tattoo.jpg", "alt": "Fine-line dragon tattoo by tattoo artist Dylan Hoogerwerf", "cap": "The dragon" },
+            { "src": "/bookmarks/dylan-hoogerwerf-daisy-tattoo.jpg", "alt": "Daisy flower tattoo by Dylan Hoogerwerf, for my grandmother", "cap": "The daisy" },
+            { "src": "/bookmarks/dylan-hoogerwerf-tattoo-artist-at-work.jpg", "alt": "Tattoo artist Dylan Hoogerwerf at work in his studio", "cap": "Dylan at work" }
+          ]
+        },
+        {
+          "type": "text",
+          "h3": "the stories",
+          "paragraphs": [
+            "Dylan did most of the ink I carry, and each piece means something. The dragon is part Lord of the Rings, but mostly it's about my own head — a fantasy world, a utopia. I love to dream, and I spend a lot of time thinking up a better world than the one we live in.",
+            "The daisy is for my grandmother. The rose, just above it, is for my grandfather. I've since bought their house — the place where I always felt most at home."
+          ]
+        }
+      ],
+      "footerNote": "most of my ink · one artist"
+    },
+    {
+      "num": "06",
+      "theme": "tattoo artist",
+      "badge": "tattoo artist",
+      "title": "Linéa ",
+      "titleEm": "D'amore",
+      "cardDesc": "Still too under the radar. Amazing fine-line work that keeps getting bigger and more detailed. Five pieces in and counting.",
+      "cardHint": "see more",
+      "visit": { "label": "Instagram", "href": "https://www.instagram.com/linea_damore/" },
+      "modalKicker": "// tattoo artist · bookmark 06",
+      "byline": "tattoo artist · fine-line",
+      "actions": [
+        { "label": "Instagram", "href": "https://www.instagram.com/linea_damore/", "primary": true },
+        { "label": "Facebook", "href": "https://www.facebook.com/profile.php?id=100075907872422", "primary": false }
+      ],
+      "blocks": [
+        {
+          "type": "photos",
+          "h3": "a few pieces",
+          "layout": "triple",
+          "items": [
+            { "src": "/bookmarks/linea-damore-mountains-lettering-tattoo.jpg", "alt": "Fine-line lettering tattoo 'I want to see mountains again' by Linéa D'amore", "cap": "Mountains" },
+            { "src": "/bookmarks/linea-damore-wander-lettering-tattoo.jpg", "alt": "Fine-line lettering tattoo 'Not all those who wander are lost' by Linéa D'amore", "cap": "Wander" },
+            { "src": "/bookmarks/linea-damore-jon-bellion-lyric-tattoo.jpg", "alt": "Fine-line lettering tattoo of a Jon Bellion lyric by Linéa D'amore", "cap": "Jon Bellion lyric" }
+          ]
+        },
+        {
+          "type": "text",
+          "h3": "why follow",
+          "paragraphs": [
+            "Still too far under the radar for how good she is. Linéa does amazing fine-line work, and I go back every year — five tattoos in so far.",
+            "Over the years I've watched her range grow: bigger pieces, more detail, more ambition. If you're into delicate line work, she's a must. Go before everyone else catches on."
+          ]
+        }
+      ],
+      "footerNote": "five pieces · and counting"
+    },
+    {
+      "num": "07",
+      "theme": "photography",
+      "badge": "photographer",
+      "title": "Emanuele ",
+      "titleEm": "De Luca",
+      "cardDesc": "Maybe my number one Fujifilm X100 photographer. The mood, the story in every frame — and his recipes are a must for travel pics.",
+      "cardHint": "see more",
+      "visit": { "label": "Instagram", "href": "https://www.instagram.com/emadeluca89/" },
+      "modalKicker": "// photographer · bookmark 07",
+      "byline": "photographer · Fujifilm X100",
+      "actions": [
+        { "label": "Instagram", "href": "https://www.instagram.com/emadeluca89/", "primary": true },
+        { "label": "Fujifilm recipe", "href": "https://film.recipes/2024/04/28/la-dolce-vita-capture-the-good-life/", "primary": false }
+      ],
+      "blocks": [
+        {
+          "type": "photos",
+          "h3": "his feed",
+          "layout": "feed",
+          "items": [
+            { "src": "/bookmarks/emanuele-deluca-fujifilm-instagram-feed.jpg", "alt": "Emanuele De Luca Instagram feed with Fujifilm X100 travel photography", "cap": "@emadeluca89" }
+          ]
+        },
+        {
+          "type": "text",
+          "h3": "why follow",
+          "paragraphs": [
+            "It's not just his own work either. There's a great community around him sharing other photographers, so your feed fills up with Fujifilm frames worth studying."
+          ]
+        },
+        {
+          "type": "text",
+          "h3": "bonus",
+          "paragraphs": [
+            "If you don't want to go deep into settings and just want to shoot, use his Fujifilm recipes — the button above links to his \"La Dolce Vita\" one. Perfect for travel pics, straight out of camera, no editing."
+          ]
+        }
+      ],
+      "footerNote": "fujifilm · recipes · must install"
+    },
+    {
+      "num": "08",
+      "theme": "photography",
+      "badge": "photography",
+      "title": "Soleo ",
+      "titleEm": "Studio",
+      "cardDesc": "A newer TikTok find. Vibey day-in-the-life shots that make you want to book a flight to Canada — and Teddy, the most photogenic dog alive.",
+      "cardHint": "see more",
+      "visit": { "label": "Instagram", "href": "https://www.instagram.com/soleostudioo/" },
+      "modalKicker": "// creator · bookmark 08",
+      "byline": "creator · TikTok · Canada",
+      "actions": [
+        { "label": "Instagram", "href": "https://www.instagram.com/soleostudioo/", "primary": true },
+        { "label": "TikTok · studio", "href": "https://www.tiktok.com/@soleostudio", "primary": false },
+        { "label": "TikTok · daily", "href": "https://www.tiktok.com/@catoulinou", "primary": false }
+      ],
+      "blocks": [
+        {
+          "type": "photos",
+          "h3": "her feed",
+          "layout": "feed",
+          "items": [
+            { "src": "/bookmarks/soleo-studio-canada-instagram-feed.jpg", "alt": "Soleo Studio Instagram feed with cozy Canadian nature photography and Teddy the dog", "cap": "@soleostudioo" }
+          ]
+        },
+        {
+          "type": "text",
+          "h3": "why follow",
+          "paragraphs": [
+            "A newer find on TikTok. Across two profiles she posts gorgeous photos and vibey day-in-the-life videos of life in Canada, through every season — the kind that make you want to book a flight right now.",
+            "But I'll be honest about why I really keep scrolling: Teddy. Her dog, who shows up in a slide or a clip here and there. Nothing cuter than a dog. I melt every time."
+          ]
+        }
+      ],
+      "footerNote": "canada · seasons · and Teddy"
+    },
+    {
+      "num": "09",
+      "theme": "music",
+      "badge": "musician",
+      "title": "Jon ",
+      "titleEm": "Bellion",
+      "cardDesc": "My favourite artist. His words hit so hard I've got three of his lyrics tattooed on me. Start with New York Soul.",
+      "cardHint": "see more",
+      "visit": { "label": "Instagram", "href": "https://www.instagram.com/jonbellion/" },
+      "modalKicker": "// musician · bookmark 09",
+      "byline": "musician · songwriter · producer",
+      "actions": [
+        { "label": "Instagram", "href": "https://www.instagram.com/jonbellion/", "primary": true },
+        { "label": "Spotify", "href": "https://open.spotify.com/artist/50JJSqHUf2RQ9xsHs0KMHg", "primary": false },
+        { "label": "YouTube", "href": "https://www.youtube.com/@jonbellion", "primary": false }
+      ],
+      "blocks": [
+        {
+          "type": "photos",
+          "h3": "words on skin",
+          "layout": "duo",
+          "items": [
+            { "src": "/bookmarks/jon-bellion-new-york-soul-album.jpg", "alt": "Jon Bellion New York Soul Part II album artwork", "cap": "New York Soul (Pt. II)" },
+            { "src": "/bookmarks/jon-bellion-lyric-tattoo.jpg", "alt": "Tattoo of Jon Bellion lyric: what if who I hoped to be was always me", "cap": "Lyric tattoo" }
+          ]
+        },
+        {
+          "type": "text",
+          "h3": "why he's my favourite",
+          "paragraphs": [
+            "You might not know the name, but the music world does. Jon Bellion writes and produces for the biggest names out there — Justin Bieber, Rihanna, Jason Derulo and plenty more. But it's his own music where it gets ridiculous.",
+            "The man was born for this. Every beat, every lyric, all of it his own. A genius, honestly — unique, jumping across genres, chasing perfection so hard that sometimes you wait years for the next release. Watch his behind-the-scenes videos and you'll see it: how it all comes together in his head.",
+            "And the evolution across the albums, the way the live versions reinvent the songs — his Cove City live set during COVID is a vibe on its own. I've got three of his lyrics tattooed on me: \"what if who I hoped to be was always me?\", \"maybe idk, maybe that's okay\", and \"insert something really dope right here.\""
+          ]
+        },
+        {
+          "type": "text",
+          "h3": "where to start",
+          "paragraphs": [
+            "New York Soul is the place to begin. Then keep going — and don't skip the behind-the-scenes. The catalogue is deep."
+          ]
+        }
+      ],
+      "footerNote": "three lyric tattoos · one favourite"
+    }
+  ]
+}
