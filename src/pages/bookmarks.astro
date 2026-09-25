@@ -1,5 +1,13 @@
 ---
 import Analytics from '@vercel/analytics/astro';
+import bookmarksData from '../data/bookmarks.json';
+const bookmarks = bookmarksData.bookmarks;
+
+// Filter-tellingen automatisch uit de data
+const themeCounts = {};
+bookmarks.forEach(b => { themeCounts[b.theme] = (themeCounts[b.theme] || 0) + 1; });
+const themeOrder = ['places', 'spoken word', 'tattoo artist', 'photography', 'music'];
+const themes = themeOrder.filter(t => themeCounts[t]);
 ---
 <!DOCTYPE html>
 <html lang="en" data-mode="light">
@@ -55,7 +63,6 @@ import Analytics from '@vercel/analytics/astro';
     mix-blend-mode: multiply;
   }
 
-  /* ── Topbar ─────────────────────────── */
   .topbar {
     position: sticky; top: 0; z-index: 20;
     background: color-mix(in srgb, var(--bg) 88%, transparent);
@@ -85,7 +92,6 @@ import Analytics from '@vercel/analytics/astro';
     gap: 6px;
   }
   .back-link:hover { color: var(--ember); transform: translateX(-3px); }
-  /* Mini-nav (homepage-familie stijl) */
   .mini-nav {
     display: flex;
     align-items: center;
@@ -116,7 +122,6 @@ import Analytics from '@vercel/analytics/astro';
   }
   .mode-toggle:hover { border-color: var(--ember); color: var(--ember); }
 
-  /* ── Hero ─────────────────────────── */
   main {
     max-width: 1200px;
     margin: 0 auto;
@@ -168,7 +173,6 @@ import Analytics from '@vercel/analytics/astro';
     font-weight: 400;
   }
 
-  /* ── Filter pills ─────────────────────────── */
   .filters {
     display: flex;
     flex-wrap: wrap;
@@ -207,7 +211,6 @@ import Analytics from '@vercel/analytics/astro';
     opacity: 0.55;
     margin-left: 5px;
   }
-  /* Card hide/show transition */
   .card.hidden {
     display: none;
   }
@@ -215,7 +218,6 @@ import Analytics from '@vercel/analytics/astro';
     .filters { margin-bottom: 28px; }
   }
 
-  /* ── Grid ─────────────────────────── */
   .grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -328,7 +330,6 @@ import Analytics from '@vercel/analytics/astro';
     white-space: nowrap;
     max-width: 60%;
   }
-  /* Direct visit pill on the card */
   .visit-pill {
     display: inline-flex;
     align-items: center;
@@ -361,7 +362,6 @@ import Analytics from '@vercel/analytics/astro';
     transition: transform 0.25s ease;
   }
   .visit-pill:hover .arrow { transform: translateX(3px); }
-  /* Expand hint appears bottom-left */
   .card-hint {
     display: inline-flex;
     align-items: center;
@@ -377,7 +377,6 @@ import Analytics from '@vercel/analytics/astro';
     font-size: 13px;
   }
 
-  /* ── Modal ─────────────────────────── */
   .modal-overlay {
     position: fixed;
     inset: 0;
@@ -458,7 +457,6 @@ import Analytics from '@vercel/analytics/astro';
   .modal-byline a { color: var(--teal); text-decoration: none; }
   html[data-mode="dark"] .modal-byline a { color: var(--gold); }
 
-  /* Action bar under title */
   .actions {
     display: flex;
     gap: 12px;
@@ -518,7 +516,6 @@ import Analytics from '@vercel/analytics/astro';
     transform: translate(2px, -2px);
   }
 
-  /* Content sections */
   .content-block { margin-bottom: 32px; }
   .content-block:last-child { margin-bottom: 0; }
   .content-block h3 {
@@ -537,7 +534,6 @@ import Analytics from '@vercel/analytics/astro';
   }
   .content-block p:last-child { margin-bottom: 0; }
 
-  /* Poem */
   .poem {
     font-family: 'Playfair Display', serif;
     font-size: 18px;
@@ -555,7 +551,6 @@ import Analytics from '@vercel/analytics/astro';
     color: var(--ember);
   }
 
-  /* Photo slots */
   .photo-strip {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -598,7 +593,6 @@ import Analytics from '@vercel/analytics/astro';
     align-items: flex-end;
     padding: 12px;
   }
-  /* When a real image is inside the photo slot, drop the placeholder look */
   .photo:has(img) {
     border: none;
     background: transparent;
@@ -648,7 +642,6 @@ import Analytics from '@vercel/analytics/astro';
     color: var(--ivory);
   }
 
-  /* Quote block */
   .quote-block {
     background: color-mix(in srgb, var(--ember) 8%, transparent);
     border-left: 3px solid var(--ember);
@@ -673,7 +666,6 @@ import Analytics from '@vercel/analytics/astro';
     font-style: normal;
   }
 
-  /* Poem excerpt (bookmark 3) */
   .poem-excerpt {
     font-family: 'Playfair Display', serif;
     font-style: italic;
@@ -716,7 +708,6 @@ import Analytics from '@vercel/analytics/astro';
     .photo-triple, .photo-strip, .photo-duo { grid-template-columns: 1fr; }
   }
 
-  /* ── Footer ─────────────────────────── */
   footer.pupvanh-footer {
     background: var(--forest);
     color: var(--ivory);
@@ -761,491 +752,96 @@ import Analytics from '@vercel/analytics/astro';
   </section>
 
   <nav class="filters" id="filters" aria-label="Filter bookmarks by theme">
-    <button class="filter-pill active" data-filter="all">all<span class="count">9</span></button>
-    <button class="filter-pill" data-filter="places">places<span class="count">2</span></button>
-    <button class="filter-pill" data-filter="spoken word">spoken word<span class="count">2</span></button>
-    <button class="filter-pill" data-filter="tattoo artist">tattoo artist<span class="count">2</span></button>
-    <button class="filter-pill" data-filter="photography">photography<span class="count">2</span></button>
-    <button class="filter-pill" data-filter="music">music<span class="count">1</span></button>
+    <button class="filter-pill active" data-filter="all">all<span class="count">{bookmarks.length}</span></button>
+    {themes.map(theme => (
+      <button class="filter-pill" data-filter={theme}>{theme}<span class="count">{themeCounts[theme]}</span></button>
+    ))}
   </nav>
 
   <section class="grid" id="grid">
-
-    <!-- Card 01 -->
-    <div class="card" data-modal="1" data-theme="spoken word" role="button" tabindex="0">
-      <div class="card-head">
-        <span class="card-num">01</span>
-        <span class="badge">spoken word</span>
+    {bookmarks.map(b => (
+      <div class="card" data-modal={b.num} data-theme={b.theme} role="button" tabindex="0">
+        <div class="card-head">
+          <span class="card-num">{b.num}</span>
+          <span class="badge">{b.badge}</span>
+        </div>
+        <h3 class="card-title" set:html={b.title + '<em>' + b.titleEm + '</em>'}></h3>
+        <p class="card-desc">{b.cardDesc}</p>
+        <div class="card-meta">
+          <span class="card-hint">{b.cardHint}</span>
+          <a class="visit-pill" href={b.visit.href} target="_blank" rel="noopener" data-nomodal>
+            {b.visit.label} <span class="arrow">↗</span>
+          </a>
+        </div>
       </div>
-      <h3 class="card-title">A Toast to <em>Old Friends</em></h3>
-      <p class="card-desc">A spoken-word piece by @georgiesroar that keeps circling back — about the friend you keep meaning to call. Click to read the whole thing.</p>
-      <div class="card-meta">
-        <span class="card-hint">read the piece</span>
-        <a class="visit-pill" href="https://www.tiktok.com/@georgiesroar/video/7440184759575153952" target="_blank" rel="noopener" data-nomodal>
-          Watch <span class="arrow">↗</span>
-        </a>
-      </div>
-    </div>
-
-    <!-- Card 02 -->
-    <div class="card" data-modal="2" data-theme="places" role="button" tabindex="0">
-      <div class="card-head">
-        <span class="card-num">02</span>
-        <span class="badge">place</span>
-      </div>
-      <h3 class="card-title">Volkshotel <em>Amsterdam</em></h3>
-      <p class="card-desc">Weekend spot with a club, a bar and a rooftop sauna. My go-to whenever I'm in Amsterdam — also the place where I get my yearly tattoo.</p>
-      <div class="card-meta">
-        <span class="card-hint">see more</span>
-        <a class="visit-pill" href="https://www.volkshotel.nl/" target="_blank" rel="noopener" data-nomodal>
-          Visit site <span class="arrow">↗</span>
-        </a>
-      </div>
-    </div>
-
-    <!-- Card 03 -->
-    <div class="card" data-modal="3" data-theme="spoken word" role="button" tabindex="0">
-      <div class="card-head">
-        <span class="card-num">03</span>
-        <span class="badge">poet</span>
-      </div>
-      <h3 class="card-title">Bri <em>Anora</em></h3>
-      <p class="card-desc">Poet on TikTok — her voice, her writing, her cadence. Must-follow if you like words that land quietly and then don't leave.</p>
-      <div class="card-meta">
-        <span class="card-hint">see more</span>
-        <a class="visit-pill" href="https://www.tiktok.com/@briwritespoetry_" target="_blank" rel="noopener" data-nomodal>
-          TikTok <span class="arrow">↗</span>
-        </a>
-      </div>
-    </div>
-
-    <!-- Card 04 -->
-    <div class="card" data-modal="4" data-theme="places" role="button" tabindex="0">
-      <div class="card-head">
-        <span class="card-num">04</span>
-        <span class="badge">self-plug</span>
-      </div>
-      <h3 class="card-title">Rosablanche C34 · <em>Siviez</em></h3>
-      <p class="card-desc">Shameless plug — my own site. Hiking, raclette, alpine silence in summer; ski-in/out in winter. Also tennis and mountain bikes.</p>
-      <div class="card-meta">
-        <span class="card-hint">see more</span>
-        <a class="visit-pill" href="https://siviez.com" target="_blank" rel="noopener noreferrer" data-nomodal>
-          Visit site <span class="arrow">↗</span>
-        </a>
-      </div>
-    </div>
-
-    <!-- Card 05 -->
-    <div class="card" data-modal="5" data-theme="tattoo artist" role="button" tabindex="0">
-      <div class="card-head">
-        <span class="card-num">05</span>
-        <span class="badge">tattoo artist</span>
-      </div>
-      <h3 class="card-title">Dylan <em>Hoogerwerf</em></h3>
-      <p class="card-desc">The artist behind most of my ink. Fine-line lettering and small pieces that each carry a story — dreams, family, home.</p>
-      <div class="card-meta">
-        <span class="card-hint">see more</span>
-        <a class="visit-pill" href="https://www.instagram.com/dylanhoogerwerf/" target="_blank" rel="noopener" data-nomodal>
-          Instagram <span class="arrow">↗</span>
-        </a>
-      </div>
-    </div>
-
-    <!-- Card 06 -->
-    <div class="card" data-modal="6" data-theme="tattoo artist" role="button" tabindex="0">
-      <div class="card-head">
-        <span class="card-num">06</span>
-        <span class="badge">tattoo artist</span>
-      </div>
-      <h3 class="card-title">Linéa <em>D'amore</em></h3>
-      <p class="card-desc">Still too under the radar. Amazing fine-line work that keeps getting bigger and more detailed. Five pieces in and counting.</p>
-      <div class="card-meta">
-        <span class="card-hint">see more</span>
-        <a class="visit-pill" href="https://www.instagram.com/linea_damore/" target="_blank" rel="noopener" data-nomodal>
-          Instagram <span class="arrow">↗</span>
-        </a>
-      </div>
-    </div>
-
-    <!-- Card 07 -->
-    <div class="card" data-modal="7" data-theme="photography" role="button" tabindex="0">
-      <div class="card-head">
-        <span class="card-num">07</span>
-        <span class="badge">photographer</span>
-      </div>
-      <h3 class="card-title">Emanuele <em>De Luca</em></h3>
-      <p class="card-desc">Maybe my number one Fujifilm X100 photographer. The mood, the story in every frame — and his recipes are a must for travel pics.</p>
-      <div class="card-meta">
-        <span class="card-hint">see more</span>
-        <a class="visit-pill" href="https://www.instagram.com/emadeluca89/" target="_blank" rel="noopener" data-nomodal>
-          Instagram <span class="arrow">↗</span>
-        </a>
-      </div>
-    </div>
-
-    <!-- Card 08 -->
-    <div class="card" data-modal="8" data-theme="photography" role="button" tabindex="0">
-      <div class="card-head">
-        <span class="card-num">08</span>
-        <span class="badge">photography</span>
-      </div>
-      <h3 class="card-title">Soleo <em>Studio</em></h3>
-      <p class="card-desc">A newer TikTok find. Vibey day-in-the-life shots that make you want to book a flight to Canada — and Teddy, the most photogenic dog alive.</p>
-      <div class="card-meta">
-        <span class="card-hint">see more</span>
-        <a class="visit-pill" href="https://www.instagram.com/soleostudioo/" target="_blank" rel="noopener" data-nomodal>
-          Instagram <span class="arrow">↗</span>
-        </a>
-      </div>
-    </div>
-
-    <!-- Card 09 -->
-    <div class="card" data-modal="9" data-theme="music" role="button" tabindex="0">
-      <div class="card-head">
-        <span class="card-num">09</span>
-        <span class="badge">musician</span>
-      </div>
-      <h3 class="card-title">Jon <em>Bellion</em></h3>
-      <p class="card-desc">My favourite artist. His words hit so hard I've got three of his lyrics tattooed on me. Start with New York Soul.</p>
-      <div class="card-meta">
-        <span class="card-hint">see more</span>
-        <a class="visit-pill" href="https://www.instagram.com/jonbellion/" target="_blank" rel="noopener" data-nomodal>
-          Instagram <span class="arrow">↗</span>
-        </a>
-      </div>
-    </div>
-
+    ))}
   </section>
 </main>
 
-<!-- ══════════════ MODAL 01 · POEM ══════════════ -->
 <div class="modal-overlay" id="modal-overlay">
+  {bookmarks.map(b => (
+    <div class="modal" data-id={b.num}>
+      <button class="modal-close">✕</button>
+      <div class="modal-kicker">{b.modalKicker}</div>
+      <h2 set:html={b.title + '<em>' + b.titleEm + '</em>'}></h2>
+      <div class="modal-byline" set:html={b.byline}></div>
 
-  <div class="modal" data-id="1">
-    <button class="modal-close">✕</button>
-    <div class="modal-kicker">// spoken word · bookmark 01</div>
-    <h2>A Toast to <em>Old Friends</em></h2>
-    <div class="modal-byline">by <a href="https://www.tiktok.com/@georgiesroar" target="_blank" rel="noopener">@georgiesroar</a> · TikTok · 2024</div>
-
-    <div class="actions">
-      <a class="btn btn-primary" href="https://www.tiktok.com/@georgiesroar/video/7440184759575153952" target="_blank" rel="noopener">
-        Watch on TikTok <span class="ext">↗</span>
-      </a>
-      <a class="btn btn-secondary" href="https://www.instagram.com/georgiesroar/" target="_blank" rel="noopener">
-        Instagram <span class="ext">↗</span>
-      </a>
-    </div>
-
-    <div class="content-block">
-      <h3>full transcript</h3>
-      <div class="poem">
-        <p>I got a call from an old mate last year — a bloke I've not spoken to since I was fourteen. For no particular reason, we just went in different directions, and then never crossed paths. And then the years passed, and so did the seasons, until it got to a point where reaching out after so long felt like treason — to that unspoken manly concept of not being the first to text and say, "How's it going?"</p>
-
-        <p>Now things are less hectic, but those Sunday morning hangovers aren't fucking slowing. And then randomly — he called. He said, "How many years has it been, old friend?" I said, "At least ten, but I still see your posts on Instagram now and then." He told me I should know better than to see life through such a tinted lens — that Instagram bollocks is all pretend.</p>
-
-        <p>I asked, "What do I owe the pleasure? Was it a call for business or leisure? Have you worked out where those dealers from my hometown finally buried their treasure?" He laughed — the same laugh he always had, giggly. And we used to take the piss out of him for it, but now it felt comforting — like a flashback in time, way after, brought upon me by laughter.</p>
-
-        <p>He said, "No rhyme, no reason for the call. My mum asked how you were — she knew we were thick as fools. And I didn't have an answer." He said, "I know you're doing well, and you're still an attention seeker, because all you do is post — but in honesty mate, you've never felt less close."</p>
-
-        <p>Which is bizarre for a man whose bare ass cheeks I've seen more than most. I told him I'd stopped mooning people out of bus windows — on account of being twenty-eight and the concept of being absolutely gross.</p>
-
-        <p>We chatted for ten minutes more, and agreed to meet up when things got less busy. I was up to my eyeballs in work, and his master's thesis was making him dizzy. And I fully intended to catch up with him — a proper catch-up over something fizzy.</p>
-
-        <p>But I've never got the chance. Well, actually… that's not true. I never made the effort to create the chance. I had a ton of time for first dates, so I could socially advance. I had time for randomers who only ever gave me "can'ts." I even ran a fucking marathon in France.</p>
-
-        <p>But now he's not here anymore, and I've missed his last dance. And boy, do I wish I was fourteen again — to see my old friend. Because now, that's twice I've said goodbye, not knowing I'd never see him again.</p>
+      <div class="actions">
+        {b.actions.map(a => (
+          <a class={a.primary ? 'btn btn-primary' : 'btn btn-secondary'} href={a.href} target="_blank" rel="noopener">
+            {a.label} <span class="ext">↗</span>
+          </a>
+        ))}
       </div>
+
+      {b.blocks.map(block => (
+        <>
+          {block.type === 'text' && (
+            <div class="content-block">
+              <h3>{block.h3}</h3>
+              {block.paragraphs.map(p => (<p>{p}</p>))}
+            </div>
+          )}
+          {block.type === 'poem' && (
+            <div class="content-block">
+              <h3>{block.h3}</h3>
+              <div class="poem">
+                {block.paragraphs.map(p => (<p>{p}</p>))}
+              </div>
+            </div>
+          )}
+          {block.type === 'photos' && (
+            <div class="content-block">
+              <h3>{block.h3}</h3>
+              {(block.layout === 'single' || block.layout === 'feed') ? (
+                <div class={block.layout === 'single' ? 'photo photo-single' : 'photo photo-feed'}>
+                  <img src={block.items[0].src} alt={block.items[0].alt} />
+                  <span class="cap">{block.items[0].cap}</span>
+                </div>
+              ) : (
+                <div class={block.layout === 'strip' ? 'photo-strip' : block.layout === 'duo' ? 'photo-duo' : 'photo-triple'}>
+                  {block.items.map(item => (
+                    <div class="photo"><img src={item.src} alt={item.alt} /><span class="cap">{item.cap}</span></div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+          {block.type === 'quote' && (
+            <div class="quote-block">
+              <p>{'"' + block.text + '"'}</p>
+              <cite>{block.cite}</cite>
+            </div>
+          )}
+          {block.type === 'poemExcerpt' && (
+            <div class="poem-excerpt" set:html={block.text + '<span class="attribution">' + block.attribution + '</span>'}></div>
+          )}
+        </>
+      ))}
+
+      <div class="modal-footer-note">{b.footerNote}</div>
     </div>
-
-    <div class="modal-footer-note">first transcript on the internet · © @georgiesroar</div>
-  </div>
-
-  <!-- ══════════════ MODAL 02 · VOLKSHOTEL ══════════════ -->
-  <div class="modal" data-id="2">
-    <button class="modal-close">✕</button>
-    <div class="modal-kicker">// place · bookmark 02</div>
-    <h2>Volkshotel <em>Amsterdam</em></h2>
-    <div class="modal-byline">Wibautstraat 150, 1091 GR · Amsterdam</div>
-
-    <div class="actions">
-      <a class="btn btn-primary" href="https://www.volkshotel.nl/" target="_blank" rel="noopener">
-        Visit volkshotel.nl <span class="ext">↗</span>
-      </a>
-      <a class="btn btn-secondary" href="https://www.volkshotel.nl/en/rooms" target="_blank" rel="noopener">
-        Book a room <span class="ext">↗</span>
-      </a>
-      <a class="btn btn-secondary" href="https://www.instagram.com/volkshotel/" target="_blank" rel="noopener">
-        Instagram <span class="ext">↗</span>
-      </a>
-    </div>
-
-    <div class="content-block">
-      <h3>a few frames</h3>
-      <div class="photo-strip">
-        <div class="photo"><img src="/bookmarks/volkshotel-amsterdam-rooftop-hottub.jpg" alt="Rooftop hot tub overlooking the Amsterdam skyline" /><span class="cap">Rooftop · hot tub</span></div>
-        <div class="photo"><img src="/bookmarks/volkshotel-amsterdam-rooftop-sauna.jpg" alt="Wooden barrel sauna on the Volkshotel rooftop" /><span class="cap">Rooftop · sauna</span></div>
-        <div class="photo"><img src="/bookmarks/volkshotel-amsterdam-room.jpg" alt="Volkshotel room with city view at night" /><span class="cap">Room · at night</span></div>
-      </div>
-    </div>
-
-    <div class="content-block">
-      <h3>why this place</h3>
-      <p>Volkshotel is that rare hotel where the building itself is the reason to stay. Former newspaper offices turned into rooms designed by different artists, a club in the basement (Canvas), a bar and restaurant, and a rooftop with hot tubs and a sauna that stays open past midnight.</p>
-      <p>I keep coming back — for the ease of not having to plan your weekend. You stay, you eat, you can party downstairs, enjoy the views, relax up top, or head into the city. The hotel gives you many ways to spend a weekend.</p>
-    </div>
-
-    <div class="quote-block">
-      <p>"Every year I visit for a day or two, I get a new tattoo... probably. Of course, it has to be from Dylan Hoogerwerf."</p>
-      <cite>— Puppy, on his Amsterdam ritual</cite>
-    </div>
-
-    <div class="modal-footer-note">visited annually · since 2022</div>
-  </div>
-
-  <!-- ══════════════ MODAL 03 · BRI ANORA ══════════════ -->
-  <div class="modal" data-id="3">
-    <button class="modal-close">✕</button>
-    <div class="modal-kicker">// poet · bookmark 03</div>
-    <h2>Bri <em>Anora</em></h2>
-    <div class="modal-byline">poet · TikTok · <a href="https://www.tiktok.com/@briwritespoetry_" target="_blank" rel="noopener">@briwritespoetry_</a></div>
-
-    <div class="actions">
-      <a class="btn btn-primary" href="https://www.tiktok.com/@briwritespoetry_" target="_blank" rel="noopener">
-        Follow on TikTok <span class="ext">↗</span>
-      </a>
-      <a class="btn btn-secondary" href="https://www.instagram.com/briwritespoetry/" target="_blank" rel="noopener">
-        Instagram <span class="ext">↗</span>
-      </a>
-    </div>
-
-    <div class="content-block">
-      <h3>recent work</h3>
-      <div class="photo photo-single"><img src="/bookmarks/bri-anora-poetry-instagram.jpg" alt="Bri Anora's Instagram grid with recent poems and video excerpts" /><span class="cap">@briwritespoetry</span></div>
-    </div>
-
-    <div class="content-block">
-      <h3>why follow</h3>
-      <p>When one of her videos scrolls by, you pause. The voice, the delivery, the words themselves — you stay a beat longer than you meant to, listening, watching, taking it in.</p>
-      <p>Reading her writing is a quiet pleasure. Some people just find the perfect words — and Bri manages to carry them across the screen, video after video.</p>
-      <p>Must check.</p>
-    </div>
-
-    <div class="poem-excerpt">
-      "Ask me how I'm feeling and I might stutter… but I can write you a poem that will tell all."
-      <span class="attribution">— Bri Anora</span>
-    </div>
-
-    <div class="modal-footer-note">discovered · 2024 · followed since</div>
-  </div>
-
-  <!-- ══════════════ MODAL 04 · SIVIEZ ══════════════ -->
-  <div class="modal" data-id="4">
-    <button class="modal-close">✕</button>
-    <div class="modal-kicker">// self-plug · bookmark 04</div>
-    <h2>Rosablanche C34 · <em>Siviez</em></h2>
-    <div class="modal-byline">1730m · Valais, Switzerland · hosted by Luc from Izegem</div>
-
-    <div class="actions">
-      <a class="btn btn-primary" href="https://siviez.com" target="_blank" rel="noopener noreferrer">
-        Visit siviez.com <span class="ext">↗</span>
-      </a>
-      <a class="btn btn-secondary" href="https://www.airbnb.com/rooms/10012437" target="_blank" rel="noopener">
-        Book on Airbnb <span class="ext">↗</span>
-      </a>
-    </div>
-
-    <div class="content-block">
-      <h3>seasons</h3>
-      <div class="photo-triple">
-        <div class="photo"><img src="/bookmarks/siviez-summer-balcony-view.jpg" alt="Summer view from the balcony of Rosablanche C34" /><span class="cap">Summer · balcony</span></div>
-        <div class="photo"><img src="/bookmarks/siviez-alpine-lake.jpg" alt="Turquoise alpine lake near Siviez, framed by snow-capped peaks" /><span class="cap">Alpine lake</span></div>
-        <div class="photo"><img src="/bookmarks/siviez-winter-ski-view.jpg" alt="Winter view of Siviez ski resort with fresh snow" /><span class="cap">Winter · ski-in/out</span></div>
-      </div>
-    </div>
-
-    <div class="content-block">
-      <h3>the pitch</h3>
-      <p>Shameless plug for my own built site in progress. Except it's not really about the site — it's about the place. Hiking, raclette and alpine lakes in summer; direct ski-in/out to Les 4 Vallées in winter. A drink with a view at Chez Caroline, then a game of pétanque or a tennis match if the weather holds.</p>
-      <p>For me it's mostly the summers — the mountain air, the sounds of nature, the walks, the views. I keep going back and I still haven't done all four seasons yet. On the list.</p>
-    </div>
-
-    <div class="modal-footer-note">external link · siviez.com</div>
-  </div>
-
-  <!-- ══════════════ MODAL 05 · DYLAN HOOGERWERF ══════════════ -->
-  <div class="modal" data-id="5">
-    <button class="modal-close">✕</button>
-    <div class="modal-kicker">// tattoo artist · bookmark 05</div>
-    <h2>Dylan <em>Hoogerwerf</em></h2>
-    <div class="modal-byline">tattoo artist · fine-line & lettering</div>
-
-    <div class="actions">
-      <a class="btn btn-primary" href="https://www.instagram.com/dylanhoogerwerf/" target="_blank" rel="noopener">
-        Instagram <span class="ext">↗</span>
-      </a>
-    </div>
-
-    <div class="content-block">
-      <h3>a few pieces</h3>
-      <div class="photo-triple">
-        <div class="photo"><img src="/bookmarks/dylan-hoogerwerf-dragon-tattoo.jpg" alt="Fine-line dragon tattoo by tattoo artist Dylan Hoogerwerf" /><span class="cap">The dragon</span></div>
-        <div class="photo"><img src="/bookmarks/dylan-hoogerwerf-daisy-tattoo.jpg" alt="Daisy flower tattoo by Dylan Hoogerwerf, for my grandmother" /><span class="cap">The daisy</span></div>
-        <div class="photo"><img src="/bookmarks/dylan-hoogerwerf-tattoo-artist-at-work.jpg" alt="Tattoo artist Dylan Hoogerwerf at work in his studio" /><span class="cap">Dylan at work</span></div>
-      </div>
-    </div>
-
-    <div class="content-block">
-      <h3>the stories</h3>
-      <p>Dylan did most of the ink I carry, and each piece means something. The dragon is part Lord of the Rings, but mostly it's about my own head — a fantasy world, a utopia. I love to dream, and I spend a lot of time thinking up a better world than the one we live in.</p>
-      <p>The daisy is for my grandmother. The rose, just above it, is for my grandfather. I've since bought their house — the place where I always felt most at home.</p>
-    </div>
-
-    <div class="modal-footer-note">most of my ink · one artist</div>
-  </div>
-
-  <!-- ══════════════ MODAL 06 · LINÉA D'AMORE ══════════════ -->
-  <div class="modal" data-id="6">
-    <button class="modal-close">✕</button>
-    <div class="modal-kicker">// tattoo artist · bookmark 06</div>
-    <h2>Linéa <em>D'amore</em></h2>
-    <div class="modal-byline">tattoo artist · fine-line</div>
-
-    <div class="actions">
-      <a class="btn btn-primary" href="https://www.instagram.com/linea_damore/" target="_blank" rel="noopener">
-        Instagram <span class="ext">↗</span>
-      </a>
-      <a class="btn btn-secondary" href="https://www.facebook.com/profile.php?id=100075907872422" target="_blank" rel="noopener">
-        Facebook <span class="ext">↗</span>
-      </a>
-    </div>
-
-    <div class="content-block">
-      <h3>a few pieces</h3>
-      <div class="photo-triple">
-        <div class="photo"><img src="/bookmarks/linea-damore-mountains-lettering-tattoo.jpg" alt="Fine-line lettering tattoo 'I want to see mountains again' by Linéa D'amore" /><span class="cap">Mountains</span></div>
-        <div class="photo"><img src="/bookmarks/linea-damore-wander-lettering-tattoo.jpg" alt="Fine-line lettering tattoo 'Not all those who wander are lost' by Linéa D'amore" /><span class="cap">Wander</span></div>
-        <div class="photo"><img src="/bookmarks/linea-damore-jon-bellion-lyric-tattoo.jpg" alt="Fine-line lettering tattoo of a Jon Bellion lyric by Linéa D'amore" /><span class="cap">Jon Bellion lyric</span></div>
-      </div>
-    </div>
-
-    <div class="content-block">
-      <h3>why follow</h3>
-      <p>Still too far under the radar for how good she is. Linéa does amazing fine-line work, and I go back every year — five tattoos in so far.</p>
-      <p>Over the years I've watched her range grow: bigger pieces, more detail, more ambition. If you're into delicate line work, she's a must. Go before everyone else catches on.</p>
-    </div>
-
-    <div class="modal-footer-note">five pieces · and counting</div>
-  </div>
-
-  <!-- ══════════════ MODAL 07 · EMANUELE DE LUCA ══════════════ -->
-  <div class="modal" data-id="7">
-    <button class="modal-close">✕</button>
-    <div class="modal-kicker">// photographer · bookmark 07</div>
-    <h2>Emanuele <em>De Luca</em></h2>
-    <div class="modal-byline">photographer · Fujifilm X100</div>
-
-    <div class="actions">
-      <a class="btn btn-primary" href="https://www.instagram.com/emadeluca89/" target="_blank" rel="noopener">
-        Instagram <span class="ext">↗</span>
-      </a>
-      <a class="btn btn-secondary" href="https://film.recipes/2024/04/28/la-dolce-vita-capture-the-good-life/" target="_blank" rel="noopener">
-        Fujifilm recipe <span class="ext">↗</span>
-      </a>
-    </div>
-
-    <div class="content-block">
-      <h3>his feed</h3>
-      <div class="photo photo-feed"><img src="/bookmarks/emanuele-deluca-fujifilm-instagram-feed.jpg" alt="Emanuele De Luca Instagram feed with Fujifilm X100 travel photography" /><span class="cap">@emadeluca89</span></div>
-    </div>
-
-    <div class="content-block">
-      <h3>why follow</h3>
-      <p>It's not just his own work either. There's a great community around him sharing other photographers, so your feed fills up with Fujifilm frames worth studying.</p>
-    </div>
-
-    <div class="content-block">
-      <h3>bonus</h3>
-      <p>If you don't want to go deep into settings and just want to shoot, use his Fujifilm recipes — the button above links to his "La Dolce Vita" one. Perfect for travel pics, straight out of camera, no editing.</p>
-    </div>
-
-    <div class="modal-footer-note">fujifilm · recipes · must install</div>
-  </div>
-
-  <!-- ══════════════ MODAL 08 · SOLEO STUDIO ══════════════ -->
-  <div class="modal" data-id="8">
-    <button class="modal-close">✕</button>
-    <div class="modal-kicker">// creator · bookmark 08</div>
-    <h2>Soleo <em>Studio</em></h2>
-    <div class="modal-byline">creator · TikTok · Canada</div>
-
-    <div class="actions">
-      <a class="btn btn-primary" href="https://www.instagram.com/soleostudioo/" target="_blank" rel="noopener">
-        Instagram <span class="ext">↗</span>
-      </a>
-      <a class="btn btn-secondary" href="https://www.tiktok.com/@soleostudio" target="_blank" rel="noopener">
-        TikTok · studio <span class="ext">↗</span>
-      </a>
-      <a class="btn btn-secondary" href="https://www.tiktok.com/@catoulinou" target="_blank" rel="noopener">
-        TikTok · daily <span class="ext">↗</span>
-      </a>
-    </div>
-
-    <div class="content-block">
-      <h3>her feed</h3>
-      <div class="photo photo-feed"><img src="/bookmarks/soleo-studio-canada-instagram-feed.jpg" alt="Soleo Studio Instagram feed with cozy Canadian nature photography and Teddy the dog" /><span class="cap">@soleostudioo</span></div>
-    </div>
-
-    <div class="content-block">
-      <h3>why follow</h3>
-      <p>A newer find on TikTok. Across two profiles she posts gorgeous photos and vibey day-in-the-life videos of life in Canada, through every season — the kind that make you want to book a flight right now.</p>
-      <p>But I'll be honest about why I really keep scrolling: Teddy. Her dog, who shows up in a slide or a clip here and there. Nothing cuter than a dog. I melt every time.</p>
-    </div>
-
-    <div class="modal-footer-note">canada · seasons · and Teddy</div>
-  </div>
-
-  <!-- ══════════════ MODAL 09 · JON BELLION ══════════════ -->
-  <div class="modal" data-id="9">
-    <button class="modal-close">✕</button>
-    <div class="modal-kicker">// musician · bookmark 09</div>
-    <h2>Jon <em>Bellion</em></h2>
-    <div class="modal-byline">musician · songwriter · producer</div>
-
-    <div class="actions">
-      <a class="btn btn-primary" href="https://www.instagram.com/jonbellion/" target="_blank" rel="noopener">
-        Instagram <span class="ext">↗</span>
-      </a>
-      <a class="btn btn-secondary" href="https://open.spotify.com/artist/50JJSqHUf2RQ9xsHs0KMHg" target="_blank" rel="noopener">
-        Spotify <span class="ext">↗</span>
-      </a>
-      <a class="btn btn-secondary" href="https://www.youtube.com/@jonbellion" target="_blank" rel="noopener">
-        YouTube <span class="ext">↗</span>
-      </a>
-    </div>
-
-    <div class="content-block">
-      <h3>words on skin</h3>
-      <div class="photo-duo">
-        <div class="photo"><img src="/bookmarks/jon-bellion-new-york-soul-album.jpg" alt="Jon Bellion New York Soul Part II album artwork" /><span class="cap">New York Soul (Pt. II)</span></div>
-        <div class="photo"><img src="/bookmarks/jon-bellion-lyric-tattoo.jpg" alt="Tattoo of Jon Bellion lyric: what if who I hoped to be was always me" /><span class="cap">Lyric tattoo</span></div>
-      </div>
-    </div>
-
-    <div class="content-block">
-      <h3>why he's my favourite</h3>
-      <p>You might not know the name, but the music world does. Jon Bellion writes and produces for the biggest names out there — Justin Bieber, Rihanna, Jason Derulo and plenty more. But it's his own music where it gets ridiculous.</p>
-      <p>The man was born for this. Every beat, every lyric, all of it his own. A genius, honestly — unique, jumping across genres, chasing perfection so hard that sometimes you wait years for the next release. Watch his behind-the-scenes videos and you'll see it: how it all comes together in his head.</p>
-      <p>And the evolution across the albums, the way the live versions reinvent the songs — his Cove City live set during COVID is a vibe on its own. I've got three of his lyrics tattooed on me: "what if who I hoped to be was always me?", "maybe idk, maybe that's okay", and "insert something really dope right here."</p>
-    </div>
-
-    <div class="content-block">
-      <h3>where to start</h3>
-      <p>New York Soul is the place to begin. Then keep going — and don't skip the behind-the-scenes. The catalogue is deep.</p>
-    </div>
-
-    <div class="modal-footer-note">three lyric tattoos · one favourite</div>
-  </div>
-
+  ))}
 </div>
 
 <footer class="pupvanh-footer">
@@ -1256,7 +852,6 @@ import Analytics from '@vercel/analytics/astro';
 <Analytics />
 
 <script>
-  // ── Filter pills ──────────────
   const filterPills = document.querySelectorAll('.filter-pill');
   const allCards = document.querySelectorAll('.card');
   filterPills.forEach(pill => {
@@ -1270,7 +865,6 @@ import Analytics from '@vercel/analytics/astro';
     });
   });
 
-  // ── Modal handling ──────────────
   const overlay = document.getElementById('modal-overlay');
   const modals = document.querySelectorAll('.modal');
 
@@ -1278,7 +872,6 @@ import Analytics from '@vercel/analytics/astro';
     modals.forEach(m => m.classList.toggle('active', m.dataset.id === String(id)));
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
-    // scroll modal content to top
     const active = document.querySelector('.modal.active');
     if (active) active.scrollTop = 0;
     overlay.scrollTop = 0;
@@ -1291,11 +884,9 @@ import Analytics from '@vercel/analytics/astro';
 
   document.querySelectorAll('[data-modal]').forEach(el => {
     el.addEventListener('click', e => {
-      // If the click bubbled up from a visit-pill (or anything with data-nomodal), ignore it
       if (e.target.closest('[data-nomodal]')) return;
       openModal(el.dataset.modal);
     });
-    // Keyboard accessibility: Enter or Space on the card opens the modal
     el.addEventListener('keydown', e => {
       if ((e.key === 'Enter' || e.key === ' ') && !e.target.closest('[data-nomodal]')) {
         e.preventDefault();
@@ -1303,7 +894,6 @@ import Analytics from '@vercel/analytics/astro';
       }
     });
   });
-  // Stop the pill's click from bubbling up into the card
   document.querySelectorAll('[data-nomodal]').forEach(el => {
     el.addEventListener('click', e => e.stopPropagation());
   });
@@ -1311,7 +901,6 @@ import Analytics from '@vercel/analytics/astro';
   overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-  // ── Mode toggle ──────────────
   const modeToggle = document.getElementById('modeToggle');
   const savedMode = localStorage.getItem('bookmarks-mode') || 'light';
   document.documentElement.dataset.mode = savedMode;
