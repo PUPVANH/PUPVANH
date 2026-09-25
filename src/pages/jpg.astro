@@ -1,18 +1,329 @@
 ---
 import Analytics from "@vercel/analytics/astro"
 import PupvanhFooter from '../components/PupvanhFooter.astro';
-import photos from '../data/jpg-photos.json';
 
+// ══════════════════════════════════════════════════════════════
+//  AUTOMATISCH FOTO'S INLEZEN UIT src/photos/
+//  Bestandsnaam-formaat:
+//    JJJJ-MM_land_Stad_Bijschrift-met-streepjes_grootte.jpg
+//  Voorbeeld:
+//    2024-06_ch_Siviez_Chapel-in-the-drizzle_tall.jpg
+//  → datum 06.2024 · land ch · stad Siviez ·
+//    titel "Chapel in the drizzle" · size tall
+//  Nieuwe foto toevoegen = enkel bestand in src/photos/ droppen.
+//  (grootte achteraan is optioneel: tall = standaard)
+// ══════════════════════════════════════════════════════════════
+
+// ══════════════════════════════════════════════════════════════
+//  ALLE LANDEN TER WERELD — ISO 3166-1 tweelettercode → vlag + naam
+//  Vlaggen komen uit jouw eigen mappen:
+//    /flag-images/{Continent}/SVG/{Landnaam}.svg
+//  Nieuw land gebruiken = gewoon de code hieronder gebruiken in de
+//  bestandsnaam van je foto. Werkt automatisch.
+// ══════════════════════════════════════════════════════════════
+const COUNTRIES = {
+  // ── Europe ──
+  'al': { label: 'Albania', flag: '/flag-images/Europe/SVG/Albania.svg' },
+  'ad': { label: 'Andorra', flag: '/flag-images/Europe/SVG/Andorra.svg' },
+  'at': { label: 'Austria', flag: '/flag-images/Europe/SVG/Austria.svg' },
+  'by': { label: 'Belarus', flag: '/flag-images/Europe/SVG/Belarus.svg' },
+  'be': { label: 'Belgium', flag: '/flag-images/Europe/SVG/Belgium.svg' },
+  'ba': { label: 'Bosnia & Herzegovina', flag: '/flag-images/Europe/SVG/Bosnia_and_Herzegovina.svg' },
+  'bg': { label: 'Bulgaria', flag: '/flag-images/Europe/SVG/Bulgaria.svg' },
+  'hr': { label: 'Croatia', flag: '/flag-images/Europe/SVG/Croatia.svg' },
+  'cz': { label: 'Czechia', flag: '/flag-images/Europe/SVG/Czechia.svg' },
+  'dk': { label: 'Denmark', flag: '/flag-images/Europe/SVG/Denmark.svg' },
+  'gb-eng': { label: 'England', flag: '/flag-images/Europe/SVG/England.svg' },
+  'ee': { label: 'Estonia', flag: '/flag-images/Europe/SVG/Estonia.svg' },
+  'fo': { label: 'Faroe Islands', flag: '/flag-images/Europe/SVG/Faroe_Islands.svg' },
+  'fi': { label: 'Finland', flag: '/flag-images/Europe/SVG/Finland.svg' },
+  'fr': { label: 'France', flag: '/flag-images/Europe/SVG/France.svg' },
+  'de': { label: 'Germany', flag: '/flag-images/Europe/SVG/Germany.svg' },
+  'gi': { label: 'Gibraltar', flag: '/flag-images/Europe/SVG/Gibraltar.svg' },
+  'gr': { label: 'Greece', flag: '/flag-images/Europe/SVG/Greece.svg' },
+  'gg': { label: 'Guernsey', flag: '/flag-images/Europe/SVG/Guernsey.svg' },
+  'hu': { label: 'Hungary', flag: '/flag-images/Europe/SVG/Hungary.svg' },
+  'is': { label: 'Iceland', flag: '/flag-images/Europe/SVG/Iceland.svg' },
+  'ie': { label: 'Ireland', flag: '/flag-images/Europe/SVG/Ireland.svg' },
+  'im': { label: 'Isle of Man', flag: '/flag-images/Europe/SVG/Isle_of_Man.svg' },
+  'it': { label: 'Italy', flag: '/flag-images/Europe/SVG/Italy.svg' },
+  'je': { label: 'Jersey', flag: '/flag-images/Europe/SVG/Jersey.svg' },
+  'xk': { label: 'Kosovo', flag: '/flag-images/Europe/SVG/Kosovo.svg' },
+  'lv': { label: 'Latvia', flag: '/flag-images/Europe/SVG/Latvia.svg' },
+  'li': { label: 'Liechtenstein', flag: '/flag-images/Europe/SVG/Liechtenstein.svg' },
+  'lt': { label: 'Lithuania', flag: '/flag-images/Europe/SVG/Lithuania.svg' },
+  'lu': { label: 'Luxembourg', flag: '/flag-images/Europe/SVG/Luxembourg.svg' },
+  'mt': { label: 'Malta', flag: '/flag-images/Europe/SVG/Malta.svg' },
+  'md': { label: 'Moldova', flag: '/flag-images/Europe/SVG/Moldova.svg' },
+  'mc': { label: 'Monaco', flag: '/flag-images/Europe/SVG/Monaco.svg' },
+  'me': { label: 'Montenegro', flag: '/flag-images/Europe/SVG/Montenegro.svg' },
+  'nl': { label: 'Netherlands', flag: '/flag-images/Europe/SVG/Netherlands.svg' },
+  'mk': { label: 'North Macedonia', flag: '/flag-images/Europe/SVG/North_Macedonia.svg' },
+  'gb-nir': { label: 'Northern Ireland', flag: '/flag-images/Europe/SVG/Northern_Ireland.svg' },
+  'no': { label: 'Norway', flag: '/flag-images/Europe/SVG/Norway.svg' },
+  'pl': { label: 'Poland', flag: '/flag-images/Europe/SVG/Poland.svg' },
+  'pt': { label: 'Portugal', flag: '/flag-images/Europe/SVG/Portugal.svg' },
+  'ro': { label: 'Romania', flag: '/flag-images/Europe/SVG/Romania.svg' },
+  'ru': { label: 'Russia', flag: '/flag-images/Europe/SVG/Russian_Federation.svg' },
+  'sm': { label: 'San Marino', flag: '/flag-images/Europe/SVG/San_Marino.svg' },
+  'gb-sct': { label: 'Scotland', flag: '/flag-images/Europe/SVG/Scotland.svg' },
+  'rs': { label: 'Serbia', flag: '/flag-images/Europe/SVG/Serbia.svg' },
+  'sk': { label: 'Slovakia', flag: '/flag-images/Europe/SVG/Slovakia.svg' },
+  'si': { label: 'Slovenia', flag: '/flag-images/Europe/SVG/Slovenia.svg' },
+  'es': { label: 'Spain', flag: '/flag-images/Europe/SVG/Spain.svg' },
+  'sj': { label: 'Svalbard & Jan Mayen', flag: '/flag-images/Europe/SVG/Svalbard_and_Jan_Mayen.svg' },
+  'se': { label: 'Sweden', flag: '/flag-images/Europe/SVG/Sweden.svg' },
+  'ch': { label: 'Switzerland', flag: '/flag-images/Europe/SVG/Switzerland.svg' },
+  'ua': { label: 'Ukraine', flag: '/flag-images/Europe/SVG/Ukraine.svg' },
+  'gb': { label: 'United Kingdom', flag: '/flag-images/Europe/SVG/United_Kingdom.svg' },
+  'va': { label: 'Vatican City', flag: '/flag-images/Europe/SVG/Vatican_City.svg' },
+  'gb-wls': { label: 'Wales', flag: '/flag-images/Europe/SVG/Wales.svg' },
+  'ax': { label: 'Åland Islands', flag: '/flag-images/Europe/SVG/Aland_Islands.svg' },
+  // ── Asia ──
+  'af': { label: 'Afghanistan', flag: '/flag-images/Asia/SVG/Afghanistan.svg' },
+  'am': { label: 'Armenia', flag: '/flag-images/Asia/SVG/Armenia.svg' },
+  'az': { label: 'Azerbaijan', flag: '/flag-images/Asia/SVG/Azerbaijan.svg' },
+  'bh': { label: 'Bahrain', flag: '/flag-images/Asia/SVG/Bahrain.svg' },
+  'bd': { label: 'Bangladesh', flag: '/flag-images/Asia/SVG/Bangladesh.svg' },
+  'bt': { label: 'Bhutan', flag: '/flag-images/Asia/SVG/Bhutan.svg' },
+  'bn': { label: 'Brunei', flag: '/flag-images/Asia/SVG/Brunei.svg' },
+  'kh': { label: 'Cambodia', flag: '/flag-images/Asia/SVG/Cambodia.svg' },
+  'cn': { label: 'China', flag: '/flag-images/Asia/SVG/China.svg' },
+  'cy': { label: 'Cyprus', flag: '/flag-images/Asia/SVG/Cyprus.svg' },
+  'ge': { label: 'Georgia', flag: '/flag-images/Asia/SVG/Georgia.svg' },
+  'hk': { label: 'Hong Kong', flag: '/flag-images/Asia/SVG/Hong_Kong.svg' },
+  'in': { label: 'India', flag: '/flag-images/Asia/SVG/India.svg' },
+  'id': { label: 'Indonesia', flag: '/flag-images/Asia/SVG/Indonesia.svg' },
+  'ir': { label: 'Iran', flag: '/flag-images/Asia/SVG/Iran.svg' },
+  'iq': { label: 'Iraq', flag: '/flag-images/Asia/SVG/Iraq.svg' },
+  'il': { label: 'Israel', flag: '/flag-images/Asia/SVG/Israel.svg' },
+  'jp': { label: 'Japan', flag: '/flag-images/Asia/SVG/Japan.svg' },
+  'jo': { label: 'Jordan', flag: '/flag-images/Asia/SVG/Jordan.svg' },
+  'kz': { label: 'Kazakhstan', flag: '/flag-images/Asia/SVG/Kazakhstan.svg' },
+  'kw': { label: 'Kuwait', flag: '/flag-images/Asia/SVG/Kuwait.svg' },
+  'kg': { label: 'Kyrgyzstan', flag: '/flag-images/Asia/SVG/Kyrgyzstan.svg' },
+  'la': { label: 'Laos', flag: '/flag-images/Asia/SVG/Laos.svg' },
+  'lb': { label: 'Lebanon', flag: '/flag-images/Asia/SVG/Lebanon.svg' },
+  'mo': { label: 'Macau', flag: '/flag-images/Asia/SVG/Macau.svg' },
+  'my': { label: 'Malaysia', flag: '/flag-images/Asia/SVG/Malaysia.svg' },
+  'mv': { label: 'Maldives', flag: '/flag-images/Asia/SVG/Maldives.svg' },
+  'mn': { label: 'Mongolia', flag: '/flag-images/Asia/SVG/Mongolia.svg' },
+  'mm': { label: 'Myanmar', flag: '/flag-images/Asia/SVG/Myanmar.svg' },
+  'np': { label: 'Nepal', flag: '/flag-images/Asia/SVG/Nepal.svg' },
+  'kp': { label: 'North Korea', flag: '/flag-images/Asia/SVG/North_Korea.svg' },
+  'om': { label: 'Oman', flag: '/flag-images/Asia/SVG/Oman.svg' },
+  'pk': { label: 'Pakistan', flag: '/flag-images/Asia/SVG/Pakistan.svg' },
+  'ps': { label: 'Palestine', flag: '/flag-images/Asia/SVG/Palestine.svg' },
+  'ph': { label: 'Philippines', flag: '/flag-images/Asia/SVG/Philippines.svg' },
+  'qa': { label: 'Qatar', flag: '/flag-images/Asia/SVG/Qatar.svg' },
+  'sa': { label: 'Saudi Arabia', flag: '/flag-images/Asia/SVG/Saudi_Arabia.svg' },
+  'sg': { label: 'Singapore', flag: '/flag-images/Asia/SVG/Singapore.svg' },
+  'kr': { label: 'South Korea', flag: '/flag-images/Asia/SVG/South_Korea.svg' },
+  'lk': { label: 'Sri Lanka', flag: '/flag-images/Asia/SVG/Sri_Lanka.svg' },
+  'sy': { label: 'Syria', flag: '/flag-images/Asia/SVG/Syria.svg' },
+  'tw': { label: 'Taiwan', flag: '/flag-images/Asia/SVG/Taiwan.svg' },
+  'tj': { label: 'Tajikistan', flag: '/flag-images/Asia/SVG/Tajikistan.svg' },
+  'th': { label: 'Thailand', flag: '/flag-images/Asia/SVG/Thailand.svg' },
+  'tl': { label: 'Timor-Leste', flag: '/flag-images/Asia/SVG/Timor_Leste.svg' },
+  'tr': { label: 'Turkey', flag: '/flag-images/Asia/SVG/Turkey.svg' },
+  'tm': { label: 'Turkmenistan', flag: '/flag-images/Asia/SVG/Turkmenistan.svg' },
+  'ae': { label: 'UAE', flag: '/flag-images/Asia/SVG/United_Arab_Emirates.svg' },
+  'uz': { label: 'Uzbekistan', flag: '/flag-images/Asia/SVG/Uzbekistan.svg' },
+  'vn': { label: 'Vietnam', flag: '/flag-images/Asia/SVG/Vietnam.svg' },
+  'ye': { label: 'Yemen', flag: '/flag-images/Asia/SVG/Yemen.svg' },
+  // ── Africa ──
+  'dz': { label: 'Algeria', flag: '/flag-images/Africa/SVG/Algeria.svg' },
+  'ao': { label: 'Angola', flag: '/flag-images/Africa/SVG/Angola.svg' },
+  'bj': { label: 'Benin', flag: '/flag-images/Africa/SVG/Benin.svg' },
+  'bw': { label: 'Botswana', flag: '/flag-images/Africa/SVG/Botswana.svg' },
+  'bf': { label: 'Burkina Faso', flag: '/flag-images/Africa/SVG/Burkina_Faso.svg' },
+  'bi': { label: 'Burundi', flag: '/flag-images/Africa/SVG/Burundi.svg' },
+  'cm': { label: 'Cameroon', flag: '/flag-images/Africa/SVG/Cameroon.svg' },
+  'cv': { label: 'Cape Verde', flag: '/flag-images/Africa/SVG/Cape_Verde.svg' },
+  'cf': { label: 'Central African Rep.', flag: '/flag-images/Africa/SVG/Central_African_Republic.svg' },
+  'td': { label: 'Chad', flag: '/flag-images/Africa/SVG/Chad.svg' },
+  'km': { label: 'Comoros', flag: '/flag-images/Africa/SVG/Comoros.svg' },
+  'cg': { label: 'Congo', flag: '/flag-images/Africa/SVG/Congo.svg' },
+  'cd': { label: 'DR Congo', flag: '/flag-images/Africa/SVG/DR_Congo.svg' },
+  'dj': { label: 'Djibouti', flag: '/flag-images/Africa/SVG/Djibouti.svg' },
+  'eg': { label: 'Egypt', flag: '/flag-images/Africa/SVG/Egypt.svg' },
+  'gq': { label: 'Equatorial Guinea', flag: '/flag-images/Africa/SVG/Equatorial_Guinea.svg' },
+  'er': { label: 'Eritrea', flag: '/flag-images/Africa/SVG/Eritrea.svg' },
+  'sz': { label: 'Eswatini', flag: '/flag-images/Africa/SVG/Eswatini.svg' },
+  'et': { label: 'Ethiopia', flag: '/flag-images/Africa/SVG/Ethiopia.svg' },
+  'ga': { label: 'Gabon', flag: '/flag-images/Africa/SVG/Gabon.svg' },
+  'gm': { label: 'Gambia', flag: '/flag-images/Africa/SVG/Gambia.svg' },
+  'gh': { label: 'Ghana', flag: '/flag-images/Africa/SVG/Ghana.svg' },
+  'gn': { label: 'Guinea', flag: '/flag-images/Africa/SVG/Guinea.svg' },
+  'gw': { label: 'Guinea-Bissau', flag: '/flag-images/Africa/SVG/Guinea_Bissau.svg' },
+  'ci': { label: 'Ivory Coast', flag: '/flag-images/Africa/SVG/Ivory_Coast.svg' },
+  'ke': { label: 'Kenya', flag: '/flag-images/Africa/SVG/Kenya.svg' },
+  'ls': { label: 'Lesotho', flag: '/flag-images/Africa/SVG/Lesotho.svg' },
+  'lr': { label: 'Liberia', flag: '/flag-images/Africa/SVG/Liberia.svg' },
+  'ly': { label: 'Libya', flag: '/flag-images/Africa/SVG/Libya.svg' },
+  'mg': { label: 'Madagascar', flag: '/flag-images/Africa/SVG/Madagascar.svg' },
+  'mw': { label: 'Malawi', flag: '/flag-images/Africa/SVG/Malawi.svg' },
+  'ml': { label: 'Mali', flag: '/flag-images/Africa/SVG/Mali.svg' },
+  'mr': { label: 'Mauritania', flag: '/flag-images/Africa/SVG/Mauritania.svg' },
+  'mu': { label: 'Mauritius', flag: '/flag-images/Africa/SVG/Mauritius.svg' },
+  'ma': { label: 'Morocco', flag: '/flag-images/Africa/SVG/Morocco.svg' },
+  'mz': { label: 'Mozambique', flag: '/flag-images/Africa/SVG/Mozambique.svg' },
+  'na': { label: 'Namibia', flag: '/flag-images/Africa/SVG/Namibia.svg' },
+  'ne': { label: 'Niger', flag: '/flag-images/Africa/SVG/Niger.svg' },
+  'ng': { label: 'Nigeria', flag: '/flag-images/Africa/SVG/Nigeria.svg' },
+  'rw': { label: 'Rwanda', flag: '/flag-images/Africa/SVG/Rwanda.svg' },
+  'sn': { label: 'Senegal', flag: '/flag-images/Africa/SVG/Senegal.svg' },
+  'sc': { label: 'Seychelles', flag: '/flag-images/Africa/SVG/Seychelles.svg' },
+  'sl': { label: 'Sierra Leone', flag: '/flag-images/Africa/SVG/Sierra_Leone.svg' },
+  'so': { label: 'Somalia', flag: '/flag-images/Africa/SVG/Somalia.svg' },
+  'za': { label: 'South Africa', flag: '/flag-images/Africa/SVG/South_Africa.svg' },
+  'ss': { label: 'South Sudan', flag: '/flag-images/Africa/SVG/South_Sudan.svg' },
+  'sd': { label: 'Sudan', flag: '/flag-images/Africa/SVG/Sudan.svg' },
+  'st': { label: 'São Tomé & Príncipe', flag: '/flag-images/Africa/SVG/Sao_Tome_and_Principe.svg' },
+  'tz': { label: 'Tanzania', flag: '/flag-images/Africa/SVG/Tanzania.svg' },
+  'tg': { label: 'Togo', flag: '/flag-images/Africa/SVG/Togo.svg' },
+  'tn': { label: 'Tunisia', flag: '/flag-images/Africa/SVG/Tunisia.svg' },
+  'ug': { label: 'Uganda', flag: '/flag-images/Africa/SVG/Uganda.svg' },
+  'zm': { label: 'Zambia', flag: '/flag-images/Africa/SVG/Zambia.svg' },
+  'zw': { label: 'Zimbabwe', flag: '/flag-images/Africa/SVG/Zimbabwe.svg' },
+  // ── North America ──
+  'ag': { label: 'Antigua & Barbuda', flag: '/flag-images/North_America/SVG/Antigua_and_Barbuda.svg' },
+  'bs': { label: 'Bahamas', flag: '/flag-images/North_America/SVG/Bahamas.svg' },
+  'bb': { label: 'Barbados', flag: '/flag-images/North_America/SVG/Barbados.svg' },
+  'bz': { label: 'Belize', flag: '/flag-images/North_America/SVG/Belize.svg' },
+  'ca': { label: 'Canada', flag: '/flag-images/North_America/SVG/Canada.svg' },
+  'cr': { label: 'Costa Rica', flag: '/flag-images/North_America/SVG/Costa_Rica.svg' },
+  'cu': { label: 'Cuba', flag: '/flag-images/North_America/SVG/Cuba.svg' },
+  'dm': { label: 'Dominica', flag: '/flag-images/North_America/SVG/Dominica.svg' },
+  'do': { label: 'Dominican Rep.', flag: '/flag-images/North_America/SVG/Dominican_Republic.svg' },
+  'sv': { label: 'El Salvador', flag: '/flag-images/North_America/SVG/El_Salvador.svg' },
+  'gd': { label: 'Grenada', flag: '/flag-images/North_America/SVG/Grenada.svg' },
+  'gt': { label: 'Guatemala', flag: '/flag-images/North_America/SVG/Guatemala.svg' },
+  'ht': { label: 'Haiti', flag: '/flag-images/North_America/SVG/Haiti.svg' },
+  'hn': { label: 'Honduras', flag: '/flag-images/North_America/SVG/Honduras.svg' },
+  'jm': { label: 'Jamaica', flag: '/flag-images/North_America/SVG/Jamaica.svg' },
+  'mx': { label: 'Mexico', flag: '/flag-images/North_America/SVG/Mexico.svg' },
+  'ni': { label: 'Nicaragua', flag: '/flag-images/North_America/SVG/Nicaragua.svg' },
+  'pa': { label: 'Panama', flag: '/flag-images/North_America/SVG/Panama.svg' },
+  'kn': { label: 'St. Kitts & Nevis', flag: '/flag-images/North_America/SVG/Saint_Kitts_and_Nevis.svg' },
+  'lc': { label: 'St. Lucia', flag: '/flag-images/North_America/SVG/Saint_Lucia.svg' },
+  'vc': { label: 'St. Vincent', flag: '/flag-images/North_America/SVG/Saint_Vincent_and_the_Grenadines.svg' },
+  'tt': { label: 'Trinidad & Tobago', flag: '/flag-images/North_America/SVG/Trinidad_and_Tobago.svg' },
+  'us': { label: 'United States', flag: '/flag-images/North_America/SVG/United_States.svg' },
+  // ── South America ──
+  'ar': { label: 'Argentina', flag: '/flag-images/South_America/SVG/Argentina.svg' },
+  'bo': { label: 'Bolivia', flag: '/flag-images/South_America/SVG/Bolivia.svg' },
+  'br': { label: 'Brazil', flag: '/flag-images/South_America/SVG/Brazil.svg' },
+  'cl': { label: 'Chile', flag: '/flag-images/South_America/SVG/Chile.svg' },
+  'co': { label: 'Colombia', flag: '/flag-images/South_America/SVG/Colombia.svg' },
+  'ec': { label: 'Ecuador', flag: '/flag-images/South_America/SVG/Ecuador.svg' },
+  'gy': { label: 'Guyana', flag: '/flag-images/South_America/SVG/Guyana.svg' },
+  'py': { label: 'Paraguay', flag: '/flag-images/South_America/SVG/Paraguay.svg' },
+  'pe': { label: 'Peru', flag: '/flag-images/South_America/SVG/Peru.svg' },
+  'sr': { label: 'Suriname', flag: '/flag-images/South_America/SVG/Suriname.svg' },
+  'uy': { label: 'Uruguay', flag: '/flag-images/South_America/SVG/Uruguay.svg' },
+  've': { label: 'Venezuela', flag: '/flag-images/South_America/SVG/Venezuela.svg' },
+  // ── Oceania ──
+  'au': { label: 'Australia', flag: '/flag-images/Oceania/SVG/Australia.svg' },
+  'fj': { label: 'Fiji', flag: '/flag-images/Oceania/SVG/Fiji.svg' },
+  'ki': { label: 'Kiribati', flag: '/flag-images/Oceania/SVG/Kiribati.svg' },
+  'mh': { label: 'Marshall Islands', flag: '/flag-images/Oceania/SVG/Marshall_Islands.svg' },
+  'fm': { label: 'Micronesia', flag: '/flag-images/Oceania/SVG/Micronesia.svg' },
+  'nr': { label: 'Nauru', flag: '/flag-images/Oceania/SVG/Nauru.svg' },
+  'nz': { label: 'New Zealand', flag: '/flag-images/Oceania/SVG/New_Zealand.svg' },
+  'pw': { label: 'Palau', flag: '/flag-images/Oceania/SVG/Palau.svg' },
+  'pg': { label: 'Papua New Guinea', flag: '/flag-images/Oceania/SVG/Papua_New_Guinea.svg' },
+  'ws': { label: 'Samoa', flag: '/flag-images/Oceania/SVG/Samoa.svg' },
+  'sb': { label: 'Solomon Islands', flag: '/flag-images/Oceania/SVG/Solomon_Islands.svg' },
+  'to': { label: 'Tonga', flag: '/flag-images/Oceania/SVG/Tonga.svg' },
+  'tv': { label: 'Tuvalu', flag: '/flag-images/Oceania/SVG/Tuvalu.svg' },
+  'vu': { label: 'Vanuatu', flag: '/flag-images/Oceania/SVG/Vanuatu.svg' },
+};
+
+const MONTHS = ['', 'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+// Lees ALLE foto's in src/photos/ in (bij build).
+// query:'?url' geeft het definitieve pad naar elk bestand terug (geen Sharp nodig,
+// dus geen build-risico op Vercel). De foto's worden 1-op-1 mee gedeployed.
+const photoModules = import.meta.glob(
+  '/src/photos/*.{jpg,jpeg,JPG,JPEG,png,PNG,webp,WEBP}',
+  { eager: true, query: '?url', import: 'default' }
+);
+
+function parsePhoto(path, url) {
+  // path is bv /src/photos/2024-06_ch_Siviez_Chapel-in-the-drizzle_tall.jpg
+  const file = path.split('/').pop();                 // bestandsnaam
+  const base = file.replace(/\.[^.]+$/, '');          // zonder extensie
+  const parts = base.split('_');
+  // Verwacht: [datum, land, stad, bijschrift, grootte]  (grootte optioneel)
+  if (parts.length < 4) return null;                  // oude/foute naam → overslaan
+  const [datePart, land, stad, bijschrift, groottePart] = parts;
+
+  // Datum JJJJ-MM
+  const dm = /^(\d{4})-(\d{2})$/.exec(datePart);
+  if (!dm) return null;
+  const year = dm[1];
+  const monthNum = parseInt(dm[2], 10);
+  if (monthNum < 1 || monthNum > 12) return null;     // ongeldige maand → overslaan
+  const sortKey = year + dm[2];                       // "202406" voor sorteren
+  const dateLabel = dm[2] + '.' + year;               // "06.2024" zoals voorheen
+
+  // Land
+  const landCode = (land || '').toLowerCase();
+
+  // Titel: streepjes → spaties
+  const title = (bijschrift || '').replace(/-/g, ' ');
+
+  // Grootte: tall (default) / wide / sq
+  let size = 'tall';
+  if (groottePart) {
+    const g = groottePart.toLowerCase();
+    if (g === 'wide' || g === 'sq' || g === 'tall') size = g;
+  }
+
+  // Locatie-label: "Stad, Land"
+  const countryLabel = COUNTRIES[landCode]?.label || landCode.toUpperCase();
+  const loc = stad ? stad.replace(/-/g, ' ') + ', ' + countryLabel : countryLabel;
+
+  return {
+    src: url,                  // definitief pad naar het beeld
+    file,
+    size,
+    place: landCode,
+    title,
+    loc,
+    date: dateLabel,
+    sortKey,
+  };
+}
+
+// Alle foto's inlezen, ongeldige namen overslaan, sorteren nieuwste eerst
+const photos = Object.entries(photoModules)
+  .map(([path, url]) => parsePhoto(path, url))
+  .filter(Boolean)
+  .sort((a, b) => b.sortKey.localeCompare(a.sortKey));
+
+// Client-veilige versie voor de lightbox (identiek, maar expliciet los gehouden)
+const photosClient = photos.map(p => ({
+  src: p.src,
+  title: p.title,
+  loc: p.loc,
+  date: p.date,
+  place: p.place,
+}));
+
+// Filters automatisch opbouwen uit de landen die echt voorkomen
+const presentCountries = [...new Set(photos.map(p => p.place))];
 const filters = [
-  { key:'all', label:'All',         count: photos.length },
-  { key:'fr',  label:'France',      count: photos.filter(p=>p.place==='fr').length },
-  { key:'nl',  label:'Netherlands', count: photos.filter(p=>p.place==='nl').length },
-  { key:'ch',  label:'Switzerland', count: photos.filter(p=>p.place==='ch').length },
-  { key:'it',  label:'Italy',       count: photos.filter(p=>p.place==='it').length },
-  { key:'fi',  label:'Finland',     count: photos.filter(p=>p.place==='fi').length },
-  { key:'ee',  label:'Estonia',     count: photos.filter(p=>p.place==='ee').length },
-  { key:'si',  label:'Slovenia',    count: photos.filter(p=>p.place==='si').length },
+  { key: 'all', label: 'All', flag: null, count: photos.length },
+  ...presentCountries.map(code => ({
+    key: code,
+    label: COUNTRIES[code]?.label || code.toUpperCase(),
+    flag: COUNTRIES[code]?.flag || null,
+    count: photos.filter(p => p.place === code).length,
+  })),
 ];
+
 ---
 <!DOCTYPE html>
 <html lang="en" data-mode="light">
@@ -24,9 +335,7 @@ const filters = [
 <link rel="icon" type="image/svg+xml" href="/favicons/jpg.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet" />
 <style>
 :root {
   --bg:#F5F2EA;--text:#1a1a1a;--muted:#8a877e;--border:#d4d0c4;
@@ -47,9 +356,6 @@ html[data-mode="dark"] {
 .pupsjpg-page .mini-nav a:hover { color:var(--ember); }
 .pupsjpg-page .nav-r { display:flex; gap:20px; align-items:center; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; }
 .pupsjpg-page .intro-controls { display:flex; gap:20px; align-items:center; margin-top:20px; flex-wrap:wrap; }
-.pupsjpg-page .viewsw { display:flex; padding:3px; border-radius:6px; background:var(--swatch); transition:background .35s; }
-.pupsjpg-page .viewsw button { font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:1px; padding:5px 12px; border:none; background:transparent; border-radius:4px; cursor:pointer; color:inherit; text-transform:uppercase; }
-.pupsjpg-page .viewsw button.on { background:var(--bg); color:var(--text); box-shadow:0 1px 2px rgba(0,0,0,0.06); }
 .pupsjpg-page .intro-socials { display:flex; gap:10px; align-items:center; font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:1px; text-transform:uppercase; }
 .pupsjpg-page .intro-socials a { color:#0E6B6F; text-decoration:none; padding:7px 16px; border:1.5px solid #0E6B6F; border-radius:999px; transition:all .2s; font-weight:500; }
 .pupsjpg-page .intro-socials a:hover { background:#0E6B6F; color:#F4F0E8; }
@@ -73,6 +379,7 @@ html[data-mode="dark"] .pupsjpg-page .toggle::before { content:'◑'; }
 .pupsjpg-page .chip:hover { color:var(--text); }
 .pupsjpg-page .chip.on { background:var(--ember); color:white; border-color:var(--ember); }
 .pupsjpg-page .chip .cnt { font-size:9px; opacity:0.7; }
+.pupsjpg-page .chip-flag { width:16px; height:auto; max-height:12px; object-fit:cover; border-radius:2px; box-shadow:0 0 0 1px rgba(0,0,0,0.12); display:inline-block; vertical-align:middle; flex-shrink:0; }
 
 .pupsjpg-page .view { display:none; }
 .pupsjpg-page .view.on { display:block; }
@@ -83,7 +390,7 @@ html[data-mode="dark"] .pupsjpg-page .toggle::before { content:'◑'; }
 .pupsjpg-page .photo.wide { grid-column:span 2; aspect-ratio:3/2; }
 .pupsjpg-page .photo.tall { aspect-ratio:3/4; }
 .pupsjpg-page .photo.sq { aspect-ratio:1; }
-.pupsjpg-page .img { position:absolute; inset:0; background-size:cover; background-position:center; transition:transform .8s ease; }
+.pupsjpg-page .img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; transition:transform .8s ease; display:block; }
 .pupsjpg-page .photo:hover .img { transform:scale(1.04); }
 .pupsjpg-page .overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(6,6,6,0.85) 0%,rgba(6,6,6,0.35) 40%,rgba(0,0,0,0) 65%); opacity:0; transition:opacity .35s ease; display:flex; flex-direction:column; justify-content:flex-end; padding:22px; }
 .pupsjpg-page .photo:hover .overlay { opacity:1; }
@@ -92,90 +399,6 @@ html[data-mode="dark"] .pupsjpg-page .toggle::before { content:'◑'; }
 .pupsjpg-page .o-exif { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,0.55); margin-top:6px; }
 .pupsjpg-page .idx { position:absolute; top:12px; right:14px; font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:1px; color:white; background:rgba(0,0,0,0.5); padding:3px 8px; border-radius:2px; opacity:0; transition:opacity .35s; z-index:2; }
 .pupsjpg-page .photo:hover .idx { opacity:1; }
-
-.pupsjpg-page .map-wrap { padding:30px 0; }
-
-/* Continent tabs */
-.pupsjpg-page .map-tabs { display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
-.pupsjpg-page .tab { font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; padding:8px 18px; border-radius:999px; background:var(--card-bg); color:var(--muted); border:1px solid var(--border); cursor:pointer; transition:all .2s; }
-.pupsjpg-page .tab.on { background:var(--text); color:var(--bg); border-color:var(--text); }
-.pupsjpg-page .tab:not(.on):not([disabled]):hover { color:var(--text); }
-.pupsjpg-page .tab[disabled] { opacity:0.5; cursor:not-allowed; }
-
-/* Layout: sidebar + map + info-panel */
-.pupsjpg-page .map-layout { display:grid; grid-template-columns:200px 1fr 240px; gap:20px; align-items:start; }
-
-/* Sidebar */
-.pupsjpg-page .map-sidebar { background:var(--card-bg); border-radius:8px; padding:8px; }
-.pupsjpg-page .places-header { display:flex; justify-content:space-between; align-items:center; padding:10px 12px; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); border-bottom:1px solid var(--border); margin-bottom:6px; }
-.pupsjpg-page .places-total { color:var(--text); font-weight:500; }
-.pupsjpg-page .place-row { display:flex; align-items:center; gap:10px; width:100%; padding:8px 12px; background:transparent; border:none; border-radius:6px; cursor:pointer; font-family:inherit; font-size:13px; color:var(--text); text-align:left; transition:background .15s; }
-.pupsjpg-page .place-row:hover { background:var(--swatch); }
-.pupsjpg-page .place-row .flag-img { width:18px; height:auto; max-height:13px; object-fit:cover; border-radius:2px; box-shadow:0 0 0 1px rgba(0,0,0,0.08); display:block; flex-shrink:0; }
-.pupsjpg-page .place-row .name { flex:1; }
-.pupsjpg-page .place-row .count { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); }
-.pupsjpg-page .place-row .chev { color:var(--muted); font-size:14px; opacity:0.5; }
-
-/* Map area — Leaflet container */
-.pupsjpg-page .map-area { position:relative; border-radius:8px; overflow:hidden; background:#F5F1E8; aspect-ratio:1.4/1; min-height:400px; }
-html[data-mode="dark"] .pupsjpg-page .map-area { background:#1a1918; }
-.pupsjpg-page #leaflet-map { width:100%; height:100%; z-index:1; background:transparent; }
-
-/* Leaflet — override defaults */
-.pupsjpg-page .leaflet-container { font-family:'Inter',sans-serif !important; background:transparent !important; }
-.pupsjpg-page .leaflet-control-attribution { font-size:9px !important; padding:1px 4px !important; background:rgba(255,255,255,0.7) !important; }
-html[data-mode="dark"] .pupsjpg-page .leaflet-control-attribution { background:rgba(30,30,30,0.7) !important; color:#aaa !important; }
-html[data-mode="dark"] .pupsjpg-page .leaflet-control-attribution a { color:#aaa !important; }
-.pupsjpg-page .leaflet-control-zoom { border:none !important; margin:16px !important; }
-.pupsjpg-page .leaflet-control-zoom a { background:rgba(255,255,255,0.95) !important; color:var(--text) !important; border:1px solid rgba(0,0,0,0.08) !important; font-family:'JetBrains Mono',monospace !important; font-weight:400 !important; }
-html[data-mode="dark"] .pupsjpg-page .leaflet-control-zoom a { background:rgba(40,40,38,0.9) !important; color:#e0dcd0 !important; border-color:rgba(255,255,255,0.1) !important; }
-
-/* Custom pin marker */
-.pupsjpg-page .leaflet-marker-pane { z-index:700 !important; }
-.pupsjpg-page .city-pin { display:flex !important; align-items:center; justify-content:center; }
-.pupsjpg-page .leaflet-marker-icon { z-index:700 !important; }
-
-/* Info-panel rechts van map — vervangt oude Leaflet popup */
-.pupsjpg-page .map-info-panel { background:var(--card-bg); border-radius:8px; overflow:hidden; font-family:'Inter',sans-serif; position:sticky; top:20px; align-self:start; width:320px; max-width:100%; }
-
-/* Tussenscherm (<1150px): info-paneel onder map, sidebar nog links */
-@media (max-width:1150px) {
-  .pupsjpg-page .map-layout { grid-template-columns:200px 1fr; grid-template-areas:'sidebar map' 'info info'; }
-  .pupsjpg-page .map-sidebar { grid-area:sidebar; }
-  .pupsjpg-page .map-area { grid-area:map; }
-  .pupsjpg-page .map-info-panel { grid-area:info; position:static; width:100%; max-width:400px; }
-}
-.pupsjpg-page .map-info-empty { padding:40px 20px; text-align:center; color:var(--muted); font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; line-height:1.7; }
-.pupsjpg-page .map-info-empty .mi-icon { font-size:24px; opacity:0.4; margin-bottom:12px; display:block; }
-.pupsjpg-page .mi-thumb-wrap { width:100%; aspect-ratio:3/4; overflow:hidden; display:block; position:relative; }
-.pupsjpg-page .mi-thumb { width:100%; height:100%; object-fit:cover; cursor:pointer; display:block; transition:opacity .15s; }
-.pupsjpg-page .mi-thumb:hover { opacity:0.88; }
-.pupsjpg-page .mi-header { display:flex; align-items:center; gap:10px; padding:14px 14px 12px; }
-.pupsjpg-page .mi-flag-wrap { width:22px; height:16px; overflow:hidden; display:block; flex-shrink:0; border-radius:2px; box-shadow:0 0 0 1px rgba(0,0,0,0.1); }
-.pupsjpg-page .mi-flag { width:100%; height:100%; object-fit:cover; display:block; }
-.pupsjpg-page .mi-info { flex:1; min-width:0; }
-.pupsjpg-page .mi-name { font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:500; text-transform:uppercase; letter-spacing:1.2px; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.pupsjpg-page .mi-count { font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--muted); letter-spacing:0.5px; margin-top:2px; }
-.pupsjpg-page .mi-view-all { display:block; width:100%; padding:12px 14px; background:var(--ember); color:#fff !important; border:none; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; cursor:pointer; transition:background .2s; font-weight:500; text-decoration:none; text-align:center; box-sizing:border-box; }
-.pupsjpg-page .mi-view-all:hover { background:#c94a1e; color:#fff !important; text-decoration:none; }
-
-/* Legend rechtsonder */
-.pupsjpg-page .map-legend-new { position:absolute; bottom:16px; right:16px; display:flex; gap:14px; align-items:center; background:rgba(255,255,255,0.95); padding:8px 14px; border-radius:999px; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:1px; text-transform:uppercase; color:var(--text); backdrop-filter:blur(4px); z-index:1000; box-shadow:0 2px 8px rgba(0,0,0,0.1); }
-html[data-mode="dark"] .pupsjpg-page .map-legend-new { background:rgba(40,40,38,0.95); color:#e0dcd0; }
-.pupsjpg-page .lg-item { display:flex; align-items:center; gap:6px; }
-.pupsjpg-page .lg-dot { background:var(--ember); border-radius:50%; display:inline-block; }
-.pupsjpg-page .lg-1 { width:8px; height:8px; }
-.pupsjpg-page .lg-2 { width:12px; height:12px; }
-.pupsjpg-page .lg-3 { width:18px; height:18px; }
-.pupsjpg-page .lg-4 { width:24px; height:24px; }
-
-/* Quote polaroid rechtsboven */
-.pupsjpg-page .quote-polaroid { position:absolute; top:20px; right:16px; background:#FDFBF5; padding:12px; border-radius:2px; box-shadow:0 4px 20px rgba(0,0,0,0.15); transform:rotate(3deg); max-width:170px; z-index:1000; }
-html[data-mode="dark"] .pupsjpg-page .quote-polaroid { background:#3A3835; }
-.pupsjpg-page .qp-note { font-family:'Caveat',cursive; font-size:16px; line-height:1.3; color:#3D3B37; padding:4px 6px; }
-html[data-mode="dark"] .pupsjpg-page .qp-note { color:#D8D4CE; }
-.pupsjpg-page .qp-note p { margin:0; }
-.pupsjpg-page .qp-sig { text-align:right; margin-top:6px !important; opacity:0.7; }
 
 .pupsjpg-page .lb { position:fixed; inset:0; background:rgba(8,8,8,0.97); display:none; align-items:center; justify-content:center; z-index:100; padding:40px; }
 .pupsjpg-page .lb.on { display:flex; }
@@ -205,16 +428,6 @@ html[data-mode="dark"] .pupsjpg-page .qp-note { color:#D8D4CE; }
   .pupsjpg-page .nav-r { gap:12px; }
   .pupsjpg-page .lb-inner { max-width:95%; }
   .pupsjpg-page .lb-prev { left:12px; } .pupsjpg-page .lb-next { right:12px; }
-  .pupsjpg-page .map-layout { grid-template-columns:1fr; }
-  .pupsjpg-page .map-sidebar { display:flex; gap:6px; overflow-x:auto; padding:8px; }
-  .pupsjpg-page .map-info-panel { position:static; }
-  .pupsjpg-page .places-header { display:none; }
-  .pupsjpg-page .place-row { flex-shrink:0; padding:6px 10px; font-size:12px; }
-  .pupsjpg-page .place-row .chev { display:none; }
-  .pupsjpg-page .quote-polaroid { max-width:130px; font-size:12px; }
-  .pupsjpg-page .qp-note { font-size:13px; }
-  .pupsjpg-page .ctry-lbl { font-size:9px; }
-  .pupsjpg-page .sea-lbl { font-size:10px; }
 }
 @media (max-width:600px) {
   .pupsjpg-page .grid { grid-template-columns:1fr; }
@@ -244,10 +457,6 @@ html[data-mode="dark"] .pupsjpg-page .qp-note { color:#D8D4CE; }
     <div class="intro-meta">Fujifilm X100F <span class="em">·</span> Since 2024</div>
 
     <div class="intro-controls">
-      <div class="viewsw">
-        <button class="on" data-view="grid">▦ Grid</button>
-        <button data-view="map">◫ Map</button>
-      </div>
       <div class="intro-socials">
         <a href="https://www.instagram.com/pepijnvanhauwere/" target="_blank" rel="noopener">Instagram ↗</a>
         <a href="https://www.tiktok.com/@pups.jpg" target="_blank" rel="noopener">TikTok ↗</a>
@@ -258,15 +467,18 @@ html[data-mode="dark"] .pupsjpg-page .qp-note { color:#D8D4CE; }
   <div class="filters">
     <span class="fl">Place</span>
     {filters.map((f, i) => (
-      <button class={"chip" + (i === 0 ? " on" : "")} data-filter={f.key}>{f.label} <span class="cnt">{String(f.count).padStart(2,'0')}</span></button>
+      <button class={"chip" + (i === 0 ? " on" : "")} data-filter={f.key}>
+        {f.flag && <img class="chip-flag" src={f.flag} alt="" />}
+        {f.label} <span class="cnt">{String(f.count).padStart(2,'0')}</span>
+      </button>
     ))}
   </div>
 
-  <div class="view on" id="view-grid">
+  <div id="view-grid">
     <div class="grid" id="grid-inner">
       {photos.map((p, i) => (
         <div class={"photo " + p.size} data-place={p.place} data-idx={i}>
-          <div class="img" style={`background-image:url(/jpg/${p.file})`}></div>
+          <img class="img" src={p.src} alt={p.title} loading="lazy" decoding="async" />
           <div class="idx">{String(i+1).padStart(3,'0')} / {String(photos.length).padStart(3,'0')}</div>
           <div class="overlay">
             <div class="o-t">{p.title}</div>
@@ -275,99 +487,6 @@ html[data-mode="dark"] .pupsjpg-page .qp-note { color:#D8D4CE; }
           </div>
         </div>
       ))}
-    </div>
-  </div>
-
-  <div class="view" id="view-map">
-    <div class="map-wrap">
-      <!-- Continent tabs -->
-      <div class="map-tabs">
-        <button class="tab on">● Europe</button>
-        <button class="tab" disabled>Asia</button>
-        <button class="tab" disabled>North America</button>
-        <button class="tab" disabled>Rest</button>
-      </div>
-
-      <div class="map-layout">
-        <!-- Places sidebar -->
-        <div class="map-sidebar">
-          <div class="places-header">
-            <span>Places</span>
-            <span class="places-total">{photos.length}</span>
-          </div>
-          <button class="place-row" data-map-filter="fr">
-            <img class="flag-img" src="/flag-images/Europe/SVG/France.svg" alt="FR" />
-            <span class="name">France</span>
-            <span class="count">{photos.filter(p=>p.place==='fr').length}</span>
-            <span class="chev">›</span>
-          </button>
-          <button class="place-row" data-map-filter="nl">
-            <img class="flag-img" src="/flag-images/Europe/SVG/Netherlands.svg" alt="NL" />
-            <span class="name">Netherlands</span>
-            <span class="count">{photos.filter(p=>p.place==='nl').length}</span>
-            <span class="chev">›</span>
-          </button>
-          <button class="place-row" data-map-filter="ch">
-            <img class="flag-img" src="/flag-images/Europe/SVG/Switzerland.svg" alt="CH" />
-            <span class="name">Switzerland</span>
-            <span class="count">{photos.filter(p=>p.place==='ch').length}</span>
-            <span class="chev">›</span>
-          </button>
-          <button class="place-row" data-map-filter="it">
-            <img class="flag-img" src="/flag-images/Europe/SVG/Italy.svg" alt="IT" />
-            <span class="name">Italy</span>
-            <span class="count">{photos.filter(p=>p.place==='it').length}</span>
-            <span class="chev">›</span>
-          </button>
-          <button class="place-row" data-map-filter="fi">
-            <img class="flag-img" src="/flag-images/Europe/SVG/Finland.svg" alt="FI" />
-            <span class="name">Finland</span>
-            <span class="count">{photos.filter(p=>p.place==='fi').length}</span>
-            <span class="chev">›</span>
-          </button>
-          <button class="place-row" data-map-filter="ee">
-            <img class="flag-img" src="/flag-images/Europe/SVG/Estonia.svg" alt="EE" />
-            <span class="name">Estonia</span>
-            <span class="count">{photos.filter(p=>p.place==='ee').length}</span>
-            <span class="chev">›</span>
-          </button>
-          <button class="place-row" data-map-filter="si">
-            <img class="flag-img" src="/flag-images/Europe/SVG/Slovenia.svg" alt="SI" />
-            <span class="name">Slovenia</span>
-            <span class="count">{photos.filter(p=>p.place==='si').length}</span>
-            <span class="chev">›</span>
-          </button>
-        </div>
-
-        <!-- Map area with Leaflet -->
-        <div class="map-area">
-          <div id="leaflet-map"></div>
-
-          <!-- Legend rechtsonder (overlay) -->
-          <div class="map-legend-new">
-            <span class="lg-item"><span class="lg-dot lg-1"></span>1</span>
-            <span class="lg-item"><span class="lg-dot lg-2"></span>2–5</span>
-            <span class="lg-item"><span class="lg-dot lg-3"></span>6–9</span>
-            <span class="lg-item"><span class="lg-dot lg-4"></span>10+</span>
-          </div>
-
-          <!-- Quote polaroid rechtsboven (overlay) -->
-          <div class="quote-polaroid">
-            <div class="qp-note">
-              <p>Capture the moments,<br/>not just the places.</p>
-              <p class="qp-sig">— P.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Info-panel rechts van map — leeg by default, gevuld bij pin-klik -->
-        <div class="map-info-panel" id="map-info-panel">
-          <div class="map-info-empty">
-            <span class="mi-icon">◉</span>
-            Click a pin<br/>to preview
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 
@@ -380,7 +499,7 @@ html[data-mode="dark"] .pupsjpg-page .qp-note { color:#D8D4CE; }
 <PupvanhFooter
   paginaNaam="PUPVANH.jpg"
   built="AUG 2026"
-  updated="AUG 2026"
+  updated="SEP 2026"
   theme="default"
   socials={[
     { label: 'INSTAGRAM', href: 'https://instagram.com/pepijnvanhauwere' },
@@ -400,7 +519,7 @@ html[data-mode="dark"] .pupsjpg-page .qp-note { color:#D8D4CE; }
   <div class="lb-hint">← Prev <span class="em">·</span> → Next <span class="em">·</span> Esc to close</div>
 </div>
 
-<script is:inline define:vars={{ photos }}>
+<script is:inline define:vars={{ photos: photosClient }}>
   // Dark/light met localStorage
   const saved = localStorage.getItem('pupsjpg-mode');
   if (saved) document.documentElement.dataset.mode = saved;
@@ -409,179 +528,6 @@ html[data-mode="dark"] .pupsjpg-page .qp-note { color:#D8D4CE; }
     html.dataset.mode = html.dataset.mode === 'dark' ? 'light' : 'dark';
     localStorage.setItem('pupsjpg-mode', html.dataset.mode);
   });
-
-  // Grid / Map view switcher
-  document.querySelectorAll('.viewsw button').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.viewsw button').forEach(b => b.classList.remove('on'));
-      btn.classList.add('on');
-      document.querySelectorAll('.view').forEach(v => v.classList.remove('on'));
-      document.getElementById('view-' + btn.dataset.view).classList.add('on');
-      // Lazy init Leaflet als map view wordt geactiveerd
-      if (btn.dataset.view === 'map') initLeafletMap();
-    });
-  });
-
-  // ============ LEAFLET MAP ============
-  const cities = [
-    // FRANCE
-    { name: 'Cappy',             country: 'fr', flag: '/flag-images/Europe/SVG/France.svg', lat: 49.918, lng: 2.734,  locs: ['Cappy'] },
-    { name: 'Amiens',            country: 'fr', flag: '/flag-images/Europe/SVG/France.svg', lat: 49.894, lng: 2.296,  locs: ['Amiens, France'] },
-    { name: 'Thiepval Memorial', country: 'fr', flag: '/flag-images/Europe/SVG/France.svg', lat: 50.051, lng: 2.688,  locs: ['Thiepval Memorial'] },
-    { name: 'Camphin-en-Pevele', country: 'fr', flag: '/flag-images/Europe/SVG/France.svg', lat: 50.585, lng: 3.249,  locs: ['Camphin-en-Pevele, Paris-Roubaix'] },
-    // NETHERLANDS
-    { name: 'Amsterdam',         country: 'nl', flag: '/flag-images/Europe/SVG/Netherlands.svg', lat: 52.370, lng: 4.895,  locs: ['Amsterdam, Netherlands'] },
-    // SWITZERLAND
-    { name: 'Siviez region',     country: 'ch', flag: '/flag-images/Europe/SVG/Switzerland.svg', lat: 46.176, lng: 7.290,  locs: ['Siviez, Valais', 'Val de Nendaz, Valais', 'Lac de Cleuson, Valais'] },
-    { name: 'Basel',             country: 'ch', flag: '/flag-images/Europe/SVG/Switzerland.svg', lat: 47.559, lng: 7.588,  locs: ['Basel, Switzerland'] },
-    { name: 'Vevey',             country: 'ch', flag: '/flag-images/Europe/SVG/Switzerland.svg', lat: 46.463, lng: 6.843,  locs: ['Vevey, Lake Geneva'] },
-    { name: 'Lausanne',          country: 'ch', flag: '/flag-images/Europe/SVG/Switzerland.svg', lat: 46.520, lng: 6.634,  locs: ['Lausanne, Lake Geneva'] },
-    { name: 'Sion',              country: 'ch', flag: '/flag-images/Europe/SVG/Switzerland.svg', lat: 46.230, lng: 7.360,  locs: ['Sion, Women\u2019s Euro'] },
-    // ITALY
-    { name: 'Turin',             country: 'it', flag: '/flag-images/Europe/SVG/Italy.svg', lat: 45.070, lng: 7.686,  locs: ['Turin, Italy'] },
-    { name: 'Genoa',             country: 'it', flag: '/flag-images/Europe/SVG/Italy.svg', lat: 44.408, lng: 8.933,  locs: ['Genoa, Italy'] },
-    { name: 'Cinque Terre',      country: 'it', flag: '/flag-images/Europe/SVG/Italy.svg', lat: 44.107, lng: 9.735,  locs: ['Riomaggiore, Cinque Terre', 'Manarola, Cinque Terre'] },
-    { name: 'Bologna',           country: 'it', flag: '/flag-images/Europe/SVG/Italy.svg', lat: 44.494, lng: 11.343, locs: ['Bologna, Italy'] },
-    { name: 'Venice',            country: 'it', flag: '/flag-images/Europe/SVG/Italy.svg', lat: 45.440, lng: 12.316, locs: ['Venice, Italy'] },
-    { name: 'Alta Badia',        country: 'it', flag: '/flag-images/Europe/SVG/Italy.svg', lat: 46.554, lng: 11.893, locs: ['Alta Badia, Dolomites'] },
-    { name: 'Lago di Braies',    country: 'it', flag: '/flag-images/Europe/SVG/Italy.svg', lat: 46.694, lng: 12.086, locs: ['Lago di Braies, Dolomites'] },
-    // FINLAND
-    { name: 'Helsinki',          country: 'fi', flag: '/flag-images/Europe/SVG/Finland.svg', lat: 60.170, lng: 24.938, locs: ['Helsinki, Finland'] },
-    // ESTONIA
-    { name: 'Tallinn',           country: 'ee', flag: '/flag-images/Europe/SVG/Estonia.svg', lat: 59.437, lng: 24.745, locs: ['Tallinn, Estonia'] },
-    // SLOVENIA
-    { name: 'Lake Bled',         country: 'si', flag: '/flag-images/Europe/SVG/Slovenia.svg', lat: 46.363, lng: 14.113, locs: ['Lake Bled, Slovenia'] }
-  ];
-
-  // Helper: welke foto's horen bij een stad
-  function getCityPhotos(city) {
-    return photos.filter(p => city.locs.includes(p.loc));
-  }
-
-  let mapInited = false;
-  let leafletMap = null;
-  let lightTiles = null;
-  let darkTiles = null;
-
-  function initLeafletMap() {
-    if (mapInited) return;
-    // Als Leaflet nog niet geladen is: wacht en probeer opnieuw
-    if (typeof L === 'undefined') {
-      setTimeout(initLeafletMap, 100);
-      return;
-    }
-    mapInited = true;
-
-    leafletMap = L.map('leaflet-map', {
-      zoomControl: true,
-      scrollWheelZoom: false,
-      attributionControl: true
-    }).setView([50, 12], 5);
-
-    // Stamen Watercolor (light) - waterverf-look, past bij een fotografie-hub
-    lightTiles = L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_watercolor/{z}/{x}/{y}.jpg', {
-      attribution: '© <a href="https://stadiamaps.com/">Stadia Maps</a> · Stamen · OSM',
-      minZoom: 1,
-      maxZoom: 16,
-      ext: 'jpg'
-    });
-    // Stamen Toner (dark alternative)
-    darkTiles = L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}.png', {
-      attribution: '© <a href="https://stadiamaps.com/">Stadia Maps</a> · Stamen · OSM',
-      minZoom: 1,
-      maxZoom: 20
-    });
-
-    const isDark = document.documentElement.dataset.mode === 'dark';
-    (isDark ? darkTiles : lightTiles).addTo(leafletMap);
-
-    // Markers per city
-    cities.forEach(city => {
-      const cityPhotos = getCityPhotos(city);
-      const count = cityPhotos.length;
-      if (count === 0) return;
-      const size = count === 1 ? 14 : count <= 5 ? 22 : count <= 9 ? 30 : 38;
-      const marker = L.marker([city.lat, city.lng], {
-        icon: L.divIcon({
-          className: 'city-pin',
-          html: '<div class="pin-dot" style="width:' + size + 'px;height:' + size + 'px;background:#E85D2F;border:2px solid #fff;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,0.4);"></div>',
-          iconSize: [size, size],
-          iconAnchor: [size / 2, size / 2]
-        })
-      }).addTo(leafletMap);
-
-      // Klik op marker → vul info-panel rechts in (geen Leaflet popup meer)
-      marker.on('click', () => {
-        showCityInfo(city, cityPhotos, count);
-      });
-    });
-
-    // Vult het rechter info-panel met stad-info
-    function showCityInfo(city, cityPhotos, count) {
-      const panel = document.getElementById('map-info-panel');
-      if (!panel) return;
-      // Kies bij voorkeur een verticale foto (size !== 'wide') zodat het portret goed vult
-      const previewPhoto = cityPhotos.find(p => p.size !== 'wide') || cityPhotos[0];
-      const previewIdx = photos.indexOf(previewPhoto);
-      const btnLabel = count === 1 ? 'View photo →' : 'View all ' + count + ' →';
-      // Inline styles op wrappers als extra failsafe — winnen altijd van CSS
-      panel.innerHTML =
-        '<div class="mi-thumb-wrap" style="width:100%;aspect-ratio:3/4;overflow:hidden;display:block;position:relative;">' +
-          '<img class="mi-thumb" src="/jpg/' + previewPhoto.file + '" data-photo-idx="' + previewIdx + '" alt="' + previewPhoto.title + '" style="width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;" />' +
-        '</div>' +
-        '<div class="mi-header">' +
-          '<span class="mi-flag-wrap" style="width:22px;height:16px;overflow:hidden;display:block;flex-shrink:0;border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,0.1);">' +
-            '<img class="mi-flag" src="' + city.flag + '" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" />' +
-          '</span>' +
-          '<div class="mi-info">' +
-            '<div class="mi-name">' + city.name + '</div>' +
-            '<div class="mi-count">' + count + ' photograph' + (count > 1 ? 's' : '') + '</div>' +
-          '</div>' +
-        '</div>' +
-        '<button class="mi-view-all" data-country="' + city.country + '">' + btnLabel + '</button>';
-
-      // Klik op thumb → lightbox
-      const thumbEl = panel.querySelector('.mi-thumb');
-      if (thumbEl) {
-        thumbEl.addEventListener('click', () => {
-          const idx = parseInt(thumbEl.dataset.photoIdx, 10);
-          if (!isNaN(idx) && window.openLbFromMap) window.openLbFromMap(idx);
-        });
-      }
-      // Klik op "View all" → filter grid + switch view
-      const btnEl = panel.querySelector('.mi-view-all');
-      if (btnEl) {
-        btnEl.addEventListener('click', () => {
-          applyFilter(btnEl.dataset.country);
-          document.querySelector('.viewsw button[data-view="grid"]').click();
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-      }
-    }
-  }
-
-  // Klik op place-row: zoom naar die stad
-  document.querySelectorAll('.place-row').forEach(row => {
-    row.addEventListener('click', () => {
-      const country = row.dataset.mapFilter;
-      const first = cities.find(c => c.country === country);
-      if (first && leafletMap) leafletMap.setView([first.lat, first.lng], 7);
-    });
-  });
-
-  // Dark mode: switch tile layer
-  const observer = new MutationObserver(() => {
-    if (!leafletMap || !lightTiles || !darkTiles) return;
-    const isDark = document.documentElement.dataset.mode === 'dark';
-    if (isDark) {
-      if (leafletMap.hasLayer(lightTiles)) leafletMap.removeLayer(lightTiles);
-      if (!leafletMap.hasLayer(darkTiles)) darkTiles.addTo(leafletMap);
-    } else {
-      if (leafletMap.hasLayer(darkTiles)) leafletMap.removeLayer(darkTiles);
-      if (!leafletMap.hasLayer(lightTiles)) lightTiles.addTo(leafletMap);
-    }
-  });
-  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-mode'] });
 
   // Filter chips
   function applyFilter(f) {
@@ -596,13 +542,6 @@ html[data-mode="dark"] .pupsjpg-page .qp-note { color:#D8D4CE; }
     chip.addEventListener('click', () => applyFilter(chip.dataset.filter));
   });
 
-  // Sidebar place-row: filter grid on click (naast zoom)
-  document.querySelectorAll('.place-row[data-map-filter]').forEach(g => {
-    g.addEventListener('click', () => {
-      applyFilter(g.dataset.mapFilter);
-    });
-  });
-
   // Lightbox
   let cur = 0;
   function openLb(i) {
@@ -610,7 +549,6 @@ html[data-mode="dark"] .pupsjpg-page .qp-note { color:#D8D4CE; }
     document.getElementById('lb').classList.add('on');
     document.body.style.overflow = 'hidden';
   }
-  window.openLbFromMap = openLb;
   function closeLb() {
     document.getElementById('lb').classList.remove('on');
     document.body.style.overflow = '';
@@ -619,7 +557,7 @@ html[data-mode="dark"] .pupsjpg-page .qp-note { color:#D8D4CE; }
   function nextLb() { cur = (cur + 1) % photos.length; renderLb(); }
   function renderLb() {
     const p = photos[cur];
-    document.getElementById('lb-img').src = '/jpg/' + p.file;
+    document.getElementById('lb-img').src = p.src;
     document.getElementById('lb-t').textContent = p.title;
     document.getElementById('lb-m').textContent = p.loc + ' · ' + p.date + '  ·  ' + (cur+1) + ' / ' + photos.length;
   }
@@ -635,20 +573,6 @@ html[data-mode="dark"] .pupsjpg-page .qp-note { color:#D8D4CE; }
     if (e.key === 'ArrowLeft') prevLb();
     if (e.key === 'ArrowRight') nextLb();
   });
-
-  // Open lightbox via URL hash (bv. /jpg#photo-17 vanaf de Featured Today op de homepage)
-  function openFromHash() {
-    const hash = window.location.hash;
-    const m = hash.match(/^#photo-(\d+)$/);
-    if (m) {
-      const idx = parseInt(m[1], 10);
-      if (!isNaN(idx) && idx >= 0 && idx < photos.length) {
-        openLb(idx);
-      }
-    }
-  }
-  openFromHash();
-  window.addEventListener('hashchange', openFromHash);
 </script>
 <Analytics />
 </body>
