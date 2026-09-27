@@ -452,7 +452,7 @@
     "size": "tall",
     "place": "ch",
     "title": "A hug beneath the castle",
-    "loc": "Sion, Women\\u2019s Euro",
+    "loc": "Sion, Women's Euro",
     "date": "07.2025"
   },
   {
@@ -502,5 +502,205 @@
     "title": "The man who watched",
     "loc": "Lake Bled, Slovenia",
     "date": "06.2024"
+  },
+  {
+    "file": "ch-14-nendaz-village-peak.jpg",
+    "size": "tall",
+    "place": "ch",
+    "title": "Village under the peak",
+    "loc": "Nendaz",
+    "date": "09.2025"
+  },
+  {
+    "file": "ch-15-lake-geneva-willow.jpg",
+    "size": "tall",
+    "place": "ch",
+    "title": "Under the willow",
+    "loc": "Lac Léman",
+    "date": "09.2025"
+  },
+  {
+    "file": "ch-16-siviez-resort-valley.jpg",
+    "size": "tall",
+    "place": "ch",
+    "title": "Dream big",
+    "loc": "Siviez",
+    "date": "09.2025"
+  },
+  {
+    "file": "ch-17-starry-sky-ridge.jpg",
+    "size": "tall",
+    "place": "ch",
+    "title": "A field of stars",
+    "loc": "Nendaz",
+    "date": "09.2025"
+  },
+  {
+    "file": "ch-18-nendaz-gondola.jpg",
+    "size": "tall",
+    "place": "ch",
+    "title": "Two cabins down",
+    "loc": "Nendaz",
+    "date": "09.2025"
+  },
+  {
+    "file": "ch-19-alpine-meadow-pines.jpg",
+    "size": "tall",
+    "place": "ch",
+    "title": "Pines and a hidden peak",
+    "loc": "Valais",
+    "date": "09.2025"
+  },
+  {
+    "file": "ch-20-chalets-valley-view.jpg",
+    "size": "tall",
+    "place": "ch",
+    "title": "Two chalets, one valley",
+    "loc": "Nendaz",
+    "date": "09.2025"
+  },
+  {
+    "file": "ch-21-rock-valley-haze.jpg",
+    "size": "tall",
+    "place": "ch",
+    "title": "Haze over the valley",
+    "loc": "Valais",
+    "date": "09.2025"
+  },
+  {
+    "file": "ch-22-tracouet-lake-station.jpg",
+    "size": "tall",
+    "place": "ch",
+    "title": "The lake at the top",
+    "loc": "Tracouet",
+    "date": "09.2025"
+  },
+  {
+    "file": "ch-23-tracouet-lift-lake.jpg",
+    "size": "tall",
+    "place": "ch",
+    "title": "Still waters, quiet lifts",
+    "loc": "Tracouet",
+    "date": "09.2025"
+  },
+  {
+    "file": "ch-24-sion-valley-rock.jpg",
+    "size": "tall",
+    "place": "ch",
+    "title": "The whole valley below",
+    "loc": "Nendaz",
+    "date": "09.2025"
+  },
+  {
+    "file": "ch-25-paraglider-clouds.jpg",
+    "size": "tall",
+    "place": "ch",
+    "title": "One in the clouds",
+    "loc": "Nendaz",
+    "date": "09.2025"
+  },
+  {
+    "file": "ch-26-red-ridge-clouds.jpg",
+    "size": "tall",
+    "place": "ch",
+    "title": "The red ridge",
+    "loc": "Valais",
+    "date": "09.2025"
+  },
+  {
+    "file": "ch-27-aussie-trail-sign.jpg",
+    "size": "tall",
+    "place": "ch",
+    "title": "Which way now",
+    "loc": "Tracouet",
+    "date": "09.2025"
+  },
+  {
+    "file": "ch-28-cleuson-turquoise-lake.jpg",
+    "size": "tall",
+    "place": "ch",
+    "title": "Turquoise through the pines",
+    "loc": "Lac de Cleuson",
+    "date": "09.2025"
+  },
+  {
+    "file": "ch-29-cleuson-valley-dam.jpg",
+    "size": "tall",
+    "place": "ch",
+    "title": "The dam in the distance",
+    "loc": "Lac de Cleuson",
+    "date": "09.2025"
+  },
+  {
+    "file": "ch-30-morning-peak-forest.jpg",
+    "size": "tall",
+    "place": "ch",
+    "title": "Morning on the peak",
+    "loc": "Nendaz",
+    "date": "09.2025"
+  },
+  {
+    "file": "ch-31-nendaz-town-birds.jpg",
+    "size": "tall",
+    "place": "ch",
+    "title": "A bird over Nendaz",
+    "loc": "Nendaz",
+    "date": "09.2025"
+  },
+  {
+    "file": "ch-32-valley-road-forest.jpg",
+    "size": "tall",
+    "place": "ch",
+    "title": "The road down",
+    "loc": "Nendaz",
+    "date": "09.2025"
+  },
+  {
+    "file": "ch-33-alpine-chapel.jpg",
+    "size": "tall",
+    "place": "ch",
+    "title": "The little chapel",
+    "loc": "Siviez",
+    "date": "09.2025"
+  },
+  {
+    "file": "ch-34-nendaz-village-clouds.jpg",
+    "size": "tall",
+    "place": "ch",
+    "title": "Clouds over the village",
+    "loc": "Nendaz",
+    "date": "09.2025"
+  },
+  {
+    "file": "ch-35-lake-geneva-swiss-flag.jpg",
+    "size": "tall",
+    "place": "ch",
+    "title": "Swiss flag on the lake",
+    "loc": "Lac Léman",
+    "date": "09.2025"
+  },
+  {
+    "file": "ch-36-lone-tree-clouds.jpg",
+    "size": "tall",
+    "place": "ch",
+    "title": "The lone tree",
+    "loc": "Valais",
+    "date": "09.2025"
+  },
+  {
+    "file": "ch-37-aussie-mountain-trail.jpg",
+    "size": "tall",
+    "place": "ch",
+    "title": "On the trail",
+    "loc": "Nendaz",
+    "date": "09.2025"
+  },
+  {
+    "file": "ch-38-cleuson-dam-turquoise.jpg",
+    "size": "tall",
+    "place": "ch",
+    "title": "The turquoise reservoir",
+    "loc": "Lac de Cleuson",
+    "date": "09.2025"
   }
 ]
