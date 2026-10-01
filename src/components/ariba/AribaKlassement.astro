@@ -1,8 +1,27 @@
 ---
 import data from '../../data/ariba-klassementen.json';
 
-// Sorteer klassementen: actief eerst, dan aflopend per seizoen
-const seizoenen = [...data.seizoenen];
+// Berekent per ploeg: gespeeld, punten en doelsaldo, en bepaalt de positie.
+//  - gsp = w + g + v            (tenzij 'gsp' handmatig in het bestand staat)
+//  - pt  = 3 x w + g            (tenzij 'pt' handmatig in het bestand staat)
+//  - ds  = dv - dt
+//  - volgorde: punten, dan doelsaldo, dan doelpunten voor
+// Seizoenen waar ELKE ploeg al een vaste 'pos' heeft (oude seizoenen) worden niet herordend.
+function bereken(rijen: any[]) {
+  const rows = rijen.map((r: any) => {
+    const w = r.w ?? 0, g = r.g ?? 0, v = r.v ?? 0;
+    const dv = r.dv ?? 0, dt = r.dt ?? 0;
+    return { ...r, w, g, v, dv, dt, gsp: r.gsp ?? (w + g + v), pt: r.pt ?? (3 * w + g), ds: dv - dt };
+  });
+  if (!rows.every((r: any) => r.pos != null)) {
+    rows.sort((a: any, b: any) => b.pt - a.pt || b.ds - a.ds || b.dv - a.dv || a.ploeg.localeCompare(b.ploeg));
+    rows.forEach((r: any, i: number) => { r.pos = i + 1; });
+  }
+  return rows;
+}
+
+// Klassementen: seizoen voor seizoen, met berekende rijen
+const seizoenen = data.seizoenen.map((s: any) => ({ ...s, rijen: bereken(s.rijen) }));
 ---
 
 <section class="ariba-klassement-sec" id="ariba-klassement">
@@ -37,13 +56,13 @@ const seizoenen = [...data.seizoenen];
           <thead>
             <tr>
               <th>#</th><th>Ploeg</th><th>Gsp</th><th>W</th><th>G</th>
-              <th>V</th><th>DV</th><th>DT</th><th>Pt</th>
+              <th>V</th><th>DV</th><th>DT</th><th>DS</th><th>Pt</th>
             </tr>
           </thead>
           <tbody>
-            {s.rijen.map((r: any, idx: number) => (
+            {s.rijen.map((r: any) => (
               <tr class={r.us ? 'us' : ''}>
-                <td>{r.pos ?? idx + 1}</td>
+                <td>{r.pos}</td>
                 <td>{r.ploeg}</td>
                 <td>{r.gsp}</td>
                 <td>{r.w}</td>
@@ -51,6 +70,7 @@ const seizoenen = [...data.seizoenen];
                 <td>{r.v}</td>
                 <td>{r.dv}</td>
                 <td>{r.dt}</td>
+                <td>{r.ds > 0 ? `+${r.ds}` : r.ds}</td>
                 <td>{r.pt}</td>
               </tr>
             ))}
@@ -60,6 +80,14 @@ const seizoenen = [...data.seizoenen];
     </div>
   ))}
 </section>
+
+<style>
+  /* Op smalle schermen: V en DV zijn al verborgen (ariba.css), DT ook, zodat DS en Pt overblijven */
+  @media (max-width: 800px) {
+    .ariba-table th:nth-child(8),
+    .ariba-table td:nth-child(8) { display: none; }
+  }
+</style>
 
 <script is:inline>
   (function(){

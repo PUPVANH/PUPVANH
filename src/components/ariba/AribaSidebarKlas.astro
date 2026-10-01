@@ -1,8 +1,25 @@
 ---
 import data from '../../data/ariba-klassementen.json';
 
-// Vind huidig seizoen
-const huidig = data.seizoenen.find((s: any) => s.actief) || data.seizoenen[0];
+// Zelfde berekening als in AribaKlassement.astro (hou beide gelijk):
+//  - gsp = w + g + v | pt = 3 x w + g | ds = dv - dt
+//  - volgorde: punten, dan doelsaldo, dan doelpunten voor
+function bereken(rijen: any[]) {
+  const rows = rijen.map((r: any) => {
+    const w = r.w ?? 0, g = r.g ?? 0, v = r.v ?? 0;
+    const dv = r.dv ?? 0, dt = r.dt ?? 0;
+    return { ...r, w, g, v, dv, dt, gsp: r.gsp ?? (w + g + v), pt: r.pt ?? (3 * w + g), ds: dv - dt };
+  });
+  if (!rows.every((r: any) => r.pos != null)) {
+    rows.sort((a: any, b: any) => b.pt - a.pt || b.ds - a.ds || b.dv - a.dv || a.ploeg.localeCompare(b.ploeg));
+    rows.forEach((r: any, i: number) => { r.pos = i + 1; });
+  }
+  return rows;
+}
+
+// Vind huidig seizoen en bereken het klassement
+const huidigRuw = data.seizoenen.find((s: any) => s.actief) || data.seizoenen[0];
+const huidig = { ...huidigRuw, rijen: bereken(huidigRuw.rijen) };
 
 // Vind Ariba positie
 const arIdx = huidig.rijen.findIndex((r: any) => r.us);
@@ -36,9 +53,9 @@ function shortName(n: string) {
   <div class="ariba-side-sub">{huidig.seizoen} · {huidig.reeks}</div>
   <table class="ariba-side-table">
     <tbody>
-      {zichtbaar.map((r: any, i: number) => (
+      {zichtbaar.map((r: any) => (
         <tr class={r.us ? 'us' : ''}>
-          <td>{start + i + 1}</td>
+          <td>{r.pos}</td>
           <td>{shortName(r.ploeg)}</td>
           <td>{r.pt}</td>
         </tr>
