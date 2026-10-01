@@ -1,262 +1,33 @@
 {
-  "_uitleg": "Klassementen per seizoen. Zet 'actief: true' op het lopende seizoen. Nieuwe wedstrijd gespeeld? Pas gsp/w/g/v/dv/dt/pt aan. Bij afloop van seizoen: zet actief op false, kopieer alle ploegen op 0 punten in een nieuw blok voor het volgende seizoen.",
+  "_uitleg": "Klassementen per seizoen. LOPEND SEIZOEN: vul per ploeg enkel w (gewonnen), g (gelijk), v (verloren), dv (doelpunten voor) en dt (doelpunten tegen) in, als TOTALEN tot nu toe. De site berekent zelf: gsp (gespeeld), pt (punten: winst = 3, gelijk = 1), ds (doelsaldo) en de positie. Volgorde in dit bestand maakt niet uit; de site sorteert op punten, dan doelsaldo, dan doelpunten voor. De ploeg met 'us': true wordt gemarkeerd. Wil je toch zelf iets afdwingen (bv. puntenaftrek)? Voeg dan 'pt' of 'gsp' toe bij die ploeg, dat wint van de berekening. OUDE SEIZOENEN blijven vast staan met hun eigen gsp/pt/pos en worden niet herberekend. Bij afloop van het seizoen: haal 'actief' weg bij het oude seizoen en maak een nieuw blok met 'actief: true' voor het volgende seizoen. Na commit deployt Vercel automatisch.",
   "seizoenen": [
     {
       "seizoen": "2026-27",
       "reeks": "Reeks 1",
       "actief": true,
       "rijen": [
-        {
-          "ploeg": "Fc Ariba",
-          "gsp": 0,
-          "w": 0,
-          "g": 0,
-          "v": 0,
-          "dv": 0,
-          "dt": 0,
-          "pt": 0,
-          "us": true
-        },
-        {
-          "ploeg": "T'Bloemgat",
-          "gsp": 0,
-          "w": 0,
-          "g": 0,
-          "v": 0,
-          "dv": 0,
-          "dt": 0,
-          "pt": 0
-        },
-        {
-          "ploeg": "MVC Deportivo VDM",
-          "gsp": 0,
-          "w": 0,
-          "g": 0,
-          "v": 0,
-          "dv": 0,
-          "dt": 0,
-          "pt": 0
-        },
-        {
-          "ploeg": "Panna FC",
-          "gsp": 0,
-          "w": 0,
-          "g": 0,
-          "v": 0,
-          "dv": 0,
-          "dt": 0,
-          "pt": 0
-        },
-        {
-          "ploeg": "FC Bacobana",
-          "gsp": 0,
-          "w": 0,
-          "g": 0,
-          "v": 0,
-          "dv": 0,
-          "dt": 0,
-          "pt": 0
-        },
-        {
-          "ploeg": "Orthopedie Van Parys",
-          "gsp": 0,
-          "w": 0,
-          "g": 0,
-          "v": 0,
-          "dv": 0,
-          "dt": 0,
-          "pt": 0
-        },
-        {
-          "ploeg": "MVC De Statie",
-          "gsp": 0,
-          "w": 0,
-          "g": 0,
-          "v": 0,
-          "dv": 0,
-          "dt": 0,
-          "pt": 0
-        },
-        {
-          "ploeg": "VK Lagaar",
-          "gsp": 0,
-          "w": 0,
-          "g": 0,
-          "v": 0,
-          "dv": 0,
-          "dt": 0,
-          "pt": 0
-        },
-        {
-          "ploeg": "L'Abattoir",
-          "gsp": 0,
-          "w": 0,
-          "g": 0,
-          "v": 0,
-          "dv": 0,
-          "dt": 0,
-          "pt": 0
-        },
-        {
-          "ploeg": "Plectrum - Maison Noire",
-          "gsp": 0,
-          "w": 0,
-          "g": 0,
-          "v": 0,
-          "dv": 0,
-          "dt": 0,
-          "pt": 0
-        },
-        {
-          "ploeg": "MKS 2",
-          "gsp": 0,
-          "w": 0,
-          "g": 0,
-          "v": 0,
-          "dv": 0,
-          "dt": 0,
-          "pt": 0
-        },
-        {
-          "ploeg": "MVC JV Renovaties",
-          "gsp": 0,
-          "w": 0,
-          "g": 0,
-          "v": 0,
-          "dv": 0,
-          "dt": 0,
-          "pt": 0
-        },
-        {
-          "ploeg": "Checked by Vanhulle",
-          "gsp": 0,
-          "w": 0,
-          "g": 0,
-          "v": 0,
-          "dv": 0,
-          "dt": 0,
-          "pt": 0
-        },
-        {
-          "ploeg": "Sanifro ofzo",
-          "gsp": 0,
-          "w": 0,
-          "g": 0,
-          "v": 0,
-          "dv": 0,
-          "dt": 0,
-          "pt": 0
-        },
-        {
-          "ploeg": "EPDM Solutions",
-          "gsp": 0,
-          "w": 0,
-          "g": 0,
-          "v": 0,
-          "dv": 0,
-          "dt": 0,
-          "pt": 0
-        },
-        {
-          "ploeg": "FC Electrum",
-          "gsp": 0,
-          "w": 0,
-          "g": 0,
-          "v": 0,
-          "dv": 0,
-          "dt": 0,
-          "pt": 0
-        },
-        {
-          "ploeg": "BTW-Boys",
-          "gsp": 0,
-          "w": 0,
-          "g": 0,
-          "v": 0,
-          "dv": 0,
-          "dt": 0,
-          "pt": 0
-        },
-        {
-          "ploeg": "FC Elk 'T Zinne",
-          "gsp": 0,
-          "w": 0,
-          "g": 0,
-          "v": 0,
-          "dv": 0,
-          "dt": 0,
-          "pt": 0
-        },
-        {
-          "ploeg": "Q-Team",
-          "gsp": 0,
-          "w": 0,
-          "g": 0,
-          "v": 0,
-          "dv": 0,
-          "dt": 0,
-          "pt": 0
-        },
-        {
-          "ploeg": "Korazon",
-          "gsp": 0,
-          "w": 0,
-          "g": 0,
-          "v": 0,
-          "dv": 0,
-          "dt": 0,
-          "pt": 0
-        },
-        {
-          "ploeg": "Playa",
-          "gsp": 0,
-          "w": 0,
-          "g": 0,
-          "v": 0,
-          "dv": 0,
-          "dt": 0,
-          "pt": 0
-        },
-        {
-          "ploeg": "T'Schroefke",
-          "gsp": 0,
-          "w": 0,
-          "g": 0,
-          "v": 0,
-          "dv": 0,
-          "dt": 0,
-          "pt": 0
-        },
-        {
-          "ploeg": "FC De Ondank",
-          "gsp": 0,
-          "w": 0,
-          "g": 0,
-          "v": 0,
-          "dv": 0,
-          "dt": 0,
-          "pt": 0
-        },
-        {
-          "ploeg": "De Kasjotters",
-          "gsp": 0,
-          "w": 0,
-          "g": 0,
-          "v": 0,
-          "dv": 0,
-          "dt": 0,
-          "pt": 0
-        },
-        {
-          "ploeg": "Korupt Kidz United / Schroefke",
-          "gsp": 0,
-          "w": 0,
-          "g": 0,
-          "v": 0,
-          "dv": 0,
-          "dt": 0,
-          "pt": 0
-        }
+        {"ploeg": "Fc Ariba", "w": 3, "g": 0, "v": 0, "dv": 50, "dt": 6, "us": true},
+        {"ploeg": "PayitFC", "w": 3, "g": 0, "v": 0, "dv": 39, "dt": 5},
+        {"ploeg": "Orthopedie Van Parys", "w": 3, "g": 0, "v": 1, "dv": 40, "dt": 10},
+        {"ploeg": "Plectrum - Maison Noire", "w": 3, "g": 0, "v": 0, "dv": 23, "dt": 9},
+        {"ploeg": "T'Bloemgat", "w": 3, "g": 0, "v": 0, "dv": 19, "dt": 7},
+        {"ploeg": "MVC JPV Renovaties", "w": 3, "g": 0, "v": 0, "dv": 15, "dt": 9},
+        {"ploeg": "MVC Deportivo VDM", "w": 2, "g": 0, "v": 0, "dv": 21, "dt": 3},
+        {"ploeg": "Checked by Vanhulle", "w": 2, "g": 0, "v": 1, "dv": 21, "dt": 17},
+        {"ploeg": "Panna FC", "w": 2, "g": 0, "v": 1, "dv": 18, "dt": 14},
+        {"ploeg": "FC Plectrum", "w": 1, "g": 1, "v": 1, "dv": 16, "dt": 13},
+        {"ploeg": "T'Schroefke", "w": 1, "g": 1, "v": 2, "dv": 11, "dt": 26},
+        {"ploeg": "FC Elk 'T Zinne", "w": 1, "g": 0, "v": 1, "dv": 13, "dt": 14},
+        {"ploeg": "MVC De Lagaar - Gworks", "w": 1, "g": 0, "v": 1, "dv": 8, "dt": 9},
+        {"ploeg": "BTW Boys", "w": 1, "g": 0, "v": 3, "dv": 18, "dt": 22},
+        {"ploeg": "Q-Team", "w": 1, "g": 0, "v": 1, "dv": 6, "dt": 20},
+        {"ploeg": "Driemo", "w": 0, "g": 0, "v": 2, "dv": 9, "dt": 13},
+        {"ploeg": "Sanifro ofzo", "w": 0, "g": 0, "v": 2, "dv": 4, "dt": 11},
+        {"ploeg": "Korazon", "w": 0, "g": 0, "v": 3, "dv": 3, "dt": 12},
+        {"ploeg": "L'Abattoir", "w": 0, "g": 0, "v": 2, "dv": 6, "dt": 17},
+        {"ploeg": "Playa", "w": 0, "g": 0, "v": 2, "dv": 4, "dt": 17},
+        {"ploeg": "FC De Ondank", "w": 0, "g": 0, "v": 3, "dv": 3, "dt": 36},
+        {"ploeg": "De Kasjotters", "w": 0, "g": 0, "v": 4, "dv": 5, "dt": 62}
       ]
     },
     {
