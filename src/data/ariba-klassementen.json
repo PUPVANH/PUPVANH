@@ -6,7 +6,6 @@
       "reeks": "Reeks 1",
       "actief": true,
       "rijen": [
-     [
   {"ploeg":"FC Ariba","w":8,"g":0,"v":0,"dv":107,"dt":14,"us":true},
   {"ploeg":"T'Bloemgat","w":7,"g":0,"v":1,"dv":56,"dt":21},
   {"ploeg":"Panna FC","w":6,"g":0,"v":2,"dv":44,"dt":29},
