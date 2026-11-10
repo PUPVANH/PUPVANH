@@ -50,13 +50,20 @@
       "thuis": "Fc Ariba",
       "uit": "MVC De Lagaar-Gworks",
       "locatie": "Izegem",
-      "uitslag": null
+      "uitslag": "11-1"
    },
     {
       "datum": "2026-11-09T21:50:00",
       "thuis": "Fc Ariba",
       "uit": "Driemo",
       "locatie": "Kachtem",
+      "uitslag": "6-4"
+    },
+     {
+      "datum": "2026-11-16T20:30:00",
+      "thuis": "MBD United",
+      "uit": "Fc Ariba",
+      "locatie": "Izegem",
       "uitslag": null
     },
     {
